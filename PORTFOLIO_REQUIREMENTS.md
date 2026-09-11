@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.1 — Swiss Research`  
+> **Versión base documentada:** `v7.2 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -160,10 +160,6 @@ Estructura actual relevante:
 ├── cv.qmd
 ├── contact.qmd
 ├── portfolio.qmd
-├── about.qmd
-├── research.qmd
-├── experience.qmd
-├── skills.qmd
 │
 ├── projects/
 │   ├── index.qmd
@@ -2376,6 +2372,9 @@ La lógica debe:
 
 Esto debe seguir funcionando aunque Quarto agregue clases o wrappers no funcionales alrededor del TOC.
 
+
+> **Actualización v7.2:** el comportamiento requerido se mantiene, pero la implementación basada en el árbol generado por Quarto fue reemplazada por `REQ-NAV-012` a `REQ-NAV-016`, que reconstruyen el TOC desde los headings reales.
+
 ---
 
 ## REQ-RENDER-001 — Componentes personalizados deben usar sintaxis segura de Quarto/Pandoc
@@ -2444,6 +2443,280 @@ Contact hero
 Contact cards
 Contact document cards
 ```
+
+---
+
+
+
+# 23C. Requisitos introducidos en v7.2
+
+## REQ-NAV-012 — TOC reconstruido desde los headings reales
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+A partir de v7.2, el comportamiento dinámico de la lista izquierda **no debe depender de la estructura HTML interna generada por Quarto para su TOC**.
+
+JavaScript debe obtener directamente los headings renderizados del contenido:
+
+```text
+h1
+h2
+h3
+```
+
+y construir una nueva jerarquía de navegación.
+
+### Regla de jerarquía
+
+El nivel más alto existente en cada página se convierte en el nivel principal.
+
+Ejemplos:
+
+```text
+Página Home:
+H1 → título principal del grupo
+H2 → subtítulo
+
+Portfolio técnico:
+H1 → título principal del grupo
+H2 → subtítulo
+H3 → subtítulo de tercer nivel
+
+Página de tesis:
+H2 → título principal del grupo
+H3 → subtítulo
+```
+
+Por lo tanto, la navegación se adapta automáticamente a páginas con distintas profundidades de headings.
+
+---
+
+## REQ-NAV-013 — Expansión mediante `<details>` / `<summary>`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Los grupos principales del TOC dinámico deben utilizar controles HTML nativos:
+
+```html
+<details>
+  <summary>...</summary>
+  ...
+</details>
+```
+
+La propiedad:
+
+```javascript
+details.open
+```
+
+es la fuente de verdad para expandir o colapsar el grupo.
+
+### Comportamiento requerido
+
+Mientras el usuario avanza:
+
+```text
+Grupo A → open = true
+Grupo B → open = false
+Grupo C → open = false
+```
+
+Al entrar en Grupo B:
+
+```text
+Grupo A → open = false
+Grupo B → open = true
+Grupo C → open = false
+```
+
+Este método reemplaza el mecanismo anterior basado principalmente en:
+
+```text
+clases CSS + max-height
+```
+
+para mejorar robustez.
+
+---
+
+## REQ-NAV-014 — Tercer nivel contextual
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Cuando una página tiene:
+
+```text
+H1
+    H2
+        H3
+```
+
+al abrir el grupo `H1` se muestran sus `H2`.
+
+Los `H3` solo deben mostrarse bajo el `H2` correspondiente a la zona activa.
+
+Ejemplo:
+
+```text
+MASTER'S THESIS
+    Objective 1
+        Monitoring
+    Objective 2
+    Objective 3
+```
+
+Si el usuario está viendo `Monitoring`, ese tercer nivel aparece bajo `Objective 1`.
+
+---
+
+## REQ-NAV-015 — Fail-safe del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La navegación personalizada debe construirse completamente antes de reemplazar el TOC nativo.
+
+Secuencia:
+
+```text
+1. Quarto genera su TOC normal.
+2. JavaScript lee los headings reales.
+3. JavaScript construye el nuevo TOC en memoria.
+4. Solo si la construcción termina correctamente:
+       reemplazar contenido de #TOC.
+```
+
+Si JavaScript falla antes del paso 4:
+
+```text
+el TOC normal de Quarto permanece visible y utilizable.
+```
+
+---
+
+## REQ-NAV-016 — Auto-scroll del nuevo TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El TOC reconstruido conserva el seguimiento automático:
+
+- marca el heading activo;
+- abre el grupo correspondiente;
+- abre el tercer nivel contextual cuando existe;
+- mantiene visible el enlace activo;
+- desplaza únicamente el contenedor lateral;
+- respeta Reduced Motion.
+
+---
+
+## REQ-CLEAN-001 — Código CSS y JS consolidado
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+`assets/site.css` y `assets/site-scripts.html` deben contener únicamente la implementación vigente.
+
+No deben mantenerse concatenadas implementaciones obsoletas de:
+
+```text
+v6
+v7
+v7.1
+```
+
+El código actual debe estar organizado por secciones funcionales y evitar reglas duplicadas.
+
+---
+
+## REQ-CLEAN-002 — Eliminación de archivos históricos redundantes
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La raíz del proyecto no debe acumular archivos de validación de versiones anteriores.
+
+Se eliminaron:
+
+```text
+BUILD_VALIDATION_V6.md
+BUILD_VALIDATION_V7.md
+BUILD_VALIDATION_V7_1.md
+SWISS_STYLE_INTEGRATION.md
+```
+
+Debe conservarse únicamente:
+
+```text
+BUILD_VALIDATION.md
+```
+
+correspondiente a la versión actual.
+
+---
+
+## REQ-CLEAN-003 — Eliminación de páginas legacy no enlazadas
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Se eliminaron páginas standalone antiguas que ya no formaban parte de la navegación y cuyo contenido está cubierto por Home, Portfolio y CV:
+
+```text
+about.qmd
+research.qmd
+experience.qmd
+skills.qmd
+```
+
+La información relevante permanece en:
+
+```text
+index.qmd
+portfolio.qmd
+cv.qmd
+projects/*.qmd
+```
+
+---
+
+## REQ-QA-005 — Prueba de navegación con navegador real
+
+**Estado:** `VALIDAR`  
+**Prioridad:** `P0`
+
+La lógica del TOC personalizado debe validarse, además de la sintaxis JavaScript, en Chrome/Chromium real.
+
+La prueba debe verificar al menos:
+
+```text
+TOC generado desde headings
+grupo inicial expandido
+cambio de grupo al hacer scroll
+subtítulo activo
+uso de <details open>
+tercer nivel contextual cuando exista
+auto-scroll de la columna izquierda
+```
+
+### Estado de la validación automática
+
+El entorno utilizado para construir el proyecto bloqueó la navegación de Chromium/Playwright, incluso para páginas HTML locales y `localhost`.
+
+Por lo tanto:
+
+```text
+sintaxis JavaScript → validada
+estructura del algoritmo → validada
+preview standalone → generado
+prueba interactiva real en Chrome → VALIDAR por el usuario
+```
+
+Este requisito debe pasar a `IMPLEMENTADO` una vez comprobado el ZIP/preview en Chrome.
 
 ---
 
@@ -2638,6 +2911,9 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.1 | 2026-09-11 | Nombre superior enlaza a Home | REQ-NAV-009 | IMPLEMENTADO |
 | v7.1 | 2026-09-11 | Portfolio superior enlaza al portafolio técnico | REQ-NAV-010 | IMPLEMENTADO |
 | v7.1 | 2026-09-11 | Acordeón TOC robusto y accesible | REQ-NAV-011 | IMPLEMENTADO |
+| v7.2 | 2026-09-11 | TOC reconstruido desde headings reales con details/summary | REQ-NAV-012/013/014/015/016 | IMPLEMENTADO |
+| v7.2 | 2026-09-11 | Consolidación de CSS/JS y limpieza de archivos | REQ-CLEAN-001/002/003 | IMPLEMENTADO |
+| v7.2 | 2026-09-11 | Prueba de navegación real preparada; sandbox bloquea Chromium | REQ-QA-005 | VALIDAR |
 | próxima | — | — | — | — |
 
 ---
@@ -2677,6 +2953,10 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 26. Home y Contact deben usar sintaxis de componentes segura para Quarto/Pandoc.
 27. Nunca debe aparecer HTML literal como código visible.
 28. El acordeón lateral debe expandir automáticamente el grupo que contiene el subtítulo visible.
+29. El TOC dinámico debe construirse desde headings reales, no depender del árbol interno de Quarto.
+30. La expansión principal debe usar <details>.open.
+31. Si falla el TOC personalizado, el TOC nativo de Quarto debe quedar intacto.
+32. CSS y JS deben mantenerse consolidados, sin implementaciones históricas duplicadas.
 ```
 
 ---
@@ -2736,7 +3016,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.1 Swiss Research
+Version: v7.2 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

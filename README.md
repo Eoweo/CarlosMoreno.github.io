@@ -1,107 +1,85 @@
-# Carlos Moreno Rojas — Portfolio
+# Carlos Moreno Rojas — Engineering Portfolio
 
-Quarto-based engineering and biomedical research portfolio.
+Quarto-based portfolio for biomedical engineering, electrical engineering, research and technical projects.
 
-## Structure
+## Current version
 
-- `index.qmd` — Home
-- `projects/` — Individual project pages
-- `research.qmd`
-- `experience.qmd`
-- `skills.qmd`
-- `about.qmd`
-- `cv.qmd`
-- `contact.qmd`
-- `assets/site.css`
-- `.github/workflows/publish.yml`
+**v7.2 — Swiss Research**
+
+The current architecture separates:
+
+```text
+Home                 → index.qmd
+Technical Portfolio  → portfolio.qmd
+CV                   → cv.qmd
+Contact              → contact.qmd
+Project index        → projects/index.qmd
+Individual projects  → projects/*.qmd
+Design               → assets/site.css
+Interaction          → assets/site-scripts.html
+Requirements         → PORTFOLIO_REQUIREMENTS.md
+Deployment           → .github/workflows/publish.yml
+```
+
+## Navigation
+
+The left navigation is rebuilt in the browser directly from the rendered `h1`, `h2` and `h3` headings.
+
+It uses native HTML:
+
+```html
+<details>
+<summary>
+```
+
+This avoids depending on Quarto's internal nested TOC markup.
+
+Behavior:
+
+- only main titles are shown normally;
+- the group currently being viewed opens automatically;
+- its subtitles appear;
+- third-level headings appear only for the active second-level subsection;
+- the exact active heading is marked in Swiss red;
+- the sidebar scrolls automatically to keep the active item visible.
+
+If JavaScript fails, Quarto's native TOC remains intact because it is replaced only after the custom TOC has been fully built.
+
+## Display controls
+
+Top-right controls:
+
+- compact mode;
+- reduced motion;
+- light/dark mode.
 
 ## Local preview
 
-Install Quarto:
-
-https://quarto.org/
-
-Then run:
+With Quarto installed:
 
 ```bash
 quarto preview
 ```
 
-## Publish with GitHub Pages
+## GitHub Pages
 
-1. Create a GitHub repository.
-2. Upload all files from this folder.
-3. In GitHub: **Settings → Pages → Source → GitHub Actions**.
-4. Push to the `main` branch.
-5. The included workflow will render and deploy the site.
+1. Upload the project files to GitHub.
+2. Go to **Settings → Pages**.
+3. Choose **GitHub Actions**.
+4. Push to `main`.
+5. `.github/workflows/publish.yml` renders and deploys the site.
 
-## Important before publishing
+## Project documentation
 
-Replace placeholders in `contact.qmd`.
+- `PORTFOLIO_REQUIREMENTS.md` — mandatory living requirements specification.
+- `CONTENT_TO_ADD.md` — images/data/content still to add.
+- `GITHUB_PAGES_GUIDE.md` — deployment guide.
+- `BUILD_VALIDATION.md` — validation of the current version only.
 
-Add:
-- project photographs;
-- videos;
-- diagrams;
-- validated plots;
-- public datasets;
-- repository links;
-- final CV PDFs.
+## Development rule
 
-See `CONTENT_TO_ADD.md`.
+Every functional, visual, structural or navigation change must also update:
 
-
-## Version 2 design
-
-Simplified visual style, interactive preview tabs and previous/next navigation between pages.
-
-## Version 3 design
-
-Documentation-style layout:
-
-- fixed / sticky section index on the left;
-- active section highlighted while scrolling;
-- long-form technical pages;
-- image placeholders with the exact suggested image title centered in each slot;
-- simplified visual styling inspired by electronics/computer technical documentation.
-
-
-## Version 4
-
-Added a complete long-form portfolio page with all major projects and experiences. See `portfolio.qmd` and `GITHUB_PAGES_GUIDE.md`.
-
-## Version 5
-
-- Working Portfolio / CV / Contact top navigation.
-- Hierarchical left sidebar with technical-area titles and project / objective subtitles.
-- Portfolio home is now the long-form technical page.
-- CV and Contact have their own working content and side navigation.
-
-
-## Version 5.1
-
-- Sidebar hierarchy revised to match the requested documentation style.
-- Top-level section names are uppercase/bold.
-- Project/objective links are indented below each section.
-- Same hierarchy applied to Portfolio, CV, Contact, Project Pages and detailed project pages.
-- Light and dark themes enabled in Quarto.
-- Interactive preview includes a persistent light/dark toggle.
-
-
-## Version 6 — Swiss Research integration
-
-This version keeps the v5.2 content and integrates the approved Swiss Research visual system,
-fail-safe scroll animations, icon display controls, dynamic TOC highlighting and automatic
-left-sidebar scrolling.
-
-See `SWISS_STYLE_INTEGRATION.md`.
-
-
-## Version 7
-
-- `index.qmd` is now a professional summary/home page.
-- The detailed engineering portfolio remains in `portfolio.qmd` and `projects/*.qmd`.
-- Swiss Controls are aligned at the far right.
-- The left TOC behaves as a contextual accordion: only main titles are visible; the active group expands its subtitles.
-- Contact uses responsive cards and grids rather than a simple list.
-- `PORTFOLIO_REQUIREMENTS.md` is now mandatory documentation for every future change.
+```text
+PORTFOLIO_REQUIREMENTS.md
+```

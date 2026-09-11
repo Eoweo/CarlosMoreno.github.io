@@ -1,7 +1,8 @@
 /* ================================================================
-   CARLOS MORENO ROJAS — SWISS RESEARCH SYSTEM
-   Integrated on top of portfolio v5.2.
-   Content structure is preserved; this file controls presentation.
+   CARLOS MORENO ROJAS — PORTFOLIO
+   VERSION 7.2 — SWISS RESEARCH
+
+   Single consolidated stylesheet.
    ================================================================ */
 
 :root {
@@ -13,7 +14,6 @@
   --border: #cbc7bc;
   --accent: #d63230;
   --accent-soft: rgba(214, 50, 48, .08);
-  --sidebar-title: #66635d;
   --header-height: 62px;
 }
 
@@ -28,7 +28,6 @@ html[data-bs-theme="light"] {
   --border: #cbc7bc;
   --accent: #d63230;
   --accent-soft: rgba(214, 50, 48, .08);
-  --sidebar-title: #66635d;
 }
 
 .quarto-dark,
@@ -43,7 +42,6 @@ body.swiss-manual-dark {
   --border: #383633;
   --accent: #ff615e;
   --accent-soft: rgba(255, 97, 94, .09);
-  --sidebar-title: #a7a39a;
 }
 
 * {
@@ -75,8 +73,12 @@ a {
   color: var(--accent);
 }
 
+strong {
+  color: var(--text);
+}
+
 /* ================================================================
-   HEADER / NAVBAR
+   NAVBAR
    ================================================================ */
 
 #quarto-header {
@@ -93,23 +95,29 @@ a {
   backdrop-filter: blur(12px);
 }
 
+.navbar-container,
+.navbar .container-fluid {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .navbar-brand,
 .navbar-title,
 .navbar-nav .nav-link,
-.navbar-nav .menu-text,
-.navbar #quarto-search.type-overlay .aa-Autocomplete svg {
+.navbar-nav .menu-text {
   color: var(--text) !important;
 }
 
 .navbar-brand {
   font-weight: 900 !important;
   letter-spacing: -.02em;
+  cursor: pointer;
 }
 
 .navbar-nav .nav-link {
   font-size: .88rem;
   font-weight: 700;
-  letter-spacing: .01em;
 }
 
 .navbar-nav .nav-link:hover,
@@ -117,15 +125,7 @@ a {
   color: var(--accent) !important;
 }
 
-.navbar-toggler {
-  border-color: var(--border) !important;
-}
-
-.navbar-toggler-icon {
-  filter: none;
-}
-
-/* Native Quarto toggle remains available to JS but is visually replaced. */
+/* Native Quarto theme button is used internally, but replaced visually. */
 .quarto-color-scheme-toggle {
   position: absolute !important;
   width: 1px !important;
@@ -135,12 +135,13 @@ a {
   pointer-events: none !important;
 }
 
-/* Custom icon controls injected by assets/site-scripts.html */
 .swiss-controls {
+  order: 9999 !important;
   display: flex;
   align-items: center;
   gap: 7px;
-  margin-left: .7rem;
+  margin-left: auto !important;
+  margin-right: 0 !important;
   flex: 0 0 auto;
 }
 
@@ -182,12 +183,11 @@ a {
 }
 
 /* ================================================================
-   PAGE TITLE
+   PAGE TITLE / MAIN TYPOGRAPHY
    ================================================================ */
 
 #title-block-header {
   margin-bottom: 3rem;
-  padding-bottom: 0;
 }
 
 .quarto-title h1.title {
@@ -203,132 +203,10 @@ a {
 
 .quarto-title .subtitle {
   max-width: 760px;
-  margin-top: .8rem;
   color: var(--muted) !important;
   font-size: 1.06rem;
   line-height: 1.55;
 }
-
-/* ================================================================
-   LEFT TABLE OF CONTENTS
-   Keeps the v5.2 hierarchy, now with Swiss styling and auto-scroll.
-   ================================================================ */
-
-#TOC {
-  position: sticky;
-  top: calc(var(--header-height) + 14px);
-  max-height: calc(100vh - var(--header-height) - 28px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 0 .72rem 2.2rem .1rem;
-  border-right: 0;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-  font-size: .95rem;
-}
-
-#TOC::-webkit-scrollbar {
-  width: 5px;
-}
-
-#TOC::-webkit-scrollbar-thumb {
-  background: var(--border);
-}
-
-#TOC .toc-title {
-  margin: 0 0 .42rem .55rem;
-  padding-bottom: .7rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--sidebar-title);
-  font-size: .73rem;
-  line-height: 1.2;
-  font-weight: 900;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-#TOC ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#TOC li {
-  margin: 0;
-  padding: 0;
-}
-
-#TOC > ul > li {
-  margin-top: 1.12rem;
-}
-
-#TOC > ul > li:first-child {
-  margin-top: .45rem;
-}
-
-/* Top-level sections act as category titles */
-#TOC > ul > li > a {
-  display: block;
-  padding: .2rem .55rem .25rem .55rem;
-  border-left: 4px solid transparent;
-  color: var(--sidebar-title) !important;
-  font-size: .73rem;
-  line-height: 1.2;
-  font-weight: 900;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-/* Second level */
-#TOC > ul > li > ul {
-  margin-top: .25rem;
-}
-
-#TOC > ul > li > ul > li > a {
-  display: block;
-  padding: .38rem .45rem .38rem 1.18rem;
-  border-left: 4px solid transparent;
-  color: var(--muted) !important;
-  font-size: .93rem;
-  line-height: 1.25;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-  text-decoration: none;
-}
-
-/* Third level */
-#TOC > ul > li > ul > li > ul {
-  margin: .05rem 0 .2rem;
-}
-
-#TOC > ul > li > ul > li > ul > li > a {
-  display: block;
-  padding: .3rem .4rem .3rem 1.72rem;
-  border-left: 4px solid transparent;
-  color: var(--muted) !important;
-  font-size: .82rem;
-  line-height: 1.24;
-  text-decoration: none;
-}
-
-/* Quarto active + our robust scroll-spy active */
-#TOC a.active,
-#TOC a.swiss-active {
-  color: var(--accent) !important;
-  border-left-color: var(--accent) !important;
-  background: transparent !important;
-  font-weight: 700 !important;
-}
-
-#TOC a:hover {
-  color: var(--accent) !important;
-}
-
-/* ================================================================
-   MAIN CONTENT — SWISS EDITORIAL / RESEARCH
-   ================================================================ */
 
 main.content {
   max-width: 940px;
@@ -374,10 +252,6 @@ main.content h4 {
   font-weight: 800;
 }
 
-main.content strong {
-  color: var(--text);
-}
-
 hr {
   margin: 3.3rem 0;
   border: 0;
@@ -385,422 +259,164 @@ hr {
   opacity: 1;
 }
 
-/* Metadata / chips */
-.project-meta,
-.skill-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .45rem;
-  margin: 0 0 1.35rem;
-}
-
-.project-meta span,
-.skill-chips span {
-  padding: .38rem .55rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 700;
-}
-
 /* ================================================================
-   IMAGE PLACEHOLDERS — preserve v5.2 content
+   CUSTOM DYNAMIC TOC
+   Rebuilt directly from rendered H1/H2/H3 headings.
+   Native <details> provides robust expand/collapse behavior.
    ================================================================ */
 
-.image-slot {
-  position: relative;
-  width: 100%;
-  min-height: 270px;
-  margin: 1.5rem 0 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  border: 1px dashed var(--border);
-  border-radius: 0;
-  background: var(--surface);
-  text-align: center;
+#TOC {
+  position: sticky;
+  top: calc(var(--header-height) + 14px);
+  max-height: calc(100vh - var(--header-height) - 28px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 .72rem 2rem .08rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
-.image-slot.large {
-  min-height: 420px;
+#TOC::-webkit-scrollbar {
+  width: 5px;
 }
 
-.image-slot.small {
-  min-height: 190px;
+#TOC::-webkit-scrollbar-thumb {
+  background: var(--border);
 }
 
-.image-slot::before,
-.image-slot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.image-slot::before {
-  background:
-    linear-gradient(135deg,
-      transparent 49.72%,
-      var(--border) 49.88%,
-      var(--border) 50.12%,
-      transparent 50.28%);
-}
-
-.image-slot::after {
-  background:
-    linear-gradient(45deg,
-      transparent 49.72%,
-      var(--border) 49.88%,
-      var(--border) 50.12%,
-      transparent 50.28%);
-}
-
-.image-slot .slot-label {
-  position: relative;
-  z-index: 2;
-  max-width: 76%;
-  padding: .78rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--page-bg);
-  color: var(--text);
-  font-size: .86rem;
-  font-weight: 900;
-  letter-spacing: .015em;
-}
-
-.image-slot .slot-label small {
-  display: block;
-  margin-top: .28rem;
+#TOC .toc-title {
+  margin: 0 0 .5rem .55rem;
+  padding: 0 0 .75rem;
+  border-bottom: 1px solid var(--border);
   color: var(--muted);
-  font-size: .78rem;
-  line-height: 1.35;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-/* ================================================================
-   CARDS / GRIDS / CONTACT / DOWNLOADS
-   ================================================================ */
-
-.project-grid,
-.skill-grid,
-.download-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-  gap: .75rem;
-}
-
-.project-card,
-.skill-card,
-.download-card,
-.contact-card {
-  padding: 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--surface-2);
-  color: var(--text);
-  box-shadow: none;
-}
-
-.project-card {
-  text-decoration: none;
-  transition: transform .16s ease, border-color .16s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-}
-
-.project-tag {
-  color: var(--accent);
-  font-size: .7rem;
+  font-size: .73rem;
+  line-height: 1.2;
   font-weight: 900;
-  letter-spacing: .065em;
+  letter-spacing: .07em;
   text-transform: uppercase;
 }
 
-.tech {
-  color: var(--muted);
-  font-size: .84rem;
+.swiss-toc-root,
+.swiss-toc-root ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Tables */
-table {
-  --bs-table-bg: transparent !important;
-  --bs-table-color: var(--text) !important;
-  --bs-table-border-color: var(--border) !important;
+.swiss-toc-group {
+  margin: 1rem 0 0;
+  padding: 0;
+  border: 0;
 }
 
-table th {
-  color: var(--text) !important;
-  font-weight: 800;
+.swiss-toc-group:first-child {
+  margin-top: .35rem;
 }
 
-table td {
-  color: var(--muted) !important;
-}
-
-/* Code / Mermaid */
-pre,
-code,
-.cell-output-display {
-  border-radius: 0 !important;
-}
-
-pre {
-  border: 1px solid var(--border) !important;
-}
-
-.cell-output-display svg {
-  max-width: 100%;
-}
-
-/* Page navigation */
-.page-nav {
-  display: flex;
-  justify-content: space-between;
-  gap: .7rem;
-  margin-top: 3rem;
-  padding-top: 1rem;
-  border-top: 4px solid var(--text);
-}
-
-.page-nav a {
-  padding: .55rem .8rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.page-nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* Footer */
-.nav-footer {
-  background: var(--page-bg) !important;
-  border-top: 1px solid var(--border);
-  color: var(--muted) !important;
-}
-
-/* ================================================================
-   FAIL-SAFE SCROLL ANIMATIONS
-   Visible by default. JS only hides future elements after it works.
-   ================================================================ */
-
-.swiss-reveal {
-  opacity: 1;
-  transform: none;
-  clip-path: none;
-}
-
-/* Wipe reveal, directly adapted from the working Swiss demo */
-body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  transition:
-    clip-path .68s cubic-bezier(.77, 0, .18, 1),
-    opacity .36s ease;
-}
-
-body.swiss-js-ready .swiss-reveal.swiss-shown {
-  opacity: 1;
-  clip-path: inset(0 0 0 0);
-}
-
-/* Slight stagger supplied by JS */
-body.swiss-js-ready .swiss-reveal {
-  transition-delay: var(--swiss-delay, 0ms);
-}
-
-/* Reduce motion always wins */
-body.swiss-reduce-motion *,
-body.swiss-reduce-motion *::before,
-body.swiss-reduce-motion *::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
-body.swiss-reduce-motion .swiss-reveal,
-body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
-  opacity: 1 !important;
-  transform: none !important;
-  clip-path: none !important;
-}
-
-/* Compact mode */
-body.swiss-compact main.content h1:not(.title),
-body.swiss-compact main.content h2 {
-  margin-top: 2.35rem;
-}
-
-body.swiss-compact .image-slot {
-  min-height: 215px;
-  margin: 1.1rem 0 1.5rem;
-}
-
-body.swiss-compact .image-slot.large {
-  min-height: 300px;
-}
-
-body.swiss-compact p,
-body.swiss-compact li {
-  line-height: 1.5;
-}
-
-/* ================================================================
-   RESPONSIVE
-   ================================================================ */
-
-@media (max-width: 1100px) {
-  .swiss-controls {
-    gap: 4px;
-  }
-
-  .swiss-icon-button {
-    width: 33px;
-    height: 33px;
-  }
-}
-
-@media (max-width: 991px) {
-  .swiss-controls {
-    position: fixed;
-    top: 12px;
-    right: 62px;
-    z-index: 1200;
-    margin-left: 0;
-  }
-
-  #TOC {
-    position: static;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .quarto-title h1.title {
-    font-size: clamp(2.35rem, 10vw, 4rem);
-  }
-
-  .image-slot.large {
-    min-height: 300px;
-  }
-}
-
-@media (max-width: 620px) {
-  .swiss-controls {
-    right: 58px;
-  }
-
-  .swiss-icon-button {
-    width: 31px;
-    height: 31px;
-  }
-
-  .quarto-title h1.title {
-    font-size: 2.45rem;
-  }
-
-  main.content h1:not(.title),
-  main.content h2 {
-    padding-top: .8rem;
-  }
-}
-
-
-/* ================================================================
-   VERSION 7
-   - Swiss controls at far right
-   - Accordion TOC
-   - Home summary layout
-   - Distributed Contact layout
-   ================================================================ */
-
-/* ------------------------------------------------
-   Controls: always at the far right of the navbar
-   ------------------------------------------------ */
-#quarto-header .navbar-container,
-#quarto-header .container-fluid {
-  display: flex;
-  align-items: center;
-}
-
-.swiss-controls {
-  order: 9999 !important;
-  margin-left: auto !important;
-  margin-right: 0 !important;
-  justify-content: flex-end;
-  flex-shrink: 0;
-}
-
-#quarto-header .navbar-collapse {
-  flex: 1 1 auto;
-}
-
-/* ------------------------------------------------
-   Accordion TOC
-   Only category titles remain visible.
-   The group that contains the active section expands.
-   ------------------------------------------------ */
-#TOC > ul > li.swiss-toc-group > ul {
-  max-height: 0;
-  margin-top: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition:
-    max-height .34s ease,
-    opacity .22s ease,
-    transform .28s ease,
-    margin-top .28s ease;
-}
-
-#TOC > ul > li.swiss-toc-group.swiss-toc-open > ul {
-  max-height: 1100px;
-  margin-top: .25rem;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Title remains visually present even while its children are collapsed. */
-#TOC > ul > li.swiss-toc-group > a {
+.swiss-toc-group > summary {
   position: relative;
-  padding-right: 1.55rem;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
 }
 
-#TOC > ul > li.swiss-toc-group > a::after {
+.swiss-toc-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.swiss-toc-group > summary::marker {
+  display: none;
+  content: "";
+}
+
+.swiss-toc-group > summary::after {
   content: "+";
   position: absolute;
   right: .35rem;
-  top: .18rem;
+  top: .15rem;
   color: var(--muted);
-  font-size: .9rem;
-  font-weight: 400;
+  font-size: .92rem;
   line-height: 1;
+  font-weight: 400;
 }
 
-#TOC > ul > li.swiss-toc-group.swiss-toc-open > a::after {
+.swiss-toc-group[open] > summary::after {
   content: "−";
   color: var(--accent);
 }
 
-/* Active category title also uses Swiss red. */
-#TOC > ul > li.swiss-toc-open > a,
-#TOC > ul > li > a.swiss-active {
+.swiss-toc-group.swiss-toc-no-children > summary::after {
+  content: "";
+}
+
+.swiss-toc-group-link {
+  display: block;
+  padding: .2rem 1.5rem .27rem .55rem;
+  border-left: 4px solid transparent;
+  color: var(--muted) !important;
+  font-size: .73rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+}
+
+.swiss-toc-group[open] > summary .swiss-toc-group-link {
   color: var(--accent) !important;
 }
 
-/* ------------------------------------------------
-   Home page / summary
-   ------------------------------------------------ */
+.swiss-toc-children {
+  margin-top: .25rem !important;
+}
+
+.swiss-toc-child-link,
+.swiss-toc-grand-link {
+  display: block;
+  border-left: 4px solid transparent;
+  color: var(--muted) !important;
+  text-decoration: none !important;
+}
+
+.swiss-toc-child-link {
+  padding: .38rem .45rem .38rem 1.18rem;
+  font-size: .93rem;
+  line-height: 1.25;
+}
+
+.swiss-toc-grand-link {
+  padding: .29rem .4rem .29rem 1.75rem;
+  font-size: .82rem;
+  line-height: 1.24;
+}
+
+.swiss-toc-child-link:hover,
+.swiss-toc-grand-link:hover,
+.swiss-toc-group-link:hover {
+  color: var(--accent) !important;
+}
+
+.swiss-toc-link.swiss-active {
+  color: var(--accent) !important;
+  border-left-color: var(--accent) !important;
+  font-weight: 700 !important;
+}
+
+/* Third-level subtitles only expand for the active second-level item. */
+.swiss-toc-grandchildren {
+  display: none;
+}
+
+.swiss-toc-subgroup.swiss-sub-open > .swiss-toc-grandchildren {
+  display: block;
+}
+
+/* If JS fails, Quarto's original TOC is never hidden/replaced. */
+
+/* ================================================================
+   HOME
+   ================================================================ */
+
 .home-intro {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
@@ -829,15 +445,6 @@ body.swiss-compact li {
   font-weight: 900;
 }
 
-.home-intro-copy p {
-  max-width: 720px;
-}
-
-.home-portrait {
-  min-height: 390px;
-  margin: 0;
-}
-
 .home-actions,
 .home-final-actions {
   display: flex;
@@ -857,10 +464,8 @@ body.swiss-compact li {
   color: var(--text) !important;
   font-size: .8rem;
   font-weight: 800;
-  letter-spacing: .025em;
   text-decoration: none !important;
   text-transform: uppercase;
-  transition: border-color .16s ease, color .16s ease, background .16s ease;
 }
 
 .home-action:hover {
@@ -888,72 +493,46 @@ body.swiss-compact li {
   margin: 1.4rem 0 2rem;
 }
 
-.home-metric-grid {
+.home-metric-grid,
+.home-step-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.home-metric {
+.home-project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.home-metric,
+.home-step {
   min-height: 150px;
   padding: 1rem;
   border: 1px solid var(--border);
   background: var(--surface-2);
 }
 
-.home-metric strong {
-  display: block;
-  margin-bottom: .7rem;
-  color: var(--text);
-  font-size: 1rem;
+.home-step {
+  min-height: 180px;
 }
 
-.home-metric span {
-  color: var(--muted);
+.home-metric strong,
+.home-step strong {
+  display: block;
+  margin-bottom: .6rem;
+}
+
+.home-metric p,
+.home-step p {
+  margin-bottom: 0;
   font-size: .86rem;
   line-height: 1.5;
 }
 
-.home-step-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.home-step {
-  position: relative;
-  min-height: 180px;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text) !important;
-  text-decoration: none !important;
-  transition: transform .16s ease, border-color .16s ease;
-}
-
-.home-step:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-}
-
 .step-number {
-  display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
   color: var(--accent);
   font-size: .72rem;
   font-weight: 900;
   letter-spacing: .08em;
-}
-
-.home-step strong {
-  display: block;
-  margin-bottom: .45rem;
-  color: var(--text);
-}
-
-.home-step small {
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-.home-project-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .inline-project-link {
@@ -978,17 +557,14 @@ body.swiss-compact li {
   border-bottom: 1px solid var(--border);
 }
 
-.home-timeline strong {
-  color: var(--text);
+.home-timeline p {
+  margin: 0;
 }
 
-.home-timeline span {
-  color: var(--muted);
-}
+/* ================================================================
+   CONTACT
+   ================================================================ */
 
-/* ------------------------------------------------
-   Contact page
-   ------------------------------------------------ */
 .contact-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 150px;
@@ -1018,7 +594,6 @@ body.swiss-compact li {
   color: var(--text);
   font-size: 2.1rem;
   font-weight: 900;
-  letter-spacing: -.05em;
 }
 
 .contact-grid {
@@ -1047,22 +622,11 @@ body.swiss-compact li {
 }
 
 .contact-icon {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 2rem;
+  min-height: 30px;
+  margin-bottom: 1.6rem;
   color: var(--accent);
-}
-
-.contact-icon svg {
-  width: 28px;
-  height: 28px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  font-size: 1.4rem;
+  font-weight: 900;
 }
 
 .contact-card-label {
@@ -1077,12 +641,11 @@ body.swiss-compact li {
 .contact-method strong {
   display: block;
   margin-bottom: .45rem;
-  color: var(--text);
   font-size: 1.15rem;
 }
 
 .contact-method p {
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.1rem;
   font-size: .86rem;
   line-height: 1.5;
 }
@@ -1096,18 +659,10 @@ body.swiss-compact li {
 .contact-link-card {
   color: inherit !important;
   text-decoration: none !important;
-  transition: transform .16s ease, border-color .16s ease;
 }
 
 .contact-link-card:hover {
-  transform: translateY(-2px);
   border-color: var(--accent);
-}
-
-.contact-link-card span {
-  color: var(--accent);
-  font-size: .82rem;
-  font-weight: 800;
 }
 
 .contact-status {
@@ -1118,7 +673,278 @@ body.swiss-compact li {
   color: var(--muted);
 }
 
-/* v7 responsive */
+/* ================================================================
+   PROJECT / SKILL COMPONENTS
+   ================================================================ */
+
+.project-meta,
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 0 0 1.35rem;
+}
+
+.project-meta span,
+.skill-chips span {
+  padding: .38rem .55rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.project-grid,
+.skill-grid,
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: .75rem;
+}
+
+.project-card,
+.skill-card,
+.download-card,
+.contact-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.project-card {
+  text-decoration: none;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+}
+
+.project-tag {
+  margin-bottom: .35rem;
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+.tech {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.data-slot {
+  margin: 1.2rem 0 2rem;
+  padding: .8rem 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+/* ================================================================
+   IMAGE PLACEHOLDERS
+   ================================================================ */
+
+.image-slot {
+  position: relative;
+  width: 100%;
+  min-height: 270px;
+  margin: 1.5rem 0 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed var(--border);
+  background: var(--surface);
+  text-align: center;
+}
+
+.image-slot.large {
+  min-height: 420px;
+}
+
+.image-slot.small {
+  min-height: 190px;
+}
+
+.image-slot.home-portrait {
+  min-height: 390px;
+  margin: 0;
+}
+
+.image-slot::before,
+.image-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.image-slot::before {
+  background: linear-gradient(
+    135deg,
+    transparent 49.72%,
+    var(--border) 49.88%,
+    var(--border) 50.12%,
+    transparent 50.28%
+  );
+}
+
+.image-slot::after {
+  background: linear-gradient(
+    45deg,
+    transparent 49.72%,
+    var(--border) 49.88%,
+    var(--border) 50.12%,
+    transparent 50.28%
+  );
+}
+
+.image-slot .slot-label {
+  position: relative;
+  z-index: 2;
+  max-width: 76%;
+  padding: .78rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--page-bg);
+  color: var(--text);
+  font-size: .86rem;
+  font-weight: 900;
+}
+
+.image-slot .slot-label small {
+  display: block;
+  margin-top: .28rem;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+/* ================================================================
+   TABLES / CODE / PAGE NAV
+   ================================================================ */
+
+table {
+  --bs-table-bg: transparent !important;
+  --bs-table-color: var(--text) !important;
+  --bs-table-border-color: var(--border) !important;
+}
+
+table th {
+  color: var(--text) !important;
+}
+
+table td {
+  color: var(--muted) !important;
+}
+
+pre,
+code,
+.cell-output-display {
+  border-radius: 0 !important;
+}
+
+pre {
+  border: 1px solid var(--border) !important;
+}
+
+.cell-output-display svg {
+  max-width: 100%;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: .7rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--text);
+}
+
+.page-nav a {
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-footer {
+  background: var(--page-bg) !important;
+  border-top: 1px solid var(--border);
+  color: var(--muted) !important;
+}
+
+/* ================================================================
+   FAIL-SAFE REVEAL ANIMATIONS
+   Content remains visible if JavaScript does not run.
+   ================================================================ */
+
+.swiss-reveal {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+}
+
+body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transition:
+    clip-path .68s cubic-bezier(.77, 0, .18, 1),
+    opacity .36s ease;
+  transition-delay: var(--swiss-delay, 0ms);
+}
+
+body.swiss-js-ready .swiss-reveal.swiss-shown {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+body.swiss-reduce-motion *,
+body.swiss-reduce-motion *::before,
+body.swiss-reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+body.swiss-reduce-motion .swiss-reveal,
+body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+body.swiss-compact main.content h1:not(.title),
+body.swiss-compact main.content h2 {
+  margin-top: 2.35rem;
+}
+
+body.swiss-compact .image-slot {
+  min-height: 215px;
+  margin: 1.1rem 0 1.5rem;
+}
+
+body.swiss-compact .image-slot.large {
+  min-height: 300px;
+}
+
+body.swiss-compact p,
+body.swiss-compact li {
+  line-height: 1.5;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+
 @media (max-width: 1050px) {
   .home-intro {
     grid-template-columns: 1fr;
@@ -1130,6 +956,30 @@ body.swiss-compact li {
 
   .contact-grid-three {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 991px) {
+  .swiss-controls {
+    position: fixed;
+    top: 12px;
+    right: 62px;
+    z-index: 1200;
+    margin-left: 0 !important;
+  }
+
+  #TOC {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .quarto-title h1.title {
+    font-size: clamp(2.35rem, 10vw, 4rem);
+  }
+
+  .image-slot.large {
+    min-height: 300px;
   }
 }
 
@@ -1159,100 +1009,13 @@ body.swiss-compact li {
   }
 }
 
+@media (max-width: 620px) {
+  .swiss-icon-button {
+    width: 31px;
+    height: 31px;
+  }
 
-/* ================================================================
-   VERSION 7.1 BUGFIXES
-   ================================================================ */
-
-/* Fenced Divs generated by Pandoc/Quarto should never inherit code-like
-   overflow behavior from accidental raw HTML rendering. */
-.home-intro,
-.home-metric-grid,
-.home-step-grid,
-.home-project-grid,
-.home-timeline,
-.home-actions,
-.home-final-actions,
-.contact-hero,
-.contact-grid,
-.contact-status {
-  overflow: visible;
-}
-
-.home-intro pre,
-.home-metric-grid pre,
-.home-step-grid pre,
-.home-project-grid pre,
-.contact-hero pre,
-.contact-grid pre {
-  white-space: normal;
-}
-
-/* Markdown links emitted inside home controls. */
-.home-actions > p,
-.home-final-actions > p {
-  display: contents;
-}
-
-.home-actions .home-action,
-.home-final-actions .home-action {
-  margin: 0;
-}
-
-/* Cards generated from fenced divs. */
-.home-metric > p:last-child,
-.home-step > p:last-child,
-.project-card > p:last-child,
-.contact-method > p:last-child {
-  margin-bottom: 0;
-}
-
-/* Home timeline fenced-div children. */
-.home-timeline > .cell,
-.home-timeline > div {
-  min-width: 0;
-}
-
-/* Accordion: use child UL regardless of extra Quarto classes. */
-#TOC > ul > li.swiss-toc-group > ul,
-#TOC ul > li.swiss-toc-group > ul {
-  max-height: 0;
-  margin-top: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-4px);
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    max-height .34s ease,
-    opacity .22s ease,
-    transform .28s ease,
-    margin-top .28s ease,
-    visibility 0s linear .34s;
-}
-
-#TOC > ul > li.swiss-toc-group.swiss-toc-open > ul,
-#TOC ul > li.swiss-toc-group.swiss-toc-open > ul {
-  max-height: 1200px;
-  margin-top: .25rem;
-  opacity: 1;
-  transform: translateY(0);
-  visibility: visible;
-  pointer-events: auto;
-  transition:
-    max-height .34s ease,
-    opacity .22s ease,
-    transform .28s ease,
-    margin-top .28s ease,
-    visibility 0s linear 0s;
-}
-
-/* Reduce motion keeps the accordion behavior, without animation. */
-body.swiss-reduce-motion #TOC li.swiss-toc-group > ul {
-  transition: none !important;
-}
-
-/* Navbar brand is explicitly treated as a Home control. */
-.navbar-brand {
-  cursor: pointer;
+  .quarto-title h1.title {
+    font-size: 2.45rem;
+  }
 }

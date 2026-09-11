@@ -23,6 +23,11 @@
       <path d="M4 6h16M4 12h16M4 18h16"></path>
     </svg>`;
 
+  let revealTargets = [];
+  let tocModel = null;
+  let activeHeadingId = "";
+  let ticking = false;
+
   function safeGet(key) {
     try {
       return window.localStorage ? localStorage.getItem(key) : null;
@@ -37,6 +42,15 @@
     } catch (e) {}
   }
 
+  function slugify(text) {
+    return String(text || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "section";
+  }
+
   function isDark() {
     return (
       document.body.classList.contains("quarto-dark") ||
@@ -46,19 +60,51 @@
     );
   }
 
-  /* --------------------------------------------------------------
-     Controls
-     -------------------------------------------------------------- */
+  /* ============================================================
+     NAVBAR
+     ============================================================ */
+
+  function fixNavbarRouting() {
+    const brand = document.querySelector("#quarto-header .navbar-brand");
+    const navLinks = Array.from(
+      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
+    );
+
+    const portfolioLink = navLinks.find(function (link) {
+      return (link.textContent || "").trim().toLowerCase() === "portfolio";
+    });
+
+    if (!brand) return;
+
+    if (portfolioLink) {
+      const portfolioHref = portfolioLink.getAttribute("href") || "portfolio.html";
+      const homeHref = portfolioHref.replace(
+        /portfolio(?:\.html)?(?:#.*)?$/,
+        "index.html"
+      );
+
+      brand.setAttribute("href", homeHref);
+    } else {
+      brand.setAttribute("href", "index.html");
+    }
+
+    brand.setAttribute("title", "Home");
+    brand.setAttribute("aria-label", "Carlos Moreno Rojas — Home");
+  }
+
+  /* ============================================================
+     CONTROLS
+     ============================================================ */
+
   function createControls() {
     if (document.querySelector(".swiss-controls")) return;
 
     const controls = document.createElement("div");
-    controls.className = "swiss-controls swiss-controls-right";
+    controls.className = "swiss-controls";
     controls.setAttribute("aria-label", "Display controls");
 
     const compact = document.createElement("button");
     compact.type = "button";
-    compact.id = "swissCompactToggle";
     compact.className = "swiss-icon-button";
     compact.title = "Compact mode";
     compact.setAttribute("aria-label", "Toggle compact mode");
@@ -66,7 +112,6 @@
 
     const motion = document.createElement("button");
     motion.type = "button";
-    motion.id = "swissMotionToggle";
     motion.className = "swiss-icon-button";
     motion.title = "Reduce motion";
     motion.setAttribute("aria-label", "Toggle reduced motion");
@@ -74,7 +119,6 @@
 
     const theme = document.createElement("button");
     theme.type = "button";
-    theme.id = "swissThemeToggle";
     theme.className = "swiss-icon-button";
     theme.setAttribute("aria-label", "Toggle light or dark mode");
 
@@ -83,12 +127,11 @@
     const host =
       document.querySelector("#quarto-header .navbar-container") ||
       document.querySelector("#quarto-header .container-fluid") ||
-      document.querySelector("#quarto-header nav") ||
+      document.querySelector("#quarto-header .navbar") ||
       document.body;
 
     host.appendChild(controls);
 
-    // Restore display preferences.
     if (safeGet("swiss-compact") === "1") {
       document.body.classList.add("swiss-compact");
       compact.classList.add("is-on");
@@ -113,7 +156,7 @@
       safeSet("swiss-reduce-motion", on ? "1" : "0");
 
       if (on) {
-        document.querySelectorAll(".swiss-reveal").forEach(function (el) {
+        revealTargets.forEach(function (el) {
           el.classList.add("swiss-shown");
         });
       } else {
@@ -128,35 +171,37 @@
     }
 
     theme.addEventListener("click", function () {
-      // Prefer Quarto's own theme switch, keeping Bootstrap in sync.
       const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
+
       if (nativeToggle) {
         nativeToggle.click();
         window.setTimeout(updateThemeIcon, 80);
         return;
       }
 
-      // Standalone fallback.
       document.body.classList.toggle("swiss-manual-dark");
       const dark = document.body.classList.contains("swiss-manual-dark");
       safeSet("swiss-manual-dark", dark ? "1" : "0");
       updateThemeIcon();
     });
 
-    if (!document.querySelector(".quarto-color-scheme-toggle") &&
-        safeGet("swiss-manual-dark") === "1") {
+    if (
+      !document.querySelector(".quarto-color-scheme-toggle") &&
+      safeGet("swiss-manual-dark") === "1"
+    ) {
       document.body.classList.add("swiss-manual-dark");
     }
 
     updateThemeIcon();
 
-    // Keep icon synchronized if Quarto changes classes/data attributes.
     try {
       const observer = new MutationObserver(updateThemeIcon);
+
       observer.observe(document.documentElement, {
         attributes: true,
         attributeFilter: ["class", "data-bs-theme"]
       });
+
       observer.observe(document.body, {
         attributes: true,
         attributeFilter: ["class"]
@@ -164,11 +209,9 @@
     } catch (e) {}
   }
 
-  /* --------------------------------------------------------------
-     Reveal animation
-     Important: content is visible before JS adds swiss-js-ready.
-     -------------------------------------------------------------- */
-  let revealTargets = [];
+  /* ============================================================
+     FAIL-SAFE REVEAL
+     ============================================================ */
 
   function collectRevealTargets() {
     const content =
@@ -190,23 +233,21 @@
         ".project-grid",
         ".skill-grid",
         ".download-grid",
-        ".contact-card",
+        ".contact-grid",
+        ".home-metric-grid",
+        ".home-step-grid",
+        ".home-project-grid",
         ".cell",
         "table",
-        "blockquote",
-        "ul",
-        "ol"
+        "blockquote"
       ].join(",")
     );
 
-    const seen = new Set();
     const result = [];
+    const seen = new Set();
 
     candidates.forEach(function (el) {
-      // Avoid animating elements nested inside a larger selected component.
       if (el.closest(".image-slot") && !el.classList.contains("image-slot")) return;
-      if (el.closest(".project-meta") && !el.classList.contains("project-meta")) return;
-      if (el.closest(".skill-chips") && !el.classList.contains("skill-chips")) return;
       if (seen.has(el)) return;
 
       seen.add(el);
@@ -235,8 +276,8 @@
 
     revealTargets.forEach(function (el) {
       if (el.classList.contains("swiss-shown")) return;
-      const rect = el.getBoundingClientRect();
-      if (rect.top < trigger) {
+
+      if (el.getBoundingClientRect().top < trigger) {
         el.classList.add("swiss-shown");
       }
     });
@@ -245,7 +286,6 @@
   function initReveal() {
     revealTargets = collectRevealTargets();
 
-    // Mark current viewport items visible BEFORE enabling hidden states.
     revealTargets.forEach(function (el) {
       if (el.getBoundingClientRect().top < window.innerHeight * 0.97) {
         el.classList.add("swiss-shown");
@@ -256,192 +296,368 @@
     revealOnScroll();
   }
 
-  /* --------------------------------------------------------------
-     TOC Scroll Spy
-     - active item follows the document
-     - sidebar automatically scrolls so active item remains visible
-     -------------------------------------------------------------- */
-  const toc = document.getElementById("TOC");
-  let tocItems = [];
-  let tocGroups = [];
-  let lastActiveHref = "";
+  /* ============================================================
+     CUSTOM TOC FROM REAL HEADINGS
+     This intentionally replaces the Quarto-generated TOC tree.
+     ============================================================ */
 
-  function getTocRootList() {
-    if (!toc) return null;
-
-    // Quarto currently renders #TOC > ul, but this fallback also
-    // supports wrappers that may be introduced by future Quarto versions.
-    const direct = Array.from(toc.children).find(function (el) {
-      return el.tagName === "UL";
-    });
-    if (direct) return direct;
-
-    return toc.querySelector("ul");
+  function getContentRoot() {
+    return (
+      document.querySelector("main.content") ||
+      document.querySelector("#quarto-document-content") ||
+      document.querySelector("main")
+    );
   }
 
-  function initTocAccordion() {
-    if (!toc) return [];
+  function collectHeadings() {
+    const content = getContentRoot();
+    if (!content) return [];
 
-    const rootList = getTocRootList();
-    if (!rootList) return [];
-
-    const groups = Array.from(rootList.children).filter(function (li) {
-      if (li.tagName !== "LI") return false;
-      const nested = Array.from(li.children).find(function (el) {
-        return el.tagName === "UL";
-      });
-      return !!nested;
+    const headings = Array.from(
+      content.querySelectorAll("h1:not(.title), h2, h3")
+    ).filter(function (heading) {
+      if (heading.closest("#title-block-header")) return false;
+      if (heading.classList.contains("toc-ignore")) return false;
+      if (heading.closest(".toc-ignore")) return false;
+      return (heading.textContent || "").trim().length > 0;
     });
 
-    groups.forEach(function (li) {
-      li.classList.add("swiss-toc-group");
+    const usedIds = new Set();
+
+    headings.forEach(function (heading, index) {
+      let id = heading.id;
+
+      if (!id) {
+        const base = slugify(heading.textContent);
+        id = base;
+        let suffix = 2;
+
+        while (
+          usedIds.has(id) ||
+          (document.getElementById(id) && document.getElementById(id) !== heading)
+        ) {
+          id = base + "-" + suffix;
+          suffix += 1;
+        }
+
+        heading.id = id;
+      }
+
+      usedIds.add(id);
+    });
+
+    return headings;
+  }
+
+  function buildHeadingTree(headings) {
+    if (!headings.length) return [];
+
+    const levels = headings.map(function (h) {
+      return Number(h.tagName.substring(1));
+    });
+
+    const baseLevel = Math.min.apply(null, levels);
+    const groups = [];
+
+    let currentGroup = null;
+    let currentChild = null;
+
+    headings.forEach(function (heading) {
+      const level = Number(heading.tagName.substring(1));
+
+      const entry = {
+        heading: heading,
+        id: heading.id,
+        text: (heading.textContent || "").trim(),
+        level: level,
+        children: [],
+        parent: null,
+        group: null,
+        link: null,
+        li: null
+      };
+
+      if (level <= baseLevel || !currentGroup) {
+        currentGroup = entry;
+        currentGroup.group = currentGroup;
+        groups.push(currentGroup);
+        currentChild = null;
+        return;
+      }
+
+      if (level === baseLevel + 1) {
+        entry.group = currentGroup;
+        entry.parent = currentGroup;
+        currentGroup.children.push(entry);
+        currentChild = entry;
+        return;
+      }
+
+      // H3 under H2 when base is H1.
+      if (currentChild) {
+        entry.group = currentGroup;
+        entry.parent = currentChild;
+        currentChild.children.push(entry);
+      } else {
+        // Safe fallback for unusual heading jumps.
+        entry.group = currentGroup;
+        entry.parent = currentGroup;
+        currentGroup.children.push(entry);
+      }
     });
 
     return groups;
   }
 
-  function topLevelGroupFor(link) {
-    if (!toc || !link) return null;
+  function createTocLink(entry, className) {
+    const link = document.createElement("a");
+    link.className = "swiss-toc-link " + className;
+    link.href = "#" + entry.id;
+    link.textContent = entry.text;
+    entry.link = link;
 
-    const rootList = getTocRootList();
-    if (!rootList) return null;
+    link.addEventListener("click", function (event) {
+      // Prevent a link inside <summary> from toggling the details twice.
+      event.stopPropagation();
+    });
 
-    let li = link.closest("li");
+    return link;
+  }
 
-    while (li) {
-      if (li.parentElement === rootList) return li;
-      li = li.parentElement ? li.parentElement.closest("li") : null;
+  function renderTocGroup(group) {
+    const details = document.createElement("details");
+    details.className = "swiss-toc-group";
+    group.details = details;
+
+    const summary = document.createElement("summary");
+    summary.appendChild(createTocLink(group, "swiss-toc-group-link"));
+    details.appendChild(summary);
+
+    if (!group.children.length) {
+      // A title without subtitles behaves like a normal link.
+      details.classList.add("swiss-toc-no-children");
+      summary.addEventListener("click", function (event) {
+        event.preventDefault();
+        group.link.click();
+      });
+      return details;
+    }
+
+    const childrenList = document.createElement("ul");
+    childrenList.className = "swiss-toc-children";
+
+    group.children.forEach(function (child) {
+      const li = document.createElement("li");
+      li.className = "swiss-toc-subgroup";
+      child.li = li;
+
+      li.appendChild(createTocLink(child, "swiss-toc-child-link"));
+
+      if (child.children.length) {
+        const grandList = document.createElement("ul");
+        grandList.className = "swiss-toc-grandchildren";
+
+        child.children.forEach(function (grand) {
+          const grandLi = document.createElement("li");
+          grand.li = grandLi;
+          grandLi.appendChild(
+            createTocLink(grand, "swiss-toc-grand-link")
+          );
+          grandList.appendChild(grandLi);
+        });
+
+        li.appendChild(grandList);
+      }
+
+      childrenList.appendChild(li);
+    });
+
+    details.appendChild(childrenList);
+    return details;
+  }
+
+  function getOrCreateTocContainer() {
+    let toc = document.getElementById("TOC");
+    if (toc) return toc;
+
+    const margin =
+      document.querySelector("#quarto-margin-sidebar") ||
+      document.querySelector(".margin-sidebar") ||
+      document.querySelector(".quarto-margin-sidebar");
+
+    if (!margin) return null;
+
+    toc = document.createElement("nav");
+    toc.id = "TOC";
+    toc.setAttribute("role", "doc-toc");
+    margin.prepend(toc);
+
+    return toc;
+  }
+
+  function buildCustomToc() {
+    const toc = getOrCreateTocContainer();
+    if (!toc) return null;
+
+    const headings = collectHeadings();
+    if (!headings.length) return null;
+
+    const groups = buildHeadingTree(headings);
+    if (!groups.length) return null;
+
+    const originalTitle = toc.querySelector(".toc-title");
+    const titleText = originalTitle
+      ? originalTitle.textContent.trim()
+      : "ON THIS PAGE";
+
+    const nodeById = new Map();
+
+    groups.forEach(function addNodes(group) {
+      nodeById.set(group.id, group);
+
+      group.children.forEach(function (child) {
+        nodeById.set(child.id, child);
+
+        child.children.forEach(function (grand) {
+          nodeById.set(grand.id, grand);
+        });
+      });
+    });
+
+    const fragment = document.createDocumentFragment();
+
+    const title = document.createElement("div");
+    title.className = "toc-title";
+    title.textContent = titleText;
+    fragment.appendChild(title);
+
+    const root = document.createElement("div");
+    root.className = "swiss-toc-root";
+
+    groups.forEach(function (group) {
+      root.appendChild(renderTocGroup(group));
+    });
+
+    fragment.appendChild(root);
+
+    // Only replace the native TOC after our own tree is completely built.
+    toc.replaceChildren(fragment);
+
+    return {
+      toc: toc,
+      headings: headings,
+      groups: groups,
+      nodeById: nodeById
+    };
+  }
+
+  function getActiveHeading() {
+    if (!tocModel || !tocModel.headings.length) return null;
+
+    const marker = Math.min(170, window.innerHeight * 0.25);
+    let active = tocModel.headings[0];
+
+    tocModel.headings.forEach(function (heading) {
+      if (heading.getBoundingClientRect().top <= marker) {
+        active = heading;
+      }
+    });
+
+    return active;
+  }
+
+  function findActiveChild(node) {
+    if (!node) return null;
+
+    if (node.parent && node.parent.group === node.parent) {
+      return node;
+    }
+
+    if (node.parent && node.parent.parent) {
+      return node.parent;
     }
 
     return null;
   }
 
-  function openTocGroupFor(activeLink) {
-    if (!tocGroups.length) return;
+  function keepTocLinkVisible(link) {
+    if (!tocModel || !link) return;
 
-    const activeGroup = topLevelGroupFor(activeLink);
-
-    tocGroups.forEach(function (group) {
-      const open = group === activeGroup;
-      group.classList.toggle("swiss-toc-open", open);
-
-      const nested = Array.from(group.children).find(function (el) {
-        return el.tagName === "UL";
-      });
-
-      if (nested) {
-        nested.setAttribute("aria-hidden", open ? "false" : "true");
-      }
-
-      const titleLink = Array.from(group.children).find(function (el) {
-        return el.tagName === "A";
-      });
-
-      if (titleLink) {
-        titleLink.setAttribute("aria-expanded", open ? "true" : "false");
-      }
-    });
-  }
-
-  function collectTocItems() {
-    if (!toc) return [];
-
-    const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
-
-    return links.map(function (link) {
-      let id = link.getAttribute("href").slice(1);
-      try { id = decodeURIComponent(id); } catch (e) {}
-      const target = document.getElementById(id);
-      return target ? { link: link, target: target, href: "#" + id } : null;
-    }).filter(Boolean);
-  }
-
-  function keepActiveTocVisible(activeLink) {
-    if (!toc || !activeLink) return;
-
+    const toc = tocModel.toc;
     const tocRect = toc.getBoundingClientRect();
-    const linkRect = activeLink.getBoundingClientRect();
-    const margin = 42;
+    const linkRect = link.getBoundingClientRect();
+    const margin = 44;
 
     if (linkRect.bottom > tocRect.bottom - margin) {
-      const amount = linkRect.bottom - tocRect.bottom + margin;
       toc.scrollTo({
-        top: toc.scrollTop + amount,
-        behavior: document.body.classList.contains("swiss-reduce-motion") ? "auto" : "smooth"
+        top: toc.scrollTop + (linkRect.bottom - tocRect.bottom + margin),
+        behavior: document.body.classList.contains("swiss-reduce-motion")
+          ? "auto"
+          : "smooth"
       });
     } else if (linkRect.top < tocRect.top + margin) {
-      const amount = tocRect.top + margin - linkRect.top;
       toc.scrollTo({
-        top: Math.max(0, toc.scrollTop - amount),
-        behavior: document.body.classList.contains("swiss-reduce-motion") ? "auto" : "smooth"
+        top: Math.max(
+          0,
+          toc.scrollTop - (tocRect.top + margin - linkRect.top)
+        ),
+        behavior: document.body.classList.contains("swiss-reduce-motion")
+          ? "auto"
+          : "smooth"
       });
     }
   }
 
-  function updateToc() {
-    if (!tocItems.length) return;
+  function updateCustomToc() {
+    if (!tocModel) return;
 
-    const marker = Math.min(165, window.innerHeight * .25);
-    let current = tocItems[0];
+    const activeHeading = getActiveHeading();
+    if (!activeHeading) return;
 
-    tocItems.forEach(function (item) {
-      const rect = item.target.getBoundingClientRect();
-      if (rect.top <= marker) current = item;
-    });
+    const node = tocModel.nodeById.get(activeHeading.id);
+    if (!node) return;
 
-    tocItems.forEach(function (item) {
-      item.link.classList.toggle("swiss-active", item === current);
-    });
+    const group = node.group || node;
+    const activeChild = findActiveChild(node);
 
-    if (current) {
-      openTocGroupFor(current.link);
-    }
-
-    if (current && current.href !== lastActiveHref) {
-      lastActiveHref = current.href;
-
-      // Wait one frame so accordion expansion has affected layout.
-      window.requestAnimationFrame(function () {
-        keepActiveTocVisible(current.link);
-      });
-    }
-  }
-
-  /* --------------------------------------------------------------
-     Navbar routing
-     -------------------------------------------------------------- */
-  function fixNavbarRouting() {
-    const brand = document.querySelector("#quarto-header .navbar-brand");
-    const navLinks = Array.from(
-      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
-    );
-
-    // Quarto rewrites qmd links to correct relative HTML paths.
-    // Derive Home from the rendered Portfolio link so this also works
-    // from nested project pages and GitHub Pages subpaths.
-    const portfolioLink = navLinks.find(function (link) {
-      return (link.textContent || "").trim().toLowerCase() === "portfolio";
-    });
-
-    if (portfolioLink) {
-      const portfolioHref = portfolioLink.getAttribute("href") || "portfolio.html";
-      const homeHref = portfolioHref.replace(/portfolio(?:\.html)?(?:#.*)?$/, "index.html");
-
-      if (brand) {
-        brand.setAttribute("href", homeHref);
-        brand.setAttribute("title", "Home");
-        brand.setAttribute("aria-label", "Carlos Moreno Rojas — Home");
+    // Native <details>.open is the robust source of truth.
+    tocModel.groups.forEach(function (candidate) {
+      if (candidate.details) {
+        candidate.details.open = candidate === group;
       }
-    } else if (brand) {
-      // Safe fallback for root-level pages.
-      brand.setAttribute("href", "index.html");
+
+      candidate.children.forEach(function (child) {
+        if (child.li) {
+          child.li.classList.toggle(
+            "swiss-sub-open",
+            candidate === group && child === activeChild
+          );
+        }
+      });
+    });
+
+    // Exact active subtitle/title.
+    tocModel.nodeById.forEach(function (candidate) {
+      if (candidate.link) {
+        candidate.link.classList.toggle(
+          "swiss-active",
+          candidate.id === node.id
+        );
+      }
+    });
+
+    if (node.id !== activeHeadingId) {
+      activeHeadingId = node.id;
+
+      window.requestAnimationFrame(function () {
+        keepTocLinkVisible(node.link);
+      });
     }
   }
 
-  /* --------------------------------------------------------------
-     Main loop
-     -------------------------------------------------------------- */
-  let ticking = false;
+  /* ============================================================
+     MAIN
+     ============================================================ */
 
   function onScroll() {
     if (ticking) return;
@@ -449,7 +665,7 @@
 
     window.requestAnimationFrame(function () {
       revealOnScroll();
-      updateToc();
+      updateCustomToc();
       ticking = false;
     });
   }
@@ -459,22 +675,20 @@
     createControls();
     initReveal();
 
-    tocGroups = initTocAccordion();
-    tocItems = collectTocItems();
-    updateToc();
+    tocModel = buildCustomToc();
+    updateCustomToc();
 
     window.addEventListener("scroll", onScroll, { passive: true });
+
     window.addEventListener("resize", function () {
       revealOnScroll();
-      updateToc();
+      updateCustomToc();
     });
 
-    // Extra safety after Mermaid/layout/font changes settle.
+    // Re-check after layout-sensitive content such as Mermaid has settled.
     window.setTimeout(function () {
-      tocGroups = initTocAccordion();
-      tocItems = collectTocItems();
       revealOnScroll();
-      updateToc();
+      updateCustomToc();
     }, 250);
   }
 
