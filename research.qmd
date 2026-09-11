@@ -1,0 +1,59 @@
+---
+title: "Research"
+toc: true
+---
+
+# Research
+
+My research interests sit at the intersection of biomedical engineering, experimental physiology
+and instrumentation.
+
+## Current research
+
+### Ex vivo liver viability with ICG-NIR
+
+The Master's thesis integrates:
+
+- Ex vivo organ perfusion.
+- Hemodynamic and thermal monitoring.
+- Baseline physiological characterization.
+- Biomedical optics and NIR fluorescence.
+- ICG kinetic analysis.
+- Quantitative functional assessment.
+
+[View the full thesis project →](projects/thesis.qmd)
+
+## Research approach
+
+```{mermaid}
+flowchart LR
+    A["Physiological problem"] --> B["Measurable variables"]
+    B --> C["Literature + requirements"]
+    C --> D["Prototype"]
+    D --> E["Instrumentation"]
+    E --> F["Experiment"]
+    F --> G["Validation"]
+    G --> H["Iteration / integration"]
+```
+
+I use scientific literature not only as theoretical background, but also as an engineering
+resource for geometries, materials, dimensions, physiological ranges, measurement methods and
+validation criteria.
+
+## Areas of interest
+
+- Organ perfusion and preservation.
+- Biomedical instrumentation.
+- Biosensors.
+- Biomedical optics.
+- NIR fluorescence.
+- Medical imaging.
+- Signal processing.
+- Medical devices.
+- Neuroengineering.
+- Robotic rehabilitation.
+
+<div class="page-nav">
+  <a href="projects/index.html">← Projects</a>
+  <a href="experience.html">Experience →</a>
+</div>

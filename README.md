@@ -1,1 +1,78 @@
-# CarlosMoreno.github.io
+# Carlos Moreno Rojas — Portfolio
+
+Quarto-based engineering and biomedical research portfolio.
+
+## Structure
+
+- `index.qmd` — Home
+- `projects/` — Individual project pages
+- `research.qmd`
+- `experience.qmd`
+- `skills.qmd`
+- `about.qmd`
+- `cv.qmd`
+- `contact.qmd`
+- `assets/site.css`
+- `.github/workflows/publish.yml`
+
+## Local preview
+
+Install Quarto:
+
+https://quarto.org/
+
+Then run:
+
+```bash
+quarto preview
+```
+
+## Publish with GitHub Pages
+
+1. Create a GitHub repository.
+2. Upload all files from this folder.
+3. In GitHub: **Settings → Pages → Source → GitHub Actions**.
+4. Push to the `main` branch.
+5. The included workflow will render and deploy the site.
+
+## Important before publishing
+
+Replace placeholders in `contact.qmd`.
+
+Add:
+- project photographs;
+- videos;
+- diagrams;
+- validated plots;
+- public datasets;
+- repository links;
+- final CV PDFs.
+
+See `CONTENT_TO_ADD.md`.
+
+
+## Version 2 design
+
+Simplified visual style, interactive preview tabs and previous/next navigation between pages.
+
+## Version 3 design
+
+Documentation-style layout:
+
+- fixed / sticky section index on the left;
+- active section highlighted while scrolling;
+- long-form technical pages;
+- image placeholders with the exact suggested image title centered in each slot;
+- simplified visual styling inspired by electronics/computer technical documentation.
+
+
+## Version 4
+
+Added a complete long-form portfolio page with all major projects and experiences. See `portfolio.qmd` and `GITHUB_PAGES_GUIDE.md`.
+
+## Version 5
+
+- Working Portfolio / CV / Contact top navigation.
+- Hierarchical left sidebar with technical-area titles and project / objective subtitles.
+- Portfolio home is now the long-form technical page.
+- CV and Contact have their own working content and side navigation.

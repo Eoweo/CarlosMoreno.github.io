@@ -1,0 +1,37 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Carlos Moreno Rojas"
+  description: "Biomedical & Electrical Engineering — Portfolio"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Portfolio
+      - href: cv.qmd
+        text: CV
+      - href: contact.qmd
+        text: Contact
+    right:
+      - href: projects/index.qmd
+        text: Project pages
+  page-footer:
+    left: "Carlos Moreno Rojas"
+    right: "Biomedical & Electrical Engineering"
+  search: true
+
+format:
+  html:
+    theme: cosmo
+    css: assets/site.css
+    toc: true
+    toc-location: left
+    toc-title: "CONTENTS"
+    toc-depth: 2
+    smooth-scroll: true
+    code-copy: true
+    code-overflow: wrap
+
+execute:
+  freeze: auto

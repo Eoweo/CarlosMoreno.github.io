@@ -1,0 +1,67 @@
+---
+title: "Projects"
+description: "Biomedical engineering, medical devices, robotics, imaging and embedded systems."
+toc: false
+---
+
+# Projects
+
+The portfolio is organized by application area. Each project page focuses on the problem,
+my role, system architecture, engineering decisions, validation and the evidence produced.
+
+## Organ Perfusion & Transplantation
+
+::: {.project-list}
+### [Master's Thesis — Ex Vivo Liver Viability with ICG-NIR](thesis.qmd)
+A three-objective research project: build a stable ex vivo liver perfusion platform, characterize a physiological baseline without ICG, and develop an ICG-NIR functional marker.
+
+### [Borealis UC — Organ Supercooling](borealis.qmd)
+Research project on organ preservation through supercooling.
+
+### [Organ Preservation Machine Redesign](organ-preservation.qmd)
+Electromechanical redesign and miniaturization of an organ preservation machine.
+:::
+
+## Medical Devices & Neuroengineering
+
+::: {.project-list}
+### [CandelStim — Transcranial Electrical Stimulation](candel.qmd)
+Hardware, firmware and system integration for transcranial electrical stimulation.
+
+### Advanced Neurostimulation Studies
+Follow-on technical study of temporal interference stimulation, current sources, DDS/NCO, DACs, synchronization, impedance measurement and validation approaches.
+:::
+
+## Robotics & Rehabilitation
+
+::: {.project-list}
+### [Ciervo UC — CYBATHLON 2024](cybathlon.qmd)
+Electrical Area Leader for a robotic transfemoral prosthesis developed for CYBATHLON 2024.
+:::
+
+## Medical Imaging & AI
+
+::: {.project-list}
+### [Lung Segmentation with U-Net](unet.qmd)
+Medical image segmentation project using U-Net for lung images.
+:::
+
+## Embedded Systems & FPGA
+
+::: {.project-list}
+### [FPGA Upgrade for Universal Testing Machine](fpga.qmd)
+Signal-processing and embedded hardware using Zybo Z10, Vivado and VHDL.
+:::
+
+## CAD & Prototyping
+
+::: {.project-list}
+### [Vscan Air Medical Device Enclosure](vscan.qmd)
+3D design and prototyping for a medical ultrasound device accessory.
+:::
+
+
+<div class="page-nav">
+  <a href="../index.html">← Home</a>
+  <a href="thesis.html">Master's thesis →</a>
+</div>

@@ -1,0 +1,71 @@
+---
+title: "FPGA Upgrade for Universal Testing Machine"
+toc: true
+
+toc-location: left
+toc-depth: 3
+---
+
+## Overview
+
+Development of an embedded processing board for a universal mechanical testing machine.
+
+## Signals
+
+- Force.
+- Displacement.
+- Deformation.
+- Speed.
+
+## Technology
+
+- Zybo Z10.
+- Vivado.
+- VHDL.
+- FPGA-based digital processing.
+
+
+
+
+
+## Suggested visual material
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DE LA ZYBO Z10 / HARDWARE
+    <small>Tarjeta utilizada en el upgrade</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA DE BLOQUES FPGA
+    <small>Entradas → procesamiento → salidas</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA DE ADQUISICIÓN DE FUERZA / DESPLAZAMIENTO
+    <small>Sensores y cadena de señal</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    CAPTURA DE VIVADO / VHDL
+    <small>Bloques o módulo representativo</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    GRÁFICO DE VALIDACIÓN DEL SISTEMA
+    <small>Comparación con medición de referencia</small>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="unet.html">← U-Net</a>
+  <a href="vscan.html">Vscan Air →</a>
+</div>

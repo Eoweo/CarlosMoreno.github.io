@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carlos Moreno Rojas — Portfolio</title>
+<style>
+:root{--text:#20262d;--muted:#6c7782;--border:#d8dee4;--soft:#f6f8fa;--blue:#17627d;--sidebar:280px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--text);background:#fff}
+header{height:58px;position:fixed;left:0;right:0;top:0;background:#fff;border-bottom:1px solid var(--border);z-index:50;display:flex;align-items:center;padding:0 24px}
+.brand{font-weight:750}.topnav{margin-left:auto;display:flex;gap:8px}.topbtn{border:0;background:transparent;padding:8px 11px;border-radius:5px;cursor:pointer;color:var(--muted);font-weight:650}.topbtn.active{background:var(--blue);color:#fff}
+aside{position:fixed;top:58px;bottom:0;left:0;width:var(--sidebar);border-right:1px solid var(--border);padding:16px 13px;overflow:auto;background:#fff}
+.side-group{font-size:.69rem;font-weight:850;letter-spacing:.07em;color:#8a949d;margin:17px 8px 6px;text-transform:uppercase}
+aside a{display:block;text-decoration:none;color:#66727d;font-size:.83rem;padding:5px 8px 5px 16px;border-left:2px solid transparent;margin:1px 0}
+aside a:hover{color:var(--blue)}aside a.active{color:var(--blue);font-weight:750;border-left-color:var(--blue);background:#f8fafb}
+main{margin-left:var(--sidebar);padding:88px 7vw 80px;max-width:1240px}
+.page{display:none}.page.active{display:block}
+section{scroll-margin-top:84px;max-width:890px;margin-bottom:65px}
+h1{font-size:2.7rem;line-height:1.06;letter-spacing:-.035em;margin:.4rem 0 1rem}h2{font-size:1.75rem;border-top:1px solid var(--border);padding-top:28px}h3{font-size:1.25rem;margin-top:26px}
+.kicker{font-size:.74rem;color:var(--blue);font-weight:800;letter-spacing:.08em}.lead,p,li{line-height:1.7;color:#46535f}
+.imgslot{min-height:260px;border:1px dashed #98a6b0;background:linear-gradient(135deg,transparent 49.7%,#dfe4e8 50%,transparent 50.3%),linear-gradient(45deg,transparent 49.7%,#dfe4e8 50%,transparent 50.3%),var(--soft);display:flex;align-items:center;justify-content:center;text-align:center;margin:20px 0 28px;border-radius:5px}.imgslot.large{min-height:380px}
+.label{max-width:74%;background:rgba(255,255,255,.95);border:1px solid var(--border);padding:11px 14px;font-weight:750;color:#43505b}.label small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.cvblock{border-bottom:1px solid var(--border);padding:12px 0 20px}.cvblock:last-child{border-bottom:0}.contactbox{border:1px solid var(--border);background:var(--soft);border-radius:6px;padding:16px;max-width:650px}
+@media(max-width:860px){aside{display:none}main{margin-left:0;padding:82px 20px}.topnav{gap:2px}.topbtn{padding:7px 8px}.imgslot.large{min-height:270px}}
+</style>
+</head>
+<body>
+<header>
+<div class="brand">Carlos Moreno Rojas</div>
+<div class="topnav">
+<button class="topbtn active" data-page="portfolio">Portfolio</button>
+<button class="topbtn" data-page="cv">CV</button>
+<button class="topbtn" data-page="contact">Contact</button>
+</div>
+</header>
+
+<aside id="sidebar"></aside>
+
+<main>
+
+<div id="portfolio" class="page active">
+
+<section id="p-overview">
+<div class="kicker">BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING</div>
+<h1>Engineering Portfolio</h1>
+<p class="lead">Research and technical projects in biomedical instrumentation, electronics, organ perfusion, medical devices, robotics, imaging, FPGA and prototyping.</p>
+<div class="imgslot large"><div class="label">FOTO PRINCIPAL DEL PORTAFOLIO<small>Una imagen técnica fuerte que represente tu trabajo</small></div></div>
+</section>
+
+<section id="p-master">
+<h2>Master's Research — Liver Viability & ICG-NIR</h2>
+<p>Development of an ex vivo liver perfusion platform and quantitative functional assessment using ICG-NIR kinetics.</p>
+</section>
+
+<section id="p-obj1">
+<h3>Objective 1 — Ex Vivo Perfusion Platform</h3>
+<p>Stable perfusion platform with pressure, flow, temperature, vascular resistance and perfusate monitoring.</p>
+<div class="imgslot large"><div class="label">FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA<small>Sistema armado y conectado</small></div></div>
+<div class="imgslot"><div class="label">CAPTURA DEL MONITOR HIDRODINÁMICO<small>Presión, flujo, temperatura y resistencia</small></div></div>
+</section>
+
+<section id="p-obj2">
+<h3>Objective 2 — Baseline Physiological Dataset</h3>
+<p>Characterization of the expected physiological and experimental variability before ICG.</p>
+<div class="imgslot large"><div class="label">GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA<small>Experimento estable sin ICG</small></div></div>
+</section>
+
+<section id="p-obj3">
+<h3>Objective 3 — ICG-NIR Functional Marker</h3>
+<p>Extraction of ICG-PDR, ICG-R15, clearance and other quantitative parameters from fluorescence kinetics.</p>
+<div class="imgslot large"><div class="label">FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR<small>Hígado, iluminación, filtros y adquisición</small></div></div>
+<div class="imgslot"><div class="label">CURVA FI(t) CON PARÁMETROS ICG<small>PDR, R15, clearance, Fmax, Tmax y AUC</small></div></div>
+</section>
+
+<section id="p-cybathlon">
+<h2>Robotics & Rehabilitation</h2>
+<h3>CYBATHLON 2024 — Robotic Transfemoral Prosthesis</h3>
+<p>Electrical Area Leader of Ciervo UC for CYBATHLON 2024 in Zürich.</p>
+<div class="imgslot large"><div class="label">FOTO DEL EQUIPO CIERVO UC EN CYBATHLON<small>Equipo completo durante la competencia</small></div></div>
+<div class="imgslot"><div class="label">FOTO DE LA ELECTRÓNICA INTEGRADA EN LA PRÓTESIS<small>Controladores, baterías, sensores y cableado</small></div></div>
+</section>
+
+<section id="p-candel">
+<h2>Medical Devices & Neuroengineering</h2>
+<h3>CandelStim — Transcranial Electrical Stimulation</h3>
+<p>Hardware, PCB, embedded systems, firmware, BLE and signal generation for a transcranial electrical stimulation device.</p>
+<div class="imgslot large"><div class="label">FOTO GENERAL DEL PROTOTIPO CANDELSTIM<small>Solo material autorizado para publicación</small></div></div>
+<div class="imgslot"><div class="label">DIAGRAMA HARDWARE / FIRMWARE<small>Interfaz → MCU → electrónica → electrodos</small></div></div>
+</section>
+
+<section id="p-borealis">
+<h2>Organ Preservation & Transplantation</h2>
+<h3>Borealis UC — Organ Supercooling</h3>
+<p>Research on organ preservation through supercooling.</p>
+<div class="imgslot"><div class="label">FOTO GENERAL DEL PROYECTO BOREALIS UC<small>Montaje experimental</small></div></div>
+</section>
+
+<section id="p-preservation">
+<h3>Organ Preservation Machine Redesign</h3>
+<p>Electromechanical redesign, fluid systems, control and miniaturization.</p>
+<div class="imgslot large"><div class="label">FOTO DE LA MÁQUINA DE PRESERVACIÓN<small>Vista general del sistema</small></div></div>
+</section>
+
+<section id="p-unet">
+<h2>Medical Imaging & AI</h2>
+<h3>Lung Segmentation with U-Net</h3>
+<p>Medical image segmentation project using U-Net on CT / MRI images.</p>
+<div class="imgslot"><div class="label">EJEMPLOS DE SEGMENTACIÓN<small>Imagen original + ground truth + predicción</small></div></div>
+</section>
+
+<section id="p-fpga">
+<h2>Embedded Systems & FPGA</h2>
+<h3>Universal Testing Machine Upgrade</h3>
+<p>Zybo Z10, Vivado and VHDL for processing force, displacement, deformation and speed.</p>
+<div class="imgslot"><div class="label">DIAGRAMA DE BLOQUES FPGA<small>Entradas → procesamiento → salidas</small></div></div>
+</section>
+
+<section id="p-vscan">
+<h2>CAD & Prototyping</h2>
+<h3>Vscan Air Medical Device Enclosure</h3>
+<p>CAD and prototyping for a portable ultrasound device accessory.</p>
+<div class="imgslot"><div class="label">RENDER CAD DEL DISEÑO FINAL<small>Versión seleccionada</small></div></div>
+</section>
+
+<section id="p-leadership">
+<h2>Teaching & Leadership</h2>
+<h3>Physics Laboratory Teaching Assistant</h3>
+<p>Laboratory Teaching Assistant for FIS154.</p>
+<h3>Biomedical Engineering Student Chapter UC</h3>
+<p>President, 2024–2025.</p>
+<h3>IEEE EMBS PUC Chile</h3>
+<p>Webmaster since 2024.</p>
+</section>
+
+<section id="p-meldic">
+<h2>Industry & Technical Experience</h2>
+<h3>Meldic Ltda.</h3>
+<p>Medical equipment experience and technical development work.</p>
+</section>
+
+</div>
+
+<div id="cv" class="page">
+<section id="cv-profile">
+<div class="kicker">CURRICULUM VITAE</div><h1>Carlos Moreno Rojas</h1>
+<p class="lead">Biomedical Engineering · Electrical Engineering · Research & Development</p>
+</section>
+<section id="cv-education"><h2>Education</h2>
+<div class="cvblock"><b>MSc Biomedical Engineering</b><p>PUC · 2025–2027</p></div>
+<div class="cvblock"><b>Electrical Engineering</b><p>PUC · 2025–2026</p></div>
+<div class="cvblock"><b>Biomedical Engineering</b><p>PUC · 2021–2024</p></div>
+</section>
+<section id="cv-research"><h2>Research Experience</h2><p>Master's research · Borealis UC · Organ preservation machine redesign.</p></section>
+<section id="cv-professional"><h2>Professional Experience</h2><p>Candel Medical Company · Meldic Ltda.</p></section>
+<section id="cv-projects"><h2>Selected Projects</h2><p>CYBATHLON 2024 · U-Net · FPGA testing machine · Vscan Air.</p></section>
+<section id="cv-leadership"><h2>Teaching & Leadership</h2><p>Physics Laboratory · Biomedical Engineering Student Chapter · IEEE EMBS.</p></section>
+<section id="cv-skills"><h2>Technical Skills</h2><p>Electronics · Embedded systems · FPGA · Python · C++ · Signal processing · Medical imaging · NIR · CAD.</p></section>
+<section id="cv-languages"><h2>Languages</h2><p>Spanish — Native · English — B2 / ALTE 3.</p></section>
+</div>
+
+<div id="contact" class="page">
+<section id="contact-details">
+<div class="kicker">CONTACT</div><h1>Contact</h1>
+<div class="contactbox">
+<b>Carlos Moreno Rojas</b><br>Biomedical & Electrical Engineering<br><br>
+Email: ADD_EMAIL<br>
+GitHub: ADD_GITHUB<br>
+LinkedIn: ADD_LINKEDIN<br>
+ORCID: ADD_ORCID_IF_APPLICABLE
+</div>
+</section>
+<section id="contact-profiles"><h2>Professional Profiles</h2><p>GitHub · LinkedIn · ORCID · Google Scholar.</p></section>
+<section id="contact-cv"><h2>CV</h2><p>The CV section is available from the top navigation.</p></section>
+</div>
+
+</main>
+
+<script>
+const sidebars = {
+portfolio: `
+<div class="side-group">Portfolio</div>
+<a href="#p-overview">Overview</a>
+<div class="side-group">Master's Research — Liver Viability & ICG-NIR</div>
+<a href="#p-master">Research overview</a>
+<a href="#p-obj1">Objective 1 — Perfusion Platform</a>
+<a href="#p-obj2">Objective 2 — Baseline Dataset</a>
+<a href="#p-obj3">Objective 3 — ICG-NIR Marker</a>
+<div class="side-group">Robotics & Rehabilitation</div>
+<a href="#p-cybathlon">CYBATHLON 2024</a>
+<div class="side-group">Medical Devices & Neuroengineering</div>
+<a href="#p-candel">CandelStim</a>
+<div class="side-group">Organ Preservation & Transplantation</div>
+<a href="#p-borealis">Borealis UC</a>
+<a href="#p-preservation">Preservation Machine Redesign</a>
+<div class="side-group">Medical Imaging & AI</div>
+<a href="#p-unet">Lung Segmentation — U-Net</a>
+<div class="side-group">Embedded Systems & FPGA</div>
+<a href="#p-fpga">Universal Testing Machine</a>
+<div class="side-group">CAD & Prototyping</div>
+<a href="#p-vscan">Vscan Air Enclosure</a>
+<div class="side-group">Teaching & Leadership</div>
+<a href="#p-leadership">Teaching & Leadership</a>
+<div class="side-group">Industry & Technical Experience</div>
+<a href="#p-meldic">Meldic Ltda.</a>`,
+cv: `
+<div class="side-group">Curriculum Vitae</div>
+<a href="#cv-profile">Profile</a>
+<a href="#cv-education">Education</a>
+<a href="#cv-research">Research Experience</a>
+<a href="#cv-professional">Professional Experience</a>
+<a href="#cv-projects">Selected Projects</a>
+<a href="#cv-leadership">Teaching & Leadership</a>
+<a href="#cv-skills">Technical Skills</a>
+<a href="#cv-languages">Languages</a>`,
+contact: `
+<div class="side-group">Contact</div>
+<a href="#contact-details">Contact Details</a>
+<a href="#contact-profiles">Professional Profiles</a>
+<a href="#contact-cv">CV</a>`
+};
+
+let currentPage='portfolio';
+const sidebar=document.getElementById('sidebar');
+
+function setPage(page){
+  currentPage=page;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  document.querySelectorAll('.topbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+  sidebar.innerHTML=sidebars[page];
+  bindSidebar();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function bindSidebar(){
+  const links=[...sidebar.querySelectorAll('a')];
+  links.forEach(a=>a.addEventListener('click',()=> {
+    links.forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+  }));
+}
+
+document.querySelectorAll('.topbtn').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
+setPage('portfolio');
+
+const observer=new IntersectionObserver((entries)=>{
+  const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+  if(!visible.length)return;
+  const id='#'+visible[0].target.id;
+  sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
+},{rootMargin:'-20% 0px -65% 0px',threshold:0});
+
+document.querySelectorAll('section').forEach(s=>observer.observe(s));
+</script>
+</body>
+</html>

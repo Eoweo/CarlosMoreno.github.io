@@ -1,0 +1,45 @@
+---
+title: "Experience"
+toc: true
+---
+
+# Experience
+
+## Candel Medical Company
+
+**Professional Internship — Hardware / Electronics / Firmware**
+
+Development work for a transcranial electrical stimulation device, including electronics,
+embedded systems, firmware, BLE, PCB debugging and experimental validation.
+
+[Project details →](projects/candel.qmd)
+
+## Ciervo UC — CYBATHLON 2024
+
+**Electrical Area Leader**
+
+Led and contributed to the electrical development and integration of a robotic transfemoral
+prosthesis for CYBATHLON 2024 in Zürich.
+
+[Project details →](projects/cybathlon.qmd)
+
+## Meldic Ltda.
+
+Experience in medical equipment sales and customer support, plus later technical development
+work including the FPGA upgrade for a universal testing machine.
+
+## Teaching
+
+**Laboratory Teaching Assistant — Faculty of Physics UC, FIS154**
+
+Supervision and support of experimental laboratory activities.
+
+## Leadership
+
+- President — Biomedical Engineering Student Chapter UC.
+- Webmaster — IEEE EMBS PUC Chile.
+
+<div class="page-nav">
+  <a href="research.html">← Research</a>
+  <a href="skills.html">Skills →</a>
+</div>

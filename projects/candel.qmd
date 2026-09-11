@@ -1,0 +1,95 @@
+---
+title: "CandelStim — Transcranial Electrical Stimulation"
+subtitle: "Professional Internship — Candel Medical Company"
+toc: true
+
+toc-location: left
+toc-depth: 3
+---
+
+<div class="project-meta">
+<span>Medical Devices</span><span>Electronics</span><span>Firmware</span><span>Neuroengineering</span>
+</div>
+
+## Project
+
+Professional internship focused on hardware, electronics and firmware for a transcranial
+electrical stimulation medical device, with work directed toward improving an existing
+prototype and moving it closer to a product-ready system.
+
+## Technologies
+
+The project involved stimulation modalities including:
+
+- tDCS — transcranial direct current stimulation
+- tACS — transcranial alternating current stimulation
+- tRNS — transcranial random noise stimulation
+
+## My work
+
+- Circuit analysis and redesign.
+- Electronic component selection and simulation.
+- PCB design, correction and debugging.
+- ESP32 and STM32 development.
+- Firmware modification and implementation.
+- BLE communication.
+- Signal generation and synchronization.
+- Hardware/software integration.
+- Energy-consumption reduction.
+- Experimental validation and iterative troubleshooting.
+
+```{mermaid}
+flowchart TD
+    U["User / protocol"] --> F["Firmware"]
+    F --> MCU["Microcontroller"]
+    MCU --> E["Electronic circuitry"]
+    E --> C["Current source"]
+    C --> EL["Electrodes"]
+    EL --> L["Biological load"]
+```
+
+
+
+
+
+## Suggested visual material
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO GENERAL DEL PROTOTIPO CANDELSTIM
+    <small>Equipo/prototipo completo en una mesa de laboratorio</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DE PCB / ELECTRÓNICA
+    <small>Placa principal, microcontrolador y etapa analógica</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA DE ARQUITECTURA HARDWARE / FIRMWARE
+    <small>Interfaz → firmware → MCU → electrónica → electrodos</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL SETUP DE PRUEBA
+    <small>Instrumentación utilizada para validar señales y comportamiento</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    GRÁFICO DE VALIDACIÓN
+    <small>Forma de onda, corriente, frecuencia o resultado representativo no confidencial</small>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="cybathlon.html">← CYBATHLON</a>
+  <a href="borealis.html">Borealis →</a>
+</div>

@@ -1,0 +1,50 @@
+---
+title: "Contact"
+toc: true
+toc-location: left
+toc-depth: 2
+---
+
+# Contact Details
+
+Use this page as the public contact point for the portfolio.
+
+<div class="contact-card">
+
+**Carlos Moreno Rojas**  
+Biomedical & Electrical Engineering  
+Biomedical Research & Development
+
+- Email: `ADD_EMAIL`
+- GitHub: `ADD_GITHUB`
+- LinkedIn: `ADD_LINKEDIN`
+- ORCID: `ADD_ORCID_IF_APPLICABLE`
+- Google Scholar: `ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
+
+</div>
+
+# Professional Profiles
+
+## GitHub
+
+Add your GitHub profile link here.
+
+## LinkedIn
+
+Add your LinkedIn profile link here.
+
+## ORCID / Google Scholar
+
+Use these links when they are available and relevant to your research profile.
+
+# CV
+
+[Open CV](cv.qmd)
+
+# Portfolio
+
+[Return to Portfolio](index.qmd)
+
+# Before Publishing
+
+Replace all `ADD_...` placeholders with your real public contact information.

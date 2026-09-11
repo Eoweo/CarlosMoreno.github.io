@@ -1,0 +1,149 @@
+---
+title: "Curriculum Vitae"
+subtitle: "Carlos Moreno Rojas"
+toc: true
+toc-location: left
+toc-depth: 2
+---
+
+# Profile
+
+Engineer with interdisciplinary training in **Biomedical Engineering and Electrical Engineering**,
+and Master's student in Biomedical Engineering. Experience in biomedical research, electronics,
+embedded systems, instrumentation, medical devices, signal and image processing, biomedical optics,
+robotics, FPGA and experimental validation.
+
+# Education
+
+## MSc Biomedical Engineering
+
+**Pontificia Universidad Católica de Chile — 2025–2027**
+
+Research area: biomedical instrumentation, organ perfusion and ICG-NIR assessment of ex vivo liver function.
+
+## Electrical Engineering
+
+**Pontificia Universidad Católica de Chile — 2025–2026**
+
+Training in electronics, embedded systems, signal acquisition, control, FPGA and hardware/software integration.
+
+## Biomedical Engineering
+
+**Pontificia Universidad Católica de Chile — 2021–2024**
+
+Bachelor’s Degree in Engineering Sciences, Biomedical Engineering.
+
+# Research Experience
+
+## Master's Research — Ex Vivo Liver Viability with ICG-NIR
+
+- Ex vivo liver perfusion platform.
+- Physiological monitoring: pressure, flow, temperature and vascular resistance.
+- Calibration and validation of measurement systems.
+- Baseline physiological dataset.
+- ICG-NIR fluorescence kinetics.
+- Quantitative functional parameters.
+
+## Borealis UC — Organ Supercooling
+
+Organ preservation research using supercooling.
+
+## Organ Preservation Machine Redesign
+
+Electromechanical redesign, fluid systems, control and miniaturization.
+
+# Professional Experience
+
+## Candel Medical Company
+
+**Professional Internship — Hardware / Electronics / Firmware**
+
+- Transcranial electrical stimulation device development.
+- PCB design and debugging.
+- ESP32 and STM32.
+- BLE communication.
+- Signal generation and synchronization.
+- Experimental validation.
+
+## Meldic Ltda.
+
+Medical equipment experience and technical development work, including FPGA-related instrumentation projects.
+
+# Selected Engineering Projects
+
+## CYBATHLON 2024 — Ciervo UC
+
+**Electrical Area Leader**
+
+Development and integration of electronics for a robotic transfemoral prosthesis used at CYBATHLON 2024 in Zürich.
+
+## Lung Segmentation with U-Net
+
+Medical image segmentation using deep learning.
+
+## FPGA Upgrade — Universal Testing Machine
+
+Zybo Z10, Vivado and VHDL for processing force, displacement, deformation and speed signals.
+
+## Vscan Air Enclosure
+
+CAD and prototyping for a portable ultrasound device accessory.
+
+# Teaching & Leadership
+
+## Physics Laboratory Teaching Assistant
+
+Faculty of Physics UC — FIS154.
+
+## Biomedical Engineering Student Chapter UC
+
+President, 2024–2025.
+
+## IEEE EMBS PUC Chile
+
+Webmaster since 2024.
+
+# Technical Skills
+
+## Electronics & Embedded Systems
+
+Analog and digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, embedded firmware and communications.
+
+## FPGA
+
+Zybo Z10, Vivado, VHDL and programmable digital systems.
+
+## Programming
+
+Python, C++, firmware, acquisition, signal processing and image processing.
+
+## Biomedical Engineering
+
+Instrumentation, organ perfusion, organ preservation, neurostimulation, medical imaging, NIR fluorescence and validation.
+
+## Mechanical Design & Prototyping
+
+Fusion 360, CAD, 3D printing, machining and electromechanical integration.
+
+# Languages
+
+- Spanish — Native.
+- English — B2 / ALTE 3.
+
+# Downloads
+
+<div class="download-grid">
+
+<div class="download-card">
+<h3>Research CV</h3>
+<p>Academic and research-oriented version.</p>
+<p><strong>Add PDF file here</strong></p>
+</div>
+
+<div class="download-card">
+<h3>Engineering CV</h3>
+<p>Industry and R&D-oriented version.</p>
+<p><strong>Add PDF file here</strong></p>
+</div>
+
+</div>
