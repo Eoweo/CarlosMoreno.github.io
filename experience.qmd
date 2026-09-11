@@ -1,11 +1,10 @@
 ---
 title: "Experience"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "2"
-toc-title: "EXPERIENCE"---
-
+toc: true
+toc-location: left
+toc-depth: 2
+toc-title: "EXPERIENCE"
+---
 # Experience
 
 ## Candel Medical Company

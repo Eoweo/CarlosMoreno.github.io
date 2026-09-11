@@ -1,12 +1,10 @@
 ---
 title: "FPGA Upgrade for Universal Testing Machine"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "FPGA PROJECT"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "FPGA PROJECT"
+---
 ## Overview
 
 Development of an embedded processing board for a universal mechanical testing machine.

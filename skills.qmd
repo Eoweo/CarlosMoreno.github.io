@@ -1,11 +1,10 @@
 ---
 title: "Skills"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "2"
-toc-title: "SKILLS"---
-
+toc: true
+toc-location: left
+toc-depth: 2
+toc-title: "SKILLS"
+---
 # Technical Skills
 
 <div class="skill-grid">

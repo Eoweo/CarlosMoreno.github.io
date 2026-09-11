@@ -1,13 +1,13 @@
 ---
 title: "Portfolio"
 subtitle: "Biomedical Engineering · Electrical Engineering · Research & Development"
-toc: "true"
-toc-location: "left"
-toc-depth: "2"
+toc: true
+toc-location: left
+toc-depth: 2
 page-layout: article
 
-toc-title: "PORTFOLIO"---
-
+toc-title: "PORTFOLIO"
+---
 This portfolio collects my main technical developments, research projects and engineering experience.
 The structure is organized by **technical area** and each section focuses on what was developed,
 why it was needed and how it was tested.

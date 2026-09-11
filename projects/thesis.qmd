@@ -2,12 +2,11 @@
 title: "Ex Vivo Liver Viability with ICG-NIR"
 subtitle: "Master's Thesis — Biomedical Engineering"
 description: "Ex vivo liver perfusion, physiological baseline characterization and ICG-NIR functional assessment."
-toc: "true"
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "MASTER'S RESEARCH"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "MASTER'S RESEARCH"
+---
 <div class="project-meta">
 <span>Organ Perfusion</span>
 <span>Biomedical Instrumentation</span>

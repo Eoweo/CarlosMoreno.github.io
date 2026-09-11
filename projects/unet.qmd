@@ -1,12 +1,10 @@
 ---
 title: "Lung Segmentation with U-Net"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "MEDICAL IMAGING"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "MEDICAL IMAGING"
+---
 ## Overview
 
 Medical image segmentation project using a neural network based on **U-Net**, oriented toward

@@ -1,11 +1,10 @@
 ---
 title: "Research"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "2"
-toc-title: "RESEARCH"---
-
+toc: true
+toc-location: left
+toc-depth: 2
+toc-title: "RESEARCH"
+---
 # Research
 
 My research interests sit at the intersection of biomedical engineering, experimental physiology

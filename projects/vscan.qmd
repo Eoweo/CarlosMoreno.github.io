@@ -1,13 +1,11 @@
 ---
 title: "Vscan Air Medical Device Enclosure"
 subtitle: "3D Design — IIBM UC"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "CAD & PROTOTYPING"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "CAD & PROTOTYPING"
+---
 ## Overview
 
 3D design work for a cover / enclosure associated with the GE Vscan Air portable ultrasound

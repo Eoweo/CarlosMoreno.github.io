@@ -1,13 +1,11 @@
 ---
 title: "Ciervo UC — CYBATHLON 2024"
 subtitle: "Electrical Area Leader"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "CYBATHLON 2024"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "CYBATHLON 2024"
+---
 <div class="project-meta">
 <span>Robotics</span><span>Prosthetics</span><span>Electronics</span><span>Leadership</span>
 </div>

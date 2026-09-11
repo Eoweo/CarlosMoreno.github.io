@@ -1,12 +1,10 @@
 ---
 title: "Organ Preservation Machine Redesign"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "ORGAN PRESERVATION"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "ORGAN PRESERVATION"
+---
 ## Overview
 
 Electromechanical redesign and size reduction of an organ preservation machine.

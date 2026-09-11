@@ -1,12 +1,10 @@
 ---
 title: "Borealis UC — Organ Supercooling"
-toc: "true"
-
-toc-location: "left"
-toc-depth: "3"
-
-toc-title: "BOREALIS UC"---
-
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "BOREALIS UC"
+---
 ## Overview
 
 Research project focused on reducing hypoxic damage during organ transport through
