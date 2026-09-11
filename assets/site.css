@@ -1019,3 +1019,44 @@ body.swiss-compact li {
     font-size: 2.45rem;
   }
 }
+
+
+/* ================================================================
+   VERSION 7.3 — PROJECT PAGE BUTTONS
+   Project titles remain plain text. Navigation occurs via buttons.
+   ================================================================ */
+
+.project-page-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin: .25rem 0 1.5rem;
+  padding: .55rem .85rem;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--page-bg) !important;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.project-page-button:hover,
+.project-page-button:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.project-page-button::after {
+  content: " →";
+  margin-left: .35rem;
+}

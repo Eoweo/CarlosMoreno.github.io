@@ -3,14 +3,14 @@ title: "Portfolio"
 subtitle: "Biomedical Engineering · Electrical Engineering · Research & Development"
 toc: true
 toc-location: left
-toc-depth: 2
+toc-depth: 3
 page-layout: article
 ---
 
 This page collects my main engineering, research and development work. The portfolio is organized
 as a technical record: **problem → design → implementation → testing → results / lessons learned**.
 
-# Master's Thesis — Ex Vivo Liver Viability with ICG-NIR
+# MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
 
 My Master's thesis focuses on developing an ex vivo liver perfusion platform and using ICG-NIR
 kinetics to investigate quantitative indicators of liver function and viability.
@@ -164,7 +164,9 @@ Develop a quantitative functional marker from ICG fluorescence kinetics.
 
 ---
 
-# Ciervo UC — CYBATHLON 2024
+# ROBOTICS & REHABILITATION
+
+## Ciervo UC — CYBATHLON 2024
 
 I participated in CYBATHLON 2024 in Zürich as **Electrical Area Leader** of Ciervo UC. The project
 involved developing a robotic transfemoral prosthesis for functional competition tasks.
@@ -176,7 +178,7 @@ involved developing a robotic transfemoral prosthesis for functional competition
   </div>
 </div>
 
-## My role
+### My role
 
 - Electrical system design.
 - Electronic prototyping and manufacturing.
@@ -215,7 +217,7 @@ involved developing a robotic transfemoral prosthesis for functional competition
 
 ---
 
-# CandelStim — Transcranial Electrical Stimulation
+## CandelStim — Transcranial Electrical Stimulation
 
 Professional internship at Candel Medical Company focused on hardware, electronics and firmware
 for a transcranial electrical stimulation device.
@@ -227,7 +229,7 @@ for a transcranial electrical stimulation device.
   </div>
 </div>
 
-## Technical work
+### Technical work
 
 - Circuit analysis and redesign.
 - PCB design and debugging.
@@ -268,7 +270,9 @@ for a transcranial electrical stimulation device.
 
 ---
 
-# Borealis UC — Organ Supercooling
+# ORGAN PRESERVATION & TRANSPLANTATION
+
+## Borealis UC — Organ Supercooling
 
 Research project focused on organ preservation using supercooling to reduce hypoxic damage during
 transport and potentially extend preservation time.
@@ -303,7 +307,7 @@ transport and potentially extend preservation time.
 
 ---
 
-# Organ Preservation Machine Redesign
+## Organ Preservation Machine Redesign
 
 Electromechanical redesign and size reduction of an organ preservation machine.
 
@@ -314,7 +318,7 @@ Electromechanical redesign and size reduction of an organ preservation machine.
   </div>
 </div>
 
-## Engineering work
+### Engineering work
 
 - Mechanical redesign.
 - Electronics.
@@ -347,7 +351,9 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 
 ---
 
-# Lung Segmentation with U-Net
+# MEDICAL IMAGING & AI
+
+## Lung Segmentation with U-Net
 
 Medical image segmentation project using a U-Net-based neural network for lung segmentation in CT
 and MRI images.
@@ -389,7 +395,9 @@ and MRI images.
 
 ---
 
-# FPGA Upgrade — Universal Testing Machine
+# EMBEDDED SYSTEMS & FPGA
+
+## FPGA Upgrade — Universal Testing Machine
 
 Development of an FPGA-based processing board for a universal mechanical testing machine.
 
@@ -433,7 +441,9 @@ The system processes signals associated with force, displacement, deformation an
 
 ---
 
-# Vscan Air — Medical Device Enclosure
+# CAD & PROTOTYPING
+
+## Vscan Air — Medical Device Enclosure
 
 3D design project for a cover / enclosure associated with the GE Vscan Air portable ultrasound
 transducer.
@@ -468,7 +478,7 @@ transducer.
 
 ---
 
-# Teaching — Physics Laboratory
+# Teaching — Physics Laboratory {.toc-ignore}
 
 Laboratory Teaching Assistant for FIS154 at the Faculty of Physics UC.
 
@@ -484,7 +494,7 @@ correct execution of laboratory activities.
 
 ---
 
-# Biomedical Engineering Student Chapter UC
+# Biomedical Engineering Student Chapter UC {.toc-ignore}
 
 President of the Biomedical Engineering Student Chapter UC during 2024–2025.
 
@@ -497,7 +507,7 @@ President of the Biomedical Engineering Student Chapter UC during 2024–2025.
 
 ---
 
-# IEEE EMBS PUC Chile
+# IEEE EMBS PUC Chile {.toc-ignore}
 
 Participation as **Webmaster** of the IEEE EMBS PUC Chile chapter.
 
@@ -510,7 +520,7 @@ Participation as **Webmaster** of the IEEE EMBS PUC Chile chapter.
 
 ---
 
-# Meldic Ltda.
+# Meldic Ltda. {.toc-ignore}
 
 Experience in medical equipment sales and customer support, together with later technical projects
 such as the FPGA upgrade for a universal testing machine.
@@ -524,7 +534,7 @@ such as the FPGA upgrade for a universal testing machine.
 
 ---
 
-# Skills
+# Skills {.toc-ignore}
 
 <div class="skill-chips">
 <span>Biomedical Instrumentation</span>
@@ -546,7 +556,7 @@ such as the FPGA upgrade for a universal testing machine.
 <span>Experimental Validation</span>
 </div>
 
-# Engineering approach
+# Engineering approach {.toc-ignore}
 
 ```{mermaid}
 flowchart LR
@@ -561,7 +571,7 @@ flowchart LR
     I --> J["Integrate & document"]
 ```
 
-# Contact
+# Contact {.toc-ignore}
 
 - Email: `ADD_EMAIL`
 - GitHub: `ADD_GITHUB`

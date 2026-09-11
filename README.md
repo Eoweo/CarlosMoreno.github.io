@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.2 — Swiss Research**
+**v7.3 — Swiss Research**
 
 The current architecture separates:
 
@@ -83,3 +83,11 @@ Every functional, visual, structural or navigation change must also update:
 ```text
 PORTFOLIO_REQUIREMENTS.md
 ```
+
+
+## v7.3
+
+- Portfolio TOC is fixed to six top-level technical categories.
+- Existing projects are reorganized under those six categories.
+- Non-project sections remain in `portfolio.qmd` but are excluded from the technical TOC.
+- `Project Pages` uses Swiss-styled redirect buttons instead of linked blue project titles.

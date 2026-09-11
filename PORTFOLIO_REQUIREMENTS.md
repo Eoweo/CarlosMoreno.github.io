@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.2 — Swiss Research`  
+> **Versión base documentada:** `v7.3 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -2721,6 +2721,224 @@ Este requisito debe pasar a `IMPLEMENTADO` una vez comprobado el ZIP/preview en 
 ---
 
 
+
+# 23D. Requisitos introducidos en v7.3
+
+## REQ-PORTFOLIO-TOC-001 — Estructura exacta e invariable de la lista del Portfolio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La lista lateral del **Portfolio técnico (`portfolio.qmd`)** debe utilizar **exactamente tres niveles jerárquicos**:
+
+```text
+TÍTULO
+    SUBTÍTULO
+        SUBSUBTÍTULO
+```
+
+Los **únicos títulos principales permitidos** son, exactamente y en este orden:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+ROBOTICS & REHABILITATION
+ORGAN PRESERVATION & TRANSPLANTATION
+MEDICAL IMAGING & AI
+EMBEDDED SYSTEMS & FPGA
+CAD & PROTOTYPING
+```
+
+> **Regla estricta:** no se debe crear, renombrar, eliminar, dividir ni agregar ningún otro título principal del TOC del Portfolio sin modificar primero este requisito.
+
+La lista completa debe ser **exactamente** la siguiente:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+    Objective 1 — Ex Vivo Perfusion Platform
+        Monitoring
+    Objective 2 — Baseline Dataset without ICG
+    Objective 3 — ICG-NIR Functional Marker
+
+ROBOTICS & REHABILITATION
+    Ciervo UC — CYBATHLON 2024
+        My role
+    CandelStim — Transcranial Electrical Stimulation
+        Technical work
+
+ORGAN PRESERVATION & TRANSPLANTATION
+    Borealis UC — Organ Supercooling
+    Organ Preservation Machine Redesign
+        Engineering work
+
+MEDICAL IMAGING & AI
+    Lung Segmentation with U-Net
+
+EMBEDDED SYSTEMS & FPGA
+    FPGA Upgrade — Universal Testing Machine
+
+CAD & PROTOTYPING
+    Vscan Air — Medical Device Enclosure
+```
+
+### Interpretación de los niveles
+
+```text
+H1 → TÍTULO
+H2 → SUBTÍTULO
+H3 → SUBSUBTÍTULO
+```
+
+La navegación dinámica descrita en `REQ-NAV-012` a `REQ-NAV-016` debe respetar esta jerarquía.
+
+### Asignación de CandelStim
+
+`CandelStim — Transcranial Electrical Stimulation` debe integrarse dentro de:
+
+```text
+ROBOTICS & REHABILITATION
+```
+
+y no debe generar un título principal independiente como:
+
+```text
+MEDICAL DEVICES & NEUROENGINEERING
+```
+
+Esto es deliberado porque los seis títulos principales anteriores son la estructura fija definida para el Portfolio.
+
+---
+
+## REQ-PORTFOLIO-TOC-002 — Contenido que se mantiene fuera de la lista técnica
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Las siguientes secciones **se mantienen en el contenido de `portfolio.qmd`**, pero **no deben aparecer en la lista lateral técnica del Portfolio**:
+
+```text
+Teaching — Physics Laboratory
+Biomedical Engineering Student Chapter UC
+IEEE EMBS PUC Chile
+Meldic Ltda.
+Skills
+Engineering approach
+Contact
+```
+
+Estas secciones deben utilizar:
+
+```text
+{.toc-ignore}
+```
+
+o un mecanismo equivalente que las excluya de la navegación lateral sin eliminar su contenido.
+
+### Regla
+
+El hecho de que estas secciones existan en la página **no autoriza** a convertirlas en nuevos títulos principales del TOC.
+
+---
+
+## REQ-PORTFOLIO-TOC-003 — Profundidad del TOC del Portfolio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`portfolio.qmd` debe utilizar:
+
+```yaml
+toc-depth: 3
+```
+
+para que el fallback nativo de Quarto pueda representar:
+
+```text
+título
+subtítulo
+subsubtítulo
+```
+
+La navegación personalizada también debe leer:
+
+```text
+h1
+h2
+h3
+```
+
+---
+
+## REQ-PROJ-004 — Project Pages utiliza botones de redirección
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+En `projects/index.qmd`, el nombre de cada proyecto **no debe ser un hipervínculo azul**.
+
+Patrón prohibido:
+
+```markdown
+## [CYBATHLON 2024](cybathlon.qmd)
+```
+
+Patrón requerido:
+
+```markdown
+## CYBATHLON 2024
+
+Descripción breve del proyecto.
+
+[Open project](cybathlon.qmd){.project-page-button}
+```
+
+Por lo tanto:
+
+- el título del proyecto se muestra como texto normal;
+- debajo se mantiene su descripción;
+- la navegación hacia la página individual se realiza mediante un botón;
+- el botón debe respetar el estilo Swiss;
+- el botón no debe mostrarse como texto azul convencional;
+- hover/focus utiliza el color de acento Swiss;
+- la URL de destino de cada proyecto no cambia.
+
+---
+
+## REQ-PROJ-005 — Proyectos que requieren botón en Project Pages
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+`projects/index.qmd` debe incluir botón de redirección para:
+
+```text
+Ex Vivo Liver Viability with ICG-NIR
+CYBATHLON 2024
+CandelStim
+Borealis UC — Supercooling
+Organ Preservation Machine Redesign
+Lung Segmentation — U-Net
+Universal Testing Machine Upgrade
+Vscan Air Enclosure
+```
+
+Cada botón debe redirigir a su archivo actual:
+
+```text
+thesis.qmd
+cybathlon.qmd
+candel.qmd
+borealis.qmd
+organ-preservation.qmd
+unet.qmd
+fpga.qmd
+vscan.qmd
+```
+
+No se modifica el contenido de las páginas individuales.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -2914,6 +3132,8 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.2 | 2026-09-11 | TOC reconstruido desde headings reales con details/summary | REQ-NAV-012/013/014/015/016 | IMPLEMENTADO |
 | v7.2 | 2026-09-11 | Consolidación de CSS/JS y limpieza de archivos | REQ-CLEAN-001/002/003 | IMPLEMENTADO |
 | v7.2 | 2026-09-11 | Prueba de navegación real preparada; sandbox bloquea Chromium | REQ-QA-005 | VALIDAR |
+| v7.3 | 2026-09-11 | Jerarquía fija de seis títulos para el TOC del Portfolio | REQ-PORTFOLIO-TOC-001/002/003 | IMPLEMENTADO |
+| v7.3 | 2026-09-11 | Project Pages reemplaza títulos enlazados por botones | REQ-PROJ-004/005 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -2957,6 +3177,9 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 30. La expansión principal debe usar <details>.open.
 31. Si falla el TOC personalizado, el TOC nativo de Quarto debe quedar intacto.
 32. CSS y JS deben mantenerse consolidados, sin implementaciones históricas duplicadas.
+33. El TOC de portfolio.qmd debe tener exactamente seis títulos principales, en el orden definido por REQ-PORTFOLIO-TOC-001.
+34. Teaching, Leadership, Meldic, Skills, Engineering approach y Contact no deben aparecer como títulos del TOC técnico.
+35. Project Pages debe usar botones para abrir proyectos; los nombres de proyecto no deben ser hipervínculos azules.
 ```
 
 ---
@@ -3016,7 +3239,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.2 Swiss Research
+Version: v7.3 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

@@ -1,116 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v7.2 — TOC test</title>
+<title>Portfolio v7.3 — Sidebar hierarchy</title>
 <style>
 :root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
 html[data-theme="dark"]{--bg:#141414;--surface:#1e1e1e;--text:#f1efe8;--muted:#a7a39a;--border:#383633;--accent:#ff615e}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-header{position:fixed;top:0;left:0;right:0;height:62px;display:flex;align-items:center;padding:0 20px;background:var(--bg);border-bottom:1px solid var(--border);z-index:20}.brand{font-weight:900}.controls{margin-left:auto;display:flex;gap:7px}.controls button{width:36px;height:36px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:pointer}
-#TOC{position:fixed;left:0;top:62px;bottom:0;width:315px;overflow:auto;padding:15px 12px;border-right:1px solid var(--border);background:var(--bg)}.toc-title{padding:0 8px 10px;border-bottom:1px solid var(--border);font-size:.72rem;font-weight:900;letter-spacing:.07em;color:var(--muted)}
-details{margin-top:15px}summary{position:relative;list-style:none;cursor:pointer}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:8px;top:2px;color:var(--muted)}details[open]>summary:after{content:"−";color:var(--accent)}
-.group-link,.child-link,.grand-link{display:block;text-decoration:none;color:var(--muted);border-left:4px solid transparent}.group-link{padding:5px 24px 5px 8px;font-size:.73rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}details[open]>.group-summary .group-link{color:var(--accent)}.child-link{padding:7px 8px 7px 22px;font-size:.92rem}.grand-link{padding:5px 8px 5px 36px;font-size:.82rem}.active{color:var(--accent)!important;border-left-color:var(--accent)!important;font-weight:700}.grand-list{display:none}.sub-open>.grand-list{display:block}ul{list-style:none;padding:0;margin:4px 0 0}
-main{margin-left:315px;padding:95px 7vw 80px;max-width:1200px}section{min-height:72vh;max-width:880px;scroll-margin-top:80px;padding-top:15px;border-top:4px solid var(--text)}section:first-child{border-top:0}h1,h2{text-transform:uppercase}h1{font-size:4rem}h2{font-size:2rem}h3{font-size:1.25rem}p{color:var(--muted);line-height:1.7}.card{padding:18px;border:1px solid var(--border);background:var(--surface);margin:20px 0}
+header{position:fixed;top:0;left:0;right:0;height:62px;display:flex;align-items:center;padding:0 20px;background:var(--bg);border-bottom:1px solid var(--border);z-index:20}.brand{font-weight:900}.theme{margin-left:auto;width:36px;height:36px;border:1px solid var(--border);background:transparent;color:var(--text)}
+#TOC{position:fixed;left:0;top:62px;bottom:0;width:335px;overflow:auto;padding:14px 12px 30px;border-right:1px solid var(--border);background:var(--bg)}.toc-title{padding:0 8px 10px;border-bottom:1px solid var(--border);font-size:.72rem;font-weight:900;letter-spacing:.07em;color:var(--muted)}
+details{margin-top:15px}summary{position:relative;list-style:none;cursor:pointer}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:7px;top:3px;color:var(--muted)}details[open]>summary:after{content:"−";color:var(--accent)}
+.group-link,.child-link,.grand-link{display:block;text-decoration:none;color:var(--muted);border-left:4px solid transparent}.group-link{padding:5px 24px 5px 8px;font-size:.72rem;font-weight:900;letter-spacing:.045em;text-transform:uppercase;line-height:1.2}.child-link{padding:7px 8px 7px 22px;font-size:.9rem}.grand-link{padding:5px 8px 5px 36px;font-size:.8rem}.active{color:var(--accent)!important;border-left-color:var(--accent)!important;font-weight:700}.grand-list{display:none}.sub-open>.grand-list{display:block}ul{list-style:none;padding:0;margin:4px 0 0}
+main{margin-left:335px;padding:95px 7vw 80px;max-width:1250px}section{min-height:65vh;max-width:900px;scroll-margin-top:85px;padding-top:15px;border-top:4px solid var(--text)}section:first-child{border-top:0}h1{font-size:2.2rem;line-height:1.05;text-transform:uppercase}h2{font-size:1.5rem}h3{font-size:1.1rem}p{color:var(--muted);line-height:1.7}.card{padding:16px;border:1px solid var(--border);background:var(--surface);margin:18px 0}
+.project-button{display:inline-flex;padding:9px 13px;border:1px solid var(--text);background:var(--text);color:var(--bg);font-size:.78rem;font-weight:900;text-decoration:none;text-transform:uppercase}.project-button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 </style>
 </head>
 <body>
-<header><a class="brand" href="#profile" style="color:inherit;text-decoration:none">Carlos Moreno Rojas</a><div class="controls"><button id="theme">☾</button></div></header>
-<nav id="TOC"><div class="toc-title">OVERVIEW</div></nav>
+<header><a class="brand" href="#masters" style="color:inherit;text-decoration:none">Carlos Moreno Rojas</a><button class="theme" id="theme">☾</button></header>
+<nav id="TOC"><div class="toc-title">PORTFOLIO</div></nav>
 <main class="content">
-<section>
-<h1 id="profile">Profile</h1>
-<h2 id="biomedical-electrical">Biomedical & Electrical Engineering</h2>
-<p>I develop and integrate engineering systems for biomedical research, medical devices and experimental platforms.</p>
-<div class="card">Biomedical R&D · Electronics & Embedded · Engineering Prototyping</div>
-</section>
-
-<section>
-<h1 id="research">Current Research</h1>
-<h2 id="liver">Ex Vivo Liver Viability & ICG-NIR</h2>
-<h3 id="objective-1">Objective 1 — Perfusion Platform</h3>
-<p>Stable circulation, physiological control and instrumentation.</p>
-<h3 id="objective-2">Objective 2 — Baseline Dataset</h3>
-<p>Pressure, flow, temperature and vascular resistance.</p>
-</section>
-
-<section>
-<h1 id="selected">Selected Work</h1>
-<h2 id="cybathlon">CYBATHLON 2024</h2>
-<p>Robotic transfemoral prosthesis.</p>
-<h2 id="candel">CandelStim</h2>
-<p>Neuroengineering, electronics and firmware.</p>
-</section>
-
-<section>
-<h1 id="areas">Engineering Areas</h1>
-<h2 id="instrumentation">Biomedical Instrumentation</h2>
-<p>Instrumentation and physiological measurement.</p>
-<h2 id="embedded">Electronics & Embedded Systems</h2>
-<p>PCB, microcontrollers, sensors and acquisition.</p>
-</section>
+<section><h1 id="masters">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</h1><h2 id="obj1">Objective 1 — Ex Vivo Perfusion Platform</h2><h3 id="monitoring">Monitoring</h3><p>Pressure, flow, temperature and vascular resistance.</p><h2 id="obj2">Objective 2 — Baseline Dataset without ICG</h2><p>Physiological baseline.</p><h2 id="obj3">Objective 3 — ICG-NIR Functional Marker</h2><p>ICG fluorescence kinetics.</p></section>
+<section><h1 id="robotics">ROBOTICS & REHABILITATION</h1><h2 id="cybathlon">Ciervo UC — CYBATHLON 2024</h2><h3 id="my-role">My role</h3><p>Electrical and electromechanical integration.</p><h2 id="candel">CandelStim — Transcranial Electrical Stimulation</h2><h3 id="technical-work">Technical work</h3><p>Electronics and firmware.</p></section>
+<section><h1 id="organ">ORGAN PRESERVATION & TRANSPLANTATION</h1><h2 id="borealis">Borealis UC — Organ Supercooling</h2><p>Supercooling and preservation.</p><h2 id="preservation">Organ Preservation Machine Redesign</h2><h3 id="engineering-work">Engineering work</h3><p>Mechanical, fluidic and control redesign.</p></section>
+<section><h1 id="imaging">MEDICAL IMAGING & AI</h1><h2 id="unet">Lung Segmentation with U-Net</h2><p>Medical image segmentation.</p></section>
+<section><h1 id="fpga">EMBEDDED SYSTEMS & FPGA</h1><h2 id="testing-machine">FPGA Upgrade — Universal Testing Machine</h2><p>Zybo Z10, Vivado and VHDL.</p></section>
+<section><h1 id="cad">CAD & PROTOTYPING</h1><h2 id="vscan">Vscan Air — Medical Device Enclosure</h2><p>CAD and prototyping.</p><div class="card"><b>Project Pages example</b><p>The project name is plain text. Navigation uses a button.</p><a class="project-button" href="#cad">Open project →</a></div></section>
 </main>
-
 <script>
 (function(){
-  const toc=document.getElementById('TOC');
-  const headings=[...document.querySelectorAll('main.content h1,main.content h2,main.content h3')];
-  const base=Math.min(...headings.map(h=>+h.tagName.slice(1)));
-  const groups=[];let g=null,c=null;const map=new Map();
-
-  headings.forEach(h=>{
-    const level=+h.tagName.slice(1);
-    const n={id:h.id,text:h.textContent,heading:h,children:[],parent:null,group:null,link:null,li:null};
-    map.set(n.id,n);
-    if(level<=base||!g){g=n;g.group=g;groups.push(g);c=null}
-    else if(level===base+1){n.group=g;n.parent=g;g.children.push(n);c=n}
-    else if(c){n.group=g;n.parent=c;c.children.push(n)}
-    else{n.group=g;n.parent=g;g.children.push(n)}
-  });
-
-  const title=toc.querySelector('.toc-title').cloneNode(true);
-  const root=document.createElement('div');
-
-  function link(n,cls){
-    const a=document.createElement('a');a.href='#'+n.id;a.textContent=n.text;a.className=cls;n.link=a;a.onclick=e=>e.stopPropagation();return a
-  }
-
-  groups.forEach(group=>{
-    const d=document.createElement('details');group.details=d;
-    const s=document.createElement('summary');s.className='group-summary';s.append(link(group,'group-link'));d.append(s);
-    const ul=document.createElement('ul');
-    group.children.forEach(child=>{
-      const li=document.createElement('li');child.li=li;li.append(link(child,'child-link'));
-      if(child.children.length){
-        const gul=document.createElement('ul');gul.className='grand-list';
-        child.children.forEach(gr=>{const gli=document.createElement('li');gli.append(link(gr,'grand-link'));gul.append(gli)});
-        li.append(gul)
-      }
-      ul.append(li)
-    });
-    if(group.children.length)d.append(ul);
-    root.append(d)
-  });
-  toc.replaceChildren(title,root);
-
-  let last='';
-  function update(){
-    const marker=Math.min(170,innerHeight*.25);let h=headings[0];
-    headings.forEach(x=>{if(x.getBoundingClientRect().top<=marker)h=x});
-    const n=map.get(h.id);if(!n)return;const group=n.group||n;
-    let child=null;if(n.parent===group)child=n;else if(n.parent&&n.parent.parent)child=n.parent;
-
-    groups.forEach(x=>{
-      x.details.open=x===group;
-      x.children.forEach(ch=>{if(ch.li)ch.li.classList.toggle('sub-open',x===group&&ch===child)})
-    });
-    map.forEach(x=>{if(x.link)x.link.classList.toggle('active',x.id===n.id)});
-    if(last!==n.id){last=n.id;requestAnimationFrame(()=>{const r=n.link.getBoundingClientRect(),tr=toc.getBoundingClientRect();if(r.bottom>tr.bottom-40)toc.scrollTop+=r.bottom-tr.bottom+40;if(r.top<tr.top+40)toc.scrollTop-=tr.top+40-r.top})}
-  }
-  addEventListener('scroll',update,{passive:true});update();
-
-  const t=document.getElementById('theme');t.onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';t.textContent=document.documentElement.dataset.theme==='dark'?'☀':'☾'};
+const toc=document.getElementById('TOC'),heads=[...document.querySelectorAll('main h1,main h2,main h3')],base=Math.min(...heads.map(h=>+h.tagName.slice(1))),groups=[];let g=null,c=null;const map=new Map();
+heads.forEach(h=>{const l=+h.tagName.slice(1),n={id:h.id,text:h.textContent,h,children:[],parent:null,group:null,link:null,li:null};map.set(n.id,n);if(l<=base||!g){g=n;g.group=g;groups.push(g);c=null}else if(l===base+1){n.group=g;n.parent=g;g.children.push(n);c=n}else if(c){n.group=g;n.parent=c;c.children.push(n)}else{n.group=g;n.parent=g;g.children.push(n)}});
+const title=toc.querySelector('.toc-title').cloneNode(true),root=document.createElement('div');
+function link(n,cls){const a=document.createElement('a');a.href='#'+n.id;a.textContent=n.text;a.className=cls;n.link=a;a.onclick=e=>e.stopPropagation();return a}
+groups.forEach(gr=>{const d=document.createElement('details');gr.details=d;const s=document.createElement('summary');s.append(link(gr,'group-link'));d.append(s);const ul=document.createElement('ul');gr.children.forEach(ch=>{const li=document.createElement('li');ch.li=li;li.append(link(ch,'child-link'));if(ch.children.length){const gu=document.createElement('ul');gu.className='grand-list';ch.children.forEach(x=>{const gli=document.createElement('li');gli.append(link(x,'grand-link'));gu.append(gli)});li.append(gu)}ul.append(li)});d.append(ul);root.append(d)});toc.replaceChildren(title,root);
+let last='';
+function update(){const marker=Math.min(170,innerHeight*.25);let h=heads[0];heads.forEach(x=>{if(x.getBoundingClientRect().top<=marker)h=x});const n=map.get(h.id),gr=n.group||n;let ch=null;if(n.parent===gr)ch=n;else if(n.parent&&n.parent.parent)ch=n.parent;groups.forEach(x=>{x.details.open=x===gr;x.children.forEach(y=>y.li&&y.li.classList.toggle('sub-open',x===gr&&y===ch))});map.forEach(x=>x.link&&x.link.classList.toggle('active',x.id===n.id));if(last!==n.id){last=n.id;requestAnimationFrame(()=>n.link.scrollIntoView({block:'nearest',behavior:'smooth'}))}}
+addEventListener('scroll',update,{passive:true});update();
+document.getElementById('theme').onclick=function(){document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';this.textContent=document.documentElement.dataset.theme==='dark'?'☀':'☾'};
 })();
 </script>
 </body>
