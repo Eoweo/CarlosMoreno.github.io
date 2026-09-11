@@ -1,10 +1,11 @@
 ---
 title: "Lung Segmentation with U-Net"
-toc: true
+toc: "true"
 
-toc-location: left
-toc-depth: 3
----
+toc-location: "left"
+toc-depth: "3"
+
+toc-title: "MEDICAL IMAGING"---
 
 ## Overview
 

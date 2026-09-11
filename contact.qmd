@@ -1,50 +1,48 @@
 ---
 title: "Contact"
+subtitle: "Carlos Moreno Rojas"
 toc: true
 toc-location: left
 toc-depth: 2
+toc-title: "CONTACT"
 ---
 
-# Contact Details
+# Contact Information
 
-Use this page as the public contact point for the portfolio.
+## Email
 
-<div class="contact-card">
-
-**Carlos Moreno Rojas**  
-Biomedical & Electrical Engineering  
-Biomedical Research & Development
-
-- Email: `ADD_EMAIL`
-- GitHub: `ADD_GITHUB`
-- LinkedIn: `ADD_LINKEDIN`
-- ORCID: `ADD_ORCID_IF_APPLICABLE`
-- Google Scholar: `ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
-
-</div>
-
-# Professional Profiles
+`ADD_EMAIL`
 
 ## GitHub
 
-Add your GitHub profile link here.
+`ADD_GITHUB`
 
 ## LinkedIn
 
-Add your LinkedIn profile link here.
+`ADD_LINKEDIN`
 
-## ORCID / Google Scholar
+# Research Profiles
 
-Use these links when they are available and relevant to your research profile.
+## ORCID
 
-# CV
+`ADD_ORCID_IF_APPLICABLE`
+
+## Google Scholar
+
+`ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
+
+# Documents
+
+## Curriculum Vitae
 
 [Open CV](cv.qmd)
 
-# Portfolio
+## Portfolio
 
 [Return to Portfolio](index.qmd)
 
 # Before Publishing
 
-Replace all `ADD_...` placeholders with your real public contact information.
+## Public information check
+
+Replace all `ADD_...` placeholders with the contact information that you want to make public.

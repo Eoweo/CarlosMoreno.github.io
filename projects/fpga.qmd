@@ -1,10 +1,11 @@
 ---
 title: "FPGA Upgrade for Universal Testing Machine"
-toc: true
+toc: "true"
 
-toc-location: left
-toc-depth: 3
----
+toc-location: "left"
+toc-depth: "3"
+
+toc-title: "FPGA PROJECT"---
 
 ## Overview
 

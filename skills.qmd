@@ -1,7 +1,10 @@
 ---
 title: "Skills"
-toc: false
----
+toc: "true"
+
+toc-location: "left"
+toc-depth: "2"
+toc-title: "SKILLS"---
 
 # Technical Skills
 

@@ -1,7 +1,10 @@
 ---
 title: "About"
-toc: true
----
+toc: "true"
+
+toc-location: "left"
+toc-depth: "2"
+toc-title: "ABOUT"---
 
 # About
 

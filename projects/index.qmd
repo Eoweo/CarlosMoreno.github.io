@@ -1,67 +1,54 @@
 ---
-title: "Projects"
-description: "Biomedical engineering, medical devices, robotics, imaging and embedded systems."
-toc: false
+title: "Project Pages"
+description: "Detailed pages for individual engineering and research projects."
+toc: true
+toc-location: left
+toc-depth: 2
+toc-title: "PROJECTS"
 ---
 
-# Projects
+# Master's Research
 
-The portfolio is organized by application area. Each project page focuses on the problem,
-my role, system architecture, engineering decisions, validation and the evidence produced.
+## [Ex Vivo Liver Viability with ICG-NIR](thesis.qmd)
 
-## Organ Perfusion & Transplantation
+Perfusion platform, physiological baseline and ICG-NIR functional assessment.
 
-::: {.project-list}
-### [Master's Thesis — Ex Vivo Liver Viability with ICG-NIR](thesis.qmd)
-A three-objective research project: build a stable ex vivo liver perfusion platform, characterize a physiological baseline without ICG, and develop an ICG-NIR functional marker.
+# Robotics & Rehabilitation
 
-### [Borealis UC — Organ Supercooling](borealis.qmd)
-Research project on organ preservation through supercooling.
+## [CYBATHLON 2024](cybathlon.qmd)
 
-### [Organ Preservation Machine Redesign](organ-preservation.qmd)
-Electromechanical redesign and miniaturization of an organ preservation machine.
-:::
+Robotic transfemoral prosthesis — Electrical Area Leader.
 
-## Medical Devices & Neuroengineering
+# Medical Devices & Neuroengineering
 
-::: {.project-list}
-### [CandelStim — Transcranial Electrical Stimulation](candel.qmd)
-Hardware, firmware and system integration for transcranial electrical stimulation.
+## [CandelStim](candel.qmd)
 
-### Advanced Neurostimulation Studies
-Follow-on technical study of temporal interference stimulation, current sources, DDS/NCO, DACs, synchronization, impedance measurement and validation approaches.
-:::
+Transcranial electrical stimulation hardware and firmware.
 
-## Robotics & Rehabilitation
+# Organ Preservation & Transplantation
 
-::: {.project-list}
-### [Ciervo UC — CYBATHLON 2024](cybathlon.qmd)
-Electrical Area Leader for a robotic transfemoral prosthesis developed for CYBATHLON 2024.
-:::
+## [Borealis UC — Supercooling](borealis.qmd)
 
-## Medical Imaging & AI
+Organ preservation research.
 
-::: {.project-list}
-### [Lung Segmentation with U-Net](unet.qmd)
-Medical image segmentation project using U-Net for lung images.
-:::
+## [Organ Preservation Machine Redesign](organ-preservation.qmd)
 
-## Embedded Systems & FPGA
+Electromechanical and fluid-system redesign.
 
-::: {.project-list}
-### [FPGA Upgrade for Universal Testing Machine](fpga.qmd)
-Signal-processing and embedded hardware using Zybo Z10, Vivado and VHDL.
-:::
+# Medical Imaging & AI
 
-## CAD & Prototyping
+## [Lung Segmentation — U-Net](unet.qmd)
 
-::: {.project-list}
-### [Vscan Air Medical Device Enclosure](vscan.qmd)
-3D design and prototyping for a medical ultrasound device accessory.
-:::
+Medical image segmentation using deep learning.
 
+# Embedded Systems & FPGA
 
-<div class="page-nav">
-  <a href="../index.html">← Home</a>
-  <a href="thesis.html">Master's thesis →</a>
-</div>
+## [Universal Testing Machine Upgrade](fpga.qmd)
+
+FPGA-based signal processing using Zybo Z10, Vivado and VHDL.
+
+# CAD & Prototyping
+
+## [Vscan Air Enclosure](vscan.qmd)
+
+CAD and prototyping for a medical ultrasound accessory.

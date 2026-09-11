@@ -23,12 +23,13 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: darkly
     css: assets/site.css
     toc: true
     toc-location: left
-    toc-title: "CONTENTS"
-    toc-depth: 2
+    toc-depth: 3
     smooth-scroll: true
     code-copy: true
     code-overflow: wrap

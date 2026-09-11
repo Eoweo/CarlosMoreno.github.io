@@ -1,11 +1,12 @@
 ---
 title: "Vscan Air Medical Device Enclosure"
 subtitle: "3D Design — IIBM UC"
-toc: true
+toc: "true"
 
-toc-location: left
-toc-depth: 3
----
+toc-location: "left"
+toc-depth: "3"
+
+toc-title: "CAD & PROTOTYPING"---
 
 ## Overview
 

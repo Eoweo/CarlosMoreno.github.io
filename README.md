@@ -76,3 +76,13 @@ Added a complete long-form portfolio page with all major projects and experience
 - Hierarchical left sidebar with technical-area titles and project / objective subtitles.
 - Portfolio home is now the long-form technical page.
 - CV and Contact have their own working content and side navigation.
+
+
+## Version 5.1
+
+- Sidebar hierarchy revised to match the requested documentation style.
+- Top-level section names are uppercase/bold.
+- Project/objective links are indented below each section.
+- Same hierarchy applied to Portfolio, CV, Contact, Project Pages and detailed project pages.
+- Light and dark themes enabled in Quarto.
+- Interactive preview includes a persistent light/dark toggle.
