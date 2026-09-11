@@ -5,43 +5,59 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Carlos Moreno Rojas — Portfolio</title>
 <style>
+
 :root{
- --bg:#fff;--text:#25313a;--muted:#6f7c87;--border:#d9e0e6;--soft:#f5f7f9;
- --accent:#087eae;--group:#7c8a96;--sidebar:#fff;--header:#fff
+ --bg:#f7f5ef;--surface:#ece9e0;--surface2:#fff;--text:#111;--muted:#66635d;
+ --border:#cbc7bc;--accent:#d63230;--header:#f7f5ef;--sidebar:#f7f5ef
 }
 html[data-theme="dark"]{
- --bg:#111418;--text:#e6edf2;--muted:#a7b1ba;--border:#303841;--soft:#181d22;
- --accent:#61bde1;--group:#a9b2ba;--sidebar:#111418;--header:#111418
+ --bg:#141414;--surface:#1e1e1e;--surface2:#181818;--text:#f1efe8;--muted:#a7a39a;
+ --border:#383633;--accent:#ff615e;--header:#141414;--sidebar:#141414
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);transition:background .18s,color .18s}
-header{height:58px;position:fixed;left:0;right:0;top:0;background:var(--header);border-bottom:1px solid var(--border);z-index:50;display:flex;align-items:center;padding:0 20px}
-.brand{font-weight:760}.topnav{margin-left:auto;display:flex;align-items:center;gap:5px}
-.topbtn,.themebtn{border:1px solid transparent;background:transparent;padding:7px 10px;border-radius:5px;cursor:pointer;color:var(--muted);font-weight:650}
-.topbtn.active{background:var(--accent);color:#fff}.topbtn:hover,.themebtn:hover{border-color:var(--border)}
-.themebtn{font-size:1rem;margin-left:5px}
-aside{position:fixed;top:58px;bottom:0;left:0;width:318px;border-right:1px solid var(--border);padding:8px 10px 20px;overflow:auto;background:var(--sidebar)}
-.group{font-size:.76rem;font-weight:850;letter-spacing:.045em;color:var(--group);margin:16px 10px 6px;line-height:1.2;text-transform:uppercase}
-aside a{display:block;text-decoration:none;color:var(--muted);font-size:.95rem;padding:7px 9px 7px 22px;border-left:2px solid transparent;line-height:1.25}
-aside a.sub2{font-size:.84rem;padding-left:35px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);transition:background .2s,color .2s}
+header{height:62px;position:fixed;left:0;right:0;top:0;background:var(--header);border-bottom:1px solid var(--border);z-index:50;display:flex;align-items:center;padding:0 20px}
+.brand{font-weight:900;letter-spacing:-.02em}
+.topnav{margin-left:auto;display:flex;align-items:center;gap:5px}
+.topbtn,.toolbtn{border:1px solid var(--border);background:transparent;padding:7px 10px;min-height:36px;cursor:pointer;color:var(--muted);font-weight:750;border-radius:0}
+.topbtn{border-color:transparent}
+.topbtn.active{color:var(--accent)}
+.topbtn:hover,.toolbtn:hover{color:var(--accent);border-color:var(--accent)}
+.toolbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.toolbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle}
+aside{position:fixed;top:62px;bottom:0;left:0;width:318px;border-right:1px solid var(--border);padding:8px 10px 20px;overflow:auto;background:var(--sidebar)}
+.group{font-size:.73rem;font-weight:900;letter-spacing:.055em;color:var(--muted);margin:18px 10px 6px;line-height:1.2;text-transform:uppercase}
+aside a{display:block;text-decoration:none;color:var(--muted);font-size:.94rem;padding:7px 9px 7px 22px;border-left:4px solid transparent;line-height:1.25}
 aside a:hover{color:var(--accent)}
-aside a.active{color:var(--accent);font-weight:700;border-left-color:var(--accent);background:var(--soft)}
-main{margin-left:318px;padding:90px 7vw 80px;max-width:1250px}
+aside a.active{color:var(--accent);font-weight:700;border-left-color:var(--accent)}
+main{margin-left:318px;padding:96px 7vw 80px;max-width:1250px}
 .page{display:none}.page.active{display:block}
-section{scroll-margin-top:83px;max-width:890px;margin-bottom:68px}
-h1{font-size:2.7rem;line-height:1.06;letter-spacing:-.035em;margin:.4rem 0 1rem;color:var(--text)}
-h2{font-size:1.8rem;margin-top:2rem;padding-top:25px;border-top:1px solid var(--border);color:var(--text)}
-h3{font-size:1.24rem;margin-top:27px;color:var(--text)}
-.kicker{font-size:.73rem;color:var(--accent);font-weight:800;letter-spacing:.08em}
-.lead,p,li{line-height:1.7;color:var(--text)}
-.imgslot{min-height:260px;border:1px dashed var(--muted);background:linear-gradient(135deg,transparent 49.7%,var(--border) 50%,transparent 50.3%),linear-gradient(45deg,transparent 49.7%,var(--border) 50%,transparent 50.3%),var(--soft);display:flex;align-items:center;justify-content:center;text-align:center;margin:20px 0 28px;border-radius:5px}
-.imgslot.large{min-height:380px}
-.label{max-width:75%;background:var(--bg);border:1px solid var(--border);padding:11px 14px;font-weight:750;color:var(--text)}
-.label small{display:block;color:var(--muted);font-weight:450;margin-top:4px}
+section{scroll-margin-top:88px;max-width:900px;margin-bottom:78px;padding-top:16px;border-top:4px solid var(--text);position:relative}
+section:first-child{border-top:0;padding-top:0}
+h1{font-size:clamp(2.8rem,6vw,5.1rem);line-height:.96;letter-spacing:-.052em;margin:.4rem 0 1rem;color:var(--text);text-transform:uppercase;font-weight:900}
+h2{font-size:2rem;line-height:1.06;letter-spacing:-.025em;margin:0 0 .8rem;color:var(--text);text-transform:uppercase;font-weight:900}
+h3{font-size:1.34rem;line-height:1.17;margin:1.7rem 0 .7rem;color:var(--text)}
+.kicker{font-size:.74rem;color:var(--accent);font-weight:900;letter-spacing:.09em;text-transform:uppercase}
+.lead,p,li{line-height:1.7;color:var(--muted)}
+.imgslot{position:relative;min-height:285px;border:1px dashed var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;text-align:center;margin:22px 0 32px;border-radius:0;overflow:hidden}
+.imgslot.large{min-height:420px}
+.imgslot:before,.imgslot:after{content:"";position:absolute;inset:0}
+.imgslot:before{background:linear-gradient(135deg,transparent 49.8%,var(--border) 50%,transparent 50.2%)}
+.imgslot:after{background:linear-gradient(45deg,transparent 49.8%,var(--border) 50%,transparent 50.2%)}
+.label{position:relative;z-index:2;max-width:75%;background:var(--bg);border:1px solid var(--border);padding:11px 14px;font-weight:850;color:var(--text)}
+.label small{display:block;color:var(--muted);font-weight:400;margin-top:4px}
 .cvitem{border-bottom:1px solid var(--border);padding:10px 0 17px}
-.contactbox{border:1px solid var(--border);background:var(--soft);padding:15px;border-radius:5px}
-@media(max-width:900px){aside{display:none}main{margin-left:0;padding:82px 20px}.topbtn{font-size:.85rem;padding:6px 7px}.imgslot.large{min-height:270px}}
+.contactbox{border:1px solid var(--border);background:var(--surface);padding:15px;border-radius:0}
+.reveal{opacity:1;clip-path:none}
+body.js-ready .reveal:not(.shown){opacity:0;clip-path:inset(0 100% 0 0);transition:clip-path .72s cubic-bezier(.77,0,.18,1),opacity .42s}
+body.js-ready .reveal.shown{opacity:1;clip-path:inset(0 0 0 0)}
+body.reduce-motion .reveal,body.reduce-motion.js-ready .reveal{opacity:1!important;clip-path:none!important;transition:none!important}
+body.compact section{margin-bottom:48px}
+body.compact .imgslot{min-height:220px}
+body.compact .imgslot.large{min-height:305px}
+@media(max-width:900px){aside{display:none}main{margin-left:0;padding:88px 20px}.topbtn{font-size:.82rem;padding:6px}.imgslot.large{min-height:290px}.brand{font-size:.9rem}}
+
 </style>
 </head>
 <body>
@@ -51,7 +67,13 @@ h3{font-size:1.24rem;margin-top:27px;color:var(--text)}
   <button class="topbtn active" data-page="portfolio">Portfolio</button>
   <button class="topbtn" data-page="cv">CV</button>
   <button class="topbtn" data-page="contact">Contact</button>
-  <button class="themebtn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
+  <button class="toolbtn" id="densityToggle" title="Compact layout" aria-label="Compact layout">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+     </button>
+     <button class="toolbtn" id="motionToggle" title="Reduce motion" aria-label="Reduce motion">
+      <svg viewBox="0 0 24 24"><path d="M4 12h6M14 12h6M8 8l4 4-4 4M16 8l-4 4 4 4"></path></svg>
+     </button>
+     <button class="toolbtn" id="themeToggle" aria-label="Toggle dark mode">☾</button>
  </div>
 </header>
 
@@ -59,54 +81,55 @@ h3{font-size:1.24rem;margin-top:27px;color:var(--text)}
 
 <main>
 <div id="portfolio" class="page active">
-<section id="port-overview">
+<section id="port-overview" class="reveal">
 <div class="kicker">BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING</div>
 <h1>Engineering Portfolio</h1>
 <p class="lead">Research and development in biomedical instrumentation, organ perfusion, medical devices, robotics, imaging, embedded systems and prototyping.</p>
 <div class="imgslot large"><div class="label">FOTO PRINCIPAL DEL PORTAFOLIO<small>Una imagen técnica fuerte que represente tu trabajo</small></div></div>
 </section>
 
-<section id="master-overview"><h2>Master's Research — Liver Viability & ICG-NIR</h2><p>Development of an ex vivo liver perfusion platform and quantitative functional assessment using ICG-NIR kinetics.</p></section>
-<section id="master-obj1"><h3>Objective 1 — Ex Vivo Perfusion Platform</h3><p>Build and validate a stable, instrumented perfusion platform.</p><div class="imgslot large"><div class="label">FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA<small>Sistema armado y conectado</small></div></div><div class="imgslot"><div class="label">CAPTURA DEL MONITOR HIDRODINÁMICO<small>Presión, flujo, temperatura y resistencia vascular</small></div></div></section>
-<section id="master-obj2"><h3>Objective 2 — Baseline Physiological Dataset</h3><p>Characterize the expected physiological and experimental variability before ICG.</p><div class="imgslot large"><div class="label">GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA<small>Experimento estable sin ICG</small></div></div></section>
-<section id="master-obj3"><h3>Objective 3 — ICG-NIR Functional Marker</h3><p>Extract quantitative functional parameters from ICG fluorescence kinetics.</p><div class="imgslot large"><div class="label">FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR<small>Hígado, iluminación, filtros y adquisición</small></div></div><div class="imgslot"><div class="label">CURVA FI(t) CON PARÁMETROS ICG<small>PDR, R15, clearance, Fmax, Tmax y AUC</small></div></div></section>
+<section id="master-overview" class="reveal"><h2>Master's Research — Liver Viability & ICG-NIR</h2><p>Development of an ex vivo liver perfusion platform and quantitative functional assessment using ICG-NIR kinetics.</p></section>
+<section id="master-obj1" class="reveal"><h3>Objective 1 — Ex Vivo Perfusion Platform</h3><p>Build and validate a stable, instrumented perfusion platform.</p><div class="imgslot large"><div class="label">FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA<small>Sistema armado y conectado</small></div></div><div class="imgslot"><div class="label">CAPTURA DEL MONITOR HIDRODINÁMICO<small>Presión, flujo, temperatura y resistencia vascular</small></div></div></section>
+<section id="master-obj2" class="reveal"><h3>Objective 2 — Baseline Physiological Dataset</h3><p>Characterize the expected physiological and experimental variability before ICG.</p><div class="imgslot large"><div class="label">GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA<small>Experimento estable sin ICG</small></div></div></section>
+<section id="master-obj3" class="reveal"><h3>Objective 3 — ICG-NIR Functional Marker</h3><p>Extract quantitative functional parameters from ICG fluorescence kinetics.</p><div class="imgslot large"><div class="label">FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR<small>Hígado, iluminación, filtros y adquisición</small></div></div><div class="imgslot"><div class="label">CURVA FI(t) CON PARÁMETROS ICG<small>PDR, R15, clearance, Fmax, Tmax y AUC</small></div></div></section>
 
-<section id="cybathlon"><h2>Robotics & Rehabilitation</h2><h3>CYBATHLON 2024</h3><p>Electrical Area Leader of Ciervo UC for a robotic transfemoral prosthesis.</p><div class="imgslot large"><div class="label">FOTO DEL EQUIPO CIERVO UC EN CYBATHLON<small>Equipo completo durante la competencia</small></div></div></section>
+<section id="cybathlon" class="reveal"><h2>Robotics & Rehabilitation</h2><h3>CYBATHLON 2024</h3><p>Electrical Area Leader of Ciervo UC for a robotic transfemoral prosthesis.</p><div class="imgslot large"><div class="label">FOTO DEL EQUIPO CIERVO UC EN CYBATHLON<small>Equipo completo durante la competencia</small></div></div></section>
 
-<section id="candel"><h2>Medical Devices & Neuroengineering</h2><h3>CandelStim</h3><p>Hardware, PCB, embedded systems and firmware for transcranial electrical stimulation.</p><div class="imgslot"><div class="label">DIAGRAMA HARDWARE / FIRMWARE<small>Interfaz → MCU → electrónica → electrodos</small></div></div></section>
+<section id="candel" class="reveal"><h2>Medical Devices & Neuroengineering</h2><h3>CandelStim</h3><p>Hardware, PCB, embedded systems and firmware for transcranial electrical stimulation.</p><div class="imgslot"><div class="label">DIAGRAMA HARDWARE / FIRMWARE<small>Interfaz → MCU → electrónica → electrodos</small></div></div></section>
 
-<section id="borealis"><h2>Organ Preservation & Transplantation</h2><h3>Borealis UC — Organ Supercooling</h3><p>Research on organ preservation through supercooling.</p></section>
-<section id="preservation"><h3>Organ Preservation Machine Redesign</h3><p>Electromechanical redesign, fluid systems, control and miniaturization.</p></section>
+<section id="borealis" class="reveal"><h2>Organ Preservation & Transplantation</h2><h3>Borealis UC — Organ Supercooling</h3><p>Research on organ preservation through supercooling.</p></section>
+<section id="preservation" class="reveal"><h3>Organ Preservation Machine Redesign</h3><p>Electromechanical redesign, fluid systems, control and miniaturization.</p></section>
 
-<section id="unet"><h2>Medical Imaging & AI</h2><h3>Lung Segmentation — U-Net</h3><p>Medical image segmentation using deep learning.</p></section>
+<section id="unet" class="reveal"><h2>Medical Imaging & AI</h2><h3>Lung Segmentation — U-Net</h3><p>Medical image segmentation using deep learning.</p></section>
 
-<section id="fpga"><h2>Embedded Systems & FPGA</h2><h3>Universal Testing Machine Upgrade</h3><p>Zybo Z10, Vivado and VHDL for processing mechanical-test signals.</p></section>
+<section id="fpga" class="reveal"><h2>Embedded Systems & FPGA</h2><h3>Universal Testing Machine Upgrade</h3><p>Zybo Z10, Vivado and VHDL for processing mechanical-test signals.</p></section>
 
-<section id="vscan"><h2>CAD & Prototyping</h2><h3>Vscan Air Enclosure</h3><p>CAD and prototyping for a portable ultrasound accessory.</p></section>
+<section id="vscan" class="reveal"><h2>CAD & Prototyping</h2><h3>Vscan Air Enclosure</h3><p>CAD and prototyping for a portable ultrasound accessory.</p></section>
 
-<section id="leadership"><h2>Teaching & Leadership</h2><h3>Physics Laboratory Teaching Assistant</h3><p>FIS154.</p><h3>Biomedical Engineering Student Chapter UC</h3><p>President, 2024–2025.</p><h3>IEEE EMBS PUC Chile</h3><p>Webmaster.</p></section>
+<section id="leadership" class="reveal"><h2>Teaching & Leadership</h2><h3>Physics Laboratory Teaching Assistant</h3><p>FIS154.</p><h3>Biomedical Engineering Student Chapter UC</h3><p>President, 2024–2025.</p><h3>IEEE EMBS PUC Chile</h3><p>Webmaster.</p></section>
 
-<section id="meldic"><h2>Industry & Technical Experience</h2><h3>Meldic Ltda.</h3><p>Medical equipment and technical development experience.</p></section>
+<section id="meldic" class="reveal"><h2>Industry & Technical Experience</h2><h3>Meldic Ltda.</h3><p>Medical equipment and technical development experience.</p></section>
 </div>
 
 <div id="cv" class="page">
-<section id="cv-profile"><div class="kicker">CURRICULUM VITAE</div><h1>Carlos Moreno Rojas</h1><p class="lead">Biomedical Engineering · Electrical Engineering · Research & Development</p></section>
-<section id="cv-education"><h2>Education</h2><div class="cvitem"><h3>MSc Biomedical Engineering</h3><p>PUC · 2025–2027</p></div><div class="cvitem"><h3>Electrical Engineering</h3><p>PUC · 2025–2026</p></div><div class="cvitem"><h3>Biomedical Engineering</h3><p>PUC · 2021–2024</p></div></section>
-<section id="cv-rd"><h2>Research & Development</h2><h3>Master's Research</h3><p>Liver viability & ICG-NIR.</p><h3>Borealis UC</h3><p>Organ supercooling.</p><h3>Organ Preservation Machine</h3><p>Electromechanical redesign.</p></section>
-<section id="cv-prof"><h2>Professional Experience</h2><h3>Candel Medical Company</h3><p>Hardware and firmware internship.</p><h3>Meldic Ltda.</h3><p>Medical equipment and technical projects.</p></section>
-<section id="cv-projects"><h2>Selected Engineering Projects</h2><h3>CYBATHLON 2024</h3><p>Electrical Area Leader.</p><h3>U-Net</h3><p>Medical image segmentation.</p><h3>FPGA</h3><p>Universal testing machine.</p><h3>Vscan Air</h3><p>CAD and prototyping.</p></section>
-<section id="cv-leadership"><h2>Teaching & Leadership</h2><h3>Physics Laboratory</h3><p>Teaching Assistant.</p><h3>Biomedical Student Chapter</h3><p>President.</p><h3>IEEE EMBS</h3><p>Webmaster.</p></section>
-<section id="cv-skills"><h2>Technical Skills</h2><h3>Electronics & Embedded Systems</h3><p>PCB, ESP32, STM32, Arduino.</p><h3>FPGA & Digital Design</h3><p>Zybo Z10, Vivado, VHDL.</p><h3>Programming & Data</h3><p>Python, C++, signal and image processing.</p></section>
-<section id="cv-languages"><h2>Languages</h2><h3>Spanish</h3><p>Native.</p><h3>English</h3><p>B2 / ALTE 3.</p></section>
+<section id="cv-profile" class="reveal"><div class="kicker">CURRICULUM VITAE</div><h1>Carlos Moreno Rojas</h1><p class="lead">Biomedical Engineering · Electrical Engineering · Research & Development</p></section>
+<section id="cv-education" class="reveal"><h2>Education</h2><div class="cvitem"><h3>MSc Biomedical Engineering</h3><p>PUC · 2025–2027</p></div><div class="cvitem"><h3>Electrical Engineering</h3><p>PUC · 2025–2026</p></div><div class="cvitem"><h3>Biomedical Engineering</h3><p>PUC · 2021–2024</p></div></section>
+<section id="cv-rd" class="reveal"><h2>Research & Development</h2><h3>Master's Research</h3><p>Liver viability & ICG-NIR.</p><h3>Borealis UC</h3><p>Organ supercooling.</p><h3>Organ Preservation Machine</h3><p>Electromechanical redesign.</p></section>
+<section id="cv-prof" class="reveal"><h2>Professional Experience</h2><h3>Candel Medical Company</h3><p>Hardware and firmware internship.</p><h3>Meldic Ltda.</h3><p>Medical equipment and technical projects.</p></section>
+<section id="cv-projects" class="reveal"><h2>Selected Engineering Projects</h2><h3>CYBATHLON 2024</h3><p>Electrical Area Leader.</p><h3>U-Net</h3><p>Medical image segmentation.</p><h3>FPGA</h3><p>Universal testing machine.</p><h3>Vscan Air</h3><p>CAD and prototyping.</p></section>
+<section id="cv-leadership" class="reveal"><h2>Teaching & Leadership</h2><h3>Physics Laboratory</h3><p>Teaching Assistant.</p><h3>Biomedical Student Chapter</h3><p>President.</p><h3>IEEE EMBS</h3><p>Webmaster.</p></section>
+<section id="cv-skills" class="reveal"><h2>Technical Skills</h2><h3>Electronics & Embedded Systems</h3><p>PCB, ESP32, STM32, Arduino.</p><h3>FPGA & Digital Design</h3><p>Zybo Z10, Vivado, VHDL.</p><h3>Programming & Data</h3><p>Python, C++, signal and image processing.</p></section>
+<section id="cv-languages" class="reveal"><h2>Languages</h2><h3>Spanish</h3><p>Native.</p><h3>English</h3><p>B2 / ALTE 3.</p></section>
 </div>
 
 <div id="contact" class="page">
-<section id="contact-info"><div class="kicker">CONTACT</div><h1>Contact</h1><div class="contactbox"><b>Carlos Moreno Rojas</b><br>Biomedical & Electrical Engineering</div></section>
-<section id="contact-email"><h2>Contact Information</h2><h3>Email</h3><p>ADD_EMAIL</p><h3>GitHub</h3><p>ADD_GITHUB</p><h3>LinkedIn</h3><p>ADD_LINKEDIN</p></section>
-<section id="contact-research"><h2>Research Profiles</h2><h3>ORCID</h3><p>ADD_ORCID_IF_APPLICABLE</p><h3>Google Scholar</h3><p>ADD_GOOGLE_SCHOLAR_IF_APPLICABLE</p></section>
-<section id="contact-docs"><h2>Documents</h2><h3>Curriculum Vitae</h3><p>Available from the CV tab.</p><h3>Portfolio</h3><p>Available from the Portfolio tab.</p></section>
+<section id="contact-info" class="reveal"><div class="kicker">CONTACT</div><h1>Contact</h1><div class="contactbox"><b>Carlos Moreno Rojas</b><br>Biomedical & Electrical Engineering</div></section>
+<section id="contact-email" class="reveal"><h2>Contact Information</h2><h3>Email</h3><p>ADD_EMAIL</p><h3>GitHub</h3><p>ADD_GITHUB</p><h3>LinkedIn</h3><p>ADD_LINKEDIN</p></section>
+<section id="contact-research" class="reveal"><h2>Research Profiles</h2><h3>ORCID</h3><p>ADD_ORCID_IF_APPLICABLE</p><h3>Google Scholar</h3><p>ADD_GOOGLE_SCHOLAR_IF_APPLICABLE</p></section>
+<section id="contact-docs" class="reveal"><h2>Documents</h2><h3>Curriculum Vitae</h3><p>Available from the CV tab.</p><h3>Portfolio</h3><p>Available from the Portfolio tab.</p></section>
 </div>
 </main>
+
 
 <script>
 const sidebars={
@@ -158,31 +181,90 @@ function setPage(p){
  document.querySelectorAll('.topbtn').forEach(x=>x.classList.toggle('active',x.dataset.page===p));
  sidebar.innerHTML=sidebars[p];
  bindSidebar();
- window.scrollTo({top:0,behavior:'smooth'});
+ window.scrollTo({top:0,behavior:document.body.classList.contains('reduce-motion')?'auto':'smooth'});
+ setTimeout(()=>{ revealVisible(); updateActive(); },20);
 }
 document.querySelectorAll('.topbtn').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.page)));
 
-const saved=localStorage.getItem('portfolio-theme');
-const preferred=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+function safeGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function safeSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+
+const saved=safeGet('portfolio-theme');
+let preferred='light';
+try{preferred=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}catch(e){}
 document.documentElement.dataset.theme=saved||preferred;
-function updateThemeIcon(){document.getElementById('themeToggle').textContent=document.documentElement.dataset.theme==='dark'?'☀':'☾'}
+
+function updateThemeIcon(){
+ const b=document.getElementById('themeToggle');
+ if(b) b.textContent=document.documentElement.dataset.theme==='dark'?'☀':'☾';
+}
 updateThemeIcon();
+
 document.getElementById('themeToggle').addEventListener('click',()=>{
  const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
  document.documentElement.dataset.theme=next;
- localStorage.setItem('portfolio-theme',next);
+ safeSet('portfolio-theme',next);
  updateThemeIcon();
 });
 
-setPage('portfolio');
+document.getElementById('densityToggle').addEventListener('click',function(){
+ document.body.classList.toggle('compact');
+ this.classList.toggle('on',document.body.classList.contains('compact'));
+ safeSet('portfolio-compact',document.body.classList.contains('compact')?'1':'0');
+ revealVisible();
+});
 
-const observer=new IntersectionObserver(entries=>{
- const vis=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
- if(!vis.length)return;
- const id='#'+vis[0].target.id;
- sidebar.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
-},{rootMargin:'-18% 0px -68% 0px',threshold:0});
-document.querySelectorAll('section').forEach(s=>observer.observe(s));
+document.getElementById('motionToggle').addEventListener('click',function(){
+ document.body.classList.toggle('reduce-motion');
+ this.classList.toggle('on',document.body.classList.contains('reduce-motion'));
+ safeSet('portfolio-motion',document.body.classList.contains('reduce-motion')?'1':'0');
+ if(document.body.classList.contains('reduce-motion')){
+  document.querySelectorAll('.reveal').forEach(x=>x.classList.add('shown'));
+ } else revealVisible();
+});
+
+if(safeGet('portfolio-compact')==='1'){
+ document.body.classList.add('compact');
+ document.getElementById('densityToggle').classList.add('on');
+}
+if(safeGet('portfolio-motion')==='1'){
+ document.body.classList.add('reduce-motion');
+ document.getElementById('motionToggle').classList.add('on');
+}
+
+function revealVisible(){
+ const els=[...document.querySelectorAll('.page.active .reveal')];
+ if(document.body.classList.contains('reduce-motion')){
+   els.forEach(x=>x.classList.add('shown')); return;
+ }
+ const trigger=window.innerHeight*.91;
+ els.forEach(x=>{if(x.getBoundingClientRect().top<trigger)x.classList.add('shown')});
+}
+
+function updateActive(){
+ const links=[...sidebar.querySelectorAll('a')];
+ const sections=[...document.querySelectorAll('.page.active section')];
+ if(!sections.length)return;
+ let currentId=sections[0].id;
+ const marker=window.innerHeight*.28;
+ sections.forEach(s=>{if(s.getBoundingClientRect().top<=marker)currentId=s.id});
+ links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+currentId));
+}
+
+setPage('portfolio');
+revealVisible();
+document.body.classList.add('js-ready');
+
+let ticking=false;
+window.addEventListener('scroll',()=>{
+ if(!ticking){
+  requestAnimationFrame(()=>{revealVisible();updateActive();ticking=false});
+  ticking=true;
+ }
+},{passive:true});
+window.addEventListener('resize',()=>{revealVisible();updateActive()});
+setTimeout(revealVisible,150);
 </script>
+
 </body>
 </html>

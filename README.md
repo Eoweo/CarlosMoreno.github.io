@@ -86,3 +86,16 @@ Added a complete long-form portfolio page with all major projects and experience
 - Same hierarchy applied to Portfolio, CV, Contact, Project Pages and detailed project pages.
 - Light and dark themes enabled in Quarto.
 - Interactive preview includes a persistent light/dark toggle.
+
+
+## Version 5.3 — Swiss Research
+
+This version applies the Swiss Research visual system across the complete Quarto portfolio.
+
+- Swiss academic/editorial palette.
+- Sharp, square geometry.
+- Red accent and active sidebar state.
+- Hierarchical left TOC preserved across all pages.
+- Custom icon controls for compact mode, reduced motion and light/dark mode.
+- Fail-safe JavaScript reveal animation: page content stays visible if JavaScript fails.
+- Standalone `portfolio_preview.html` updated to the same Swiss visual language.

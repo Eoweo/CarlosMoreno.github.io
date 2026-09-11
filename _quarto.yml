@@ -6,6 +6,7 @@ website:
   title: "Carlos Moreno Rojas"
   description: "Biomedical & Electrical Engineering — Portfolio"
   navbar:
+    pinned: true
     left:
       - href: index.qmd
         text: Portfolio
@@ -27,12 +28,14 @@ format:
       light: cosmo
       dark: darkly
     css: assets/site.css
+    include-after-body: assets/swiss-controls.html
     toc: true
     toc-location: left
     toc-depth: 3
     smooth-scroll: true
     code-copy: true
     code-overflow: wrap
+    anchor-sections: true
 
 execute:
   freeze: auto
