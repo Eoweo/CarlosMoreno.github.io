@@ -1,512 +1,195 @@
 ---
-title: "Portfolio"
+title: "Carlos Moreno Rojas"
 subtitle: "Biomedical Engineering · Electrical Engineering · Research & Development"
 toc: true
 toc-location: left
 toc-depth: 2
 page-layout: article
-
-toc-title: "PORTFOLIO"
+toc-title: "OVERVIEW"
 ---
-This portfolio collects my main technical developments, research projects and engineering experience.
-The structure is organized by **technical area** and each section focuses on what was developed,
-why it was needed and how it was tested.
 
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO PRINCIPAL DEL PORTAFOLIO
-    <small>Una imagen técnica fuerte: plataforma de perfusión, prótesis o montaje experimental</small>
+<div class="home-intro">
+  <div class="home-intro-copy">
+    <div class="home-kicker">BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING</div>
+    <div class="home-statement">
+      I develop and integrate engineering systems for biomedical research, medical devices and experimental platforms.
+    </div>
+    <p>
+      My work combines electronics, embedded systems, biomedical instrumentation, signal and image processing,
+      optics, CAD, prototyping and experimental validation. I am particularly interested in problems where
+      hardware, software and physiology have to work as one system.
+    </p>
+    <div class="home-actions">
+      <a class="home-action primary" href="portfolio.qmd">Technical Portfolio</a>
+      <a class="home-action" href="cv.qmd">Curriculum Vitae</a>
+      <a class="home-action" href="contact.qmd">Contact</a>
+    </div>
+  </div>
+
+  <div class="image-slot home-portrait">
+    <div class="slot-label">
+      FOTO PRINCIPAL / RETRATO TÉCNICO
+      <small>Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental</small>
+    </div>
   </div>
 </div>
 
-# Master's Research — Liver Viability & ICG-NIR
+# Profile
 
-My Master's research focuses on developing an ex vivo liver perfusion platform and using ICG-NIR
-kinetics to investigate quantitative indicators of liver function and viability.
+## Biomedical & Electrical Engineering
 
-## Objective 1 — Ex Vivo Perfusion Platform
+I have interdisciplinary training in **Biomedical Engineering and Electrical Engineering**, with experience
+across biomedical research, electronics, embedded systems, medical devices, robotics, medical imaging,
+FPGA, CAD and experimental system integration.
 
-Build and validate a stable experimental platform capable of maintaining rat livers under controlled
-physiological conditions.
+My engineering approach is strongly implementation-oriented: define the physiological or technical need,
+translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.
 
-```{mermaid}
-flowchart LR
-    A["Reservoir"] --> B["Peristaltic Pump"]
-    B --> C["Pulse Damper"]
-    C --> D["Flow Sensor"]
-    D --> E["Oxygenator"]
-    E --> F["Bubble Trap"]
-    F --> G["Liver"]
-    G --> H["Return"]
-```
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA
-    <small>Vista limpia del sistema armado y conectado</small>
+<div class="home-metric-grid">
+  <div class="home-metric">
+    <strong>Biomedical R&D</strong>
+    <span>Instrumentation, perfusion, preservation, neuroengineering and experimental validation.</span>
+  </div>
+  <div class="home-metric">
+    <strong>Electronics & Embedded</strong>
+    <span>PCB, ESP32, STM32, sensors, acquisition, communications and system integration.</span>
+  </div>
+  <div class="home-metric">
+    <strong>Engineering Prototyping</strong>
+    <span>CAD, mechanical integration, 3D printing, machining and iterative testing.</span>
   </div>
 </div>
 
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA REAL DEL CIRCUITO DE PERFUSIÓN
-    <small>Dirección de flujo, tuberías, sensores y componentes principales</small>
-  </div>
-</div>
+# Current Research
 
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DEL DAMPER DE PULSACIONES
-    <small>Componente utilizado para reducir los pulsos de presión de la bomba</small>
-  </div>
-</div>
+## Ex Vivo Liver Viability & ICG-NIR
 
-<div class="image-slot">
-  <div class="slot-label">
-    CAPTURA DEL MONITOR HIDRODINÁMICO
-    <small>Presión, flujo, temperatura y resistencia vascular en tiempo real</small>
-  </div>
-</div>
+My Master's research focuses on the development of an **ex vivo liver perfusion platform** and the use of
+**indocyanine green fluorescence in the near infrared (ICG-NIR)** to investigate quantitative indicators
+of liver function and viability.
 
-<div class="image-slot">
-  <div class="slot-label">
-    SETUP DE CALIBRACIÓN Y VALIDACIÓN
-    <small>Sistema desarrollado conectado a un patrón o instrumento de referencia</small>
-  </div>
-</div>
+The research progresses through three connected objectives:
 
-## Objective 2 — Baseline Physiological Dataset
-
-Characterize the physiological and experimental baseline before introducing ICG. The aim is to
-determine the expected range and variability of pressure, flow, temperature, vascular resistance,
-pH and gases under stable perfusion.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DE UN EXPERIMENTO BASAL SIN ICG
-    <small>Hígado perfundido durante una corrida utilizada para construir la línea base</small>
-  </div>
-</div>
-
-<div class="image-slot large">
-  <div class="slot-label">
-    GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA
-    <small>Curvas alineadas temporalmente durante un experimento estable</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    GRÁFICO DE RESISTENCIA VASCULAR R(t)=P/Q
-    <small>Evolución temporal y rango estable</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    COMPARACIÓN ENTRE EXPERIMENTOS BASALES
-    <small>Superposición de varias corridas o resumen de reproducibilidad</small>
-  </div>
-</div>
-
-## Objective 3 — ICG-NIR Functional Marker
-
-Develop a quantitative functional marker from ICG fluorescence kinetics.
-
-```{mermaid}
-flowchart LR
-    A["ICG + albumin"] --> B["Liver uptake"]
-    B --> C["NIR fluorescence"]
-    C --> D["FI(t)"]
-    D --> E["PDR / R15 / CLR / other parameters"]
-    E --> F["Functional assessment"]
-```
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR
-    <small>Hígado, fuente NIR, filtros y sistema de adquisición</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA ÓPTICO DEL SISTEMA ICG-NIR
-    <small>Excitación → hígado → emisión → filtro → adquisición</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    CURVA CONCENTRACIÓN DE ICG VS FLUORESCENCIA
-    <small>Rango lineal, saturación y región útil</small>
-  </div>
+<div class="home-step-grid">
+  <a class="home-step" href="projects/thesis.qmd#objective-1--ex-vivo-perfusion-platform">
+    <span class="step-number">01</span>
+    <strong>Perfusion Platform</strong>
+    <small>Stable circulation, physiological control and instrumentation.</small>
+  </a>
+  <a class="home-step" href="projects/thesis.qmd#objective-2--baseline-dataset-without-icg">
+    <span class="step-number">02</span>
+    <strong>Physiological Baseline</strong>
+    <small>Pressure, flow, temperature, vascular resistance, pH and gases.</small>
+  </a>
+  <a class="home-step" href="projects/thesis.qmd#objective-3--icg-nir-functional-marker">
+    <span class="step-number">03</span>
+    <strong>ICG-NIR Marker</strong>
+    <small>Fluorescence kinetics and quantitative functional parameters.</small>
+  </a>
 </div>
 
 <div class="image-slot large">
   <div class="slot-label">
-    CURVA REPRESENTATIVA FI(t) DE ICG
-    <small>Captación, peak y eliminación</small>
+    IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER
+    <small>Plataforma de perfusión completa o montaje ICG-NIR</small>
   </div>
 </div>
 
-<div class="image-slot">
-  <div class="slot-label">
-    CURVA ICG CON PDR, R15, CLEARANCE, FMAX, TMAX Y AUC
-    <small>Figura de extracción de parámetros funcionales</small>
-  </div>
+# Selected Work
+
+## CYBATHLON 2024 — Ciervo UC
+
+I participated in **CYBATHLON 2024 in Zürich** as Electrical Area Leader of Ciervo UC, working on the
+electrical and electromechanical integration of a robotic transfemoral prosthesis.
+
+<a class="inline-project-link" href="projects/cybathlon.qmd">Open project →</a>
+
+## CandelStim — Neuroengineering
+
+During my professional internship at Candel Medical Company I worked on electronics and firmware for a
+transcranial electrical stimulation platform, including circuit analysis, PCB work, embedded systems,
+communications, signal generation and validation.
+
+<a class="inline-project-link" href="projects/candel.qmd">Open project →</a>
+
+## Other Engineering Projects
+
+<div class="home-project-grid">
+  <a class="project-card" href="projects/borealis.qmd">
+    <div class="project-tag">ORGAN PRESERVATION</div>
+    <strong>Borealis UC — Supercooling</strong>
+    <p>Experimental work in organ preservation and thermal control.</p>
+  </a>
+  <a class="project-card" href="projects/organ-preservation.qmd">
+    <div class="project-tag">SYSTEM DESIGN</div>
+    <strong>Organ Preservation Machine</strong>
+    <p>Electromechanical, fluidic and control-system redesign.</p>
+  </a>
+  <a class="project-card" href="projects/unet.qmd">
+    <div class="project-tag">MEDICAL IMAGING & AI</div>
+    <strong>Lung Segmentation — U-Net</strong>
+    <p>Deep-learning segmentation of medical images.</p>
+  </a>
+  <a class="project-card" href="projects/fpga.qmd">
+    <div class="project-tag">FPGA</div>
+    <strong>Universal Testing Machine</strong>
+    <p>Zybo Z10, Vivado and VHDL for acquisition and processing.</p>
+  </a>
+  <a class="project-card" href="projects/vscan.qmd">
+    <div class="project-tag">CAD & PROTOTYPING</div>
+    <strong>Vscan Air Enclosure</strong>
+    <p>CAD and prototyping for a portable ultrasound accessory.</p>
+  </a>
 </div>
 
-# Robotics & Rehabilitation
+# Engineering Areas
 
-## CYBATHLON 2024 — Robotic Transfemoral Prosthesis
+## Biomedical Instrumentation
 
-I participated in CYBATHLON 2024 in Zürich as **Electrical Area Leader** of Ciervo UC.
+Physiological sensing, pressure, flow, temperature, perfusion systems, calibration, acquisition and
+experimental validation.
 
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DEL EQUIPO CIERVO UC EN CYBATHLON 2024
-    <small>Equipo completo durante la competencia en Zürich</small>
-  </div>
+## Electronics & Embedded Systems
+
+Analog and digital electronics, PCB, microcontrollers, ESP32, STM32, Arduino, communications and
+hardware/software integration.
+
+## Medical Imaging, Signals & Optics
+
+Signal and image processing, deep learning, biomedical optics, NIR fluorescence and experimental data analysis.
+
+## CAD, Prototyping & Integration
+
+Fusion 360, mechanical design, 3D printing, machining and integration of electronics, fluidics and mechanics.
+
+# Education & Leadership
+
+## Education
+
+<div class="home-timeline">
+  <div><strong>MSc Biomedical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2025–2027</span></div>
+  <div><strong>Electrical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2025–2026</span></div>
+  <div><strong>Biomedical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2021–2024</span></div>
 </div>
 
-## Electrical System & Integration
+## Leadership & Teaching
 
-My work included electrical system design, prototyping, manufacturing, integration of electronics
-inside the prosthesis and coordination between electronics, control and mechanics.
+My experience also includes physics laboratory teaching, leadership of the Biomedical Engineering Student
+Chapter UC and work with IEEE EMBS PUC Chile.
 
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DE LA PRÓTESIS TRANSFEMORAL COMPLETA
-    <small>Vista general del sistema desarrollado</small>
-  </div>
+# Explore
+
+## Technical Portfolio
+
+The complete technical portfolio documents projects in greater depth using the structure
+**problem → design → implementation → testing → results / lessons learned**.
+
+<a class="home-action primary" href="portfolio.qmd">Open Technical Portfolio</a>
+
+## CV & Contact
+
+<div class="home-final-actions">
+  <a class="home-action" href="cv.qmd">Curriculum Vitae</a>
+  <a class="home-action" href="projects/index.qmd">Project Pages</a>
+  <a class="home-action" href="contact.qmd">Contact</a>
 </div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DE LA ELECTRÓNICA INTEGRADA EN LA PRÓTESIS
-    <small>Controladores, baterías, sensores y cableado</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA DE ARQUITECTURA ELÉCTRICA Y ELECTROMECÁNICA
-    <small>Electrónica → control → sensores → actuadores</small>
-  </div>
-</div>
-
-## Testing & Competition
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO / VIDEO DE PRUEBAS CON EL PILOTO
-    <small>Ensayos funcionales antes o durante la competencia</small>
-  </div>
-</div>
-
-# Medical Devices & Neuroengineering
-
-## CandelStim — Transcranial Electrical Stimulation
-
-Professional internship at Candel Medical Company focused on hardware, electronics and firmware for
-a transcranial electrical stimulation device.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO GENERAL DEL PROTOTIPO CANDELSTIM
-    <small>Equipo o prototipo completo, solo si la publicación está autorizada</small>
-  </div>
-</div>
-
-## Hardware & PCB
-
-Work included circuit analysis, redesign, component selection, PCB correction and debugging.
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DE PCB / ELECTRÓNICA
-    <small>Placa principal, microcontrolador y etapa analógica no confidencial</small>
-  </div>
-</div>
-
-## Firmware & Embedded Systems
-
-Development with ESP32 and STM32, BLE communications, signal generation and synchronization.
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA DE ARQUITECTURA HARDWARE / FIRMWARE
-    <small>Interfaz → firmware → MCU → electrónica → fuente de corriente → electrodos</small>
-  </div>
-</div>
-
-## Validation
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DEL SETUP DE PRUEBA
-    <small>Instrumentación utilizada para verificar señales y funcionamiento</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    GRÁFICO DE VALIDACIÓN DE SEÑAL
-    <small>Corriente, frecuencia, fase o forma de onda representativa no confidencial</small>
-  </div>
-</div>
-
-# Organ Preservation & Transplantation
-
-## Borealis UC — Organ Supercooling
-
-Research project focused on organ preservation using supercooling to reduce hypoxic damage during
-transport and potentially extend preservation time.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO GENERAL DEL PROYECTO BOREALIS UC
-    <small>Sistema o montaje experimental de preservación</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA DEL PRINCIPIO DE SUPERCOOLING
-    <small>Órgano, recipiente, control térmico y condiciones experimentales</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    GRÁFICO DE TEMPERATURA VS TIEMPO
-    <small>Perfil térmico representativo de preservación</small>
-  </div>
-</div>
-
-## Organ Preservation Machine Redesign
-
-Electromechanical redesign and size reduction of an organ preservation machine.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DE LA MÁQUINA DE PRESERVACIÓN
-    <small>Vista general del sistema</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA DE BLOQUES DEL SISTEMA
-    <small>Fluidos, electrónica, control y sensores</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    CAD DEL REDISEÑO MECÁNICO
-    <small>Arquitectura y reducción de tamaño</small>
-  </div>
-</div>
-
-# Medical Imaging & AI
-
-## Lung Segmentation with U-Net
-
-Medical image segmentation project using a U-Net-based neural network for lung segmentation in CT
-and MRI images.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    EJEMPLO DE IMAGEN MÉDICA DE ENTRADA
-    <small>CT o MRI utilizada en el proyecto</small>
-  </div>
-</div>
-
-## Network & Training
-
-<div class="image-slot">
-  <div class="slot-label">
-    ARQUITECTURA U-NET UTILIZADA
-    <small>Encoder → bottleneck → decoder</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    CURVAS DE ENTRENAMIENTO
-    <small>Loss y métricas por época</small>
-  </div>
-</div>
-
-## Segmentation Results
-
-<div class="image-slot large">
-  <div class="slot-label">
-    EJEMPLOS DE SEGMENTACIÓN
-    <small>Imagen original + máscara de referencia + predicción</small>
-  </div>
-</div>
-
-# Embedded Systems & FPGA
-
-## Universal Testing Machine Upgrade
-
-Development of an FPGA-based processing system using **Zybo Z10, Vivado and VHDL** for force,
-displacement, deformation and speed signals.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DE LA ZYBO Z10 / HARDWARE DEL PROYECTO
-    <small>Tarjeta y conexiones principales</small>
-  </div>
-</div>
-
-## FPGA Architecture
-
-<div class="image-slot">
-  <div class="slot-label">
-    DIAGRAMA DE BLOQUES FPGA
-    <small>Entradas → procesamiento → salidas</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    CAPTURA DE VIVADO / VHDL
-    <small>Módulo o arquitectura representativa</small>
-  </div>
-</div>
-
-## Validation
-
-<div class="image-slot">
-  <div class="slot-label">
-    GRÁFICO DE VALIDACIÓN DEL SISTEMA
-    <small>Comparación con referencia</small>
-  </div>
-</div>
-
-# CAD & Prototyping
-
-## Vscan Air Medical Device Enclosure
-
-3D design and prototyping for a cover / enclosure associated with the GE Vscan Air portable
-ultrasound transducer.
-
-<div class="image-slot large">
-  <div class="slot-label">
-    FOTO DEL VSCAN AIR ORIGINAL
-    <small>Dispositivo base</small>
-  </div>
-</div>
-
-## Design Iterations
-
-<div class="image-slot">
-  <div class="slot-label">
-    RENDER CAD DEL PRIMER DISEÑO
-    <small>Primera iteración</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    RENDER CAD DEL DISEÑO FINAL
-    <small>Versión seleccionada</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DEL PROTOTIPO IMPRESO EN 3D
-    <small>Pieza fabricada y montada</small>
-  </div>
-</div>
-
-# Teaching & Leadership
-
-## Physics Laboratory Teaching Assistant
-
-Laboratory Teaching Assistant for FIS154 at the Faculty of Physics UC.
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DEL LABORATORIO / ACTIVIDAD DOCENTE
-    <small>Montaje o actividad experimental</small>
-  </div>
-</div>
-
-## Biomedical Engineering Student Chapter UC
-
-President during 2024–2025.
-
-<div class="image-slot">
-  <div class="slot-label">
-    FOTO DE ACTIVIDAD DEL CAPÍTULO DE INGENIERÍA BIOMÉDICA
-    <small>Evento, equipo o actividad representativa</small>
-  </div>
-</div>
-
-## IEEE EMBS PUC Chile
-
-Webmaster since 2024.
-
-<div class="image-slot">
-  <div class="slot-label">
-    CAPTURA DEL SITIO / ACTIVIDAD IEEE EMBS
-    <small>Trabajo web o actividad pública</small>
-  </div>
-</div>
-
-# Industry & Technical Experience
-
-## Meldic Ltda.
-
-Experience in medical equipment sales and customer support, together with later technical projects
-such as the FPGA upgrade for a universal testing machine.
-
-<div class="image-slot">
-  <div class="slot-label">
-    PROYECTO TÉCNICO REPRESENTATIVO EN MELDIC
-    <small>Preferir desarrollo técnico por sobre fotografía corporativa</small>
-  </div>
-</div>
-
-# Technical Skills
-
-<div class="skill-chips">
-<span>Biomedical Instrumentation</span>
-<span>Electronics</span>
-<span>Embedded Systems</span>
-<span>ESP32</span>
-<span>STM32</span>
-<span>Arduino</span>
-<span>FPGA</span>
-<span>VHDL</span>
-<span>Python</span>
-<span>C++</span>
-<span>Signal Processing</span>
-<span>Medical Imaging</span>
-<span>NIR / ICG</span>
-<span>CAD</span>
-<span>Fusion 360</span>
-<span>3D Printing</span>
-<span>Experimental Validation</span>
-</div>
-
-# Engineering Approach
-
-```{mermaid}
-flowchart LR
-    A["Understand problem"] --> B["Identify measurable variables"]
-    B --> C["Review literature / existing systems"]
-    C --> D["Define requirements"]
-    D --> E["Prototype"]
-    E --> F["Measure"]
-    F --> G["Compare"]
-    G --> H["Redesign"]
-    H --> I["Validate"]
-    I --> J["Integrate & document"]
-```

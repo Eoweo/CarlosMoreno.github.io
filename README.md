@@ -95,3 +95,13 @@ fail-safe scroll animations, icon display controls, dynamic TOC highlighting and
 left-sidebar scrolling.
 
 See `SWISS_STYLE_INTEGRATION.md`.
+
+
+## Version 7
+
+- `index.qmd` is now a professional summary/home page.
+- The detailed engineering portfolio remains in `portfolio.qmd` and `projects/*.qmd`.
+- Swiss Controls are aligned at the far right.
+- The left TOC behaves as a contextual accordion: only main titles are visible; the active group expands its subtitles.
+- Contact uses responsive cards and grids rather than a simple list.
+- `PORTFOLIO_REQUIREMENTS.md` is now mandatory documentation for every future change.

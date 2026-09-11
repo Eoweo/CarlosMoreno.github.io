@@ -1,48 +1,111 @@
 ---
 title: "Contact"
-subtitle: "Carlos Moreno Rojas"
+subtitle: "Research · Engineering · Professional Collaboration"
 toc: true
 toc-location: left
 toc-depth: 2
 toc-title: "CONTACT"
 ---
 
-# Contact Information
+<div class="contact-hero">
+  <div>
+    <div class="contact-kicker">GET IN TOUCH</div>
+    <div class="contact-heading">Research, engineering and technical collaboration.</div>
+    <p>
+      Use the channels below to contact me or to access my professional and research profiles.
+      Public contact information can be added progressively without changing the page structure.
+    </p>
+  </div>
+  <div class="contact-monogram">CM</div>
+</div>
 
-## Email
+# Direct Contact
 
-`ADD_EMAIL`
+## Professional Channels
 
-## GitHub
+<div class="contact-grid contact-grid-three">
 
-`ADD_GITHUB`
+  <div class="contact-method">
+    <div class="contact-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="m3 7 9 6 9-6"/></svg>
+    </div>
+    <div class="contact-card-label">EMAIL</div>
+    <strong>Email</strong>
+    <p>Preferred channel for research and professional enquiries.</p>
+    <code>ADD_EMAIL</code>
+  </div>
 
-## LinkedIn
+  <div class="contact-method">
+    <div class="contact-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M8 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1-.4-2-1-2.6 3.3-.4 6.8-1.6 6.8-7.4 0-1.6-.6-3-1.5-4.1.2-.4.7-2-.1-4-1.3-.4-4.2 1.6-4.2 1.6a14.3 14.3 0 0 0-7.6 0S4.5-.4 3.2 0c-.8 2-.3 3.6-.1 4C2.2 5.1 1.6 6.5 1.6 8.1c0 5.8 3.5 7 6.8 7.4-.5.5-.8 1.2-.9 2.1V22"/></svg>
+    </div>
+    <div class="contact-card-label">CODE & PROJECTS</div>
+    <strong>GitHub</strong>
+    <p>Repositories, code and technical project material.</p>
+    <code>ADD_GITHUB</code>
+  </div>
 
-`ADD_LINKEDIN`
+  <div class="contact-method">
+    <div class="contact-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M8 10v7M8 7v.01M12 17v-4a3 3 0 0 1 6 0v4M12 10v7"/></svg>
+    </div>
+    <div class="contact-card-label">PROFESSIONAL NETWORK</div>
+    <strong>LinkedIn</strong>
+    <p>Professional profile, engineering experience and network.</p>
+    <code>ADD_LINKEDIN</code>
+  </div>
+
+</div>
 
 # Research Profiles
 
-## ORCID
+## Academic Identity
 
-`ADD_ORCID_IF_APPLICABLE`
+<div class="contact-grid contact-grid-two">
 
-## Google Scholar
+  <div class="contact-method compact-card">
+    <div class="contact-card-label">RESEARCH ID</div>
+    <strong>ORCID</strong>
+    <p>Persistent academic researcher identifier.</p>
+    <code>ADD_ORCID_IF_APPLICABLE</code>
+  </div>
 
-`ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
+  <div class="contact-method compact-card">
+    <div class="contact-card-label">PUBLICATIONS</div>
+    <strong>Google Scholar</strong>
+    <p>Research publications and citation profile.</p>
+    <code>ADD_GOOGLE_SCHOLAR_IF_APPLICABLE</code>
+  </div>
 
-# Documents
+</div>
 
-## Curriculum Vitae
+# Documents & Portfolio
 
-[Open CV](cv.qmd)
+## Explore My Work
 
-## Portfolio
+<div class="contact-grid contact-grid-two">
 
-[Return to Portfolio](index.qmd)
+  <a class="contact-method contact-link-card" href="cv.qmd">
+    <div class="contact-card-label">DOCUMENT</div>
+    <strong>Curriculum Vitae</strong>
+    <p>Education, research, professional experience, projects and technical skills.</p>
+    <span>Open CV →</span>
+  </a>
 
-# Before Publishing
+  <a class="contact-method contact-link-card" href="portfolio.qmd">
+    <div class="contact-card-label">TECHNICAL WORK</div>
+    <strong>Engineering Portfolio</strong>
+    <p>Detailed technical record of research and engineering projects.</p>
+    <span>Open Portfolio →</span>
+  </a>
 
-## Public information check
+</div>
 
-Replace all `ADD_...` placeholders with the contact information that you want to make public.
+# Publishing Status
+
+## Public Information
+
+<div class="contact-status">
+  <strong>Before publishing:</strong>
+  replace the `ADD_...` placeholders only with information that should be publicly visible.
+</div>

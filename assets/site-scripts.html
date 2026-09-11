@@ -53,7 +53,7 @@
     if (document.querySelector(".swiss-controls")) return;
 
     const controls = document.createElement("div");
-    controls.className = "swiss-controls";
+    controls.className = "swiss-controls swiss-controls-right";
     controls.setAttribute("aria-label", "Display controls");
 
     const compact = document.createElement("button");
@@ -263,7 +263,46 @@
      -------------------------------------------------------------- */
   const toc = document.getElementById("TOC");
   let tocItems = [];
+  let tocGroups = [];
   let lastActiveHref = "";
+
+  function initTocAccordion() {
+    if (!toc) return [];
+
+    const rootList = toc.querySelector(":scope > ul");
+    if (!rootList) return [];
+
+    const groups = Array.from(rootList.children).filter(function (li) {
+      return li.tagName === "LI" && !!li.querySelector(":scope > ul");
+    });
+
+    groups.forEach(function (li) {
+      li.classList.add("swiss-toc-group");
+    });
+
+    return groups;
+  }
+
+  function topLevelGroupFor(link) {
+    if (!toc || !link) return null;
+
+    let node = link.closest("li");
+    while (node && node.parentElement && node.parentElement !== toc) {
+      if (node.parentElement.parentElement === toc) return node;
+      node = node.parentElement.closest("li");
+    }
+    return node && node.parentElement && node.parentElement.parentElement === toc ? node : null;
+  }
+
+  function openTocGroupFor(activeLink) {
+    if (!tocGroups.length) return;
+
+    const activeGroup = topLevelGroupFor(activeLink);
+
+    tocGroups.forEach(function (group) {
+      group.classList.toggle("swiss-toc-open", group === activeGroup);
+    });
+  }
 
   function collectTocItems() {
     if (!toc) return [];
@@ -315,9 +354,17 @@
       item.link.classList.toggle("swiss-active", item === current);
     });
 
+    if (current) {
+      openTocGroupFor(current.link);
+    }
+
     if (current && current.href !== lastActiveHref) {
       lastActiveHref = current.href;
-      keepActiveTocVisible(current.link);
+
+      // Wait one frame so accordion expansion has affected layout.
+      window.requestAnimationFrame(function () {
+        keepActiveTocVisible(current.link);
+      });
     }
   }
 
@@ -341,6 +388,7 @@
     createControls();
     initReveal();
 
+    tocGroups = initTocAccordion();
     tocItems = collectTocItems();
     updateToc();
 
@@ -352,6 +400,7 @@
 
     // Extra safety after Mermaid/layout/font changes settle.
     window.setTimeout(function () {
+      tocGroups = initTocAccordion();
       tocItems = collectTocItems();
       revealOnScroll();
       updateToc();
