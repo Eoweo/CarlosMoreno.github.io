@@ -88,14 +88,24 @@ Added a complete long-form portfolio page with all major projects and experience
 - Interactive preview includes a persistent light/dark toggle.
 
 
-## Version 5.3 — Swiss Research
+## Version 5.3 — Swiss Research integration
 
-This version applies the Swiss Research visual system across the complete Quarto portfolio.
+This version keeps the v5.2 content structure and applies the approved Swiss Research visual system globally.
 
-- Swiss academic/editorial palette.
-- Sharp, square geometry.
-- Red accent and active sidebar state.
-- Hierarchical left TOC preserved across all pages.
-- Custom icon controls for compact mode, reduced motion and light/dark mode.
-- Fail-safe JavaScript reveal animation: page content stays visible if JavaScript fails.
-- Standalone `portfolio_preview.html` updated to the same Swiss visual language.
+### Added
+- Swiss Research palette and typography in light/dark modes.
+- Fail-safe section reveal animations: content remains visible if JavaScript fails.
+- Dynamic left TOC that tracks the active section while scrolling.
+- Automatic TOC follow so the active item remains visible.
+- Parent-group highlighting in the sidebar.
+- Icon controls for light/dark mode, reduced motion and compact density.
+- Reading progress indicator.
+- Swiss styling for cards, placeholders, Mermaid outputs and technical content.
+- Updated standalone `portfolio_preview.html` with the same visual direction and interactions.
+
+### Preserved
+- Portfolio/CV/Contact navigation.
+- All v5.2 QMD content.
+- All individual project pages.
+- Image placeholder structure.
+- GitHub Pages workflow and deployment structure.

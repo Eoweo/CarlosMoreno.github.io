@@ -1,255 +1,229 @@
-/* =========================================================
+/* ============================================================
    CARLOS MORENO ROJAS — SWISS RESEARCH THEME
-   v5.3
-   ========================================================= */
+   Applied globally on top of the existing Quarto portfolio.
+   ============================================================ */
 
-:root,
-body.quarto-light,
-html[data-bs-theme="light"] {
-  --page-bg: #f7f5ef;
-  --surface: #ece9e0;
-  --surface-2: #ffffff;
-  --text: #111111;
-  --muted: #66635d;
-  --border: #cbc7bc;
-  --accent: #d63230;
-  --accent-soft: rgba(214, 50, 48, .075);
-  --shadow: rgba(0, 0, 0, .08);
-
-  --bs-body-bg: #f7f5ef;
-  --bs-body-color: #111111;
-  --bs-border-color: #cbc7bc;
-  --bs-link-color: #d63230;
-  --bs-link-hover-color: #a82321;
+:root {
+  --sw-bg: #f7f5ef;
+  --sw-panel: #ece9e0;
+  --sw-panel-2: #ffffff;
+  --sw-text: #111111;
+  --sw-muted: #66635d;
+  --sw-border: #cbc7bc;
+  --sw-accent: #d63230;
+  --sw-accent-soft: rgba(214, 50, 48, 0.075);
+  --sw-shadow: rgba(0, 0, 0, 0.075);
+  --sw-header-h: 62px;
 }
 
 body.quarto-dark,
+.quarto-dark,
 html[data-bs-theme="dark"],
-.quarto-dark {
-  --page-bg: #141414;
-  --surface: #1e1e1e;
-  --surface-2: #181818;
-  --text: #f1efe8;
-  --muted: #a7a39a;
-  --border: #383633;
-  --accent: #ff615e;
-  --accent-soft: rgba(255, 97, 94, .10);
-  --shadow: rgba(0, 0, 0, .45);
-
-  --bs-body-bg: #141414;
-  --bs-body-color: #f1efe8;
-  --bs-border-color: #383633;
-  --bs-link-color: #ff615e;
-  --bs-link-hover-color: #ff8d8b;
+body.swiss-force-dark {
+  --sw-bg: #141414;
+  --sw-panel: #1e1e1e;
+  --sw-panel-2: #181818;
+  --sw-text: #f1efe8;
+  --sw-muted: #a7a39a;
+  --sw-border: #383633;
+  --sw-accent: #ff615e;
+  --sw-accent-soft: rgba(255, 97, 94, 0.095);
+  --sw-shadow: rgba(0, 0, 0, 0.34);
+  color-scheme: dark;
 }
 
-/* ---------- base ---------- */
 html {
   scroll-behavior: smooth;
+  background: var(--sw-bg);
 }
 
 body {
-  background: var(--page-bg) !important;
-  color: var(--text) !important;
-  font-family: Arial, Helvetica, sans-serif !important;
+  background: var(--sw-bg) !important;
+  color: var(--sw-text) !important;
+  font-family: Arial, Helvetica, sans-serif;
   line-height: 1.68;
   transition: background-color .2s ease, color .2s ease;
+}
+
+body,
+.navbar,
+.sidebar,
+#TOC,
+main.content,
+.quarto-title-block,
+.page-footer {
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
 p,
 li,
 dd,
-.table {
-  color: var(--muted);
+dt {
+  color: var(--sw-muted);
 }
 
 a {
-  color: var(--accent);
+  color: var(--sw-accent);
 }
 
 a:hover {
-  color: var(--accent);
+  color: var(--sw-accent);
 }
 
-strong,
-b {
-  color: var(--text);
-}
+/* ------------------------------------------------------------
+   NAVBAR
+   ------------------------------------------------------------ */
 
-hr {
-  border-color: var(--border);
-  opacity: 1;
-}
-
-/* ---------- top navigation ---------- */
 .navbar {
-  min-height: 62px;
-  background: color-mix(in srgb, var(--page-bg) 94%, transparent) !important;
-  border-bottom: 1px solid var(--border);
+  min-height: var(--sw-header-h);
+  background: color-mix(in srgb, var(--sw-bg) 95%, transparent) !important;
+  border-bottom: 1px solid var(--sw-border) !important;
   box-shadow: none !important;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
-.navbar-brand {
-  color: var(--text) !important;
-  font-weight: 900;
-  letter-spacing: -.02em;
+.navbar-brand,
+.navbar-title {
+  color: var(--sw-text) !important;
+  font-weight: 900 !important;
+  letter-spacing: -.025em;
 }
 
 .navbar .nav-link {
-  color: var(--muted) !important;
-  font-size: .88rem;
+  color: var(--sw-muted) !important;
   font-weight: 700;
+  font-size: .9rem;
+  border-bottom: 3px solid transparent;
+  transition: color .16s ease, border-color .16s ease;
 }
 
 .navbar .nav-link:hover,
 .navbar .nav-link.active {
-  color: var(--accent) !important;
+  color: var(--sw-text) !important;
+  border-bottom-color: var(--sw-accent);
 }
 
-.navbar .navbar-container {
-  padding-right: 156px;
+.navbar-toggler,
+.navbar-toggler-icon {
+  color: var(--sw-text) !important;
+  border-color: var(--sw-border) !important;
 }
 
-/* Hide Quarto's own theme icon. It remains in the DOM so our
-   Swiss theme button can trigger Quarto's native theme switch. */
+/* Hide Quarto's own scheme button visually; JS still uses it internally. */
 .quarto-color-scheme-toggle {
-  position: fixed !important;
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
+  display: none !important;
 }
 
-/* Search appearance */
-.aa-DetachedSearchButton,
-.aa-DetachedSearchButtonIcon,
-#quarto-search .aa-DetachedSearchButton {
-  color: var(--muted) !important;
+/* ------------------------------------------------------------
+   TITLE / TYPOGRAPHY
+   ------------------------------------------------------------ */
+
+.quarto-title-block {
+  background: transparent !important;
 }
 
-/* ---------- page title ---------- */
-.quarto-title-block .quarto-title,
-header#title-block-header {
-  margin-bottom: 2.1rem;
+.quarto-title-block .quarto-title-banner,
+.quarto-title-banner {
+  background: transparent !important;
 }
 
-.quarto-title-block .quarto-title h1.title,
-header#title-block-header h1.title {
-  max-width: 900px;
-  margin: .45rem 0 .8rem;
-  color: var(--text);
-  font-size: clamp(2.8rem, 6vw, 5.15rem);
+.quarto-title h1.title,
+h1.title {
+  color: var(--sw-text) !important;
+  font-size: clamp(2.7rem, 6vw, 5.1rem);
   line-height: .96;
-  letter-spacing: -.052em;
-  text-transform: uppercase;
+  letter-spacing: -.05em;
   font-weight: 900;
+  text-transform: uppercase;
+  max-width: 930px;
+  margin-bottom: 1rem;
 }
 
-.quarto-title-block .subtitle,
-header#title-block-header .subtitle {
-  color: var(--accent) !important;
-  font-size: .78rem;
-  font-weight: 900;
-  letter-spacing: .085em;
-  text-transform: uppercase;
+.quarto-title .subtitle,
+.subtitle {
+  color: var(--sw-muted) !important;
+  max-width: 800px;
+  font-size: 1.05rem;
+  font-weight: 500;
 }
 
-/* ---------- content geometry ---------- */
 main.content {
-  max-width: 940px;
+  max-width: 970px;
+  color: var(--sw-text);
 }
 
-#quarto-content {
-  background: var(--page-bg);
+main.content > p:first-of-type {
+  font-size: 1.06rem;
+  max-width: 820px;
 }
 
-main.content section {
-  scroll-margin-top: 86px;
+/* Section group headings */
+section.level1 {
+  margin-top: 4.7rem;
 }
 
-/* Direct sections are the Swiss "chapter" blocks.
-   index/cv/contact use H1 as direct sections.
-   project pages generally use H2 as direct sections. */
-main.content > section.level1,
-main.content > section.level2 {
-  position: relative;
-  margin-top: 4.1rem;
+section.level1 > h1 {
+  color: var(--sw-text) !important;
+  margin: 0 0 1.2rem;
   padding-top: 1rem;
-  border-top: 4px solid var(--text);
-}
-
-main.content > section.level1:first-of-type,
-main.content > section.level2:first-of-type {
-  margin-top: 2.3rem;
-}
-
-main.content > section.level1 > h1,
-main.content > section.level2 > h2 {
-  margin: 0 0 .85rem;
-  color: var(--text);
-  font-size: clamp(1.75rem, 3.2vw, 2.15rem);
-  line-height: 1.06;
-  letter-spacing: -.025em;
+  border-top: 4px solid var(--sw-text);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  line-height: 1.04;
+  letter-spacing: -.032em;
   text-transform: uppercase;
   font-weight: 900;
 }
 
-/* Nested technical subsections */
-main.content section.level1 > section.level2 > h2,
-main.content section.level2 > section.level3 > h3,
-main.content section.level3 > h3 {
-  margin-top: 2rem;
-  margin-bottom: .7rem;
-  color: var(--text);
-  font-size: 1.34rem;
-  line-height: 1.17;
+section.level2 {
+  margin-top: 2.8rem;
+  scroll-margin-top: 84px;
+}
+
+section.level2 > h2 {
+  color: var(--sw-text) !important;
+  margin: 0 0 .9rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.38rem;
+  line-height: 1.15;
   letter-spacing: -.012em;
   font-weight: 850;
-  text-transform: none;
 }
 
-main.content h4 {
-  color: var(--text);
+section.level3 > h3,
+h3 {
+  color: var(--sw-text) !important;
   font-weight: 800;
 }
 
-/* Small automatic technical ID */
-main.content > section.level1::after,
-main.content > section.level2::after {
-  content: attr(id);
-  position: absolute;
-  top: .3rem;
-  right: 0;
-  color: var(--border);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: .64rem;
-  font-weight: 800;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  pointer-events: none;
+strong,
+b {
+  color: var(--sw-text);
 }
 
-/* ---------- left TOC / sidebar ---------- */
-#quarto-margin-sidebar {
-  border-right: 1px solid var(--border);
-  background: var(--page-bg);
+/* ------------------------------------------------------------
+   LEFT TOC / SIDEBAR
+   ------------------------------------------------------------ */
+
+#quarto-margin-sidebar,
+.sidebar.margin-sidebar {
+  background: var(--sw-bg) !important;
 }
 
 #TOC {
-  padding-right: .75rem;
-  font-size: .94rem;
+  color: var(--sw-muted);
+  border: 0 !important;
+  padding-right: .45rem;
+  font-size: .93rem;
 }
 
 #TOC .toc-title {
-  margin: .15rem 0 .45rem .6rem;
-  color: var(--muted);
-  font-size: .73rem;
-  line-height: 1.18;
+  margin: 0 0 .55rem .55rem;
+  color: var(--sw-muted);
+  font-size: .72rem;
+  line-height: 1.15;
   font-weight: 900;
-  letter-spacing: .06em;
+  letter-spacing: .075em;
   text-transform: uppercase;
 }
 
@@ -260,184 +234,131 @@ main.content > section.level2::after {
 }
 
 #TOC li {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
-/* Top-level TOC item = group title */
+/* H1 = category/group label */
 #TOC > ul > li {
-  margin-top: 1.18rem;
+  margin-top: 1.15rem;
 }
 
 #TOC > ul > li:first-child {
-  margin-top: .3rem;
+  margin-top: .2rem;
 }
 
 #TOC > ul > li > a {
   display: block;
-  padding: .18rem .55rem .22rem .6rem;
+  padding: .22rem .48rem .28rem .58rem;
+  color: var(--sw-muted) !important;
   border-left: 4px solid transparent;
-  color: var(--muted) !important;
-  font-size: .73rem;
-  line-height: 1.2;
+  font-size: .72rem;
+  line-height: 1.17;
   font-weight: 900;
-  letter-spacing: .048em;
+  letter-spacing: .055em;
   text-transform: uppercase;
   text-decoration: none;
+  background: transparent !important;
 }
 
-/* Second-level links = subtitles */
+/* H2 = normal nested project/objective */
 #TOC > ul > li > ul {
-  margin-top: .28rem;
+  margin-top: .3rem;
 }
 
 #TOC > ul > li > ul > li > a {
   display: block;
-  padding: .34rem .45rem .34rem 1.16rem;
+  padding: .39rem .45rem .39rem 1.18rem;
+  color: var(--sw-muted) !important;
   border-left: 4px solid transparent;
-  color: var(--muted) !important;
-  font-size: .93rem;
-  line-height: 1.27;
+  font-size: .92rem;
+  line-height: 1.28;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
   text-decoration: none;
+  background: transparent !important;
 }
 
-/* Third-level links */
+/* H3 = technical detail */
 #TOC > ul > li > ul > li > ul > li > a {
   display: block;
-  padding: .28rem .4rem .28rem 1.72rem;
+  padding: .3rem .42rem .3rem 1.75rem;
+  color: var(--sw-muted) !important;
   border-left: 4px solid transparent;
-  color: var(--muted) !important;
-  font-size: .82rem;
+  font-size: .81rem;
   line-height: 1.25;
-  font-weight: 400;
   text-decoration: none;
+  background: transparent !important;
+}
+
+/* Dynamic active state */
+#TOC a.swiss-active,
+#TOC a.active {
+  color: var(--sw-accent) !important;
+  border-left-color: var(--sw-accent) !important;
+  font-weight: 750 !important;
+}
+
+#TOC li.swiss-parent-active > a {
+  color: var(--sw-text) !important;
 }
 
 #TOC a:hover {
-  color: var(--accent) !important;
+  color: var(--sw-accent) !important;
 }
 
-/* Quarto may use .active or .active > a depending version */
-#TOC a.active,
-#TOC li.active > a,
-#TOC .active {
-  color: var(--accent) !important;
-  border-left-color: var(--accent) !important;
-  background: transparent !important;
-  font-weight: 700 !important;
+#TOC a:focus-visible {
+  outline: 2px solid var(--sw-accent);
+  outline-offset: 2px;
 }
 
-/* ---------- Swiss controls ---------- */
-#swiss-controls {
-  position: fixed;
-  z-index: 2000;
-  top: 12px;
-  right: 18px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
+/* subtle active section marker */
+#TOC li.swiss-parent-active > ul {
+  border-left: 1px solid color-mix(in srgb, var(--sw-accent) 25%, transparent);
 }
 
-.swiss-control {
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--page-bg);
-  color: var(--text);
-  cursor: pointer;
-  transition: transform .16s ease, border-color .16s ease, background-color .16s ease;
-}
+/* ------------------------------------------------------------
+   MEDIA PLACEHOLDERS / CARDS / BLOCKS
+   ------------------------------------------------------------ */
 
-.swiss-control:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.swiss-control.on {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #ffffff;
-}
-
-.swiss-control svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* ---------- project metadata ---------- */
-.project-meta,
-.skill-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .45rem;
-  margin: 0 0 1.3rem;
-}
-
-.project-meta span,
-.skill-chips span {
-  padding: .34rem .55rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: .79rem;
-}
-
-/* ---------- image placeholders ---------- */
 .image-slot {
   position: relative;
   width: 100%;
-  min-height: 285px;
-  margin: 1.45rem 0 2.15rem;
+  min-height: 270px;
+  margin: 1.5rem 0 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border: 1px dashed var(--border);
-  border-radius: 0;
-  background: var(--surface);
   text-align: center;
+  overflow: hidden;
+  border: 1px dashed var(--sw-border);
+  border-radius: 0;
+  background: var(--sw-panel);
 }
 
 .image-slot::before,
 .image-slot::after {
   content: "";
   position: absolute;
-  inset: 0;
-  pointer-events: none;
+  left: -10%;
+  right: -10%;
+  top: 50%;
+  height: 1px;
+  background: var(--sw-border);
+  transform-origin: center;
 }
 
 .image-slot::before {
-  background:
-    linear-gradient(135deg,
-      transparent 49.82%,
-      var(--border) 50%,
-      transparent 50.18%);
+  transform: rotate(18deg);
 }
 
 .image-slot::after {
-  background:
-    linear-gradient(45deg,
-      transparent 49.82%,
-      var(--border) 50%,
-      transparent 50.18%);
+  transform: rotate(-18deg);
 }
 
 .image-slot.large {
-  min-height: 420px;
+  min-height: 410px;
 }
 
 .image-slot.small {
@@ -449,30 +370,28 @@ main.content > section.level2::after {
   z-index: 2;
   max-width: 76%;
   padding: .78rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: var(--page-bg);
-  color: var(--text);
-  font-size: .89rem;
+  background: var(--sw-bg);
+  border: 1px solid var(--sw-border);
+  color: var(--sw-text);
+  font-size: .86rem;
   font-weight: 850;
-  line-height: 1.3;
+  letter-spacing: .01em;
 }
 
 .image-slot .slot-label small {
   display: block;
   margin-top: .28rem;
-  color: var(--muted);
+  color: var(--sw-muted);
   font-size: .78rem;
   font-weight: 400;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
-/* ---------- cards ---------- */
 .project-grid,
 .skill-grid,
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
   gap: .7rem;
 }
 
@@ -480,88 +399,164 @@ main.content > section.level2::after {
 .skill-card,
 .download-card,
 .contact-card {
-  padding: 1rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--sw-border);
   border-radius: 0;
-  background: var(--surface-2);
-  color: var(--text);
+  background: var(--sw-panel-2);
+  color: var(--sw-text);
+  padding: 1rem;
   box-shadow: none;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.project-card:hover,
+.download-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--sw-accent);
 }
 
 .project-card {
   text-decoration: none;
 }
 
-.project-card:hover {
-  border-color: var(--accent);
-}
-
 .project-tag {
-  color: var(--accent);
-  font-size: .69rem;
+  color: var(--sw-accent);
+  font-size: .68rem;
   font-weight: 900;
-  letter-spacing: .07em;
+  letter-spacing: .075em;
   text-transform: uppercase;
 }
 
 .tech {
-  color: var(--muted);
+  color: var(--sw-muted);
   font-size: .84rem;
 }
 
-/* ---------- navigation between project pages ---------- */
-.page-nav {
+.project-meta,
+.skill-chips {
   display: flex;
-  justify-content: space-between;
-  gap: .7rem;
-  margin-top: 3.2rem;
-  padding-top: 1rem;
-  border-top: 4px solid var(--text);
+  flex-wrap: wrap;
+  gap: .38rem;
+  margin: 0 0 1.2rem;
 }
 
-.page-nav a {
-  padding: .55rem .8rem;
-  border: 1px solid var(--border);
+.project-meta span,
+.skill-chips span {
+  padding: .3rem .52rem;
+  border: 1px solid var(--sw-border);
   border-radius: 0;
-  color: var(--text);
-  text-decoration: none;
+  background: var(--sw-panel);
+  color: var(--sw-muted);
+  font-size: .78rem;
 }
 
-.page-nav a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ---------- Mermaid / code ---------- */
+/* Mermaid & code */
 .cell-output-display,
 .mermaid {
-  background: transparent !important;
+  border: 1px solid var(--sw-border);
+  background: var(--sw-panel-2);
+  padding: .75rem;
 }
 
 pre,
-code,
-.sourceCode {
+code {
   border-radius: 0 !important;
 }
 
-pre {
-  border: 1px solid var(--border) !important;
-  background: var(--surface) !important;
+/* Tables */
+.table,
+table {
+  --bs-table-bg: transparent;
+  color: var(--sw-text) !important;
 }
 
-/* ---------- footer ---------- */
-.nav-footer {
-  border-top: 1px solid var(--border);
-  background: var(--page-bg);
-  color: var(--muted);
+.table > :not(caption) > * > *,
+table td,
+table th {
+  color: var(--sw-text) !important;
+  border-color: var(--sw-border) !important;
 }
 
-/* =========================================================
-   FAIL-SAFE MOTION SYSTEM
-   Default = visible. JavaScript only hides elements AFTER it
-   has successfully initialized, so a JS failure can never make
-   the main content disappear.
-   ========================================================= */
+/* Footer */
+.nav-footer,
+.page-footer {
+  background: var(--sw-bg) !important;
+  border-top: 1px solid var(--sw-border) !important;
+  color: var(--sw-muted) !important;
+}
+
+/* ------------------------------------------------------------
+   SWISS CONTROL BUTTONS
+   ------------------------------------------------------------ */
+
+.swiss-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding-left: .65rem;
+}
+
+.swiss-control {
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--sw-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--sw-text);
+  cursor: pointer;
+  padding: 0;
+  transition: transform .16s ease, border-color .16s ease, color .16s ease, background .16s ease;
+}
+
+.swiss-control svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.swiss-control:hover {
+  transform: translateY(-1px);
+  color: var(--sw-accent);
+  border-color: var(--sw-accent);
+}
+
+.swiss-control.is-on {
+  color: #fff;
+  background: var(--sw-accent);
+  border-color: var(--sw-accent);
+}
+
+.swiss-control-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}
+
+/* If insertion into navbar is not possible JS adds this fallback */
+.swiss-controls.swiss-floating {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 1055;
+  padding: 6px;
+  background: color-mix(in srgb, var(--sw-bg) 94%, transparent);
+  border: 1px solid var(--sw-border);
+  box-shadow: 0 10px 30px var(--sw-shadow);
+  backdrop-filter: blur(10px);
+}
+
+/* ------------------------------------------------------------
+   FAIL-SAFE ANIMATION SYSTEM
+   Content is ALWAYS visible before JS initializes.
+   ------------------------------------------------------------ */
 
 .swiss-reveal {
   opacity: 1;
@@ -569,81 +564,95 @@ pre {
   clip-path: none;
 }
 
-body.swiss-js-ready .swiss-reveal:not(.shown) {
+body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition:
     clip-path .72s cubic-bezier(.77, 0, .18, 1),
-    opacity .42s ease;
+    opacity .4s ease;
 }
 
-body.swiss-js-ready .swiss-reveal.shown {
+body.swiss-js-ready .swiss-reveal.swiss-shown {
   opacity: 1;
   clip-path: inset(0 0 0 0);
 }
 
-body.reduce-motion *,
-body.reduce-motion *::before,
-body.reduce-motion *::after {
+body.swiss-js-ready .image-slot.swiss-reveal:not(.swiss-shown) {
+  transform: translateY(10px);
+}
+
+body.swiss-js-ready .image-slot.swiss-reveal.swiss-shown {
+  transform: none;
+}
+
+body.swiss-no-motion *,
+body.swiss-no-motion *::before,
+body.swiss-no-motion *::after {
   animation: none !important;
   transition: none !important;
   scroll-behavior: auto !important;
 }
 
-body.reduce-motion .swiss-reveal,
-body.reduce-motion.swiss-js-ready .swiss-reveal {
+body.swiss-no-motion .swiss-reveal,
+body.swiss-no-motion.swiss-js-ready .swiss-reveal {
   opacity: 1 !important;
   clip-path: none !important;
   transform: none !important;
 }
 
 /* Compact mode */
-body.compact-layout main.content > section.level1,
-body.compact-layout main.content > section.level2 {
-  margin-top: 2.8rem;
+body.swiss-compact section.level1 {
+  margin-top: 3.1rem;
 }
 
-body.compact-layout .image-slot {
-  min-height: 220px;
+body.swiss-compact section.level2 {
+  margin-top: 1.9rem;
 }
 
-body.compact-layout .image-slot.large {
-  min-height: 305px;
+body.swiss-compact .image-slot {
+  min-height: 215px;
+  margin-top: 1rem;
+  margin-bottom: 1.35rem;
 }
 
-body.compact-layout main.content {
-  font-size: .96rem;
+body.swiss-compact .image-slot.large {
+  min-height: 300px;
 }
 
-/* Respect OS accessibility preference */
-@media (prefers-reduced-motion: reduce) {
-  .swiss-reveal {
-    opacity: 1 !important;
-    clip-path: none !important;
-    transform: none !important;
-    transition: none !important;
-  }
+body.swiss-compact main.content {
+  max-width: 1010px;
 }
 
-/* ---------- responsive ---------- */
+/* Thin reading progress bar */
+#swiss-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: 0;
+  height: 3px;
+  background: var(--sw-accent);
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------ */
+
 @media (max-width: 991px) {
-  .navbar .navbar-container {
-    padding-right: 126px;
-  }
-
-  #swiss-controls {
-    top: 11px;
-    right: 12px;
+  .swiss-controls {
+    margin-left: .4rem;
+    padding-left: .2rem;
   }
 
   .swiss-control {
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
   }
 
-  .quarto-title-block .quarto-title h1.title,
-  header#title-block-header h1.title {
-    font-size: clamp(2.4rem, 12vw, 4rem);
+  .quarto-title h1.title,
+  h1.title {
+    font-size: clamp(2.3rem, 12vw, 4.2rem);
   }
 
   .image-slot.large {
@@ -651,22 +660,17 @@ body.compact-layout main.content {
   }
 }
 
-@media (max-width: 650px) {
-  #swiss-controls {
+@media (max-width: 700px) {
+  .swiss-controls:not(.swiss-floating) {
     gap: 4px;
   }
 
   .swiss-control {
-    width: 32px;
-    height: 32px;
+    width: 31px;
+    height: 31px;
   }
 
-  .navbar .navbar-container {
-    padding-right: 112px;
-  }
-
-  main.content > section.level1::after,
-  main.content > section.level2::after {
-    display: none;
+  section.level1 {
+    margin-top: 3.2rem;
   }
 }
