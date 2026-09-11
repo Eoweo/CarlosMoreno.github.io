@@ -1,0 +1,367 @@
+<script>
+(function () {
+  "use strict";
+
+  const SUN = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+    </svg>`;
+
+  const MOON = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+    </svg>`;
+
+  const MOTION = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 12h6M14 12h6M8 8l4 4-4 4M16 8l-4 4 4 4"></path>
+    </svg>`;
+
+  const COMPACT = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>`;
+
+  function safeGet(key) {
+    try {
+      return window.localStorage ? localStorage.getItem(key) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function safeSet(key, value) {
+    try {
+      if (window.localStorage) localStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  function isDark() {
+    return (
+      document.body.classList.contains("quarto-dark") ||
+      document.body.classList.contains("swiss-manual-dark") ||
+      document.documentElement.classList.contains("quarto-dark") ||
+      document.documentElement.dataset.bsTheme === "dark"
+    );
+  }
+
+  /* --------------------------------------------------------------
+     Controls
+     -------------------------------------------------------------- */
+  function createControls() {
+    if (document.querySelector(".swiss-controls")) return;
+
+    const controls = document.createElement("div");
+    controls.className = "swiss-controls";
+    controls.setAttribute("aria-label", "Display controls");
+
+    const compact = document.createElement("button");
+    compact.type = "button";
+    compact.id = "swissCompactToggle";
+    compact.className = "swiss-icon-button";
+    compact.title = "Compact mode";
+    compact.setAttribute("aria-label", "Toggle compact mode");
+    compact.innerHTML = COMPACT;
+
+    const motion = document.createElement("button");
+    motion.type = "button";
+    motion.id = "swissMotionToggle";
+    motion.className = "swiss-icon-button";
+    motion.title = "Reduce motion";
+    motion.setAttribute("aria-label", "Toggle reduced motion");
+    motion.innerHTML = MOTION;
+
+    const theme = document.createElement("button");
+    theme.type = "button";
+    theme.id = "swissThemeToggle";
+    theme.className = "swiss-icon-button";
+    theme.setAttribute("aria-label", "Toggle light or dark mode");
+
+    controls.append(compact, motion, theme);
+
+    const host =
+      document.querySelector("#quarto-header .navbar-container") ||
+      document.querySelector("#quarto-header .container-fluid") ||
+      document.querySelector("#quarto-header nav") ||
+      document.body;
+
+    host.appendChild(controls);
+
+    // Restore display preferences.
+    if (safeGet("swiss-compact") === "1") {
+      document.body.classList.add("swiss-compact");
+      compact.classList.add("is-on");
+    }
+
+    if (safeGet("swiss-reduce-motion") === "1") {
+      document.body.classList.add("swiss-reduce-motion");
+      motion.classList.add("is-on");
+    }
+
+    compact.addEventListener("click", function () {
+      document.body.classList.toggle("swiss-compact");
+      const on = document.body.classList.contains("swiss-compact");
+      compact.classList.toggle("is-on", on);
+      safeSet("swiss-compact", on ? "1" : "0");
+    });
+
+    motion.addEventListener("click", function () {
+      document.body.classList.toggle("swiss-reduce-motion");
+      const on = document.body.classList.contains("swiss-reduce-motion");
+      motion.classList.toggle("is-on", on);
+      safeSet("swiss-reduce-motion", on ? "1" : "0");
+
+      if (on) {
+        document.querySelectorAll(".swiss-reveal").forEach(function (el) {
+          el.classList.add("swiss-shown");
+        });
+      } else {
+        revealOnScroll();
+      }
+    });
+
+    function updateThemeIcon() {
+      const dark = isDark();
+      theme.innerHTML = dark ? SUN : MOON;
+      theme.title = dark ? "Light mode" : "Dark mode";
+    }
+
+    theme.addEventListener("click", function () {
+      // Prefer Quarto's own theme switch, keeping Bootstrap in sync.
+      const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
+      if (nativeToggle) {
+        nativeToggle.click();
+        window.setTimeout(updateThemeIcon, 80);
+        return;
+      }
+
+      // Standalone fallback.
+      document.body.classList.toggle("swiss-manual-dark");
+      const dark = document.body.classList.contains("swiss-manual-dark");
+      safeSet("swiss-manual-dark", dark ? "1" : "0");
+      updateThemeIcon();
+    });
+
+    if (!document.querySelector(".quarto-color-scheme-toggle") &&
+        safeGet("swiss-manual-dark") === "1") {
+      document.body.classList.add("swiss-manual-dark");
+    }
+
+    updateThemeIcon();
+
+    // Keep icon synchronized if Quarto changes classes/data attributes.
+    try {
+      const observer = new MutationObserver(updateThemeIcon);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class", "data-bs-theme"]
+      });
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ["class"]
+      });
+    } catch (e) {}
+  }
+
+  /* --------------------------------------------------------------
+     Reveal animation
+     Important: content is visible before JS adds swiss-js-ready.
+     -------------------------------------------------------------- */
+  let revealTargets = [];
+
+  function collectRevealTargets() {
+    const content =
+      document.querySelector("main.content") ||
+      document.querySelector("#quarto-document-content") ||
+      document.querySelector("main");
+
+    if (!content) return [];
+
+    const candidates = content.querySelectorAll(
+      [
+        "h1:not(.title)",
+        "h2",
+        "h3",
+        "p",
+        ".image-slot",
+        ".project-meta",
+        ".skill-chips",
+        ".project-grid",
+        ".skill-grid",
+        ".download-grid",
+        ".contact-card",
+        ".cell",
+        "table",
+        "blockquote",
+        "ul",
+        "ol"
+      ].join(",")
+    );
+
+    const seen = new Set();
+    const result = [];
+
+    candidates.forEach(function (el) {
+      // Avoid animating elements nested inside a larger selected component.
+      if (el.closest(".image-slot") && !el.classList.contains("image-slot")) return;
+      if (el.closest(".project-meta") && !el.classList.contains("project-meta")) return;
+      if (el.closest(".skill-chips") && !el.classList.contains("skill-chips")) return;
+      if (seen.has(el)) return;
+
+      seen.add(el);
+      el.classList.add("swiss-reveal");
+      result.push(el);
+    });
+
+    result.forEach(function (el, i) {
+      el.style.setProperty("--swiss-delay", ((i % 4) * 24) + "ms");
+    });
+
+    return result;
+  }
+
+  function revealOnScroll() {
+    if (!revealTargets.length) return;
+
+    if (document.body.classList.contains("swiss-reduce-motion")) {
+      revealTargets.forEach(function (el) {
+        el.classList.add("swiss-shown");
+      });
+      return;
+    }
+
+    const trigger = window.innerHeight * 0.91;
+
+    revealTargets.forEach(function (el) {
+      if (el.classList.contains("swiss-shown")) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < trigger) {
+        el.classList.add("swiss-shown");
+      }
+    });
+  }
+
+  function initReveal() {
+    revealTargets = collectRevealTargets();
+
+    // Mark current viewport items visible BEFORE enabling hidden states.
+    revealTargets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.97) {
+        el.classList.add("swiss-shown");
+      }
+    });
+
+    document.body.classList.add("swiss-js-ready");
+    revealOnScroll();
+  }
+
+  /* --------------------------------------------------------------
+     TOC Scroll Spy
+     - active item follows the document
+     - sidebar automatically scrolls so active item remains visible
+     -------------------------------------------------------------- */
+  const toc = document.getElementById("TOC");
+  let tocItems = [];
+  let lastActiveHref = "";
+
+  function collectTocItems() {
+    if (!toc) return [];
+
+    const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+
+    return links.map(function (link) {
+      let id = link.getAttribute("href").slice(1);
+      try { id = decodeURIComponent(id); } catch (e) {}
+      const target = document.getElementById(id);
+      return target ? { link: link, target: target, href: "#" + id } : null;
+    }).filter(Boolean);
+  }
+
+  function keepActiveTocVisible(activeLink) {
+    if (!toc || !activeLink) return;
+
+    const tocRect = toc.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+    const margin = 42;
+
+    if (linkRect.bottom > tocRect.bottom - margin) {
+      const amount = linkRect.bottom - tocRect.bottom + margin;
+      toc.scrollTo({
+        top: toc.scrollTop + amount,
+        behavior: document.body.classList.contains("swiss-reduce-motion") ? "auto" : "smooth"
+      });
+    } else if (linkRect.top < tocRect.top + margin) {
+      const amount = tocRect.top + margin - linkRect.top;
+      toc.scrollTo({
+        top: Math.max(0, toc.scrollTop - amount),
+        behavior: document.body.classList.contains("swiss-reduce-motion") ? "auto" : "smooth"
+      });
+    }
+  }
+
+  function updateToc() {
+    if (!tocItems.length) return;
+
+    const marker = Math.min(165, window.innerHeight * .25);
+    let current = tocItems[0];
+
+    tocItems.forEach(function (item) {
+      const rect = item.target.getBoundingClientRect();
+      if (rect.top <= marker) current = item;
+    });
+
+    tocItems.forEach(function (item) {
+      item.link.classList.toggle("swiss-active", item === current);
+    });
+
+    if (current && current.href !== lastActiveHref) {
+      lastActiveHref = current.href;
+      keepActiveTocVisible(current.link);
+    }
+  }
+
+  /* --------------------------------------------------------------
+     Main loop
+     -------------------------------------------------------------- */
+  let ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+
+    window.requestAnimationFrame(function () {
+      revealOnScroll();
+      updateToc();
+      ticking = false;
+    });
+  }
+
+  function init() {
+    createControls();
+    initReveal();
+
+    tocItems = collectTocItems();
+    updateToc();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () {
+      revealOnScroll();
+      updateToc();
+    });
+
+    // Extra safety after Mermaid/layout/font changes settle.
+    window.setTimeout(function () {
+      tocItems = collectTocItems();
+      revealOnScroll();
+      updateToc();
+    }, 250);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>

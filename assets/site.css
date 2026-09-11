@@ -1,326 +1,413 @@
-/* ============================================================
-   CARLOS MORENO ROJAS — SWISS RESEARCH THEME
-   Applied globally on top of the existing Quarto portfolio.
-   ============================================================ */
+/* ================================================================
+   CARLOS MORENO ROJAS — SWISS RESEARCH SYSTEM
+   Integrated on top of portfolio v5.2.
+   Content structure is preserved; this file controls presentation.
+   ================================================================ */
 
 :root {
-  --sw-bg: #f7f5ef;
-  --sw-panel: #ece9e0;
-  --sw-panel-2: #ffffff;
-  --sw-text: #111111;
-  --sw-muted: #66635d;
-  --sw-border: #cbc7bc;
-  --sw-accent: #d63230;
-  --sw-accent-soft: rgba(214, 50, 48, 0.075);
-  --sw-shadow: rgba(0, 0, 0, 0.075);
-  --sw-header-h: 62px;
+  --page-bg: #f7f5ef;
+  --surface: #ece9e0;
+  --surface-2: #fffdf8;
+  --text: #111111;
+  --muted: #66635d;
+  --border: #cbc7bc;
+  --accent: #d63230;
+  --accent-soft: rgba(214, 50, 48, .08);
+  --sidebar-title: #66635d;
+  --header-height: 62px;
 }
 
-body.quarto-dark,
+.quarto-light,
+body.quarto-light,
+html[data-bs-theme="light"] {
+  --page-bg: #f7f5ef;
+  --surface: #ece9e0;
+  --surface-2: #fffdf8;
+  --text: #111111;
+  --muted: #66635d;
+  --border: #cbc7bc;
+  --accent: #d63230;
+  --accent-soft: rgba(214, 50, 48, .08);
+  --sidebar-title: #66635d;
+}
+
 .quarto-dark,
+body.quarto-dark,
 html[data-bs-theme="dark"],
-body.swiss-force-dark {
-  --sw-bg: #141414;
-  --sw-panel: #1e1e1e;
-  --sw-panel-2: #181818;
-  --sw-text: #f1efe8;
-  --sw-muted: #a7a39a;
-  --sw-border: #383633;
-  --sw-accent: #ff615e;
-  --sw-accent-soft: rgba(255, 97, 94, 0.095);
-  --sw-shadow: rgba(0, 0, 0, 0.34);
-  color-scheme: dark;
+body.swiss-manual-dark {
+  --page-bg: #141414;
+  --surface: #1e1e1e;
+  --surface-2: #181818;
+  --text: #f1efe8;
+  --muted: #a7a39a;
+  --border: #383633;
+  --accent: #ff615e;
+  --accent-soft: rgba(255, 97, 94, .09);
+  --sidebar-title: #a7a39a;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--sw-bg);
+  background: var(--page-bg);
 }
 
 body {
-  background: var(--sw-bg) !important;
-  color: var(--sw-text) !important;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.68;
-  transition: background-color .2s ease, color .2s ease;
-}
-
-body,
-.navbar,
-.sidebar,
-#TOC,
-main.content,
-.quarto-title-block,
-.page-footer {
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  margin: 0;
+  background: var(--page-bg) !important;
+  color: var(--text) !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  line-height: 1.66;
+  transition: background .18s ease, color .18s ease;
 }
 
 p,
 li,
 dd,
 dt {
-  color: var(--sw-muted);
+  color: var(--muted);
 }
 
 a {
-  color: var(--sw-accent);
+  color: var(--accent);
 }
 
-a:hover {
-  color: var(--sw-accent);
-}
+/* ================================================================
+   HEADER / NAVBAR
+   ================================================================ */
 
-/* ------------------------------------------------------------
-   NAVBAR
-   ------------------------------------------------------------ */
+#quarto-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+}
 
 .navbar {
-  min-height: var(--sw-header-h);
-  background: color-mix(in srgb, var(--sw-bg) 95%, transparent) !important;
-  border-bottom: 1px solid var(--sw-border) !important;
+  min-height: var(--header-height);
+  background: color-mix(in srgb, var(--page-bg) 94%, transparent) !important;
+  border-bottom: 1px solid var(--border) !important;
   box-shadow: none !important;
   backdrop-filter: blur(12px);
 }
 
 .navbar-brand,
-.navbar-title {
-  color: var(--sw-text) !important;
+.navbar-title,
+.navbar-nav .nav-link,
+.navbar-nav .menu-text,
+.navbar #quarto-search.type-overlay .aa-Autocomplete svg {
+  color: var(--text) !important;
+}
+
+.navbar-brand {
   font-weight: 900 !important;
-  letter-spacing: -.025em;
+  letter-spacing: -.02em;
 }
 
-.navbar .nav-link {
-  color: var(--sw-muted) !important;
+.navbar-nav .nav-link {
+  font-size: .88rem;
   font-weight: 700;
-  font-size: .9rem;
-  border-bottom: 3px solid transparent;
-  transition: color .16s ease, border-color .16s ease;
+  letter-spacing: .01em;
 }
 
-.navbar .nav-link:hover,
-.navbar .nav-link.active {
-  color: var(--sw-text) !important;
-  border-bottom-color: var(--sw-accent);
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--accent) !important;
 }
 
-.navbar-toggler,
+.navbar-toggler {
+  border-color: var(--border) !important;
+}
+
 .navbar-toggler-icon {
-  color: var(--sw-text) !important;
-  border-color: var(--sw-border) !important;
+  filter: none;
 }
 
-/* Hide Quarto's own scheme button visually; JS still uses it internally. */
+/* Native Quarto toggle remains available to JS but is visually replaced. */
 .quarto-color-scheme-toggle {
-  display: none !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* ------------------------------------------------------------
-   TITLE / TYPOGRAPHY
-   ------------------------------------------------------------ */
-
-.quarto-title-block {
-  background: transparent !important;
+/* Custom icon controls injected by assets/site-scripts.html */
+.swiss-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: .7rem;
+  flex: 0 0 auto;
 }
 
-.quarto-title-block .quarto-title-banner,
-.quarto-title-banner {
-  background: transparent !important;
+.swiss-icon-button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease,
+              background .16s ease, color .16s ease;
 }
 
-.quarto-title h1.title,
-h1.title {
-  color: var(--sw-text) !important;
-  font-size: clamp(2.7rem, 6vw, 5.1rem);
-  line-height: .96;
+.swiss-icon-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.swiss-icon-button.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.swiss-icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ================================================================
+   PAGE TITLE
+   ================================================================ */
+
+#title-block-header {
+  margin-bottom: 3rem;
+  padding-bottom: 0;
+}
+
+.quarto-title h1.title {
+  max-width: 900px;
+  margin: .3rem 0 .8rem;
+  color: var(--text) !important;
+  font-size: clamp(2.7rem, 5.8vw, 5rem);
+  line-height: .97;
   letter-spacing: -.05em;
   font-weight: 900;
   text-transform: uppercase;
-  max-width: 930px;
-  margin-bottom: 1rem;
 }
 
-.quarto-title .subtitle,
-.subtitle {
-  color: var(--sw-muted) !important;
-  max-width: 800px;
-  font-size: 1.05rem;
-  font-weight: 500;
-}
-
-main.content {
-  max-width: 970px;
-  color: var(--sw-text);
-}
-
-main.content > p:first-of-type {
+.quarto-title .subtitle {
+  max-width: 760px;
+  margin-top: .8rem;
+  color: var(--muted) !important;
   font-size: 1.06rem;
-  max-width: 820px;
+  line-height: 1.55;
 }
 
-/* Section group headings */
-section.level1 {
-  margin-top: 4.7rem;
-}
-
-section.level1 > h1 {
-  color: var(--sw-text) !important;
-  margin: 0 0 1.2rem;
-  padding-top: 1rem;
-  border-top: 4px solid var(--sw-text);
-  font-size: clamp(1.8rem, 3vw, 2.25rem);
-  line-height: 1.04;
-  letter-spacing: -.032em;
-  text-transform: uppercase;
-  font-weight: 900;
-}
-
-section.level2 {
-  margin-top: 2.8rem;
-  scroll-margin-top: 84px;
-}
-
-section.level2 > h2 {
-  color: var(--sw-text) !important;
-  margin: 0 0 .9rem;
-  padding: 0;
-  border: 0;
-  font-size: 1.38rem;
-  line-height: 1.15;
-  letter-spacing: -.012em;
-  font-weight: 850;
-}
-
-section.level3 > h3,
-h3 {
-  color: var(--sw-text) !important;
-  font-weight: 800;
-}
-
-strong,
-b {
-  color: var(--sw-text);
-}
-
-/* ------------------------------------------------------------
-   LEFT TOC / SIDEBAR
-   ------------------------------------------------------------ */
-
-#quarto-margin-sidebar,
-.sidebar.margin-sidebar {
-  background: var(--sw-bg) !important;
-}
+/* ================================================================
+   LEFT TABLE OF CONTENTS
+   Keeps the v5.2 hierarchy, now with Swiss styling and auto-scroll.
+   ================================================================ */
 
 #TOC {
-  color: var(--sw-muted);
-  border: 0 !important;
-  padding-right: .45rem;
-  font-size: .93rem;
+  position: sticky;
+  top: calc(var(--header-height) + 14px);
+  max-height: calc(100vh - var(--header-height) - 28px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 .72rem 2.2rem .1rem;
+  border-right: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  font-size: .95rem;
+}
+
+#TOC::-webkit-scrollbar {
+  width: 5px;
+}
+
+#TOC::-webkit-scrollbar-thumb {
+  background: var(--border);
 }
 
 #TOC .toc-title {
-  margin: 0 0 .55rem .55rem;
-  color: var(--sw-muted);
-  font-size: .72rem;
-  line-height: 1.15;
+  margin: 0 0 .42rem .55rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--sidebar-title);
+  font-size: .73rem;
+  line-height: 1.2;
   font-weight: 900;
-  letter-spacing: .075em;
+  letter-spacing: .07em;
   text-transform: uppercase;
 }
 
 #TOC ul {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 #TOC li {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-/* H1 = category/group label */
 #TOC > ul > li {
-  margin-top: 1.15rem;
+  margin-top: 1.12rem;
 }
 
 #TOC > ul > li:first-child {
-  margin-top: .2rem;
+  margin-top: .45rem;
 }
 
+/* Top-level sections act as category titles */
 #TOC > ul > li > a {
   display: block;
-  padding: .22rem .48rem .28rem .58rem;
-  color: var(--sw-muted) !important;
+  padding: .2rem .55rem .25rem .55rem;
   border-left: 4px solid transparent;
-  font-size: .72rem;
-  line-height: 1.17;
+  color: var(--sidebar-title) !important;
+  font-size: .73rem;
+  line-height: 1.2;
   font-weight: 900;
-  letter-spacing: .055em;
+  letter-spacing: .05em;
   text-transform: uppercase;
   text-decoration: none;
-  background: transparent !important;
 }
 
-/* H2 = normal nested project/objective */
+/* Second level */
 #TOC > ul > li > ul {
-  margin-top: .3rem;
+  margin-top: .25rem;
 }
 
 #TOC > ul > li > ul > li > a {
   display: block;
-  padding: .39rem .45rem .39rem 1.18rem;
-  color: var(--sw-muted) !important;
+  padding: .38rem .45rem .38rem 1.18rem;
   border-left: 4px solid transparent;
-  font-size: .92rem;
-  line-height: 1.28;
+  color: var(--muted) !important;
+  font-size: .93rem;
+  line-height: 1.25;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
   text-decoration: none;
-  background: transparent !important;
 }
 
-/* H3 = technical detail */
+/* Third level */
+#TOC > ul > li > ul > li > ul {
+  margin: .05rem 0 .2rem;
+}
+
 #TOC > ul > li > ul > li > ul > li > a {
   display: block;
-  padding: .3rem .42rem .3rem 1.75rem;
-  color: var(--sw-muted) !important;
+  padding: .3rem .4rem .3rem 1.72rem;
   border-left: 4px solid transparent;
-  font-size: .81rem;
-  line-height: 1.25;
+  color: var(--muted) !important;
+  font-size: .82rem;
+  line-height: 1.24;
   text-decoration: none;
+}
+
+/* Quarto active + our robust scroll-spy active */
+#TOC a.active,
+#TOC a.swiss-active {
+  color: var(--accent) !important;
+  border-left-color: var(--accent) !important;
   background: transparent !important;
-}
-
-/* Dynamic active state */
-#TOC a.swiss-active,
-#TOC a.active {
-  color: var(--sw-accent) !important;
-  border-left-color: var(--sw-accent) !important;
-  font-weight: 750 !important;
-}
-
-#TOC li.swiss-parent-active > a {
-  color: var(--sw-text) !important;
+  font-weight: 700 !important;
 }
 
 #TOC a:hover {
-  color: var(--sw-accent) !important;
+  color: var(--accent) !important;
 }
 
-#TOC a:focus-visible {
-  outline: 2px solid var(--sw-accent);
-  outline-offset: 2px;
+/* ================================================================
+   MAIN CONTENT — SWISS EDITORIAL / RESEARCH
+   ================================================================ */
+
+main.content {
+  max-width: 940px;
+  color: var(--text);
 }
 
-/* subtle active section marker */
-#TOC li.swiss-parent-active > ul {
-  border-left: 1px solid color-mix(in srgb, var(--sw-accent) 25%, transparent);
+main.content h1,
+main.content h2,
+main.content h3,
+main.content h4 {
+  color: var(--text) !important;
 }
 
-/* ------------------------------------------------------------
-   MEDIA PLACEHOLDERS / CARDS / BLOCKS
-   ------------------------------------------------------------ */
+main.content h1:not(.title),
+main.content h2 {
+  margin-top: 3.6rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--text);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+main.content h1:not(.title) {
+  font-size: 2.1rem;
+  line-height: 1.05;
+}
+
+main.content h2 {
+  font-size: 1.75rem;
+  line-height: 1.08;
+}
+
+main.content h3 {
+  margin-top: 2rem;
+  font-size: 1.24rem;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+main.content h4 {
+  margin-top: 1.5rem;
+  font-weight: 800;
+}
+
+main.content strong {
+  color: var(--text);
+}
+
+hr {
+  margin: 3.3rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  opacity: 1;
+}
+
+/* Metadata / chips */
+.project-meta,
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 0 0 1.35rem;
+}
+
+.project-meta span,
+.skill-chips span {
+  padding: .38rem .55rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+/* ================================================================
+   IMAGE PLACEHOLDERS — preserve v5.2 content
+   ================================================================ */
 
 .image-slot {
   position: relative;
@@ -330,39 +417,45 @@ b {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   overflow: hidden;
-  border: 1px dashed var(--sw-border);
+  border: 1px dashed var(--border);
   border-radius: 0;
-  background: var(--sw-panel);
+  background: var(--surface);
+  text-align: center;
+}
+
+.image-slot.large {
+  min-height: 420px;
+}
+
+.image-slot.small {
+  min-height: 190px;
 }
 
 .image-slot::before,
 .image-slot::after {
   content: "";
   position: absolute;
-  left: -10%;
-  right: -10%;
-  top: 50%;
-  height: 1px;
-  background: var(--sw-border);
-  transform-origin: center;
+  inset: 0;
+  pointer-events: none;
 }
 
 .image-slot::before {
-  transform: rotate(18deg);
+  background:
+    linear-gradient(135deg,
+      transparent 49.72%,
+      var(--border) 49.88%,
+      var(--border) 50.12%,
+      transparent 50.28%);
 }
 
 .image-slot::after {
-  transform: rotate(-18deg);
-}
-
-.image-slot.large {
-  min-height: 410px;
-}
-
-.image-slot.small {
-  min-height: 190px;
+  background:
+    linear-gradient(45deg,
+      transparent 49.72%,
+      var(--border) 49.88%,
+      var(--border) 50.12%,
+      transparent 50.28%);
 }
 
 .image-slot .slot-label {
@@ -370,193 +463,137 @@ b {
   z-index: 2;
   max-width: 76%;
   padding: .78rem 1rem;
-  background: var(--sw-bg);
-  border: 1px solid var(--sw-border);
-  color: var(--sw-text);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--page-bg);
+  color: var(--text);
   font-size: .86rem;
-  font-weight: 850;
-  letter-spacing: .01em;
+  font-weight: 900;
+  letter-spacing: .015em;
 }
 
 .image-slot .slot-label small {
   display: block;
   margin-top: .28rem;
-  color: var(--sw-muted);
+  color: var(--muted);
   font-size: .78rem;
+  line-height: 1.35;
   font-weight: 400;
-  line-height: 1.4;
+  letter-spacing: 0;
 }
+
+/* ================================================================
+   CARDS / GRIDS / CONTACT / DOWNLOADS
+   ================================================================ */
 
 .project-grid,
 .skill-grid,
 .download-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-  gap: .7rem;
+  gap: .75rem;
 }
 
 .project-card,
 .skill-card,
 .download-card,
 .contact-card {
-  border: 1px solid var(--sw-border);
-  border-radius: 0;
-  background: var(--sw-panel-2);
-  color: var(--sw-text);
   padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--surface-2);
+  color: var(--text);
   box-shadow: none;
-  transition: transform .18s ease, border-color .18s ease, background .18s ease;
-}
-
-.project-card:hover,
-.download-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--sw-accent);
 }
 
 .project-card {
   text-decoration: none;
+  transition: transform .16s ease, border-color .16s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
 }
 
 .project-tag {
-  color: var(--sw-accent);
-  font-size: .68rem;
+  color: var(--accent);
+  font-size: .7rem;
   font-weight: 900;
-  letter-spacing: .075em;
+  letter-spacing: .065em;
   text-transform: uppercase;
 }
 
 .tech {
-  color: var(--sw-muted);
+  color: var(--muted);
   font-size: .84rem;
 }
 
-.project-meta,
-.skill-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .38rem;
-  margin: 0 0 1.2rem;
+/* Tables */
+table {
+  --bs-table-bg: transparent !important;
+  --bs-table-color: var(--text) !important;
+  --bs-table-border-color: var(--border) !important;
 }
 
-.project-meta span,
-.skill-chips span {
-  padding: .3rem .52rem;
-  border: 1px solid var(--sw-border);
-  border-radius: 0;
-  background: var(--sw-panel);
-  color: var(--sw-muted);
-  font-size: .78rem;
+table th {
+  color: var(--text) !important;
+  font-weight: 800;
 }
 
-/* Mermaid & code */
-.cell-output-display,
-.mermaid {
-  border: 1px solid var(--sw-border);
-  background: var(--sw-panel-2);
-  padding: .75rem;
+table td {
+  color: var(--muted) !important;
 }
 
+/* Code / Mermaid */
 pre,
-code {
+code,
+.cell-output-display {
   border-radius: 0 !important;
 }
 
-/* Tables */
-.table,
-table {
-  --bs-table-bg: transparent;
-  color: var(--sw-text) !important;
+pre {
+  border: 1px solid var(--border) !important;
 }
 
-.table > :not(caption) > * > *,
-table td,
-table th {
-  color: var(--sw-text) !important;
-  border-color: var(--sw-border) !important;
+.cell-output-display svg {
+  max-width: 100%;
+}
+
+/* Page navigation */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: .7rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--text);
+}
+
+.page-nav a {
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* Footer */
-.nav-footer,
-.page-footer {
-  background: var(--sw-bg) !important;
-  border-top: 1px solid var(--sw-border) !important;
-  color: var(--sw-muted) !important;
+.nav-footer {
+  background: var(--page-bg) !important;
+  border-top: 1px solid var(--border);
+  color: var(--muted) !important;
 }
 
-/* ------------------------------------------------------------
-   SWISS CONTROL BUTTONS
-   ------------------------------------------------------------ */
-
-.swiss-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-left: auto;
-  padding-left: .65rem;
-}
-
-.swiss-control {
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--sw-border);
-  border-radius: 0;
-  background: transparent;
-  color: var(--sw-text);
-  cursor: pointer;
-  padding: 0;
-  transition: transform .16s ease, border-color .16s ease, color .16s ease, background .16s ease;
-}
-
-.swiss-control svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.swiss-control:hover {
-  transform: translateY(-1px);
-  color: var(--sw-accent);
-  border-color: var(--sw-accent);
-}
-
-.swiss-control.is-on {
-  color: #fff;
-  background: var(--sw-accent);
-  border-color: var(--sw-accent);
-}
-
-.swiss-control-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-}
-
-/* If insertion into navbar is not possible JS adds this fallback */
-.swiss-controls.swiss-floating {
-  position: fixed;
-  right: 15px;
-  bottom: 15px;
-  z-index: 1055;
-  padding: 6px;
-  background: color-mix(in srgb, var(--sw-bg) 94%, transparent);
-  border: 1px solid var(--sw-border);
-  box-shadow: 0 10px 30px var(--sw-shadow);
-  backdrop-filter: blur(10px);
-}
-
-/* ------------------------------------------------------------
-   FAIL-SAFE ANIMATION SYSTEM
-   Content is ALWAYS visible before JS initializes.
-   ------------------------------------------------------------ */
+/* ================================================================
+   FAIL-SAFE SCROLL ANIMATIONS
+   Visible by default. JS only hides future elements after it works.
+   ================================================================ */
 
 .swiss-reveal {
   opacity: 1;
@@ -564,12 +601,13 @@ table th {
   clip-path: none;
 }
 
+/* Wipe reveal, directly adapted from the working Swiss demo */
 body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
   opacity: 0;
   clip-path: inset(0 100% 0 0);
   transition:
-    clip-path .72s cubic-bezier(.77, 0, .18, 1),
-    opacity .4s ease;
+    clip-path .68s cubic-bezier(.77, 0, .18, 1),
+    opacity .36s ease;
 }
 
 body.swiss-js-ready .swiss-reveal.swiss-shown {
@@ -577,82 +615,79 @@ body.swiss-js-ready .swiss-reveal.swiss-shown {
   clip-path: inset(0 0 0 0);
 }
 
-body.swiss-js-ready .image-slot.swiss-reveal:not(.swiss-shown) {
-  transform: translateY(10px);
+/* Slight stagger supplied by JS */
+body.swiss-js-ready .swiss-reveal {
+  transition-delay: var(--swiss-delay, 0ms);
 }
 
-body.swiss-js-ready .image-slot.swiss-reveal.swiss-shown {
-  transform: none;
-}
-
-body.swiss-no-motion *,
-body.swiss-no-motion *::before,
-body.swiss-no-motion *::after {
+/* Reduce motion always wins */
+body.swiss-reduce-motion *,
+body.swiss-reduce-motion *::before,
+body.swiss-reduce-motion *::after {
   animation: none !important;
   transition: none !important;
   scroll-behavior: auto !important;
 }
 
-body.swiss-no-motion .swiss-reveal,
-body.swiss-no-motion.swiss-js-ready .swiss-reveal {
+body.swiss-reduce-motion .swiss-reveal,
+body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
   opacity: 1 !important;
-  clip-path: none !important;
   transform: none !important;
+  clip-path: none !important;
 }
 
 /* Compact mode */
-body.swiss-compact section.level1 {
-  margin-top: 3.1rem;
-}
-
-body.swiss-compact section.level2 {
-  margin-top: 1.9rem;
+body.swiss-compact main.content h1:not(.title),
+body.swiss-compact main.content h2 {
+  margin-top: 2.35rem;
 }
 
 body.swiss-compact .image-slot {
   min-height: 215px;
-  margin-top: 1rem;
-  margin-bottom: 1.35rem;
+  margin: 1.1rem 0 1.5rem;
 }
 
 body.swiss-compact .image-slot.large {
   min-height: 300px;
 }
 
-body.swiss-compact main.content {
-  max-width: 1010px;
+body.swiss-compact p,
+body.swiss-compact li {
+  line-height: 1.5;
 }
 
-/* Thin reading progress bar */
-#swiss-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-  width: 0;
-  height: 3px;
-  background: var(--sw-accent);
-  pointer-events: none;
-}
-
-/* ------------------------------------------------------------
+/* ================================================================
    RESPONSIVE
-   ------------------------------------------------------------ */
+   ================================================================ */
 
-@media (max-width: 991px) {
+@media (max-width: 1100px) {
   .swiss-controls {
-    margin-left: .4rem;
-    padding-left: .2rem;
+    gap: 4px;
   }
 
-  .swiss-control {
+  .swiss-icon-button {
     width: 33px;
     height: 33px;
   }
+}
 
-  .quarto-title h1.title,
-  h1.title {
-    font-size: clamp(2.3rem, 12vw, 4.2rem);
+@media (max-width: 991px) {
+  .swiss-controls {
+    position: fixed;
+    top: 12px;
+    right: 62px;
+    z-index: 1200;
+    margin-left: 0;
+  }
+
+  #TOC {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .quarto-title h1.title {
+    font-size: clamp(2.35rem, 10vw, 4rem);
   }
 
   .image-slot.large {
@@ -660,17 +695,22 @@ body.swiss-compact main.content {
   }
 }
 
-@media (max-width: 700px) {
-  .swiss-controls:not(.swiss-floating) {
-    gap: 4px;
+@media (max-width: 620px) {
+  .swiss-controls {
+    right: 58px;
   }
 
-  .swiss-control {
+  .swiss-icon-button {
     width: 31px;
     height: 31px;
   }
 
-  section.level1 {
-    margin-top: 3.2rem;
+  .quarto-title h1.title {
+    font-size: 2.45rem;
+  }
+
+  main.content h1:not(.title),
+  main.content h2 {
+    padding-top: .8rem;
   }
 }

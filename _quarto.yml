@@ -31,6 +31,6 @@ format:
     smooth-scroll: true
     code-copy: true
     code-overflow: wrap
-    include-after-body: assets/site-interactions.html
+    include-after-body: assets/site-scripts.html
 execute:
   freeze: auto

@@ -88,24 +88,10 @@ Added a complete long-form portfolio page with all major projects and experience
 - Interactive preview includes a persistent light/dark toggle.
 
 
-## Version 5.3 — Swiss Research integration
+## Version 6 — Swiss Research integration
 
-This version keeps the v5.2 content structure and applies the approved Swiss Research visual system globally.
+This version keeps the v5.2 content and integrates the approved Swiss Research visual system,
+fail-safe scroll animations, icon display controls, dynamic TOC highlighting and automatic
+left-sidebar scrolling.
 
-### Added
-- Swiss Research palette and typography in light/dark modes.
-- Fail-safe section reveal animations: content remains visible if JavaScript fails.
-- Dynamic left TOC that tracks the active section while scrolling.
-- Automatic TOC follow so the active item remains visible.
-- Parent-group highlighting in the sidebar.
-- Icon controls for light/dark mode, reduced motion and compact density.
-- Reading progress indicator.
-- Swiss styling for cards, placeholders, Mermaid outputs and technical content.
-- Updated standalone `portfolio_preview.html` with the same visual direction and interactions.
-
-### Preserved
-- Portfolio/CV/Contact navigation.
-- All v5.2 QMD content.
-- All individual project pages.
-- Image placeholder structure.
-- GitHub Pages workflow and deployment structure.
+See `SWISS_STYLE_INTEGRATION.md`.
