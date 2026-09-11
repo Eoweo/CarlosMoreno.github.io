@@ -26,8 +26,8 @@ h1{font-size:clamp(2.8rem,6vw,5rem);line-height:.97;letter-spacing:-.05em;text-t
 </head>
 <body>
 <header>
-<div class="brand">Carlos Moreno Rojas</div>
-<div class="topnav"><button class="topbtn active" data-page="home">Home</button><button class="topbtn" data-page="contact">Contact</button></div>
+<a class="brand" href="#" id="brandHome" style="color:inherit;text-decoration:none">Carlos Moreno Rojas</a>
+<div class="topnav"><button class="topbtn active" data-page="home">Home</button><button class="topbtn" data-page="portfolio">Portfolio</button><button class="topbtn" data-page="cv">CV</button><button class="topbtn" data-page="contact">Contact</button></div>
 <div class="controls">
 <button class="iconbtn" id="compact" title="Compact"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <button class="iconbtn" id="motion" title="Reduce motion"><svg viewBox="0 0 24 24"><path d="M4 12h6M14 12h6M8 8l4 4-4 4M16 8l-4 4 4 4"/></svg></button>
@@ -80,7 +80,16 @@ function update(){
 function setPage(p){
  current=p;document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.topbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===p));sections=[...document.querySelectorAll('#'+p+' section')];buildToc();sections.forEach(s=>s.classList.remove('shown'));scrollTo(0,0);setTimeout(()=>{sections.filter(s=>s.getBoundingClientRect().top<innerHeight*.95).forEach(s=>s.classList.add('shown'));document.body.classList.add('js-ready');update()},20)
 }
-document.querySelectorAll('.topbtn').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
+document.querySelectorAll('.topbtn').forEach(b=>b.onclick=()=>{
+  if(document.getElementById(b.dataset.page)){
+    setPage(b.dataset.page);
+  }else{
+    alert(b.dataset.page==='portfolio'
+      ? 'En el sitio Quarto, Portfolio abre portfolio.qmd (portafolio técnico).'
+      : 'En el sitio Quarto, CV abre cv.qmd.');
+  }
+});
+document.getElementById('brandHome').onclick=function(e){e.preventDefault();setPage('home')};
 const t=document.getElementById('theme');function themeIcon(){t.innerHTML=document.documentElement.dataset.theme==='dark'?SUN:MOON}themeIcon();t.onclick=()=>{document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';themeIcon()};
 document.getElementById('motion').onclick=function(){document.body.classList.toggle('reduce');this.classList.toggle('on');if(document.body.classList.contains('reduce'))document.querySelectorAll('.reveal').forEach(x=>x.classList.add('shown'))};
 document.getElementById('compact').onclick=function(){this.classList.toggle('on');document.body.style.setProperty('--compact',this.classList.contains('on')?'1':'0')};

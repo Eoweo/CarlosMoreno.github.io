@@ -266,14 +266,31 @@
   let tocGroups = [];
   let lastActiveHref = "";
 
+  function getTocRootList() {
+    if (!toc) return null;
+
+    // Quarto currently renders #TOC > ul, but this fallback also
+    // supports wrappers that may be introduced by future Quarto versions.
+    const direct = Array.from(toc.children).find(function (el) {
+      return el.tagName === "UL";
+    });
+    if (direct) return direct;
+
+    return toc.querySelector("ul");
+  }
+
   function initTocAccordion() {
     if (!toc) return [];
 
-    const rootList = toc.querySelector(":scope > ul");
+    const rootList = getTocRootList();
     if (!rootList) return [];
 
     const groups = Array.from(rootList.children).filter(function (li) {
-      return li.tagName === "LI" && !!li.querySelector(":scope > ul");
+      if (li.tagName !== "LI") return false;
+      const nested = Array.from(li.children).find(function (el) {
+        return el.tagName === "UL";
+      });
+      return !!nested;
     });
 
     groups.forEach(function (li) {
@@ -286,12 +303,17 @@
   function topLevelGroupFor(link) {
     if (!toc || !link) return null;
 
-    let node = link.closest("li");
-    while (node && node.parentElement && node.parentElement !== toc) {
-      if (node.parentElement.parentElement === toc) return node;
-      node = node.parentElement.closest("li");
+    const rootList = getTocRootList();
+    if (!rootList) return null;
+
+    let li = link.closest("li");
+
+    while (li) {
+      if (li.parentElement === rootList) return li;
+      li = li.parentElement ? li.parentElement.closest("li") : null;
     }
-    return node && node.parentElement && node.parentElement.parentElement === toc ? node : null;
+
+    return null;
   }
 
   function openTocGroupFor(activeLink) {
@@ -300,7 +322,24 @@
     const activeGroup = topLevelGroupFor(activeLink);
 
     tocGroups.forEach(function (group) {
-      group.classList.toggle("swiss-toc-open", group === activeGroup);
+      const open = group === activeGroup;
+      group.classList.toggle("swiss-toc-open", open);
+
+      const nested = Array.from(group.children).find(function (el) {
+        return el.tagName === "UL";
+      });
+
+      if (nested) {
+        nested.setAttribute("aria-hidden", open ? "false" : "true");
+      }
+
+      const titleLink = Array.from(group.children).find(function (el) {
+        return el.tagName === "A";
+      });
+
+      if (titleLink) {
+        titleLink.setAttribute("aria-expanded", open ? "true" : "false");
+      }
     });
   }
 
@@ -369,6 +408,37 @@
   }
 
   /* --------------------------------------------------------------
+     Navbar routing
+     -------------------------------------------------------------- */
+  function fixNavbarRouting() {
+    const brand = document.querySelector("#quarto-header .navbar-brand");
+    const navLinks = Array.from(
+      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
+    );
+
+    // Quarto rewrites qmd links to correct relative HTML paths.
+    // Derive Home from the rendered Portfolio link so this also works
+    // from nested project pages and GitHub Pages subpaths.
+    const portfolioLink = navLinks.find(function (link) {
+      return (link.textContent || "").trim().toLowerCase() === "portfolio";
+    });
+
+    if (portfolioLink) {
+      const portfolioHref = portfolioLink.getAttribute("href") || "portfolio.html";
+      const homeHref = portfolioHref.replace(/portfolio(?:\.html)?(?:#.*)?$/, "index.html");
+
+      if (brand) {
+        brand.setAttribute("href", homeHref);
+        brand.setAttribute("title", "Home");
+        brand.setAttribute("aria-label", "Carlos Moreno Rojas — Home");
+      }
+    } else if (brand) {
+      // Safe fallback for root-level pages.
+      brand.setAttribute("href", "index.html");
+    }
+  }
+
+  /* --------------------------------------------------------------
      Main loop
      -------------------------------------------------------------- */
   let ticking = false;
@@ -385,6 +455,7 @@
   }
 
   function init() {
+    fixNavbarRouting();
     createControls();
     initReveal();
 

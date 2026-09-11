@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7 — Swiss Research`  
+> **Versión base documentada:** `v7.1 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -2291,6 +2291,163 @@ No se deben inventar datos de contacto: los valores `ADD_...` permanecen hasta r
 ---
 
 
+
+# 23B. Correcciones introducidas en v7.1
+
+## REQ-NAV-009 — Nombre del sitio enlaza siempre a Home
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El texto:
+
+```text
+Carlos Moreno Rojas
+```
+
+de la barra superior debe actuar como enlace permanente hacia la página principal:
+
+```text
+index.qmd → index.html
+```
+
+La ruta debe funcionar tanto:
+
+- desde páginas de nivel raíz;
+- desde `projects/*.qmd`;
+- en GitHub Pages;
+- en rutas relativas.
+
+La implementación utiliza la ruta renderizada del enlace `Portfolio` para derivar de manera segura la ruta relativa hacia `index.html`.
+
+---
+
+## REQ-NAV-010 — Portfolio de la barra superior abre el portafolio técnico
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El enlace superior:
+
+```text
+Portfolio
+```
+
+debe dirigir a:
+
+```text
+portfolio.qmd
+```
+
+y **no** a la Home.
+
+La navegación principal queda conceptualmente:
+
+```text
+Carlos Moreno Rojas → Home / resumen profesional
+Portfolio           → portafolio técnico completo
+CV                  → curriculum vitae
+Contact             → página de contacto
+Project pages       → índice de páginas individuales
+```
+
+---
+
+## REQ-NAV-011 — Acordeón TOC robusto con Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La detección de grupos del TOC no debe depender únicamente de:
+
+```javascript
+:scope > ul
+```
+
+La lógica debe:
+
+1. encontrar el `UL` raíz del TOC de manera robusta;
+2. identificar cada `LI` de nivel superior que contenga un `UL` secundario;
+3. asociar cada subtítulo activo con su grupo principal;
+4. expandir solo el grupo actual;
+5. colapsar los demás;
+6. mantener el enlace activo visible mediante auto-scroll;
+7. actualizar `aria-expanded` y `aria-hidden`.
+
+Esto debe seguir funcionando aunque Quarto agregue clases o wrappers no funcionales alrededor del TOC.
+
+---
+
+## REQ-RENDER-001 — Componentes personalizados deben usar sintaxis segura de Quarto/Pandoc
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Los componentes complejos de `index.qmd` y `contact.qmd` no deben escribirse como HTML anidado con indentación susceptible de ser interpretada como bloque de código.
+
+Patrón anterior problemático:
+
+```html
+<div class="home-intro">
+  <div class="home-intro-copy">
+    ...
+  </div>
+</div>
+```
+
+Patrón requerido:
+
+```markdown
+:::: {.home-intro}
+
+::: {.home-intro-copy}
+...
+:::
+
+::::
+```
+
+Se deben preferir:
+
+- **Pandoc Fenced Divs** para layout y componentes;
+- Markdown normal para texto;
+- enlaces Markdown con atributos de clase;
+- HTML raw únicamente cuando sea imprescindible y sin indentación ambigua.
+
+### Criterio de aceptación
+
+La página renderizada **nunca** debe mostrar literalmente cadenas como:
+
+```text
+<div class="home-kicker">
+<div class="contact-heading">
+<strong>Biomedical R&D</strong>
+```
+
+---
+
+## REQ-RENDER-002 — Home y Contact no pueden renderizar HTML como código visible
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se considera un fallo crítico si cualquier componente personalizado aparece en cajas de código con scroll horizontal.
+
+Debe validarse específicamente:
+
+```text
+Home hero
+Home metric cards
+Home research cards
+Home project cards
+Contact hero
+Contact cards
+Contact document cards
+```
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -2477,6 +2634,10 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7 | 2026-09-11 | Swiss Controls al extremo derecho | REQ-CTRL-007 | IMPLEMENTADO |
 | v7 | 2026-09-11 | Contact distribuido en cards/grids | REQ-CONTACT-004/005 | IMPLEMENTADO |
 | v7 | 2026-09-11 | Requirements Markdown obligatorio en cada cambio | REQ-DOC-001 | IMPLEMENTADO |
+| v7.1 | 2026-09-11 | Corregido render de Home y Contact mediante Fenced Divs | REQ-RENDER-001/002 | IMPLEMENTADO |
+| v7.1 | 2026-09-11 | Nombre superior enlaza a Home | REQ-NAV-009 | IMPLEMENTADO |
+| v7.1 | 2026-09-11 | Portfolio superior enlaza al portafolio técnico | REQ-NAV-010 | IMPLEMENTADO |
+| v7.1 | 2026-09-11 | Acordeón TOC robusto y accesible | REQ-NAV-011 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -2511,6 +2672,11 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 21. El TOC debe mostrar títulos principales y expandir solo el grupo activo.
 22. La página principal debe seguir siendo un resumen profesional; el detalle técnico vive en portfolio.qmd y projects/.
 23. Contact debe conservar una distribución visual por cards/grids y no volver a una lista simple.
+24. Carlos Moreno Rojas en el navbar debe enlazar siempre a Home.
+25. Portfolio en el navbar debe enlazar al portafolio técnico.
+26. Home y Contact deben usar sintaxis de componentes segura para Quarto/Pandoc.
+27. Nunca debe aparecer HTML literal como código visible.
+28. El acordeón lateral debe expandir automáticamente el grupo que contiene el subtítulo visible.
 ```
 
 ---
@@ -2570,7 +2736,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7 Swiss Research
+Version: v7.1 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

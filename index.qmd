@@ -8,31 +8,41 @@ page-layout: article
 toc-title: "OVERVIEW"
 ---
 
-<div class="home-intro">
-  <div class="home-intro-copy">
-    <div class="home-kicker">BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING</div>
-    <div class="home-statement">
-      I develop and integrate engineering systems for biomedical research, medical devices and experimental platforms.
-    </div>
-    <p>
-      My work combines electronics, embedded systems, biomedical instrumentation, signal and image processing,
-      optics, CAD, prototyping and experimental validation. I am particularly interested in problems where
-      hardware, software and physiology have to work as one system.
-    </p>
-    <div class="home-actions">
-      <a class="home-action primary" href="portfolio.qmd">Technical Portfolio</a>
-      <a class="home-action" href="cv.qmd">Curriculum Vitae</a>
-      <a class="home-action" href="contact.qmd">Contact</a>
-    </div>
-  </div>
+:::: {.home-intro}
 
-  <div class="image-slot home-portrait">
-    <div class="slot-label">
-      FOTO PRINCIPAL / RETRATO TÉCNICO
-      <small>Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental</small>
-    </div>
-  </div>
-</div>
+::: {.home-intro-copy}
+
+::: {.home-kicker}
+BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING
+:::
+
+::: {.home-statement}
+I develop and integrate engineering systems for biomedical research, medical devices and experimental platforms.
+:::
+
+My work combines electronics, embedded systems, biomedical instrumentation, signal and image processing,
+optics, CAD, prototyping and experimental validation. I am particularly interested in problems where
+hardware, software and physiology have to work as one system.
+
+::: {.home-actions}
+[Technical Portfolio](portfolio.qmd){.home-action .primary}
+[Curriculum Vitae](cv.qmd){.home-action}
+[Contact](contact.qmd){.home-action}
+:::
+
+:::
+
+::: {.image-slot .home-portrait}
+
+::: {.slot-label}
+FOTO PRINCIPAL / RETRATO TÉCNICO
+
+Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental
+:::
+
+:::
+
+::::
 
 # Profile
 
@@ -45,20 +55,27 @@ FPGA, CAD and experimental system integration.
 My engineering approach is strongly implementation-oriented: define the physiological or technical need,
 translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.
 
-<div class="home-metric-grid">
-  <div class="home-metric">
-    <strong>Biomedical R&D</strong>
-    <span>Instrumentation, perfusion, preservation, neuroengineering and experimental validation.</span>
-  </div>
-  <div class="home-metric">
-    <strong>Electronics & Embedded</strong>
-    <span>PCB, ESP32, STM32, sensors, acquisition, communications and system integration.</span>
-  </div>
-  <div class="home-metric">
-    <strong>Engineering Prototyping</strong>
-    <span>CAD, mechanical integration, 3D printing, machining and iterative testing.</span>
-  </div>
-</div>
+:::: {.home-metric-grid}
+
+::: {.home-metric}
+**Biomedical R&D**
+
+Instrumentation, perfusion, preservation, neuroengineering and experimental validation.
+:::
+
+::: {.home-metric}
+**Electronics & Embedded**
+
+PCB, ESP32, STM32, sensors, acquisition, communications and system integration.
+:::
+
+::: {.home-metric}
+**Engineering Prototyping**
+
+CAD, mechanical integration, 3D printing, machining and iterative testing.
+:::
+
+::::
 
 # Current Research
 
@@ -70,30 +87,52 @@ of liver function and viability.
 
 The research progresses through three connected objectives:
 
-<div class="home-step-grid">
-  <a class="home-step" href="projects/thesis.qmd#objective-1--ex-vivo-perfusion-platform">
-    <span class="step-number">01</span>
-    <strong>Perfusion Platform</strong>
-    <small>Stable circulation, physiological control and instrumentation.</small>
-  </a>
-  <a class="home-step" href="projects/thesis.qmd#objective-2--baseline-dataset-without-icg">
-    <span class="step-number">02</span>
-    <strong>Physiological Baseline</strong>
-    <small>Pressure, flow, temperature, vascular resistance, pH and gases.</small>
-  </a>
-  <a class="home-step" href="projects/thesis.qmd#objective-3--icg-nir-functional-marker">
-    <span class="step-number">03</span>
-    <strong>ICG-NIR Marker</strong>
-    <small>Fluorescence kinetics and quantitative functional parameters.</small>
-  </a>
-</div>
+:::: {.home-step-grid}
 
-<div class="image-slot large">
-  <div class="slot-label">
-    IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER
-    <small>Plataforma de perfusión completa o montaje ICG-NIR</small>
-  </div>
-</div>
+::: {.home-step}
+::: {.step-number}
+01
+:::
+**Perfusion Platform**
+
+Stable circulation, physiological control and instrumentation.
+
+[Open Objective 1](projects/thesis.qmd#objective-1--ex-vivo-perfusion-platform){.inline-project-link}
+:::
+
+::: {.home-step}
+::: {.step-number}
+02
+:::
+**Physiological Baseline**
+
+Pressure, flow, temperature, vascular resistance, pH and gases.
+
+[Open Objective 2](projects/thesis.qmd#objective-2--baseline-dataset-without-icg){.inline-project-link}
+:::
+
+::: {.home-step}
+::: {.step-number}
+03
+:::
+**ICG-NIR Marker**
+
+Fluorescence kinetics and quantitative functional parameters.
+
+[Open Objective 3](projects/thesis.qmd#objective-3--icg-nir-functional-marker){.inline-project-link}
+:::
+
+::::
+
+::: {.image-slot .large}
+
+::: {.slot-label}
+IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER
+
+Plataforma de perfusión completa o montaje ICG-NIR
+:::
+
+:::
 
 # Selected Work
 
@@ -102,7 +141,7 @@ The research progresses through three connected objectives:
 I participated in **CYBATHLON 2024 in Zürich** as Electrical Area Leader of Ciervo UC, working on the
 electrical and electromechanical integration of a robotic transfemoral prosthesis.
 
-<a class="inline-project-link" href="projects/cybathlon.qmd">Open project →</a>
+[Open project →](projects/cybathlon.qmd){.inline-project-link}
 
 ## CandelStim — Neuroengineering
 
@@ -110,37 +149,68 @@ During my professional internship at Candel Medical Company I worked on electron
 transcranial electrical stimulation platform, including circuit analysis, PCB work, embedded systems,
 communications, signal generation and validation.
 
-<a class="inline-project-link" href="projects/candel.qmd">Open project →</a>
+[Open project →](projects/candel.qmd){.inline-project-link}
 
 ## Other Engineering Projects
 
-<div class="home-project-grid">
-  <a class="project-card" href="projects/borealis.qmd">
-    <div class="project-tag">ORGAN PRESERVATION</div>
-    <strong>Borealis UC — Supercooling</strong>
-    <p>Experimental work in organ preservation and thermal control.</p>
-  </a>
-  <a class="project-card" href="projects/organ-preservation.qmd">
-    <div class="project-tag">SYSTEM DESIGN</div>
-    <strong>Organ Preservation Machine</strong>
-    <p>Electromechanical, fluidic and control-system redesign.</p>
-  </a>
-  <a class="project-card" href="projects/unet.qmd">
-    <div class="project-tag">MEDICAL IMAGING & AI</div>
-    <strong>Lung Segmentation — U-Net</strong>
-    <p>Deep-learning segmentation of medical images.</p>
-  </a>
-  <a class="project-card" href="projects/fpga.qmd">
-    <div class="project-tag">FPGA</div>
-    <strong>Universal Testing Machine</strong>
-    <p>Zybo Z10, Vivado and VHDL for acquisition and processing.</p>
-  </a>
-  <a class="project-card" href="projects/vscan.qmd">
-    <div class="project-tag">CAD & PROTOTYPING</div>
-    <strong>Vscan Air Enclosure</strong>
-    <p>CAD and prototyping for a portable ultrasound accessory.</p>
-  </a>
-</div>
+:::: {.home-project-grid}
+
+::: {.project-card}
+::: {.project-tag}
+ORGAN PRESERVATION
+:::
+**Borealis UC — Supercooling**
+
+Experimental work in organ preservation and thermal control.
+
+[Open project →](projects/borealis.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+SYSTEM DESIGN
+:::
+**Organ Preservation Machine**
+
+Electromechanical, fluidic and control-system redesign.
+
+[Open project →](projects/organ-preservation.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+MEDICAL IMAGING & AI
+:::
+**Lung Segmentation — U-Net**
+
+Deep-learning segmentation of medical images.
+
+[Open project →](projects/unet.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+FPGA
+:::
+**Universal Testing Machine**
+
+Zybo Z10, Vivado and VHDL for acquisition and processing.
+
+[Open project →](projects/fpga.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+CAD & PROTOTYPING
+:::
+**Vscan Air Enclosure**
+
+CAD and prototyping for a portable ultrasound accessory.
+
+[Open project →](projects/vscan.qmd){.inline-project-link}
+:::
+
+::::
 
 # Engineering Areas
 
@@ -166,11 +236,27 @@ Fusion 360, mechanical design, 3D printing, machining and integration of electro
 
 ## Education
 
-<div class="home-timeline">
-  <div><strong>MSc Biomedical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2025–2027</span></div>
-  <div><strong>Electrical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2025–2026</span></div>
-  <div><strong>Biomedical Engineering</strong><span>Pontificia Universidad Católica de Chile · 2021–2024</span></div>
-</div>
+::: {.home-timeline}
+
+::: {}
+**MSc Biomedical Engineering**
+
+Pontificia Universidad Católica de Chile · 2025–2027
+:::
+
+::: {}
+**Electrical Engineering**
+
+Pontificia Universidad Católica de Chile · 2025–2026
+:::
+
+::: {}
+**Biomedical Engineering**
+
+Pontificia Universidad Católica de Chile · 2021–2024
+:::
+
+:::
 
 ## Leadership & Teaching
 
@@ -184,12 +270,12 @@ Chapter UC and work with IEEE EMBS PUC Chile.
 The complete technical portfolio documents projects in greater depth using the structure
 **problem → design → implementation → testing → results / lessons learned**.
 
-<a class="home-action primary" href="portfolio.qmd">Open Technical Portfolio</a>
+[Open Technical Portfolio](portfolio.qmd){.home-action .primary}
 
 ## CV & Contact
 
-<div class="home-final-actions">
-  <a class="home-action" href="cv.qmd">Curriculum Vitae</a>
-  <a class="home-action" href="projects/index.qmd">Project Pages</a>
-  <a class="home-action" href="contact.qmd">Contact</a>
-</div>
+::: {.home-final-actions}
+[Curriculum Vitae](cv.qmd){.home-action}
+[Project Pages](projects/index.qmd){.home-action}
+[Contact](contact.qmd){.home-action}
+:::

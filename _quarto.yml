@@ -6,7 +6,7 @@ website:
   description: Biomedical & Electrical Engineering — Portfolio
   navbar:
     left:
-    - href: index.qmd
+    - href: portfolio.qmd
       text: Portfolio
     - href: cv.qmd
       text: CV
