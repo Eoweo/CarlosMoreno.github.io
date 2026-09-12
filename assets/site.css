@@ -1188,7 +1188,7 @@ main.content h2 {
 
 
 /* ================================================================
-   VERSION 7.8 — FIXED LEFT TOC USING QUARTO'S REAL TOC WRAPPER
+   VERSION 7.9 — LEFT TOC BLOCK AT VIEWPORT X=0
    ================================================================ */
 
 :root {
@@ -1282,11 +1282,36 @@ body {
     height: calc(100vh - var(--header-height)) !important;
 
     margin: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     padding: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 
     overflow: hidden !important;
     background: var(--page-bg) !important;
     border-right: 1px solid var(--border) !important;
+  }
+
+
+
+  /*
+     Hard reset against Quarto / Bootstrap classes that can move the
+     left TOC away from viewport x=0 or return it to normal flow.
+  */
+  #quarto-sidebar-toc-left.sidebar,
+  #quarto-sidebar-toc-left.sidebar.toc-left,
+  body #quarto-sidebar-toc-left {
+    left: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    transform: none !important;
+    float: none !important;
+  }
+
+  #quarto-sidebar-toc-left > *,
+  #quarto-sidebar-toc-left #TOC {
+    margin-left: 0 !important;
   }
 
   /*
@@ -1313,22 +1338,25 @@ body {
     max-height: none !important;
 
     margin: 0 !important;
+    margin-left: 0 !important;
     padding:
       clamp(0.65rem, 0.9vw, 0.95rem)
       0.5rem
       1.5rem
-      var(--toc-edge-padding) !important;
+      0 !important;
+    padding-left: 0 !important;
 
     overflow-y: auto !important;
     overflow-x: hidden !important;
   }
 
   #TOC .toc-title {
-    margin-left: 0.25rem !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
   }
 
   .swiss-toc-group-link {
-    padding-left: 0.25rem !important;
+    padding-left: 0 !important;
   }
 
   /*

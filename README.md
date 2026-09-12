@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.8 — Swiss Research**
+**v7.9 — Swiss Research**
 
 The current architecture separates:
 
@@ -139,3 +139,12 @@ PORTFOLIO_REQUIREMENTS.md
 - Desktop left navigation now fixes `#quarto-sidebar-toc-left` / `.sidebar.toc-left`.
 - The unrelated margin sidebar is prevented from reserving layout space.
 - The TOC can no longer become a full-width row above the document on desktop.
+
+
+## v7.9
+
+- Desktop TOC uses Quarto's actual `#quarto-sidebar-toc-left` wrapper.
+- The complete sidebar block is pinned to viewport `left: 0`.
+- Sidebar wrapper and `#TOC` use `margin-left: 0` and `padding-left: 0`.
+- The TOC cannot participate in normal vertical document flow on desktop.
+- Requirements now document the known causes of the “sidebar above content / space on the left” bug.

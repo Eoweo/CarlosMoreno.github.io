@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.8 — Swiss Research`  
+> **Versión base documentada:** `v7.9 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -3764,6 +3764,289 @@ como navegación lateral funcional.
 ---
 
 
+
+# 23J. Corrección definitiva del bloque lateral — v7.9
+
+## REQ-LAYOUT-014 — El bloque completo del TOC comienza exactamente en `left: 0`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop, el bloque que contiene la navegación izquierda debe comenzar en la coordenada física:
+
+```text
+x = 0 px
+```
+
+del viewport.
+
+El contenedor obligatorio es:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+con:
+
+```css
+position: fixed;
+left: 0;
+top: var(--header-height);
+bottom: 0;
+
+margin-left: 0;
+padding-left: 0;
+```
+
+El propio `#TOC` también debe utilizar:
+
+```css
+margin-left: 0;
+padding-left: 0;
+```
+
+### Regla
+
+La distancia entre:
+
+```text
+borde izquierdo del navegador
+```
+
+y:
+
+```text
+borde exterior del bloque lateral
+```
+
+debe ser:
+
+```text
+0 px
+```
+
+La jerarquía interna puede utilizar indentación en subtítulos y subsubtítulos, pero **esa indentación ocurre dentro del bloque**, no desplazando el bloque completo.
+
+---
+
+## REQ-LAYOUT-015 — El TOC desktop nunca puede volver al flujo vertical
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En resoluciones desktop (`>= 992 px`) el TOC debe permanecer:
+
+```css
+position: fixed;
+```
+
+y no puede formar una fila superior antes de `main.content`.
+
+Geometría correcta:
+
+```text
+NAVBAR
+────────────────────────────────────────────────────────
+
+TOC │ PORTFOLIO / CONTENIDO
+TOC │
+TOC │
+TOC │
+```
+
+Geometría prohibida:
+
+```text
+NAVBAR
+────────────────────────────────────────────────────────
+TOC ocupando una fila superior completa
+────────────────────────────────────────────────────────
+PORTFOLIO / CONTENIDO
+```
+
+---
+
+## REQ-DIAG-001 — Causas conocidas de TOC desplazado o ubicado arriba
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Si la lista izquierda aparece separada del borde o encima del contenido, se deben revisar estas causas **antes de rediseñar la página**.
+
+### Causa 1 — Se está modificando el wrapper incorrecto
+
+Con:
+
+```yaml
+toc-location: left
+```
+
+Quarto puede generar:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+para el TOC izquierdo y:
+
+```text
+#quarto-margin-sidebar
+```
+
+para la columna de margen.
+
+Aplicar `position: fixed` al segundo en vez del primero puede dejar el TOC real dentro del flujo normal.
+
+**Síntoma:**
+
+```text
+lista arriba
+contenido debajo
+```
+
+### Causa 2 — `position: fixed` no está llegando al wrapper real
+
+Una regla anterior, Bootstrap o Quarto puede dejar:
+
+```css
+position: static;
+position: relative;
+```
+
+en el wrapper real.
+
+Por eso v7.9 utiliza selectores específicos y `!important`.
+
+### Causa 3 — Media query desktop no se está activando
+
+El comportamiento lateral se aplica desde:
+
+```css
+@media (min-width: 992px)
+```
+
+Si:
+
+- el viewport efectivo es menor;
+- existe zoom muy alto;
+- DevTools simula una pantalla angosta;
+- otra media query posterior sobrescribe el layout;
+
+el sitio puede usar el comportamiento móvil/tablet.
+
+### Causa 4 — El grid de Quarto sigue reservando una fila o columna
+
+Clases como:
+
+```text
+.page-columns
+.sidebar
+.margin-sidebar
+```
+
+pueden introducir:
+
+```text
+grid-column
+margin
+padding
+justify-self
+```
+
+aunque el contenido parezca haber sido movido.
+
+Por eso el shell desktop no debe depender del grid de Quarto para ubicar el TOC.
+
+### Causa 5 — Bootstrap agrega padding al contenedor
+
+Clases Bootstrap o estilos del theme pueden agregar:
+
+```css
+padding-left
+margin-left
+```
+
+al wrapper, al `#TOC` o a un padre.
+
+v7.9 normaliza explícitamente:
+
+```css
+margin-left: 0 !important;
+padding-left: 0 !important;
+```
+
+en el bloque exterior.
+
+### Causa 6 — Un `transform` cambia el sistema de referencia
+
+Un ancestro con:
+
+```css
+transform: ...
+```
+
+puede alterar el comportamiento esperado de elementos posicionados.
+
+El wrapper lateral debe utilizar:
+
+```css
+transform: none !important;
+```
+
+### Causa 7 — CSS anterior sigue en caché
+
+Después de publicar una versión nueva, el navegador o GitHub Pages puede seguir mostrando CSS anterior.
+
+Prueba requerida:
+
+```text
+Ctrl + F5
+```
+
+o limpiar caché antes de concluir que la nueva regla no funciona.
+
+### Causa 8 — Una regla posterior sobrescribe la corrección
+
+En CSS, una regla posterior con mayor especificidad puede recuperar:
+
+```text
+padding
+margin
+position
+display
+```
+
+no deseados.
+
+Por eso la implementación vigente debe quedar al final de la cascada o eliminar reglas antiguas incompatibles.
+
+---
+
+## REQ-DIAG-002 — Orden de diagnóstico visual del TOC
+
+**Estado:** `REQUERIDO`  
+**Prioridad:** `P1`
+
+Cuando exista un problema visual del sidebar, revisar en este orden:
+
+```text
+1. ¿Existe #quarto-sidebar-toc-left?
+2. ¿Está position: fixed?
+3. ¿Su left calculado es 0px?
+4. ¿Su margin-left calculado es 0px?
+5. ¿Su padding-left calculado es 0px?
+6. ¿Su top coincide con la altura del navbar?
+7. ¿#quarto-margin-sidebar está oculto?
+8. ¿main.content comienza después del ancho del TOC?
+9. ¿Está activa la media query >= 992px?
+10. ¿Hay CSS antiguo en caché?
+```
+
+No se debe mover la lista arriba como workaround.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -3970,6 +4253,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.6 | 2026-09-12 | Dos botones de descarga al inicio del CV | REQ-CV-010 | IMPLEMENTADO |
 | v7.7 | 2026-09-12 | Eliminación de columna invisible izquierda de Quarto; TOC fijado a viewport x=0 | REQ-LAYOUT-008/009/010 | IMPLEMENTADO |
 | v7.8 | 2026-09-12 | TOC fijado usando el wrapper real `#quarto-sidebar-toc-left` | REQ-LAYOUT-011/012/013 | IMPLEMENTADO |
+| v7.9 | 2026-09-12 | Bloque TOC con left/margin/padding izquierdo en 0 px y diagnóstico explícito | REQ-LAYOUT-014/015, REQ-DIAG-001/002 | IMPLEMENTADO / REQUERIDO |
 | próxima | — | — | — | — |
 
 ---
@@ -4034,6 +4318,10 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 51. En desktop el TOC debe comenzar físicamente en left: 0 del viewport.
 52. El contenido debe comenzar después del ancho real del TOC, no mediante el grid central de Quarto.
 53. El shell de escritorio no debe depender de page-columns para su posicionamiento horizontal.
+54. El bloque exterior del TOC debe comenzar exactamente en x=0 px.
+55. #quarto-sidebar-toc-left y #TOC deben tener margin-left:0 y padding-left:0.
+56. El TOC desktop nunca debe regresar al flujo vertical ni aparecer encima del contenido.
+57. Antes de cambiar el diseño por un bug del TOC se debe aplicar el diagnóstico de REQ-DIAG-001/002.
 ```
 
 ---
@@ -4093,7 +4381,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.8 Swiss Research
+Version: v7.9 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
