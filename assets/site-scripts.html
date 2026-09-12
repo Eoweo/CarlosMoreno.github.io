@@ -23,11 +23,6 @@
       <path d="M4 6h16M4 12h16M4 18h16"></path>
     </svg>`;
 
-  let revealTargets = [];
-  let tocModel = null;
-  let activeHeadingId = "";
-  let ticking = false;
-
   function safeGet(key) {
     try {
       return window.localStorage ? localStorage.getItem(key) : null;
@@ -42,15 +37,6 @@
     } catch (e) {}
   }
 
-  function slugify(text) {
-    return String(text || "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "") || "section";
-  }
-
   function isDark() {
     return (
       document.body.classList.contains("quarto-dark") ||
@@ -60,42 +46,9 @@
     );
   }
 
-  /* ============================================================
-     NAVBAR
-     ============================================================ */
-
-  function fixNavbarRouting() {
-    const brand = document.querySelector("#quarto-header .navbar-brand");
-    const navLinks = Array.from(
-      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
-    );
-
-    const portfolioLink = navLinks.find(function (link) {
-      return (link.textContent || "").trim().toLowerCase() === "portfolio";
-    });
-
-    if (!brand) return;
-
-    if (portfolioLink) {
-      const portfolioHref = portfolioLink.getAttribute("href") || "portfolio.html";
-      const homeHref = portfolioHref.replace(
-        /portfolio(?:\.html)?(?:#.*)?$/,
-        "index.html"
-      );
-
-      brand.setAttribute("href", homeHref);
-    } else {
-      brand.setAttribute("href", "index.html");
-    }
-
-    brand.setAttribute("title", "Home");
-    brand.setAttribute("aria-label", "Carlos Moreno Rojas — Home");
-  }
-
-  /* ============================================================
-     CONTROLS
-     ============================================================ */
-
+  /* --------------------------------------------------------------
+     Controls
+     -------------------------------------------------------------- */
   function createControls() {
     if (document.querySelector(".swiss-controls")) return;
 
@@ -105,6 +58,7 @@
 
     const compact = document.createElement("button");
     compact.type = "button";
+    compact.id = "swissCompactToggle";
     compact.className = "swiss-icon-button";
     compact.title = "Compact mode";
     compact.setAttribute("aria-label", "Toggle compact mode");
@@ -112,6 +66,7 @@
 
     const motion = document.createElement("button");
     motion.type = "button";
+    motion.id = "swissMotionToggle";
     motion.className = "swiss-icon-button";
     motion.title = "Reduce motion";
     motion.setAttribute("aria-label", "Toggle reduced motion");
@@ -119,6 +74,7 @@
 
     const theme = document.createElement("button");
     theme.type = "button";
+    theme.id = "swissThemeToggle";
     theme.className = "swiss-icon-button";
     theme.setAttribute("aria-label", "Toggle light or dark mode");
 
@@ -127,11 +83,12 @@
     const host =
       document.querySelector("#quarto-header .navbar-container") ||
       document.querySelector("#quarto-header .container-fluid") ||
-      document.querySelector("#quarto-header .navbar") ||
+      document.querySelector("#quarto-header nav") ||
       document.body;
 
     host.appendChild(controls);
 
+    // Restore display preferences.
     if (safeGet("swiss-compact") === "1") {
       document.body.classList.add("swiss-compact");
       compact.classList.add("is-on");
@@ -156,7 +113,7 @@
       safeSet("swiss-reduce-motion", on ? "1" : "0");
 
       if (on) {
-        revealTargets.forEach(function (el) {
+        document.querySelectorAll(".swiss-reveal").forEach(function (el) {
           el.classList.add("swiss-shown");
         });
       } else {
@@ -171,37 +128,35 @@
     }
 
     theme.addEventListener("click", function () {
+      // Prefer Quarto's own theme switch, keeping Bootstrap in sync.
       const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
-
       if (nativeToggle) {
         nativeToggle.click();
         window.setTimeout(updateThemeIcon, 80);
         return;
       }
 
+      // Standalone fallback.
       document.body.classList.toggle("swiss-manual-dark");
       const dark = document.body.classList.contains("swiss-manual-dark");
       safeSet("swiss-manual-dark", dark ? "1" : "0");
       updateThemeIcon();
     });
 
-    if (
-      !document.querySelector(".quarto-color-scheme-toggle") &&
-      safeGet("swiss-manual-dark") === "1"
-    ) {
+    if (!document.querySelector(".quarto-color-scheme-toggle") &&
+        safeGet("swiss-manual-dark") === "1") {
       document.body.classList.add("swiss-manual-dark");
     }
 
     updateThemeIcon();
 
+    // Keep icon synchronized if Quarto changes classes/data attributes.
     try {
       const observer = new MutationObserver(updateThemeIcon);
-
       observer.observe(document.documentElement, {
         attributes: true,
         attributeFilter: ["class", "data-bs-theme"]
       });
-
       observer.observe(document.body, {
         attributes: true,
         attributeFilter: ["class"]
@@ -209,9 +164,11 @@
     } catch (e) {}
   }
 
-  /* ============================================================
-     FAIL-SAFE REVEAL
-     ============================================================ */
+  /* --------------------------------------------------------------
+     Reveal animation
+     Important: content is visible before JS adds swiss-js-ready.
+     -------------------------------------------------------------- */
+  let revealTargets = [];
 
   function collectRevealTargets() {
     const content =
@@ -233,21 +190,23 @@
         ".project-grid",
         ".skill-grid",
         ".download-grid",
-        ".contact-grid",
-        ".home-metric-grid",
-        ".home-step-grid",
-        ".home-project-grid",
+        ".contact-card",
         ".cell",
         "table",
-        "blockquote"
+        "blockquote",
+        "ul",
+        "ol"
       ].join(",")
     );
 
-    const result = [];
     const seen = new Set();
+    const result = [];
 
     candidates.forEach(function (el) {
+      // Avoid animating elements nested inside a larger selected component.
       if (el.closest(".image-slot") && !el.classList.contains("image-slot")) return;
+      if (el.closest(".project-meta") && !el.classList.contains("project-meta")) return;
+      if (el.closest(".skill-chips") && !el.classList.contains("skill-chips")) return;
       if (seen.has(el)) return;
 
       seen.add(el);
@@ -276,8 +235,8 @@
 
     revealTargets.forEach(function (el) {
       if (el.classList.contains("swiss-shown")) return;
-
-      if (el.getBoundingClientRect().top < trigger) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < trigger) {
         el.classList.add("swiss-shown");
       }
     });
@@ -286,6 +245,7 @@
   function initReveal() {
     revealTargets = collectRevealTargets();
 
+    // Mark current viewport items visible BEFORE enabling hidden states.
     revealTargets.forEach(function (el) {
       if (el.getBoundingClientRect().top < window.innerHeight * 0.97) {
         el.classList.add("swiss-shown");
@@ -296,368 +256,128 @@
     revealOnScroll();
   }
 
-  /* ============================================================
-     CUSTOM TOC FROM REAL HEADINGS
-     This intentionally replaces the Quarto-generated TOC tree.
-     ============================================================ */
+  /* --------------------------------------------------------------
+     Navbar routing — preserve Home on site title.
+     -------------------------------------------------------------- */
+  function fixNavbarRouting() {
+    const brand = document.querySelector("#quarto-header .navbar-brand");
+    if (!brand) return;
 
-  function getContentRoot() {
-    return (
-      document.querySelector("main.content") ||
-      document.querySelector("#quarto-document-content") ||
-      document.querySelector("main")
-    );
-  }
-
-  function collectHeadings() {
-    const content = getContentRoot();
-    if (!content) return [];
-
-    const headings = Array.from(
-      content.querySelectorAll("h1:not(.title), h2, h3")
-    ).filter(function (heading) {
-      if (heading.closest("#title-block-header")) return false;
-      if (heading.classList.contains("toc-ignore")) return false;
-      if (heading.closest(".toc-ignore")) return false;
-      return (heading.textContent || "").trim().length > 0;
+    const portfolio = Array.from(
+      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
+    ).find(function (link) {
+      return (link.textContent || "").trim().toLowerCase() === "portfolio";
     });
 
-    const usedIds = new Set();
-
-    headings.forEach(function (heading, index) {
-      let id = heading.id;
-
-      if (!id) {
-        const base = slugify(heading.textContent);
-        id = base;
-        let suffix = 2;
-
-        while (
-          usedIds.has(id) ||
-          (document.getElementById(id) && document.getElementById(id) !== heading)
-        ) {
-          id = base + "-" + suffix;
-          suffix += 1;
-        }
-
-        heading.id = id;
-      }
-
-      usedIds.add(id);
-    });
-
-    return headings;
-  }
-
-  function buildHeadingTree(headings) {
-    if (!headings.length) return [];
-
-    const levels = headings.map(function (h) {
-      return Number(h.tagName.substring(1));
-    });
-
-    const baseLevel = Math.min.apply(null, levels);
-    const groups = [];
-
-    let currentGroup = null;
-    let currentChild = null;
-
-    headings.forEach(function (heading) {
-      const level = Number(heading.tagName.substring(1));
-
-      const entry = {
-        heading: heading,
-        id: heading.id,
-        text: (heading.textContent || "").trim(),
-        level: level,
-        children: [],
-        parent: null,
-        group: null,
-        link: null,
-        li: null
-      };
-
-      if (level <= baseLevel || !currentGroup) {
-        currentGroup = entry;
-        currentGroup.group = currentGroup;
-        groups.push(currentGroup);
-        currentChild = null;
-        return;
-      }
-
-      if (level === baseLevel + 1) {
-        entry.group = currentGroup;
-        entry.parent = currentGroup;
-        currentGroup.children.push(entry);
-        currentChild = entry;
-        return;
-      }
-
-      // H3 under H2 when base is H1.
-      if (currentChild) {
-        entry.group = currentGroup;
-        entry.parent = currentChild;
-        currentChild.children.push(entry);
-      } else {
-        // Safe fallback for unusual heading jumps.
-        entry.group = currentGroup;
-        entry.parent = currentGroup;
-        currentGroup.children.push(entry);
-      }
-    });
-
-    return groups;
-  }
-
-  function createTocLink(entry, className) {
-    const link = document.createElement("a");
-    link.className = "swiss-toc-link " + className;
-    link.href = "#" + entry.id;
-    link.textContent = entry.text;
-    entry.link = link;
-
-    link.addEventListener("click", function (event) {
-      // Prevent a link inside <summary> from toggling the details twice.
-      event.stopPropagation();
-    });
-
-    return link;
-  }
-
-  function renderTocGroup(group) {
-    const details = document.createElement("details");
-    details.className = "swiss-toc-group";
-    group.details = details;
-
-    const summary = document.createElement("summary");
-    summary.appendChild(createTocLink(group, "swiss-toc-group-link"));
-    details.appendChild(summary);
-
-    if (!group.children.length) {
-      // A title without subtitles behaves like a normal link.
-      details.classList.add("swiss-toc-no-children");
-      summary.addEventListener("click", function (event) {
-        event.preventDefault();
-        group.link.click();
-      });
-      return details;
+    if (portfolio) {
+      const href = portfolio.getAttribute("href") || "portfolio.html";
+      brand.setAttribute(
+        "href",
+        href.replace(/portfolio(?:\.html)?(?:#.*)?$/, "index.html")
+      );
     }
-
-    const childrenList = document.createElement("ul");
-    childrenList.className = "swiss-toc-children";
-
-    group.children.forEach(function (child) {
-      const li = document.createElement("li");
-      li.className = "swiss-toc-subgroup";
-      child.li = li;
-
-      li.appendChild(createTocLink(child, "swiss-toc-child-link"));
-
-      if (child.children.length) {
-        const grandList = document.createElement("ul");
-        grandList.className = "swiss-toc-grandchildren";
-
-        child.children.forEach(function (grand) {
-          const grandLi = document.createElement("li");
-          grand.li = grandLi;
-          grandLi.appendChild(
-            createTocLink(grand, "swiss-toc-grand-link")
-          );
-          grandList.appendChild(grandLi);
-        });
-
-        li.appendChild(grandList);
-      }
-
-      childrenList.appendChild(li);
-    });
-
-    details.appendChild(childrenList);
-    return details;
   }
 
-  function getOrCreateTocContainer() {
-    let toc = document.getElementById("TOC");
-    if (toc) return toc;
+  /* --------------------------------------------------------------
+     Layout self-test for the ACTUAL rendered Quarto page.
+     Append ?layout-debug=1 to any page URL to display the panel.
+     -------------------------------------------------------------- */
+  function runLayoutSelfTest() {
+    const sidebar = document.getElementById("quarto-sidebar-toc-left");
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const desktop = window.innerWidth >= 992;
 
-    const margin =
-      document.querySelector("#quarto-margin-sidebar") ||
-      document.querySelector(".margin-sidebar") ||
-      document.querySelector(".quarto-margin-sidebar");
-
-    if (!margin) return null;
-
-    toc = document.createElement("nav");
-    toc.id = "TOC";
-    toc.setAttribute("role", "doc-toc");
-    margin.prepend(toc);
-
-    return toc;
-  }
-
-  function buildCustomToc() {
-    const toc = getOrCreateTocContainer();
-    if (!toc) return null;
-
-    const headings = collectHeadings();
-    if (!headings.length) return null;
-
-    const groups = buildHeadingTree(headings);
-    if (!groups.length) return null;
-
-    const originalTitle = toc.querySelector(".toc-title");
-    const titleText = originalTitle
-      ? originalTitle.textContent.trim()
-      : "ON THIS PAGE";
-
-    const nodeById = new Map();
-
-    groups.forEach(function addNodes(group) {
-      nodeById.set(group.id, group);
-
-      group.children.forEach(function (child) {
-        nodeById.set(child.id, child);
-
-        child.children.forEach(function (grand) {
-          nodeById.set(grand.id, grand);
-        });
-      });
-    });
-
-    const fragment = document.createDocumentFragment();
-
-    const title = document.createElement("div");
-    title.className = "toc-title";
-    title.textContent = titleText;
-    fragment.appendChild(title);
-
-    const root = document.createElement("div");
-    root.className = "swiss-toc-root";
-
-    groups.forEach(function (group) {
-      root.appendChild(renderTocGroup(group));
-    });
-
-    fragment.appendChild(root);
-
-    // Only replace the native TOC after our own tree is completely built.
-    toc.replaceChildren(fragment);
-
-    return {
-      toc: toc,
-      headings: headings,
-      groups: groups,
-      nodeById: nodeById
+    const result = {
+      viewport: { width: window.innerWidth, height: window.innerHeight },
+      desktop: desktop,
+      found: {
+        shell: !!shell,
+        sidebar: !!sidebar,
+        toc: !!toc,
+        main: !!main
+      },
+      checks: {},
+      computed: {}
     };
-  }
 
-  function getActiveHeading() {
-    if (!tocModel || !tocModel.headings.length) return null;
-
-    const marker = Math.min(170, window.innerHeight * 0.25);
-    let active = tocModel.headings[0];
-
-    tocModel.headings.forEach(function (heading) {
-      if (heading.getBoundingClientRect().top <= marker) {
-        active = heading;
-      }
-    });
-
-    return active;
-  }
-
-  function findActiveChild(node) {
-    if (!node) return null;
-
-    if (node.parent && node.parent.group === node.parent) {
-      return node;
+    function rect(el) {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return {
+        left: Math.round(r.left), top: Math.round(r.top),
+        right: Math.round(r.right), bottom: Math.round(r.bottom),
+        width: Math.round(r.width), height: Math.round(r.height)
+      };
     }
 
-    if (node.parent && node.parent.parent) {
-      return node.parent;
+    result.rects = {
+      sidebar: rect(sidebar), toc: rect(toc), main: rect(main), shell: rect(shell)
+    };
+
+    if (sidebar) {
+      const s = getComputedStyle(sidebar);
+      result.computed.sidebar = {
+        display: s.display,
+        position: s.position,
+        gridColumn: s.gridColumn,
+        gridRow: s.gridRow,
+        marginLeft: s.marginLeft,
+        paddingLeft: s.paddingLeft
+      };
     }
 
-    return null;
-  }
-
-  function keepTocLinkVisible(link) {
-    if (!tocModel || !link) return;
-
-    const toc = tocModel.toc;
-    const tocRect = toc.getBoundingClientRect();
-    const linkRect = link.getBoundingClientRect();
-    const margin = 44;
-
-    if (linkRect.bottom > tocRect.bottom - margin) {
-      toc.scrollTo({
-        top: toc.scrollTop + (linkRect.bottom - tocRect.bottom + margin),
-        behavior: document.body.classList.contains("swiss-reduce-motion")
-          ? "auto"
-          : "smooth"
-      });
-    } else if (linkRect.top < tocRect.top + margin) {
-      toc.scrollTo({
-        top: Math.max(
-          0,
-          toc.scrollTop - (tocRect.top + margin - linkRect.top)
-        ),
-        behavior: document.body.classList.contains("swiss-reduce-motion")
-          ? "auto"
-          : "smooth"
-      });
+    if (shell) {
+      const s = getComputedStyle(shell);
+      result.computed.shell = {
+        display: s.display,
+        gridTemplateColumns: s.gridTemplateColumns
+      };
     }
-  }
 
-  function updateCustomToc() {
-    if (!tocModel) return;
-
-    const activeHeading = getActiveHeading();
-    if (!activeHeading) return;
-
-    const node = tocModel.nodeById.get(activeHeading.id);
-    if (!node) return;
-
-    const group = node.group || node;
-    const activeChild = findActiveChild(node);
-
-    // Native <details>.open is the robust source of truth.
-    tocModel.groups.forEach(function (candidate) {
-      if (candidate.details) {
-        candidate.details.open = candidate === group;
-      }
-
-      candidate.children.forEach(function (child) {
-        if (child.li) {
-          child.li.classList.toggle(
-            "swiss-sub-open",
-            candidate === group && child === activeChild
-          );
-        }
-      });
-    });
-
-    // Exact active subtitle/title.
-    tocModel.nodeById.forEach(function (candidate) {
-      if (candidate.link) {
-        candidate.link.classList.toggle(
-          "swiss-active",
-          candidate.id === node.id
-        );
-      }
-    });
-
-    if (node.id !== activeHeadingId) {
-      activeHeadingId = node.id;
-
-      window.requestAnimationFrame(function () {
-        keepTocLinkVisible(node.link);
-      });
+    if (desktop && sidebar && main) {
+      const sr = sidebar.getBoundingClientRect();
+      const mr = main.getBoundingClientRect();
+      result.checks.sidebarVisible = sr.width > 100 && sr.height > 100;
+      result.checks.sidebarNotFullWidth = sr.width < window.innerWidth * 0.4;
+      result.checks.sideBySide = sr.right <= mr.left + 24;
+      result.checks.notStackedAbove = sr.width < mr.width && mr.left > sr.left + 80;
+      result.checks.mainUsesWidth = mr.width > window.innerWidth * 0.5;
+    } else if (!desktop) {
+      result.checks.mobileMode = true;
     }
+
+    const values = Object.values(result.checks);
+    result.pass = values.length > 0 && values.every(Boolean);
+    document.body.dataset.layoutTest = result.pass ? "pass" : "fail";
+    window.__portfolioLayoutTest = result;
+    console.info("[Portfolio layout self-test]", result);
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("layout-debug") === "1") {
+      const panel = document.createElement("pre");
+      panel.id = "portfolio-layout-debug";
+      panel.textContent = (result.pass ? "PASS" : "FAIL") + "\n" +
+        JSON.stringify(result, null, 2);
+      Object.assign(panel.style, {
+        position: "fixed", right: "10px", bottom: "10px",
+        width: "min(460px, 46vw)", maxHeight: "52vh", overflow: "auto",
+        zIndex: "99999", padding: "12px", margin: "0",
+        border: "2px solid " + (result.pass ? "#17833d" : "#b42318"),
+        background: "#fff", color: "#111", fontSize: "11px",
+        lineHeight: "1.35", whiteSpace: "pre-wrap", boxShadow: "0 4px 20px #0003"
+      });
+      document.body.appendChild(panel);
+    }
+
+    return result;
   }
 
-  /* ============================================================
-     MAIN
-     ============================================================ */
+  /* --------------------------------------------------------------
+     Main loop
+     -------------------------------------------------------------- */
+  let ticking = false;
 
   function onScroll() {
     if (ticking) return;
@@ -665,7 +385,6 @@
 
     window.requestAnimationFrame(function () {
       revealOnScroll();
-      updateCustomToc();
       ticking = false;
     });
   }
@@ -675,20 +394,18 @@
     createControls();
     initReveal();
 
-    tocModel = buildCustomToc();
-    updateCustomToc();
+    window.setTimeout(runLayoutSelfTest, 350);
+
 
     window.addEventListener("scroll", onScroll, { passive: true });
-
     window.addEventListener("resize", function () {
       revealOnScroll();
-      updateCustomToc();
     });
 
-    // Re-check after layout-sensitive content such as Mermaid has settled.
+    // Extra safety after Mermaid/layout/font changes settle.
     window.setTimeout(function () {
+      tocItems = collectTocItems();
       revealOnScroll();
-      updateCustomToc();
     }, 250);
   }
 

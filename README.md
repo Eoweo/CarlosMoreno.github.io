@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.9 — Swiss Research**
+**v8.0 — Swiss Research / Native Quarto TOC**
 
 The current architecture separates:
 
@@ -148,3 +148,14 @@ PORTFOLIO_REQUIREMENTS.md
 - Sidebar wrapper and `#TOC` use `margin-left: 0` and `padding-left: 0`.
 - The TOC cannot participate in normal vertical document flow on desktop.
 - Requirements now document the known causes of the “sidebar above content / space on the left” bug.
+
+
+## v8.0 — native Quarto TOC regression reset
+
+- Restored the working v6 philosophy: Quarto owns the TOC/page grid.
+- Uses `toc-location: left`, `toc-expand: 1`, `page-layout: full`.
+- Uses official Quarto `grid` width configuration.
+- Removed custom JS TOC reconstruction and wrapper positioning hacks.
+- Added `tests/run_layout_regression.py`.
+- Added actual-page diagnostics using `?layout-debug=1`.
+- Added `TOC_DIAGNOSTICS.md`.

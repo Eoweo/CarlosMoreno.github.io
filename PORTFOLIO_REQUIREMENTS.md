@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.9 — Swiss Research`  
+> **Versión base documentada:** `v8.0 — Swiss Research / Native Quarto TOC`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -3564,7 +3564,7 @@ La página no debe quedar dentro de un contenedor general centrado con márgenes
 
 ## REQ-LAYOUT-008 — El TOC se ancla al borde físico del viewport
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 La lista izquierda no debe depender de:
@@ -3605,11 +3605,14 @@ x = 0 px del navegador
 
 No se permite ninguna columna vacía antes del TOC en desktop.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 ## REQ-LAYOUT-009 — El contenido principal se posiciona respecto al ancho real del TOC
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 El contenido principal debe comenzar mediante:
@@ -3634,11 +3637,14 @@ El ancho del TOC es responsive:
 
 En pantallas muy grandes puede ajustarse moderadamente, pero el TOC debe seguir empezando en `left: 0`.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 ## REQ-LAYOUT-010 — Quarto page grid desactivado para el shell de escritorio
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 En desktop:
@@ -3656,6 +3662,9 @@ En desktop:
 
 La navegación interna de Quarto puede seguir existiendo, pero su grid central no debe controlar la posición lateral del TOC ni del cuerpo.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 
@@ -3664,7 +3673,7 @@ La navegación interna de Quarto puede seguir existiendo, pero su grid central n
 
 ## REQ-LAYOUT-011 — El TOC desktop debe usar `#quarto-sidebar-toc-left`
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 Cuando Quarto utiliza:
@@ -3696,11 +3705,14 @@ bottom: 0;
 
 No se debe utilizar `#quarto-margin-sidebar` como sustituto del TOC izquierdo.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 ## REQ-LAYOUT-012 — La lista izquierda no puede ocupar una fila superior en desktop
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 En resoluciones desktop (`>= 992px`) la lista lateral:
@@ -3734,11 +3746,14 @@ TOC / lista ocupando una fila completa superior
 PORTFOLIO / CONTENIDO
 ```
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 ## REQ-LAYOUT-013 — `#quarto-margin-sidebar` no debe reservar espacio
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P1`
 
 En el layout actual no se utilizan contenidos de margin sidebar.
@@ -3761,6 +3776,9 @@ Se pueden ocultar mientras se preserve:
 
 como navegación lateral funcional.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 
@@ -3769,7 +3787,7 @@ como navegación lateral funcional.
 
 ## REQ-LAYOUT-014 — El bloque completo del TOC comienza exactamente en `left: 0`
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 En desktop, el bloque que contiene la navegación izquierda debe comenzar en la coordenada física:
@@ -3827,11 +3845,14 @@ debe ser:
 
 La jerarquía interna puede utilizar indentación en subtítulos y subsubtítulos, pero **esa indentación ocurre dentro del bloque**, no desplazando el bloque completo.
 
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
+
 ---
 
 ## REQ-LAYOUT-015 — El TOC desktop nunca puede volver al flujo vertical
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 En resoluciones desktop (`>= 992 px`) el TOC debe permanecer:
@@ -3863,6 +3884,9 @@ TOC ocupando una fila superior completa
 ────────────────────────────────────────────────────────
 PORTFOLIO / CONTENIDO
 ```
+
+
+> **Superado en v8.0:** la implementación manual del shell/TOC fue retirada. Quarto vuelve a controlar la cuadrícula y la posición del TOC de forma nativa.
 
 ---
 
@@ -4043,6 +4067,184 @@ Cuando exista un problema visual del sidebar, revisar en este orden:
 ```
 
 No se debe mover la lista arriba como workaround.
+
+---
+
+
+
+# 23K. Retorno al TOC nativo de Quarto — v8.0
+
+## REQ-QUARTO-TOC-001 — Quarto controla la posición del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La posición de la lista izquierda debe ser gestionada por la implementación nativa de Quarto:
+
+```yaml
+toc: true
+toc-location: left
+```
+
+No se permite posicionar manualmente estos elementos:
+
+```text
+#quarto-sidebar-toc-left
+#quarto-content
+.page-columns
+main.content
+```
+
+mediante hacks de shell como:
+
+```css
+position: fixed;
+display: block;
+margin-left: <ancho sidebar>;
+width: calc(100vw - <ancho sidebar>);
+```
+
+La razón es que Quarto ya sitúa `.sidebar.toc-left` en su grid de página. Sobrescribir ese grid fue la causa principal de que el TOC apareciera como una fila superior.
+
+---
+
+## REQ-QUARTO-TOC-002 — Expansión nativa del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La expansión de títulos/subtítulos debe utilizar:
+
+```yaml
+toc-expand: 1
+```
+
+Quarto administra automáticamente:
+
+- sección activa;
+- expansión contextual;
+- colapso de niveles;
+- scroll/responsividad del TOC.
+
+El JavaScript propio no debe reconstruir el árbol del TOC ni reemplazar `#TOC`.
+
+---
+
+## REQ-QUARTO-LAYOUT-001 — `page-layout: full` para ocupar el ancho disponible
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se utiliza:
+
+```yaml
+page-layout: full
+```
+
+Quarto debe ampliar la región de contenido automáticamente hacia regiones no utilizadas, manteniendo ocupado el lado izquierdo cuando existe `toc-location: left`.
+
+---
+
+## REQ-QUARTO-GRID-001 — Anchuras mediante el grid oficial de Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La adaptación horizontal se realiza mediante:
+
+```yaml
+grid:
+  sidebar-width: 300px
+  body-width: 1600px
+  margin-width: 100px
+  gutter-width: 0.75rem
+```
+
+Estos valores pueden ajustarse, pero el método debe seguir siendo el `grid` oficial de Quarto en vez de reposicionar wrappers mediante CSS.
+
+---
+
+## REQ-QA-006 — Regression test del layout lateral
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El proyecto incluye:
+
+```text
+tests/native-toc-regression.html
+tests/run_layout_regression.py
+```
+
+La prueba debe ejecutarse al menos en:
+
+```text
+1920 px
+1440 px
+1100 px
+900 px
+```
+
+En desktop debe comprobar:
+
+```text
+TOC visible
+TOC ancho < 40% viewport
+TOC a la izquierda del contenido
+TOC y contenido no apilados verticalmente
+contenido > 45% viewport
+```
+
+En 900 px debe comprobar la respuesta móvil.
+
+---
+
+## REQ-QA-007 — Diagnóstico sobre la página Quarto real
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Añadiendo:
+
+```text
+?layout-debug=1
+```
+
+a cualquier URL renderizada, el sitio debe mostrar un panel PASS/FAIL con la geometría real del DOM.
+
+Ejemplo:
+
+```text
+portfolio.html?layout-debug=1
+```
+
+El panel debe informar:
+
+- existencia de `#quarto-sidebar-toc-left`;
+- rectángulo del sidebar;
+- rectángulo de `main.content`;
+- `grid-column` y `grid-row` calculados;
+- `display` del shell;
+- si TOC y contenido están lado a lado;
+- PASS o FAIL.
+
+---
+
+## REQ-QA-008 — Comparación con la implementación antigua funcional
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El estilo del TOC de v8.0 recupera deliberadamente el enfoque de v6:
+
+```text
+#TOC sticky
+estilos solo sobre #TOC y sus links
+sin cambiar el wrapper lateral
+sin cambiar la cuadrícula Quarto
+```
+
+Esta comparación debe conservarse en `TOC_DIAGNOSTICS.md` para evitar reintroducir el error.
 
 ---
 
@@ -4254,6 +4456,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.7 | 2026-09-12 | Eliminación de columna invisible izquierda de Quarto; TOC fijado a viewport x=0 | REQ-LAYOUT-008/009/010 | IMPLEMENTADO |
 | v7.8 | 2026-09-12 | TOC fijado usando el wrapper real `#quarto-sidebar-toc-left` | REQ-LAYOUT-011/012/013 | IMPLEMENTADO |
 | v7.9 | 2026-09-12 | Bloque TOC con left/margin/padding izquierdo en 0 px y diagnóstico explícito | REQ-LAYOUT-014/015, REQ-DIAG-001/002 | IMPLEMENTADO / REQUERIDO |
+| v8.0 | 2026-09-12 | Retorno al TOC/layout nativo de Quarto + tests de regresión y diagnóstico real | REQ-QUARTO-TOC-001/002, REQ-QUARTO-LAYOUT-001, REQ-QUARTO-GRID-001, REQ-QA-006/007/008 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -4292,10 +4495,10 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 25. Portfolio en el navbar debe enlazar al portafolio técnico.
 26. Home y Contact deben usar sintaxis de componentes segura para Quarto/Pandoc.
 27. Nunca debe aparecer HTML literal como código visible.
-28. El acordeón lateral debe expandir automáticamente el grupo que contiene el subtítulo visible.
-29. El TOC dinámico debe construirse desde headings reales, no depender del árbol interno de Quarto.
-30. La expansión principal debe usar <details>.open.
-31. Si falla el TOC personalizado, el TOC nativo de Quarto debe quedar intacto.
+28. El TOC lateral debe expandir automáticamente el grupo que contiene el subtítulo visible usando la funcionalidad nativa de Quarto.
+29. El TOC no debe reconstruirse mediante JavaScript propio.
+30. La expansión principal debe usar `toc-expand: 1` de Quarto.
+31. Quarto debe conservar el control del wrapper y de la cuadrícula del TOC.
 32. CSS y JS deben mantenerse consolidados, sin implementaciones históricas duplicadas.
 33. El TOC de portfolio.qmd debe tener exactamente seis títulos principales, en el orden definido por REQ-PORTFOLIO-TOC-001.
 34. Teaching, Leadership, Meldic, Skills, Engineering approach y Contact no deben aparecer como títulos del TOC técnico.
@@ -4307,21 +4510,17 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 40. Portfolio debe ser el único índice general de proyectos.
 41. No debe existir Project Pages como nivel intermedio ni enlace de navbar.
 42. Cada proyecto del Portfolio debe tener acceso directo a su página detallada.
-43. En desktop el contenido debe abarcar body-start → screen-end y aprovechar la pantalla disponible.
-44. Los gutters deben ser dinámicos mediante clamp(), no márgenes fijos grandes.
-45. El TOC debe quedar próximo al borde izquierdo real del navegador.
-46. El navbar debe comenzar en la parte superior sin una banda vacía.
-47. No debe existir ningún acceso a Project Pages.
-48. Cada proyecto del Portfolio debe terminar con su botón de detalle.
-49. El CV debe comenzar con dos botones de descarga y no tener sección Downloads al final.
-50. El sitio no debe mostrar buscador.
-51. En desktop el TOC debe comenzar físicamente en left: 0 del viewport.
-52. El contenido debe comenzar después del ancho real del TOC, no mediante el grid central de Quarto.
-53. El shell de escritorio no debe depender de page-columns para su posicionamiento horizontal.
-54. El bloque exterior del TOC debe comenzar exactamente en x=0 px.
-55. #quarto-sidebar-toc-left y #TOC deben tener margin-left:0 y padding-left:0.
-56. El TOC desktop nunca debe regresar al flujo vertical ni aparecer encima del contenido.
-57. Antes de cambiar el diseño por un bug del TOC se debe aplicar el diagnóstico de REQ-DIAG-001/002.
+43. El layout horizontal debe utilizar `page-layout: full` y el `grid` oficial de Quarto.
+44. No se deben reposicionar manualmente `#quarto-sidebar-toc-left`, `.page-columns` o `#quarto-content`.
+45. El navbar debe comenzar en la parte superior sin una banda vacía.
+46. No debe existir ningún acceso a Project Pages.
+47. Cada proyecto del Portfolio debe terminar con su botón de detalle.
+48. El CV debe comenzar con dos botones de descarga y no tener sección Downloads al final.
+49. El sitio no debe mostrar buscador.
+50. Debe existir un regression test del TOC en varias resoluciones.
+51. Debe poder probarse el layout real añadiendo `?layout-debug=1`.
+52. Antes de alterar el shell, comparar con la implementación v6 que funcionaba.
+53. El TOC debe ser nativo de Quarto: `toc-location: left` + `toc-expand: 1`.
 ```
 
 ---
@@ -4334,7 +4533,6 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 | Portfolio principal | `index.qmd` |
 | CV | `cv.qmd` |
 | Contact | `contact.qmd` |
-| Índice proyectos | `projects/index.qmd` |
 | Tesis | `projects/thesis.qmd` |
 | CYBATHLON | `projects/cybathlon.qmd` |
 | CandelStim | `projects/candel.qmd` |
@@ -4344,10 +4542,12 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 | FPGA | `projects/fpga.qmd` |
 | Vscan | `projects/vscan.qmd` |
 | Diseño global | `assets/site.css` |
-| Animaciones y navegación dinámica | `assets/site-scripts.html` |
+| Animaciones, controles y diagnóstico de layout | `assets/site-scripts.html` |
 | Preview local | `portfolio_preview.html` |
 | Deploy | `.github/workflows/publish.yml` |
 | Imágenes | `assets/images/` |
+| Diagnóstico TOC | `TOC_DIAGNOSTICS.md` |
+| Test layout | `tests/run_layout_regression.py` |
 
 ---
 
@@ -4381,7 +4581,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.9 Swiss Research
+Version: v8.0 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
