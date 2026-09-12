@@ -5743,7 +5743,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.9 Swiss Research / TOC + CV Compile Fix
+Version: v8.10 Swiss Research / Robust CV Raw HTML + Compact Skills
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -5852,7 +5852,7 @@ Esto aplica especialmente a títulos de secciones del contenido principal y se i
 La versión vigente después de esta modificación es:
 
 ```text
-Version: v8.9 Swiss Research / TOC + CV Compile Fix
+Version: v8.10 Swiss Research / Robust CV Raw HTML + Compact Skills
 Base funcional: v8.6 WAAPI Reveal + v8.4 validated TOC geometry
 ```
 
@@ -6119,4 +6119,142 @@ Swiss Wipe animation
 project pages
 contact.qmd
 index.qmd
+```
+
+
+---
+
+# 102. Registro incremental — v8.10
+
+## VERSION 8.10 — Robust CV raw HTML + compact Technical Skills
+
+### REQ-CV-008 — Los bloques HTML del CV deben usar raw HTML explícito de Pandoc
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El error observado en `cv.html` mostraba etiquetas HTML impresas como texto o dentro de cajas de código, por ejemplo:
+
+```text
+<div class="cv-kicker">...
+<article class="cv-summary-card">...
+<span>...</span>
+<a class="project-page-button">...
+```
+
+La causa es que HTML anidado e indentado puede dejar de pertenecer al mismo raw HTML block después de ciertos saltos de línea y terminar interpretado como Markdown/code block.
+
+A partir de v8.10, cada bloque visual del CV debe estar encapsulado explícitamente como:
+
+````markdown
+```{=html}
+<section class="cv-card-grid">
+  ...
+</section>
+```
+````
+
+Esto obliga a Pandoc/Quarto a emitir el contenido como HTML sin reinterpretar la indentación.
+
+No se debe volver a confiar únicamente en HTML anidado libre dentro del `.qmd` para estas composiciones complejas.
+
+### REQ-QA-017 — El test del CV debe usar el parser Markdown normal
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El test anterior utilizó una configuración demasiado permisiva (`+raw_html`) y no reprodujo fielmente el fallo observado.
+
+La validación v8.10 debe ejecutar:
+
+```bash
+pandoc -f markdown -t html5 cv.qmd
+```
+
+sin forzar extensiones especiales.
+
+El resultado solo es válido si:
+
+```text
+<pre><code> con etiquetas HTML escapadas = 0
+&lt;div class="cv-..." = 0
+&lt;article class="cv-..." = 0
+&lt;span class="cv-..." = 0
+```
+
+### REQ-CV-009 — Technical Skills más compacto verticalmente
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Solo la sección `Technical Skills` debe utilizar una variante compacta:
+
+```html
+<section class="cv-card-grid cv-skill-grid ...">
+```
+
+Valores de referencia desktop:
+
+```css
+.cv-skill-grid .cv-card {
+    min-height: 132px;
+    padding: .78rem .95rem;
+}
+```
+
+Además:
+
+```text
+icono más pequeño
+menor margen bajo icono
+menor margen de H3
+line-height más compacto
+```
+
+No se debe reducir globalmente la altura de las tarjetas de Research, Professional Experience, Selected Projects o Leadership.
+
+### REQ-PORTFOLIO-TOC-006 — La corrección del CV no modifica el TOC aprobado
+
+**Estado:** `VERIFICADO`  
+**Prioridad:** `P0`
+
+La lista del Portfolio permanece exactamente según `REQ-PORTFOLIO-TOC-001`:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+    Objective 1 — Ex Vivo Perfusion Platform
+    Objective 2 — Baseline Dataset without ICG
+    Objective 3 — ICG-NIR Functional Marker
+
+ROBOTICS & REHABILITATION
+ORGAN PRESERVATION & TRANSPLANTATION
+MEDICAL IMAGING & AI
+EMBEDDED SYSTEMS & FPGA
+CAD & PROTOTYPING
+```
+
+Los H3 siguen excluidos mediante `toc-depth: 2`.
+
+### Archivos modificados en v8.10
+
+```text
+cv.qmd
+assets/site.css
+PORTFOLIO_REQUIREMENTS.md
+README.md
+BUILD_VALIDATION.md
+portfolio_preview.html
+```
+
+No se modifican:
+
+```text
+portfolio.qmd
+assets/site-scripts.html
+_quarto.yml
+TOC portal/runtime geometry
+Swiss Wipe animation
+project pages
+index.qmd
+contact.qmd
 ```

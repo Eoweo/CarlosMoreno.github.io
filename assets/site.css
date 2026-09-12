@@ -1735,3 +1735,45 @@ body.swiss-compact .cv-summary-card {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ================================================================
+   VERSION 8.10 — CV COMPILE FIX + COMPACT TECHNICAL SKILLS
+   Only Technical Skills cards are vertically compacted.
+   ================================================================ */
+
+.cv-skill-grid {
+  gap: .62rem;
+  margin-top: .9rem;
+  margin-bottom: 1.45rem;
+}
+
+.cv-skill-grid .cv-card {
+  min-height: 132px;
+  padding: .78rem .95rem;
+}
+
+.cv-skill-grid .cv-card-icon {
+  margin-bottom: .55rem;
+  --cv-icon-size: 1.15rem;
+}
+
+.cv-skill-grid .cv-card h3 {
+  margin-top: 0;
+  margin-bottom: .28rem;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.cv-skill-grid .cv-card p {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: .83rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 620px) {
+  .cv-skill-grid .cv-card {
+    min-height: 0;
+  }
+}

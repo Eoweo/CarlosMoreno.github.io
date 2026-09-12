@@ -1,61 +1,19 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v8.9 — TOC + CV Fix</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v8.10 CV Compile Fix</title>
 <style>
-:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-aside{position:fixed;left:0;top:0;bottom:0;width:320px;padding:20px;border-right:1px solid var(--border);background:#202020;color:#ddd}
-aside h4{font-size:.75rem;letter-spacing:.08em;margin:0 0 18px;color:#ddd}
-.group{margin:17px 0 7px;font-size:.76rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-.group.active{color:#ff7665;border-left:4px solid #ff7665;padding-left:12px}
-.child{display:block;padding:7px 0 7px 26px;color:#ddd;font-size:.9rem}
-.plus{float:right;color:#bbb}
-main{margin-left:320px;padding:34px 26px;max-width:1400px}
-h1{font-size:3rem;margin:0 0 25px;text-transform:uppercase}
-h2{border-top:4px solid var(--text);padding-top:.16rem;margin-top:2.2rem;text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{padding:18px;border:1px solid var(--border);background:#fffdf8;min-height:170px}
-.label{font-size:.7rem;color:var(--accent);text-transform:uppercase;font-weight:900;letter-spacing:.06em}
-.tag{display:inline-block;padding:4px 7px;border:1px solid var(--border);margin:8px 5px 0 0;font-size:.75rem}
-@media(max-width:850px){aside{display:none}main{margin:0}.grid{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<aside>
-  <h4>ON THIS PAGE</h4>
-  <div class="group active">MASTER'S RESEARCH — LIVER VIABILITY &amp; ICG-NIR <span class="plus">−</span></div>
-  <span class="child">Objective 1 — Ex Vivo Perfusion Platform</span>
-  <span class="child">Objective 2 — Baseline Dataset without ICG</span>
-  <span class="child">Objective 3 — ICG-NIR Functional Marker</span>
-
-  <div class="group">ROBOTICS &amp; REHABILITATION <span class="plus">+</span></div>
-  <div class="group">ORGAN PRESERVATION &amp; TRANSPLANTATION <span class="plus">+</span></div>
-  <div class="group">MEDICAL IMAGING &amp; AI <span class="plus">+</span></div>
-  <div class="group">EMBEDDED SYSTEMS &amp; FPGA <span class="plus">+</span></div>
-  <div class="group">CAD &amp; PROTOTYPING <span class="plus">+</span></div>
-</aside>
-<main>
-  <h1>Curriculum Vitae</h1>
-  <p>The CV now uses explicit semantic HTML rather than nested fenced divs, preventing raw <code>:::</code> markup from appearing in the rendered page.</p>
-
-  <h2>Research &amp; Development</h2>
-  <div class="grid">
-    <article class="card">
-      <div class="label">Main research line</div>
-      <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
-      <p>Development of an ex vivo liver perfusion platform and ICG-NIR functional assessment.</p>
-      <span class="tag">Ex vivo perfusion</span><span class="tag">ICG-NIR</span>
-    </article>
-    <article class="card">
-      <div class="label">Preservation research</div>
-      <h3>Borealis UC — Organ Supercooling</h3>
-      <p>Organ preservation, supercooling strategies and thermal control.</p>
-      <span class="tag">Organ preservation</span><span class="tag">Thermal control</span>
-    </article>
-  </div>
-</main>
-</body>
-</html>
+:root{--bg:#f7f5ef;--surface:#fffdf8;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+.wrap{max-width:1400px;margin:auto}h1{font-size:3rem;text-transform:uppercase;margin:0 0 20px}h2{border-top:4px solid var(--text);padding-top:.16rem;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.62rem}.card{border:1px solid var(--border);background:var(--surface);padding:.78rem .95rem;min-height:132px}.icon{color:var(--accent);font-weight:900;margin-bottom:.45rem}.card h3{font-size:1rem;margin:.1rem 0 .28rem}.card p{font-size:.83rem;line-height:1.4;color:var(--muted);margin:0}.ok{border-left:4px solid var(--accent);padding:12px;background:var(--surface);margin-bottom:22px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.card{min-height:0}}
+</style></head><body><div class="wrap">
+<h1>Curriculum Vitae</h1>
+<div class="ok"><b>Compile fix:</b> complex CV blocks are emitted through explicit Pandoc raw-HTML blocks, so tags are no longer printed as code.</div>
+<h2>Technical Skills</h2>
+<div class="grid">
+<div class="card"><div class="icon">◫</div><h3>Electronics &amp; Embedded Systems</h3><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></div>
+<div class="card"><div class="icon">&lt;/&gt;</div><h3>Programming &amp; Data</h3><p>Python, C++, acquisition, signal processing and image processing.</p></div>
+<div class="card"><div class="icon">▣</div><h3>FPGA &amp; Digital Design</h3><p>Zybo Z10, Vivado and VHDL.</p></div>
+<div class="card"><div class="icon">♡</div><h3>Biomedical Engineering</h3><p>Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.</p></div>
+</div></div></body></html>

@@ -249,3 +249,12 @@ This version keeps the validated layout / TOC / animation base from v8.6 and int
 - Replaced fragile nested Pandoc fenced divs with explicit semantic HTML (`section`, `article`, `div`) to prevent literal `::: {.class}` compilation artifacts.
 - Added a Pandoc render test that fails if fenced-div markup leaks into `cv.html`.
 - No changes to the validated TOC portal geometry or reveal animation.
+
+
+## v8.10
+
+- Fixed the remaining CV rendering problem by wrapping every complex CV HTML block in explicit Pandoc raw-HTML fences (`{=html}`).
+- Validation now uses plain `pandoc -f markdown`, matching the failure mode more closely.
+- Technical Skills cards now use a compact `cv-skill-grid` variant with 132 px reference minimum height.
+- Other CV cards keep their previous dimensions.
+- Portfolio TOC hierarchy and validated layout/animation systems are unchanged.

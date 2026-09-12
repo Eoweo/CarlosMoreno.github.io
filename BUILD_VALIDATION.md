@@ -1,14 +1,14 @@
-# Build validation — v8.9
+# Build validation — v8.10
 
 - QMD YAML: OK
-- Portfolio toc-depth = 2: YES
-- Canonical Portfolio TOC hierarchy: YES
-- H3 content preserved: YES
-- H3 excluded from visible TOC by toc-depth=2: YES
-- Pandoc CV compile: OK
-- Literal fenced-div leakage in compiled CV: 0
-- CV card labels rendered as HTML: YES
+- Plain Pandoc CV compile: OK
+- Escaped CV HTML inside code blocks: 0
+- Escaped cv-* HTML tags: 0
+- CV summary cards rendered: YES
 - CV project buttons rendered: YES
-- JavaScript syntax: OK
+- Raw HTML fences leaked to output: NO
+- Compact skill grid class: YES
+- Skill card min-height 132px: YES
 - CSS braces balanced: YES
-- Unrelated functional files changed: 0
+- Portfolio unchanged from v8.9: YES
+- Runtime/animation JS unchanged: YES

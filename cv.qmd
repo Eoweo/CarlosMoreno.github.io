@@ -7,13 +7,16 @@ toc-depth: 2
 page-layout: full
 ---
 
+```{=html}
 <div class="cv-download-actions">
   <a class="cv-download-button" href="downloads/Carlos_Moreno_Research_CV.pdf" download="Carlos_Moreno_Research_CV.pdf">Download Research CV</a>
   <a class="cv-download-button" href="downloads/Carlos_Moreno_Engineering_CV.pdf" download="Carlos_Moreno_Engineering_CV.pdf">Download Engineering CV</a>
 </div>
+```
 
 # Professional Profile
 
+```{=html}
 <section class="cv-hero swiss-reveal">
   <div class="cv-hero-copy">
     <div class="cv-kicker">Biomedical &amp; Electrical Engineering</div>
@@ -36,7 +39,9 @@ page-layout: full
     </article>
   </div>
 </section>
+```
 
+```{=html}
 <section class="cv-chip-grid swiss-reveal">
   <article class="cv-chip">
     <span class="cv-chip-icon cv-icon-microscope" aria-hidden="true"></span>
@@ -62,9 +67,11 @@ page-layout: full
     <p>CAD, prototyping, testing, debugging and iteration from data.</p>
   </article>
 </section>
+```
 
 # Education
 
+```{=html}
 <section class="cv-timeline swiss-reveal">
   <article class="cv-timeline-card">
     <div class="cv-timeline-date">2025–2027</div>
@@ -93,9 +100,11 @@ page-layout: full
     </div>
   </article>
 </section>
+```
 
 # Research & Development
 
+```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card with-button">
     <span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span>
@@ -138,9 +147,11 @@ page-layout: full
     <p>This same structure organizes my portfolio and guides how I approach technical development.</p>
   </article>
 </section>
+```
 
 # Professional Experience
 
+```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
     <span class="cv-card-icon cv-icon-medical" aria-hidden="true"></span>
@@ -158,9 +169,11 @@ page-layout: full
     <div class="cv-card-tags"><span>Technical support</span><span>Engineering</span><span>Medical equipment</span></div>
   </article>
 </section>
+```
 
 # Selected Engineering Projects
 
+```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card with-button">
     <span class="cv-card-icon cv-icon-robot" aria-hidden="true"></span>
@@ -194,9 +207,11 @@ page-layout: full
     <a class="project-page-button" href="projects/vscan.html">View project detail</a>
   </article>
 </section>
+```
 
 # Teaching & Leadership
 
+```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
     <span class="cv-card-icon cv-icon-magnet" aria-hidden="true"></span>
@@ -226,10 +241,12 @@ page-layout: full
     <p>Comfortable working across research, engineering and implementation teams.</p>
   </article>
 </section>
+```
 
 # Technical Skills
 
-<section class="cv-card-grid swiss-reveal">
+```{=html}
+<section class="cv-card-grid cv-skill-grid swiss-reveal">
   <article class="cv-card"><span class="cv-card-icon cv-icon-circuit" aria-hidden="true"></span><h3>Electronics &amp; Embedded Systems</h3><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></article>
   <article class="cv-card"><span class="cv-card-icon cv-icon-code" aria-hidden="true"></span><h3>Programming &amp; Data</h3><p>Python, C++, acquisition, signal processing and image processing.</p></article>
   <article class="cv-card"><span class="cv-card-icon cv-icon-cpu" aria-hidden="true"></span><h3>FPGA &amp; Digital Design</h3><p>Zybo Z10, Vivado and VHDL.</p></article>
@@ -237,9 +254,11 @@ page-layout: full
   <article class="cv-card"><span class="cv-card-icon cv-icon-ruler" aria-hidden="true"></span><h3>CAD &amp; Prototyping</h3><p>Fusion 360, CAD, 3D printing, machining and electromechanical integration.</p></article>
   <article class="cv-card"><span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span><h3>Engineering approach</h3><p>Implementation-oriented, systems-level thinking and iterative validation.</p></article>
 </section>
+```
 
 # Languages
 
+```{=html}
 <section class="cv-language-grid swiss-reveal">
   <article class="cv-language-card">
     <div class="cv-language-title"><span class="cv-ui-icon cv-icon-globe" aria-hidden="true"></span>Spanish</div>
@@ -251,8 +270,11 @@ page-layout: full
     <p>B2 / ALTE 3.</p>
   </article>
 </section>
+```
 
+```{=html}
 <div class="cv-note">
   <span class="cv-inline-icon cv-icon-lightbulb" aria-hidden="true"></span>
   <p>The CV page is intentionally visual and scannable: the same information base is organized into panels, cards, a timeline and project entry points rather than a plain sequential list.</p>
 </div>
+```
