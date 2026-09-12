@@ -178,3 +178,15 @@ PORTFOLIO_REQUIREMENTS.md
 - Adds A/B mode: `?layout-debug=1&layout-fix=0`.
 - Normal test mode `?layout-debug=1` reports both baseline and post-fix geometry.
 - Reapplies the geometry after short/long settle windows and on resize.
+
+
+## v8.3
+
+- The v8.2 A/B test proved the left/top geometry repair itself works.
+- The remaining white block is treated as a stale Quarto TOC layout slot / occlusion issue.
+- The real `#TOC` is now moved into a body-level `#portfolio-toc-shell` instead of only being fixed in its original grid slot.
+- Empty original TOC wrappers are hidden and non-empty wrappers are neutralized behind the main content.
+- Main content is layered above stale layout boxes.
+- Right-edge testing now uses `document.documentElement.clientWidth`, excluding the vertical scrollbar.
+- The debug test now probes for visual occlusion using `document.elementsFromPoint()`.
+- Custom Quarto `grid:` widths were removed from `_quarto.yml`.

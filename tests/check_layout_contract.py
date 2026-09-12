@@ -10,15 +10,14 @@ cfg = yaml.safe_load((root / "_quarto.yml").read_text(encoding="utf-8"))
 checks = {
     "toc-location left": cfg["format"]["html"].get("toc-location") == "left",
     "toc-expand 1": cfg["format"]["html"].get("toc-expand") == 1,
-    "runtime CSS class": "portfolio-runtime-layout" in css,
-    "runtime geometry function": "enforceRuntimeDesktopGeometry" in js,
-    "baseline measurement": "runtimeGeometryState.baseline" in js,
-    "real toc direct positioning": 'setImportant(toc, "position", "fixed")' in js,
-    "real toc left zero": 'setImportant(toc, "left", "0px")' in js,
-    "header fixed top zero": 'setImportant(header, "top", "0px")' in js,
-    "main spans screen lines": 'setImportant(main, "grid-column", "screen-start / screen-end")' in js,
-    "A/B layout-fix switch": 'params.get("layout-fix") === "0"' in js,
-    "hard runtime pass": "result.checks.fixApplied" in js,
+    "custom grid removed": "grid" not in cfg["format"]["html"],
+    "TOC portal CSS": "#portfolio-toc-shell" in css,
+    "TOC portal JS": "ensureTocPortal" in js,
+    "stale slot cleanup": "data-portfolio-stale-toc-slot" in js,
+    "main above stale slots": 'setImportant(main, "z-index", "2")' in js,
+    "clientWidth right gap": "document.documentElement.clientWidth" in js,
+    "occlusion probe": "elementsFromPoint" in js,
+    "ancestor diagnostics": "tocAncestorChain" in js,
 }
 
 for name, ok in checks.items():

@@ -31,10 +31,5 @@ format:
     include-after-body: assets/site-scripts.html
     page-layout: full
     toc-expand: 1
-    grid:
-      sidebar-width: 300px
-      body-width: 1600px
-      margin-width: 100px
-      gutter-width: 0.75rem
 execute:
   freeze: auto

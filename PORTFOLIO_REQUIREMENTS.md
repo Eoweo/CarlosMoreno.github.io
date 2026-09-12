@@ -4632,6 +4632,237 @@ para evitar que scripts posteriores de Quarto/Bootstrap restituyan posiciones an
 ---
 
 
+
+# 23N. Eliminación del bloque blanco residual — v8.3
+
+## REQ-LAYOUT-026 — El TOC debe salir físicamente del slot Quarto original
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La prueba v8.2 confirmó que la corrección geométrica principal funciona:
+
+```text
+toc.left       = 0 px
+header.top     = 0 px
+navbar.top     = 0 px
+contentGap     = 14.4 px
+fixApplied     = true
+```
+
+Sin embargo, visualmente permaneció un bloque blanco sobre la zona izquierda del contenido.
+
+En v8.3 el propio elemento:
+
+```text
+#TOC
+```
+
+se conserva, pero se mueve a un nuevo contenedor de nivel `body`:
+
+```text
+#portfolio-toc-shell
+```
+
+De este modo deja de participar físicamente en el slot/grid original de Quarto.
+
+---
+
+## REQ-LAYOUT-027 — Shell lateral independiente del grid Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop:
+
+```text
+#portfolio-toc-shell
+```
+
+debe ser:
+
+```css
+position: fixed;
+left: 0;
+top: altura-navbar;
+bottom: 0;
+```
+
+El shell controla:
+
+```text
+ancho
+scroll vertical
+background
+borde derecho
+z-index
+```
+
+El `#TOC` permanece dentro de este shell y mantiene sus enlaces/clases nativas.
+
+---
+
+## REQ-LAYOUT-028 — El slot TOC original no puede pintar sobre el contenido
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Después de mover `#TOC`, cualquier ancestro original que quede vacío debe marcarse como:
+
+```text
+data-portfolio-stale-toc-slot="empty"
+```
+
+y ocultarse.
+
+Si un wrapper no está vacío pero pertenece a la cadena original, debe marcarse como:
+
+```text
+data-portfolio-stale-toc-slot="wrapper"
+```
+
+y no puede pintar fondo/borde/sombra ni interceptar eventos sobre el cuerpo.
+
+---
+
+## REQ-LAYOUT-029 — El contenido debe pintar por encima de slots residuales
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`main.content` debe utilizar en desktop:
+
+```css
+position: relative;
+z-index: 2;
+background: var(--page-bg);
+```
+
+El TOC shell permanece por encima mediante un `z-index` mayor.
+
+Esto evita el patrón reportado en Quarto donde un bloque vertical asociado al TOC izquierdo cubre texto de contenido ancho.
+
+---
+
+## REQ-QA-011 — El right gap debe medirse contra `clientWidth`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El test anterior calculaba:
+
+```javascript
+window.innerWidth - main.right
+```
+
+pero `innerWidth` incluye el ancho de la scrollbar vertical.
+
+En la prueba real:
+
+```text
+window.innerWidth             = 2560
+documentElement.clientWidth   = 2545
+scrollbar                     = 15 px
+main.right                    = 2525
+```
+
+Por tanto el gap real de layout era:
+
+```text
+2545 - 2525 = 20 px
+```
+
+y no `35 px`.
+
+Desde v8.3:
+
+```javascript
+rightGap = document.documentElement.clientWidth - main.right
+```
+
+---
+
+## REQ-QA-012 — Detectar elementos que cubren el inicio del main
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El test debe utilizar:
+
+```javascript
+document.elementsFromPoint(...)
+```
+
+en varios puntos dentro de la zona izquierda de `main.content`.
+
+Debe reportar:
+
+```text
+occlusion.clear
+occlusion.probes
+```
+
+y `PASS` exige:
+
+```text
+noMainOcclusion = true
+```
+
+Esto permite detectar exactamente el problema visual del bloque blanco aunque las coordenadas de `main` sean correctas.
+
+---
+
+## REQ-QA-013 — Guardar la cadena de ancestros original del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La medición baseline debe registrar:
+
+```text
+tocAncestors
+```
+
+con:
+
+```text
+tag
+id
+class
+rect
+display
+position
+gridColumn
+zIndex
+backgroundColor
+```
+
+para identificar el wrapper que Quarto haya generado en cada versión.
+
+---
+
+## REQ-QUARTO-001 — No usar grid custom junto con toc-left salvo necesidad validada
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Se elimina de `_quarto.yml` la configuración custom:
+
+```yaml
+grid:
+  sidebar-width: ...
+  body-width: ...
+  margin-width: ...
+  gutter-width: ...
+```
+
+La documentación e issues de Quarto muestran antecedentes de interacción problemática entre `toc-location: left`, layouts full/screen y configuraciones de grid.
+
+La geometría final del proyecto se controla mediante el contrato runtime validado.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -4842,6 +5073,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v8.0 | 2026-09-12 | Retorno al TOC/layout nativo de Quarto + tests de regresión y diagnóstico real | REQ-QUARTO-TOC-001/002, REQ-QUARTO-LAYOUT-001, REQ-QUARTO-GRID-001, REQ-QA-006/007/008 | IMPLEMENTADO |
 | v8.1 | 2026-09-12 | Grid Quarto redefinido con page-start en x=0 y test geométrico numérico | REQ-LAYOUT-020/021/022, REQ-QA-006/007, REQ-NAVBAR-002 | IMPLEMENTADO |
 | v8.2 | 2026-09-12 | Corrección runtime del TOC/navbar con comparación baseline/post-fix y modo A/B | REQ-LAYOUT-023/024/025, REQ-NAVBAR-003, REQ-QA-008/009/010 | IMPLEMENTADO |
+| v8.3 | 2026-09-12 | TOC portalizado fuera del grid Quarto, limpieza de slot blanco, test de oclusión y right-gap corregido por clientWidth | REQ-LAYOUT-026/027/028/029, REQ-QA-011/012/013, REQ-QUARTO-001 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -4966,7 +5198,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.2 Swiss Research / Native Quarto TOC
+Version: v8.3 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

@@ -1,20 +1,14 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v8.2 — Runtime Geometry</title>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>v8.3 TOC portal</title>
 <style>
-:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-header{height:48px;position:fixed;left:0;right:0;top:0;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border);background:var(--bg);z-index:20}.brand{font-weight:900}.nav{margin-left:20px;font-weight:700}
-#TOC{position:fixed;left:0;top:48px;bottom:0;width:288px;overflow:auto;margin:0;padding:12px 8px 25px 0;border-right:1px solid var(--border);background:var(--bg)}.title{font-size:.72rem;font-weight:900}.group{margin-top:14px;color:var(--accent);font-size:.72rem;font-weight:900}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}
-main{margin:0 16px 0 300px;padding:78px 0 60px;width:auto}h1{font-size:3rem;text-transform:uppercase;margin:0 0 15px}h2{font-size:1.4rem;border-top:4px solid var(--text);padding-top:12px;margin-top:36px;text-transform:uppercase}p{color:var(--muted);line-height:1.7;max-width:125ch}.wide{height:300px;background:var(--surface);border:1px dashed var(--border);display:grid;place-items:center;margin-top:22px}
-</style>
-</head>
-<body>
-<header><div class="brand">Carlos Moreno Rojas</div><div class="nav">Portfolio　CV　Contact</div></header>
-<nav id="TOC"><div class="title">ON THIS PAGE</div><div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div><span class="child">Objective 1 — Perfusion Platform</span><span class="child">Objective 2 — Baseline Dataset</span></nav>
-<main><h1>Portfolio</h1><p>v8.2 positions the actual rendered TOC directly at x=0 and fixes the navbar at y=0 after Quarto finishes rendering.</p><h2>Expected result</h2><div class="wide">TOC left = 0px │ navbar top = 0px │ content reaches right edge</div></main>
-</body>
-</html>
+:root{--bg:#f7f5ef;--text:#111;--muted:#666;--border:#cbc7bc;--accent:#d63230}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);font-family:Arial;color:var(--text)}
+header{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border);background:var(--bg);z-index:20}
+aside{position:fixed;left:0;top:48px;bottom:0;width:288px;padding:12px 8px 20px 0;border-right:1px solid var(--border);overflow:auto}
+main{margin-left:300px;margin-right:10px;padding-top:78px;min-height:100vh}h1{font-size:3rem;margin:0}.group{font-size:.72rem;font-weight:900;color:var(--accent);margin-top:15px}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}.wide{height:320px;background:#ece9e0;border:1px dashed var(--border);display:grid;place-items:center;margin-top:25px}
+</style></head><body>
+<header><b>Carlos Moreno Rojas</b>&nbsp;&nbsp; Portfolio　CV　Contact</header>
+<aside><b>ON THIS PAGE</b><div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div><span class="child">Objective 1</span><span class="child">Objective 2</span></aside>
+<main><h1>PORTFOLIO</h1><p>The TOC is now in an independent body-level shell. No original Quarto sidebar slot remains above the main text.</p><div class="wide">FULL-WIDTH CONTENT — NO WHITE OCCLUSION BAR</div></main>
+</body></html>

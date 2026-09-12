@@ -1,113 +1,108 @@
-# TOC Diagnostics — v8.2
+# TOC Diagnostics — v8.3
 
-## Evidencia recibida desde la página real
+## Conclusión de las dos pruebas v8.2
 
-v8.1 produjo:
+### Prueba A — `layout-fix=0`
 
-```text
-viewport.width   = 2560
-toc.left         = 292.5
-toc.width        = 280
-main.left        = 585.3
-main.right       = 2272.5
-right gap        = 287.5
-
-header.top       = 53
-navbar.top       = 53
-navbar.height    = 53
-```
-
-El `gridTemplateColumns` seguía siendo el generado por Quarto:
+Fue una prueba de control y era esperable que fallara:
 
 ```text
-[screen-start] 12.75
-[screen-start-inset] 259.75
-[page-start] 60
-[page-start-inset] 180
-[body-start-outset] 60
-[body-start] 12.75
-[body-content-start] 1574.5
-...
+fixApplied = false
+toc.left   = 292.5 px
+header.top = 64 px
+main width = 940 px
 ```
 
-Esto confirma que la corrección CSS de v8.1 no modificó el grid calculado de la página real.
+Esto reproduce el layout original centrado de Quarto.
 
-## Estrategia v8.2
+### Prueba B — corrección activada
 
-No se reconstruye el TOC.
-
-Se conserva:
+La reparación geométrica principal sí funcionó:
 
 ```text
-contenido del TOC generado por Quarto
-enlaces
-scroll spy nativo
-toc-expand
+fixApplied = true
+
+toc.left       = 0 px
+toc.width      = 306 px
+header.top     = 0 px
+navbar.top     = 0 px
+navbar.height  = 48 px
+main.left      = 320.4 px
+content gap    = 14.4 px
 ```
 
-Después del render:
+El único `FAIL` numérico anterior era:
 
 ```text
-#TOC        → fixed, left 0
-#header     → fixed, top 0
-main        → screen-start / screen-end + margin-left del TOC
-body        → padding-top = altura del navbar
+rightGap = 35 px
 ```
 
-Las propiedades se aplican mediante:
+pero el cálculo usaba `window.innerWidth = 2560`, que incluye una scrollbar de 15 px.
 
-```javascript
-element.style.setProperty(name, value, "important")
-```
-
-de modo que no dependen del orden de las hojas CSS.
-
-## Test A/B
-
-### Quarto sin corrección
+El ancho CSS real era:
 
 ```text
-portfolio.html?layout-debug=1&layout-fix=0
+documentElement.clientWidth = 2545 px
 ```
 
-Debe mostrar las medidas originales de Quarto.
+por lo que el gap real era 20 px.
 
-### Quarto + corrección v8.2
+## Qué explica el bloque blanco
+
+La captura muestra que, aun cuando `main.left` ya era correcto, una caja blanca seguía pintándose sobre la zona inicial del `main`.
+
+Esto coincide con un bug abierto de Quarto sobre `toc-location: left` y contenido screen/full-width: se ha reportado una barra vertical blanca que cubre texto pero no necesariamente gráficos.
+
+Además, Quarto mueve el `nav#TOC` a un target generado durante el post-procesado. Mover solamente `#TOC` con `position: fixed` puede dejar su wrapper/slot original en el grid.
+
+## Solución v8.3
+
+```text
+Quarto genera #TOC
+        ↓
+guardar parent/ancestros originales
+        ↓
+crear #portfolio-toc-shell en <body>
+        ↓
+mover EL MISMO #TOC al nuevo shell
+        ↓
+ocultar wrappers originales vacíos
+        ↓
+main.content z-index:2
+        ↓
+testear oclusión con elementsFromPoint()
+```
+
+No se clona el TOC, por lo que se mantienen los enlaces y clases que Quarto usa para el scroll-spy.
+
+## Nuevo criterio de PASS
+
+Abrir:
 
 ```text
 portfolio.html?layout-debug=1
 ```
 
-Debe mostrar:
+Debe cumplir:
 
 ```text
 fixApplied = true
-tocLeftPx ≈ 0
-rightGapPx <= 32
-headerTopPx ≈ 0
-navbarTopPx ≈ 0
+tocPortalCreated = true
+tocLeftPx <= 2
+contentGapPx <= 28
+rightGapPx <= 18        # medido contra clientWidth
+headerTopPx <= 1
+navbarTopPx <= 1
+noMainOcclusion = true
 ```
 
-El panel también incluye:
+El resultado ahora incluye:
 
 ```text
-baseline
+baseline.tocAncestors
+runtimeValues.staleSlots
+occlusion.probes
+scrollbarWidthPx
 ```
 
-para comparar el antes y después dentro del mismo render.
-
-## Contrato PASS desktop
-
-```text
-fixApplied                    = true
-abs(tocLeftPx)                <= 2
-tocMarginLeft                 <= 1
-tocPaddingLeft                <= 1
-contentGapPx                  -1 .. 28
-rightGapPx                    -1 .. 32
-abs(headerTopPx)              <= 1
-abs(navbarTopPx)              <= 1
-navbarHeightPx                <= 50
-shell starts after header     sí
-notStacked                    sí
-```
+Si aún aparece una caja blanca, copiar esas cuatro secciones.
