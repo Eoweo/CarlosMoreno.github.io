@@ -1,26 +1,13 @@
-# Build validation — v8.7 Dynamic CV
+# Build validation — v8.8
 
-## Scope
-
-This release modifies only:
-
-- heading top-rule spacing;
-- `cv.qmd` presentation;
-- CV-specific CSS;
-- requirements / documentation.
-
-Validated layout, TOC portal and WAAPI reveal behavior are preserved from v8.6.
-
-## Results
-
-- PASS: Reduced heading top padding
-- PASS: Dynamic CV hero
-- PASS: Education timeline
-- PASS: CV card grid
-- PASS: Emoji / icon markers
-- PASS: Research CV download preserved
-- PASS: Engineering CV download preserved
-- PASS: Requirements current version v8.7
-- PASS: QMD YAML errors = 0
-- PASS: Global JavaScript syntax
-- PASS: CSS braces balanced
+- QMD YAML: OK
+- JavaScript unchanged/syntax: OK
+- CSS braces balanced: YES
+- Heading padding = .16rem: YES
+- Vector icon masks present: YES
+- CV emoji markers remaining: 0
+- CV vector icon spans: 32
+- Portfolio TOC exact hierarchy preserved: YES
+- Portfolio toc-ignore sections preserved: YES
+- Unrelated functional files changed: 0
+- Pandoc CV icon render: OK (32 icon references in source)

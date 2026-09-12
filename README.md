@@ -229,3 +229,13 @@ This version keeps the validated layout / TOC / animation base from v8.6 and int
 - a more dynamic CV page built with hero, card and timeline sections;
 - lighter section-title spacing (smaller gap below the top rule);
 - moderate emoji / textual icon cues for faster reading.
+
+
+## v8.8
+
+- Reduced the Swiss rule-to-title spacing to `0.16rem`.
+- Kept the CV in a visual card/timeline structure rather than a linear list.
+- Replaced all CV emoji markers with self-contained monochrome vector icons using CSS SVG masks.
+- Added vector download icons to both CV download buttons.
+- Re-validated the Portfolio TOC against the exact six-title hierarchy documented in `PORTFOLIO_REQUIREMENTS.md`.
+- No changes to TOC geometry, navbar, runtime portal, project content or Swiss Wipe animation.

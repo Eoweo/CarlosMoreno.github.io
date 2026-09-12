@@ -5760,7 +5760,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.7 Swiss Research / Dynamic CV
+Version: v8.8 Swiss Research / Dynamic CV + Vector Icons
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -5869,7 +5869,7 @@ Esto aplica especialmente a títulos de secciones del contenido principal y se i
 La versión vigente después de esta modificación es:
 
 ```text
-Version: v8.7 Swiss Research / Dynamic CV
+Version: v8.8 Swiss Research / Dynamic CV + Vector Icons
 Base funcional: v8.6 WAAPI Reveal + v8.4 validated TOC geometry
 ```
 
@@ -5878,7 +5878,7 @@ Cambios visuales vigentes:
 ```text
 Línea superior de headings → menor padding vertical
 CV → hero + summary cards + timeline + card grids
-Iconografía → emojis moderados y funcionales
+Iconografía → iconos vectoriales monocromos; emojis prohibidos en CV
 ```
 
 No se modificaron:
@@ -5892,4 +5892,190 @@ Swiss Wipe animation
 portfolio.qmd
 project pages
 contact.qmd
+```
+
+
+---
+
+# 100. Registro incremental — v8.8
+
+## VERSION 8.8 — Dynamic CV + vector icons + tighter heading spacing
+
+### Cambio solicitado
+
+Se mantiene toda la base funcional previamente validada y se modifican únicamente:
+
+1. la separación visual entre la línea superior Swiss y el título;
+2. la presentación de `cv.qmd`;
+3. la iconografía del CV;
+4. la verificación explícita de la jerarquía lateral de `portfolio.qmd`.
+
+### REQ-UI-021 — Línea Swiss más próxima al título
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La separación entre `border-top` y los títulos `H1/H2` del contenido principal debe ser menor que en v8.7.
+
+Valor de referencia:
+
+```css
+main.content h1:not(.title),
+main.content h2 {
+    padding-top: .16rem;
+}
+```
+
+La línea superior se conserva; solo se reduce el aire inmediatamente debajo de ella.
+
+### REQ-CV-004 — CV basado en bloques visuales
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`cv.qmd` debe conservar una composición equivalente a `contact.qmd` en cuanto a lectura visual:
+
+```text
+hero
+summary cards
+focus cards
+education timeline
+R&D cards
+experience cards
+selected project cards
+leadership cards
+skill cards
+language cards
+```
+
+No debe volver a un listado textual largo como forma principal de presentación.
+
+### REQ-CV-005 — Iconos vectoriales, no emojis
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La página CV no debe utilizar emojis como iconografía.
+
+Patrón prohibido:
+
+```text
+🔬 ⚙️ 🧠 🎓 🤖 📐 🇨🇱 🇬🇧
+```
+
+La iconografía debe usar elementos vectoriales monocromos autocontenidos:
+
+```text
+SVG mask icons
+```
+
+integrados en `assets/site.css`.
+
+Los iconos deben:
+
+- respetar `currentColor`;
+- adaptarse a modo claro/oscuro;
+- no requerir CDN;
+- no requerir JavaScript;
+- mantener estilo técnico y profesional;
+- utilizar `aria-hidden="true"` cuando sean decorativos.
+
+### REQ-CV-006 — Descargas con icono vectorial
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Los dos botones existentes:
+
+```text
+Download Research CV
+Download Engineering CV
+```
+
+deben mantener su ubicación y archivos, añadiendo un icono vectorial de descarga mediante CSS.
+
+### REQ-PORTFOLIO-TOC-004 — Verificación v8.8 de la lista técnica
+
+**Estado:** `VERIFICADO`  
+**Prioridad:** `P0`
+
+La modificación del CV **no puede alterar** la lista del Portfolio.
+
+Los seis títulos principales deben seguir siendo exactamente:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+ROBOTICS & REHABILITATION
+ORGAN PRESERVATION & TRANSPLANTATION
+MEDICAL IMAGING & AI
+EMBEDDED SYSTEMS & FPGA
+CAD & PROTOTYPING
+```
+
+Jerarquía completa requerida:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+    Objective 1 — Ex Vivo Perfusion Platform
+        Monitoring
+    Objective 2 — Baseline Dataset without ICG
+    Objective 3 — ICG-NIR Functional Marker
+
+ROBOTICS & REHABILITATION
+    Ciervo UC — CYBATHLON 2024
+        My role
+    CandelStim — Transcranial Electrical Stimulation
+        Technical work
+
+ORGAN PRESERVATION & TRANSPLANTATION
+    Borealis UC — Organ Supercooling
+    Organ Preservation Machine Redesign
+        Engineering work
+
+MEDICAL IMAGING & AI
+    Lung Segmentation with U-Net
+
+EMBEDDED SYSTEMS & FPGA
+    FPGA Upgrade — Universal Testing Machine
+
+CAD & PROTOTYPING
+    Vscan Air — Medical Device Enclosure
+```
+
+Las secciones:
+
+```text
+Teaching — Physics Laboratory
+Biomedical Engineering Student Chapter UC
+IEEE EMBS PUC Chile
+Meldic Ltda.
+Skills
+Engineering approach
+Contact
+```
+
+permanecen en `portfolio.qmd` con `.toc-ignore` y no pueden convertirse en títulos principales del TOC.
+
+### Archivos modificados en v8.8
+
+```text
+cv.qmd
+assets/site.css
+PORTFOLIO_REQUIREMENTS.md
+README.md
+BUILD_VALIDATION.md
+portfolio_preview.html
+```
+
+No se modifican:
+
+```text
+portfolio.qmd
+index.qmd
+contact.qmd
+projects/*.qmd
+assets/site-scripts.html
+_quarto.yml
+TOC portal/runtime geometry
+Swiss Wipe animation
 ```

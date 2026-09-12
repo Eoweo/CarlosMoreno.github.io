@@ -32,7 +32,7 @@ I work with an implementation-oriented mindset: define the need, translate it in
 ::: {.cv-summary-panel}
 ::: {.cv-summary-card}
 ::: {.cv-summary-label}
-🎯 Current focus
+[]{.cv-ui-icon .cv-icon-target aria-hidden="true"} Current focus
 :::
 ::: {.cv-summary-value}
 Biomedical instrumentation · organ perfusion · ICG-NIR functional assessment
@@ -44,7 +44,7 @@ Research and engineering work centered on experimental platforms, monitoring and
 
 ::: {.cv-summary-card}
 ::: {.cv-summary-label}
-📍 Snapshot
+[]{.cv-ui-icon .cv-icon-location aria-hidden="true"} Snapshot
 :::
 ::: {.cv-summary-value}
 Pontificia Universidad Católica de Chile
@@ -58,31 +58,30 @@ Biomedical Engineering · Electrical Engineering · Research & Development
 
 ::: {.cv-chip-grid .swiss-reveal}
 ::: {.cv-chip}
-::: {.cv-chip-icon}
-🔬
-:::
+[]{.cv-chip-icon .cv-icon-microscope aria-hidden="true"}
 **Research**
+
 Experimental design, organ perfusion, instrumentation and functional assessment.
 :::
+
 ::: {.cv-chip}
-::: {.cv-chip-icon}
-⚙️
-:::
+[]{.cv-chip-icon .cv-icon-cpu aria-hidden="true"}
 **Systems**
+
 Embedded systems, electronics, sensing, acquisition and integration.
 :::
+
 ::: {.cv-chip}
-::: {.cv-chip-icon}
-🧠
-:::
-**Medical tech**
+[]{.cv-chip-icon .cv-icon-medical aria-hidden="true"}
+**Medical technology**
+
 Biomedical devices, neurostimulation, imaging and validation workflows.
 :::
+
 ::: {.cv-chip}
-::: {.cv-chip-icon}
-🛠️
-:::
+[]{.cv-chip-icon .cv-icon-tools aria-hidden="true"}
 **Build approach**
+
 CAD, prototyping, testing, debugging and iteration from data.
 :::
 :::
@@ -96,7 +95,7 @@ CAD, prototyping, testing, debugging and iteration from data.
 :::
 ::: {}
 ::: {.cv-timeline-degree}
-🎓 MSc Biomedical Engineering
+[]{.cv-ui-icon .cv-icon-education aria-hidden="true"} MSc Biomedical Engineering
 :::
 ::: {.cv-timeline-place}
 Pontificia Universidad Católica de Chile
@@ -111,7 +110,7 @@ Research focused on **ex vivo liver perfusion**, biomedical instrumentation and 
 :::
 ::: {}
 ::: {.cv-timeline-degree}
-⚡ Electrical Engineering
+[]{.cv-ui-icon .cv-icon-bolt aria-hidden="true"} Electrical Engineering
 :::
 ::: {.cv-timeline-place}
 Pontificia Universidad Católica de Chile
@@ -126,7 +125,7 @@ Training in electronics, embedded systems, data acquisition, control, FPGA and h
 :::
 ::: {}
 ::: {.cv-timeline-degree}
-🧬 Biomedical Engineering
+[]{.cv-ui-icon .cv-icon-dna aria-hidden="true"} Biomedical Engineering
 :::
 ::: {.cv-timeline-place}
 Pontificia Universidad Católica de Chile
@@ -140,13 +139,12 @@ Bachelor’s Degree in Engineering Sciences with specialization in Biomedical En
 
 ::: {.cv-card-grid .swiss-reveal}
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-🧪
-:::
+[]{.cv-card-icon .cv-icon-flask aria-hidden="true"}
 ::: {.cv-card-label}
 Main research line
 :::
 **Master’s Research — Liver Viability & ICG-NIR**
+
 Development of an **ex vivo liver perfusion platform** and investigation of **ICG-NIR kinetics** to explore quantitative indicators of liver function and viability.
 
 ::: {.cv-card-tags}
@@ -160,13 +158,12 @@ Development of an **ex vivo liver perfusion platform** and investigation of **IC
 :::
 
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-❄️
-:::
+[]{.cv-card-icon .cv-icon-snow aria-hidden="true"}
 ::: {.cv-card-label}
 Preservation research
 :::
 **Borealis UC — Organ Supercooling**
+
 Research participation in organ preservation, focused on **supercooling strategies**, thermal control and experimental support.
 
 ::: {.cv-card-tags}
@@ -179,13 +176,12 @@ Research participation in organ preservation, focused on **supercooling strategi
 :::
 
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-🫀
-:::
+[]{.cv-card-icon .cv-icon-heart-pulse aria-hidden="true"}
 ::: {.cv-card-label}
 Device development
 :::
 **Organ Preservation Machine**
+
 Electromechanical redesign of an organ preservation system, integrating **fluidics, control and miniaturization**.
 
 ::: {.cv-card-tags}
@@ -198,13 +194,12 @@ Electromechanical redesign of an organ preservation system, integrating **fluidi
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-📈
-:::
+[]{.cv-card-icon .cv-icon-chart aria-hidden="true"}
 ::: {.cv-card-label}
 Engineering method
 :::
 **Typical workflow**
+
 Problem definition → measurable requirements → architecture → implementation → calibration → testing → lessons learned.
 
 This same structure organizes my portfolio and guides how I approach technical development.
@@ -215,13 +210,12 @@ This same structure organizes my portfolio and guides how I approach technical d
 
 ::: {.cv-card-grid .swiss-reveal}
 ::: {.cv-card}
-::: {.cv-card-icon}
-⚕️
-:::
+[]{.cv-card-icon .cv-icon-medical aria-hidden="true"}
 ::: {.cv-card-label}
 Internship
 :::
 **Candel Medical Company**
+
 Professional internship in **hardware, electronics and firmware** for transcranial electrical stimulation systems.
 
 ::: {.cv-card-tags}
@@ -232,13 +226,12 @@ Professional internship in **hardware, electronics and firmware** for transcrani
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🏢
-:::
+[]{.cv-card-icon .cv-icon-briefcase aria-hidden="true"}
 ::: {.cv-card-label}
 Industry connection
 :::
 **Meldic Ltda.**
+
 Experience linked to medical equipment, technical development and engineering-oriented problem solving in applied settings.
 
 ::: {.cv-card-tags}
@@ -253,52 +246,48 @@ Experience linked to medical equipment, technical development and engineering-or
 
 ::: {.cv-card-grid .swiss-reveal}
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-🤖
-:::
+[]{.cv-card-icon .cv-icon-robot aria-hidden="true"}
 ::: {.cv-card-label}
 Robotics & rehabilitation
 :::
 **CYBATHLON 2024**
+
 Electrical Area Leader at **Ciervo UC**, integrating electronics for a robotic transfemoral prosthesis.
 
 [View project detail](projects/cybathlon.qmd){.project-page-button}
 :::
 
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-🖼️
-:::
+[]{.cv-card-icon .cv-icon-image aria-hidden="true"}
 ::: {.cv-card-label}
 Medical imaging & AI
 :::
 **Lung Segmentation — U-Net**
+
 Deep-learning project for medical image segmentation using a **U-Net** architecture.
 
 [View project detail](projects/unet.qmd){.project-page-button}
 :::
 
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-💻
-:::
+[]{.cv-card-icon .cv-icon-circuit aria-hidden="true"}
 ::: {.cv-card-label}
 Embedded systems & FPGA
 :::
 **FPGA — Universal Testing Machine**
+
 Development with **Zybo Z10, Vivado and VHDL** for force, displacement, deformation and speed signals.
 
 [View project detail](projects/fpga.qmd){.project-page-button}
 :::
 
 ::: {.cv-card .with-button}
-::: {.cv-card-icon}
-📐
-:::
+[]{.cv-card-icon .cv-icon-ruler aria-hidden="true"}
 ::: {.cv-card-label}
 CAD & prototyping
 :::
 **Vscan Air Enclosure**
+
 CAD design and prototyping of an accessory for a portable ultrasound device.
 
 [View project detail](projects/vscan.qmd){.project-page-button}
@@ -309,46 +298,42 @@ CAD design and prototyping of an accessory for a portable ultrasound device.
 
 ::: {.cv-card-grid .swiss-reveal}
 ::: {.cv-card}
-::: {.cv-card-icon}
-🧲
-:::
+[]{.cv-card-icon .cv-icon-magnet aria-hidden="true"}
 ::: {.cv-card-label}
 Teaching
 :::
 **Physics Laboratory Teaching Assistant**
+
 Faculty of Physics UC — **FIS154**.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🌱
-:::
+[]{.cv-card-icon .cv-icon-users aria-hidden="true"}
 ::: {.cv-card-label}
 Student leadership
 :::
 **Biomedical Engineering Student Chapter UC**
+
 President, **2024–2025**.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🌐
-:::
+[]{.cv-card-icon .cv-icon-globe aria-hidden="true"}
 ::: {.cv-card-label}
 Professional chapter
 :::
 **IEEE EMBS PUC Chile**
+
 Webmaster since **2024**.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🤝
-:::
+[]{.cv-card-icon .cv-icon-users aria-hidden="true"}
 ::: {.cv-card-label}
 Collaboration style
 :::
 **Interdisciplinary work**
+
 Comfortable working across research, engineering and implementation teams.
 :::
 :::
@@ -357,50 +342,44 @@ Comfortable working across research, engineering and implementation teams.
 
 ::: {.cv-card-grid .swiss-reveal}
 ::: {.cv-card}
-::: {.cv-card-icon}
-🔌
-:::
+[]{.cv-card-icon .cv-icon-circuit aria-hidden="true"}
 **Electronics & Embedded Systems**
+
 Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🧮
-:::
+[]{.cv-card-icon .cv-icon-code aria-hidden="true"}
 **Programming & Data**
+
 Python, C++, acquisition, signal processing and image processing.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🧷
-:::
+[]{.cv-card-icon .cv-icon-cpu aria-hidden="true"}
 **FPGA & Digital Design**
+
 Zybo Z10, Vivado and VHDL.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🧫
-:::
+[]{.cv-card-icon .cv-icon-heart-pulse aria-hidden="true"}
 **Biomedical Engineering**
+
 Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-📏
-:::
+[]{.cv-card-icon .cv-icon-ruler aria-hidden="true"}
 **CAD & Prototyping**
+
 Fusion 360, CAD, 3D printing, machining and electromechanical integration.
 :::
 
 ::: {.cv-card}
-::: {.cv-card-icon}
-🧭
-:::
+[]{.cv-card-icon .cv-icon-compass aria-hidden="true"}
 **Engineering approach**
+
 Implementation-oriented, systems-level thinking and iterative validation.
 :::
 :::
@@ -409,16 +388,22 @@ Implementation-oriented, systems-level thinking and iterative validation.
 
 ::: {.cv-language-grid .swiss-reveal}
 ::: {.cv-language-card}
-**🇨🇱 Spanish**
+::: {.cv-language-title}
+[]{.cv-ui-icon .cv-icon-globe aria-hidden="true"} Spanish
+:::
 Native.
 :::
 
 ::: {.cv-language-card}
-**🇬🇧 English**
+::: {.cv-language-title}
+[]{.cv-ui-icon .cv-icon-globe aria-hidden="true"} English
+:::
 B2 / ALTE 3.
 :::
 :::
 
 ::: {.cv-note}
-<span class="cv-inline-emoji">💡</span>The CV page is intentionally more visual than previous versions: it keeps the same information base, but reorganizes it into panels, cards and project entry points so it reads faster and feels less like a plain list.
+[]{.cv-inline-icon .cv-icon-lightbulb aria-hidden="true"}
+
+The CV page is intentionally visual and scannable: the same information base is reorganized into panels, cards, a timeline and project entry points rather than a plain sequential list.
 :::
