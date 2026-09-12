@@ -178,44 +178,48 @@
 
     if (!content) return [];
 
-    const candidates = content.querySelectorAll(
-      [
-        "h1:not(.title)",
-        "h2",
-        "h3",
-        "p",
-        ".image-slot",
-        ".project-meta",
-        ".skill-chips",
-        ".project-grid",
-        ".skill-grid",
-        ".download-grid",
-        ".contact-card",
-        ".cell",
-        "table",
-        "blockquote",
-        "ul",
-        "ol"
-      ].join(",")
-    );
-
-    const seen = new Set();
     const result = [];
+    const seen = new Set();
 
-    candidates.forEach(function (el) {
-      // Avoid animating elements nested inside a larger selected component.
-      if (el.closest(".image-slot") && !el.classList.contains("image-slot")) return;
-      if (el.closest(".project-meta") && !el.classList.contains("project-meta")) return;
-      if (el.closest(".skill-chips") && !el.classList.contains("skill-chips")) return;
-      if (seen.has(el)) return;
-
+    function addTarget(el) {
+      if (!el || seen.has(el)) return;
       seen.add(el);
       el.classList.add("swiss-reveal");
       result.push(el);
-    });
+    }
 
-    result.forEach(function (el, i) {
-      el.style.setProperty("--swiss-delay", ((i % 4) * 24) + "ms");
+    /*
+       Match the reference animation model:
+       logical sections reveal as one horizontal wipe instead of
+       animating each heading/paragraph independently.
+    */
+    const titleBlock = document.querySelector("#title-block-header");
+    if (titleBlock) addTarget(titleBlock);
+
+    // Quarto/Pandoc sections (level1, level2, level3...) are the
+    // primary reveal units.
+    content.querySelectorAll("section").forEach(addTarget);
+
+    /*
+       Some pages contain meaningful blocks before the first section
+       (Home hero, Contact hero, CV download controls, introductory
+       paragraphs). Animate only those top-level blocks, preserving
+       all existing layout and markup.
+    */
+    Array.from(content.children).forEach(function (el) {
+      if (el.tagName === "SECTION") return;
+      if (el.matches("script, style, link")) return;
+      if (el.id === "title-block-header") return;
+
+      const tag = el.tagName;
+      const isLogicalBlock =
+        tag === "P" ||
+        tag === "DIV" ||
+        tag === "FIGURE" ||
+        tag === "TABLE" ||
+        tag === "BLOCKQUOTE";
+
+      if (isLogicalBlock) addTarget(el);
     });
 
     return result;
@@ -231,10 +235,12 @@
       return;
     }
 
-    const trigger = window.innerHeight * 0.91;
+    // Same trigger used by the supplied reference.
+    const trigger = window.innerHeight * 0.90;
 
     revealTargets.forEach(function (el) {
       if (el.classList.contains("swiss-shown")) return;
+
       const rect = el.getBoundingClientRect();
       if (rect.top < trigger) {
         el.classList.add("swiss-shown");
@@ -245,15 +251,24 @@
   function initReveal() {
     revealTargets = collectRevealTargets();
 
-    // Mark current viewport items visible BEFORE enabling hidden states.
+    /*
+       Fail-safe sequence from the reference:
+       first mark what is already visible, then enable hidden states.
+       If JS fails before swiss-js-ready, all content remains visible.
+    */
     revealTargets.forEach(function (el) {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.97) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
         el.classList.add("swiss-shown");
       }
     });
 
     document.body.classList.add("swiss-js-ready");
     revealOnScroll();
+
+    // Final timing safety matching the reference behavior.
+    window.setTimeout(function () {
+      revealOnScroll();
+    }, 150);
   }
 
   /* --------------------------------------------------------------

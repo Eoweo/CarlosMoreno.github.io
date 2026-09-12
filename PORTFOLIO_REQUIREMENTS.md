@@ -4951,6 +4951,150 @@ noMainOcclusion
 ---
 
 
+
+# 23O. Animación de contenido Swiss Wipe — v8.5
+
+## REQ-ANIM-001 — Reveal horizontal por bloque/sección
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El contenido de las páginas debe utilizar la animación Swiss Wipe de la referencia visual aprobada.
+
+Estado inicial activado por JavaScript:
+
+```css
+clip-path: inset(0 100% 0 0);
+opacity: 0;
+```
+
+Estado visible:
+
+```css
+clip-path: inset(0 0 0 0);
+opacity: 1;
+```
+
+Transición:
+
+```css
+clip-path .7s cubic-bezier(.77, 0, .18, 1)
+opacity .4s ease
+```
+
+La animación produce un reveal horizontal de izquierda a derecha mediante la reducción del recorte derecho.
+
+---
+
+## REQ-ANIM-002 — Unidad de animación = sección lógica
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La animación no debe aplicarse individualmente a cada párrafo, heading o elemento interno.
+
+Las unidades principales son:
+
+```text
+#title-block-header
+section de Quarto/Pandoc
+bloques top-level anteriores a la primera sección
+```
+
+Esto reproduce el comportamiento visual de la referencia, donde cada sección aparece como una sola composición.
+
+---
+
+## REQ-ANIM-003 — Disparo por scroll
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Una sección pendiente debe mostrarse cuando:
+
+```javascript
+element.getBoundingClientRect().top < window.innerHeight * 0.90
+```
+
+Antes de activar el estado oculto, los elementos ya presentes en el viewport deben marcarse visibles usando aproximadamente:
+
+```javascript
+window.innerHeight * 0.95
+```
+
+---
+
+## REQ-ANIM-004 — Animación fail-safe
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El contenido debe permanecer visible por defecto.
+
+Solo después de que JavaScript haya:
+
+1. encontrado los bloques;
+2. marcado los inicialmente visibles;
+
+puede agregarse:
+
+```text
+body.swiss-js-ready
+```
+
+Si JavaScript falla, no debe quedar contenido invisible.
+
+---
+
+## REQ-ANIM-005 — Reduced Motion prevalece
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Con:
+
+```text
+body.swiss-reduce-motion
+```
+
+todo bloque reveal debe mantenerse:
+
+```css
+opacity: 1;
+clip-path: none;
+transform: none;
+transition: none;
+```
+
+---
+
+## REQ-ANIM-006 — Animación no puede modificar layout ni navegación
+
+**Estado:** `REQUERIDO`  
+**Prioridad:** `P0`
+
+La implementación v8.5 solo afecta la presentación del contenido.
+
+No debe modificar:
+
+```text
+TOC portal
+padding 20 px del TOC
+navbar
+geometría runtime
+layout debug
+Portfolio structure
+CV
+Contact
+routing
+themes
+compact mode
+search configuration
+```
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -5163,6 +5307,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v8.2 | 2026-09-12 | Corrección runtime del TOC/navbar con comparación baseline/post-fix y modo A/B | REQ-LAYOUT-023/024/025, REQ-NAVBAR-003, REQ-QA-008/009/010 | IMPLEMENTADO |
 | v8.3 | 2026-09-12 | TOC portalizado fuera del grid Quarto, limpieza de slot blanco, test de oclusión y right-gap corregido por clientWidth | REQ-LAYOUT-026/027/028/029, REQ-QA-011/012/013, REQ-QUARTO-001 | IMPLEMENTADO |
 | v8.4 | 2026-09-12 | Padding interno TOC 20 px izquierda/superior sin alterar shell x=0 | REQ-LAYOUT-030, REQ-QA-014 | IMPLEMENTADO |
+| v8.5 | 2026-09-12 | Animación Swiss Wipe por secciones lógicas, fail-safe y Reduced Motion | REQ-ANIM-001/002/003/004/005/006 | IMPLEMENTADO / REQUERIDO |
 | próxima | — | — | — | — |
 
 ---
@@ -5228,6 +5373,9 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 52. Antes de alterar el shell, comparar con la implementación v6 que funcionaba.
 53. El TOC debe ser nativo de Quarto: `toc-location: left` + `toc-expand: 1`.
 54. El shell lateral debe seguir en x=0; el contenido interno del TOC usa padding-left:20px y padding-top:20px.
+55. El contenido debe usar Swiss Wipe por secciones lógicas, no animación elemento por elemento.
+56. La animación debe ser fail-safe y Reduced Motion debe prevalecer.
+57. La animación no puede modificar TOC, navbar, geometría runtime ni navegación.
 ```
 
 ---
@@ -5288,7 +5436,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.4 Swiss Research / Native Quarto TOC
+Version: v8.5 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

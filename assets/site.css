@@ -833,28 +833,31 @@ pre {
 }
 
 /* ================================================================
-   FAIL-SAFE REVEAL ANIMATIONS
-   Content remains visible if JavaScript does not run.
+   FAIL-SAFE REVEAL ANIMATION — SWISS WIPE
+   Reference behavior:
+   - visible by default
+   - JS activates hidden state only after initialization
+   - horizontal clip-path wipe from right to left
+   - Reduced Motion always keeps content visible
    ================================================================ */
 
 .swiss-reveal {
-  opacity: 1;
-  transform: none;
-  clip-path: none;
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
 }
 
 body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
+  opacity: 0 !important;
+  clip-path: inset(0 100% 0 0) !important;
   transition:
-    clip-path .68s cubic-bezier(.77, 0, .18, 1),
-    opacity .36s ease;
-  transition-delay: var(--swiss-delay, 0ms);
+    clip-path .7s cubic-bezier(.77, 0, .18, 1),
+    opacity .4s ease !important;
 }
 
 body.swiss-js-ready .swiss-reveal.swiss-shown {
-  opacity: 1;
-  clip-path: inset(0 0 0 0);
+  opacity: 1 !important;
+  clip-path: inset(0 0 0 0) !important;
 }
 
 body.swiss-reduce-motion *,
@@ -870,6 +873,7 @@ body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
   opacity: 1 !important;
   transform: none !important;
   clip-path: none !important;
+  transition: none !important;
 }
 
 body.swiss-compact main.content h1:not(.title),
