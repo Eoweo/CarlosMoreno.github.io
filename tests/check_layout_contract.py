@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import re, sys, yaml
+import sys, yaml
 
 root = Path(__file__).resolve().parents[1]
 css = (root / "assets" / "site.css").read_text(encoding="utf-8")
@@ -8,16 +8,17 @@ js = (root / "assets" / "site-scripts.html").read_text(encoding="utf-8")
 cfg = yaml.safe_load((root / "_quarto.yml").read_text(encoding="utf-8"))
 
 checks = {
-    "toc-left configured": cfg["format"]["html"].get("toc-location") == "left",
-    "native toc expansion": cfg["format"]["html"].get("toc-expand") == 1,
-    "root named grid present": "[screen-start screen-start-inset page-start page-start-inset]" in css,
-    "toc starts at page-start": "grid-column: page-start / body-start" in css,
-    "content uses native named lines": "grid-column: body-content-start / body-content-end" in css,
-    "toc left padding zero": "padding-left: 0 !important;" in css,
-    "header target 48px": "--portfolio-header-height: 48px" in css,
-    "real toc selector supported": '#TOC.sidebar.toc-left' in js,
-    "hard toc-left test": "tocTouchesViewportLeft" in js,
-    "hard navbar-top test": "navbarTouchesViewportTop" in js,
+    "toc-location left": cfg["format"]["html"].get("toc-location") == "left",
+    "toc-expand 1": cfg["format"]["html"].get("toc-expand") == 1,
+    "runtime CSS class": "portfolio-runtime-layout" in css,
+    "runtime geometry function": "enforceRuntimeDesktopGeometry" in js,
+    "baseline measurement": "runtimeGeometryState.baseline" in js,
+    "real toc direct positioning": 'setImportant(toc, "position", "fixed")' in js,
+    "real toc left zero": 'setImportant(toc, "left", "0px")' in js,
+    "header fixed top zero": 'setImportant(header, "top", "0px")' in js,
+    "main spans screen lines": 'setImportant(main, "grid-column", "screen-start / screen-end")' in js,
+    "A/B layout-fix switch": 'params.get("layout-fix") === "0"' in js,
+    "hard runtime pass": "result.checks.fixApplied" in js,
 }
 
 for name, ok in checks.items():

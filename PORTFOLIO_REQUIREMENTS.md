@@ -4324,6 +4324,9 @@ Esto permite que las reglas internas de Quarto continúen ubicando:
 
 sin `position: fixed` y sin crear una fila superior.
 
+
+> **Actualización v8.2:** la intención geométrica se conserva, pero la implementación puramente CSS no ganó la cascada del HTML real. La geometría final desktop pasa a ser aplicada y verificada por runtime JavaScript.
+
 ---
 
 ## REQ-LAYOUT-022 — Selector real del TOC debe detectarse dinámicamente
@@ -4425,6 +4428,206 @@ NAVBAR  → borde azul
 Además del panel JSON.
 
 Esto permite confirmar visualmente qué caja está midiendo el test.
+
+---
+
+
+
+# 23M. Corrección geométrica runtime — v8.2
+
+## REQ-LAYOUT-023 — Medir el layout Quarto antes de corregirlo
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Antes de aplicar la corrección desktop, JavaScript debe guardar la geometría original generada por Quarto en:
+
+```javascript
+window.__portfolioLayoutTest.baseline
+```
+
+Esto permite comparar objetivamente:
+
+```text
+ANTES → Quarto nativo
+DESPUÉS → geometría corregida
+```
+
+El caso real que motivó v8.2 fue:
+
+```text
+viewport = 2560 px
+toc.left = 292.5 px
+main.right gap = 287.5 px
+header.top = 53 px
+```
+
+---
+
+## REQ-LAYOUT-024 — Corrección desktop aplicada al elemento real `#TOC`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop, el propio:
+
+```text
+#TOC
+```
+
+debe actuar como bloque lateral.
+
+La corrección se aplica mediante JavaScript después del render de Quarto:
+
+```text
+position: fixed
+left: 0
+top: altura navbar
+bottom: 0
+```
+
+No se debe volver a depender de que exista:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+---
+
+## REQ-LAYOUT-025 — Main ocupa viewport restante después del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`main.content` debe ocupar:
+
+```text
+TOC + gap → borde derecho
+```
+
+La corrección runtime debe aplicar:
+
+```text
+grid-column: screen-start / screen-end
+margin-left: tocWidth + gap
+margin-right: rightGutter
+max-width: none
+```
+
+El ancho no depende de:
+
+```text
+body-width: 1600px
+```
+
+para la geometría final desktop.
+
+---
+
+## REQ-NAVBAR-003 — Navbar runtime fijo en `top: 0`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop:
+
+```text
+#quarto-header
+```
+
+se corrige después del render a:
+
+```text
+position: fixed
+top: 0
+left: 0
+right: 0
+height: 48px
+```
+
+y `body` reserva exactamente esa altura mediante `padding-top`.
+
+El objetivo es eliminar el caso medido:
+
+```text
+header.top = 53 px
+navbar.top = 53 px
+```
+
+---
+
+## REQ-QA-008 — Test compara baseline y resultado corregido
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El panel:
+
+```text
+?layout-debug=1
+```
+
+debe incluir:
+
+```text
+baseline
+runtimeValues
+rects
+measurements
+checks
+```
+
+Se considera especialmente útil comprobar:
+
+```text
+baseline.rects.toc.left  ≈ 292.5   (ejemplo real)
+rects.toc.left           ≈ 0       (resultado esperado)
+```
+
+---
+
+## REQ-QA-009 — Modo A/B sin corrección
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Para diagnosticar Quarto sin la reparación runtime se puede abrir:
+
+```text
+?layout-debug=1&layout-fix=0
+```
+
+En ese modo:
+
+```text
+Quarto se mide sin modificar
+```
+
+Mientras que:
+
+```text
+?layout-debug=1
+```
+
+aplica la corrección y luego mide.
+
+---
+
+## REQ-QA-010 — Reaplicar geometría después de ajustes tardíos
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La geometría debe reaplicarse:
+
+```text
+al iniciar
+después de ~80 ms
+después de ~400 ms
+al cambiar el tamaño de ventana
+```
+
+para evitar que scripts posteriores de Quarto/Bootstrap restituyan posiciones anteriores.
 
 ---
 
@@ -4638,6 +4841,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.9 | 2026-09-12 | Bloque TOC con left/margin/padding izquierdo en 0 px y diagnóstico explícito | REQ-LAYOUT-014/015, REQ-DIAG-001/002 | IMPLEMENTADO / REQUERIDO |
 | v8.0 | 2026-09-12 | Retorno al TOC/layout nativo de Quarto + tests de regresión y diagnóstico real | REQ-QUARTO-TOC-001/002, REQ-QUARTO-LAYOUT-001, REQ-QUARTO-GRID-001, REQ-QA-006/007/008 | IMPLEMENTADO |
 | v8.1 | 2026-09-12 | Grid Quarto redefinido con page-start en x=0 y test geométrico numérico | REQ-LAYOUT-020/021/022, REQ-QA-006/007, REQ-NAVBAR-002 | IMPLEMENTADO |
+| v8.2 | 2026-09-12 | Corrección runtime del TOC/navbar con comparación baseline/post-fix y modo A/B | REQ-LAYOUT-023/024/025, REQ-NAVBAR-003, REQ-QA-008/009/010 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -4762,7 +4966,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.1 Swiss Research / Native Quarto TOC
+Version: v8.2 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

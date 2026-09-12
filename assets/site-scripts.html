@@ -282,17 +282,224 @@
      Layout self-test for the ACTUAL rendered Quarto page.
      Append ?layout-debug=1 to any page URL to display the panel.
      -------------------------------------------------------------- */
+
+  /* --------------------------------------------------------------
+     Runtime desktop geometry
+
+     Why this exists:
+     Quarto's generated grid can center the whole page composition.
+     At 2560px the real page measured:
+       TOC left  = 292.5px
+       main right gap = 287.5px
+
+     We keep the native TOC content/scrollspy, but position the real
+     rendered elements directly after Quarto has finished rendering.
+     -------------------------------------------------------------- */
+
+  const runtimeGeometryState = {
+    baseline: null,
+    applied: false,
+    last: null
+  };
+
+  function px(value) {
+    return Math.round(value * 10) / 10;
+  }
+
+  function measureRuntimeGeometry() {
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+    const body = document.body;
+
+    function r(el) {
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      return {
+        left: px(rect.left),
+        top: px(rect.top),
+        right: px(rect.right),
+        bottom: px(rect.bottom),
+        width: px(rect.width),
+        height: px(rect.height)
+      };
+    }
+
+    return {
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight
+      },
+      rects: {
+        toc: r(toc),
+        main: r(main),
+        shell: r(shell),
+        header: r(header),
+        navbar: r(navbar),
+        body: r(body)
+      },
+      classes: {
+        shell: shell ? shell.className : null,
+        toc: toc ? toc.className : null,
+        body: body ? body.className : null
+      }
+    };
+  }
+
+  function setImportant(el, prop, value) {
+    if (!el) return;
+    el.style.setProperty(prop, value, "important");
+  }
+
+  function removeRuntimeProperty(el, prop) {
+    if (!el) return;
+    el.style.removeProperty(prop);
+  }
+
+  function clearRuntimeDesktopGeometry() {
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+
+    document.body.classList.remove("portfolio-runtime-layout");
+
+    [
+      [document.body, ["padding-top"]],
+      [document.documentElement, ["scroll-padding-top"]],
+      [header, ["position","left","right","top","height","min-height","max-height","margin","padding","width"]],
+      [navbar, ["height","min-height","max-height","margin","padding-top","padding-bottom"]],
+      [shell, ["margin-top","padding-top"]],
+      [toc, ["position","left","top","bottom","width","height","max-height","overflow-y","z-index","grid-column","grid-row","margin-left","margin-right","padding-left"]],
+      [main, ["grid-column","grid-row","margin-left","margin-right","width","max-width","min-width","padding-left","padding-right","justify-self"]]
+    ].forEach(function (pair) {
+      const el = pair[0];
+      pair[1].forEach(function (prop) {
+        removeRuntimeProperty(el, prop);
+      });
+    });
+
+    runtimeGeometryState.applied = false;
+  }
+
+  function enforceRuntimeDesktopGeometry() {
+    const desktop = window.innerWidth >= 992;
+    const params = new URLSearchParams(window.location.search);
+
+    // A/B diagnostic mode: ?layout-fix=0 leaves Quarto untouched.
+    if (!desktop || params.get("layout-fix") === "0") {
+      clearRuntimeDesktopGeometry();
+      return false;
+    }
+
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+
+    if (!toc || !main || !shell || !header || !navbar) {
+      return false;
+    }
+
+    if (!runtimeGeometryState.baseline) {
+      runtimeGeometryState.baseline = measureRuntimeGeometry();
+    }
+
+    const rootStyle = getComputedStyle(document.documentElement);
+
+    const headerHeight =
+      parseFloat(rootStyle.getPropertyValue("--runtime-header-height")) || 48;
+
+    // Equivalent to clamp(15.5rem, 16vw, 18rem) at the current root font size.
+    const rootFont = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const tocMin = 15.5 * rootFont;
+    const tocMax = 18 * rootFont;
+    const tocWidth = Math.min(tocMax, Math.max(tocMin, window.innerWidth * 0.16));
+
+    const gap =
+      Math.min(14.4, Math.max(8.8, window.innerWidth * 0.008));
+
+    const rightGutter =
+      Math.min(20, Math.max(10.4, window.innerWidth * 0.01));
+
+    const mainLeft = tocWidth + gap;
+
+    document.body.classList.add("portfolio-runtime-layout");
+
+    // Header physically at y=0.
+    setImportant(header, "position", "fixed");
+    setImportant(header, "left", "0px");
+    setImportant(header, "right", "0px");
+    setImportant(header, "top", "0px");
+    setImportant(header, "height", headerHeight + "px");
+    setImportant(header, "min-height", headerHeight + "px");
+    setImportant(header, "max-height", headerHeight + "px");
+    setImportant(header, "margin", "0px");
+    setImportant(header, "padding", "0px");
+    setImportant(header, "width", "100%");
+
+    setImportant(navbar, "height", headerHeight + "px");
+    setImportant(navbar, "min-height", headerHeight + "px");
+    setImportant(navbar, "max-height", headerHeight + "px");
+    setImportant(navbar, "margin", "0px");
+    setImportant(navbar, "padding-top", "0px");
+    setImportant(navbar, "padding-bottom", "0px");
+
+    // Header is removed from normal flow, so reserve exactly its height.
+    setImportant(document.body, "padding-top", headerHeight + "px");
+    setImportant(document.documentElement, "scroll-padding-top", (headerHeight + 8) + "px");
+
+    // Shell begins immediately under header.
+    setImportant(shell, "margin-top", "0px");
+    setImportant(shell, "padding-top", "0px");
+
+    // Real TOC element becomes the viewport-left block.
+    setImportant(toc, "position", "fixed");
+    setImportant(toc, "left", "0px");
+    setImportant(toc, "top", headerHeight + "px");
+    setImportant(toc, "bottom", "0px");
+    setImportant(toc, "width", tocWidth + "px");
+    setImportant(toc, "height", "auto");
+    setImportant(toc, "max-height", "none");
+    setImportant(toc, "overflow-y", "auto");
+    setImportant(toc, "z-index", "1050");
+    setImportant(toc, "margin-left", "0px");
+    setImportant(toc, "margin-right", "0px");
+    setImportant(toc, "padding-left", "0px");
+    // Fixed positioning removes it from the Quarto grid.
+    setImportant(toc, "grid-column", "auto");
+    setImportant(toc, "grid-row", "auto");
+
+    // Main spans Quarto's full screen lines, then uses margins for the TOC.
+    setImportant(main, "grid-column", "screen-start / screen-end");
+    setImportant(main, "grid-row", "content-top / content-bottom");
+    setImportant(main, "margin-left", mainLeft + "px");
+    setImportant(main, "margin-right", rightGutter + "px");
+    setImportant(main, "width", "auto");
+    setImportant(main, "max-width", "none");
+    setImportant(main, "min-width", "0px");
+    setImportant(main, "padding-left", "0px");
+    setImportant(main, "padding-right", "0px");
+    setImportant(main, "justify-self", "stretch");
+
+    runtimeGeometryState.applied = true;
+    runtimeGeometryState.last = {
+      headerHeight: px(headerHeight),
+      tocWidth: px(tocWidth),
+      gap: px(gap),
+      mainLeft: px(mainLeft),
+      rightGutter: px(rightGutter)
+    };
+
+    return true;
+  }
+
   function runLayoutSelfTest() {
     const toc = document.getElementById("TOC");
-
-    // Current Quarto can emit the TOC itself as .sidebar.toc-left.
-    // Older/other builds may use a wrapper. Support both.
-    const sidebar =
-      document.querySelector("#TOC.sidebar.toc-left") ||
-      document.querySelector("nav#TOC.toc-left") ||
-      document.querySelector(".sidebar.toc-left") ||
-      document.getElementById("quarto-sidebar-toc-left");
-
     const main = document.querySelector("main.content");
     const shell = document.getElementById("quarto-content");
     const header = document.getElementById("quarto-header");
@@ -302,19 +509,21 @@
     const result = {
       viewport: { width: window.innerWidth, height: window.innerHeight },
       desktop: desktop,
+      fixApplied: runtimeGeometryState.applied,
+      runtimeValues: runtimeGeometryState.last,
+      baseline: runtimeGeometryState.baseline,
       found: {
         shell: !!shell,
-        sidebar: !!sidebar,
         toc: !!toc,
         main: !!main,
         header: !!header,
         navbar: !!navbar
       },
-      selectorUsed: sidebar
-        ? (sidebar.id
-            ? "#" + sidebar.id + (sidebar.className ? "." + String(sidebar.className).trim().replace(/\s+/g, ".") : "")
-            : sidebar.tagName.toLowerCase() + "." + String(sidebar.className).trim().replace(/\s+/g, "."))
-        : null,
+      classes: {
+        shell: shell ? shell.className : null,
+        toc: toc ? toc.className : null,
+        body: document.body.className
+      },
       checks: {},
       computed: {}
     };
@@ -323,17 +532,16 @@
       if (!el) return null;
       const r = el.getBoundingClientRect();
       return {
-        left: Math.round(r.left * 10) / 10,
-        top: Math.round(r.top * 10) / 10,
-        right: Math.round(r.right * 10) / 10,
-        bottom: Math.round(r.bottom * 10) / 10,
-        width: Math.round(r.width * 10) / 10,
-        height: Math.round(r.height * 10) / 10
+        left: px(r.left),
+        top: px(r.top),
+        right: px(r.right),
+        bottom: px(r.bottom),
+        width: px(r.width),
+        height: px(r.height)
       };
     }
 
     result.rects = {
-      sidebar: rect(sidebar),
       toc: rect(toc),
       main: rect(main),
       shell: rect(shell),
@@ -341,49 +549,35 @@
       navbar: rect(navbar)
     };
 
-    if (sidebar) {
-      const s = getComputedStyle(sidebar);
-      result.computed.sidebar = {
+    [
+      ["toc", toc],
+      ["main", main],
+      ["shell", shell],
+      ["header", header],
+      ["navbar", navbar],
+      ["body", document.body]
+    ].forEach(function (pair) {
+      const name = pair[0];
+      const el = pair[1];
+      if (!el) return;
+      const s = getComputedStyle(el);
+      result.computed[name] = {
         display: s.display,
         position: s.position,
         gridColumn: s.gridColumn,
         gridRow: s.gridRow,
         marginLeft: s.marginLeft,
-        paddingLeft: s.paddingLeft
-      };
-    }
-
-    if (toc) {
-      const s = getComputedStyle(toc);
-      result.computed.toc = {
-        display: s.display,
-        position: s.position,
-        gridColumn: s.gridColumn,
-        marginLeft: s.marginLeft,
-        paddingLeft: s.paddingLeft
-      };
-    }
-
-    if (shell) {
-      const s = getComputedStyle(shell);
-      result.computed.shell = {
-        display: s.display,
-        gridTemplateColumns: s.gridTemplateColumns,
+        marginRight: s.marginRight,
         marginTop: s.marginTop,
-        paddingTop: s.paddingTop
-      };
-    }
-
-    if (navbar) {
-      const s = getComputedStyle(navbar);
-      result.computed.navbar = {
-        height: s.height,
-        minHeight: s.minHeight,
+        paddingLeft: s.paddingLeft,
+        paddingRight: s.paddingRight,
         paddingTop: s.paddingTop,
         paddingBottom: s.paddingBottom,
-        marginTop: s.marginTop
+        height: s.height,
+        minHeight: s.minHeight,
+        maxHeight: s.maxHeight
       };
-    }
+    });
 
     if (desktop && toc && main && shell && header && navbar) {
       const tr = toc.getBoundingClientRect();
@@ -399,16 +593,17 @@
       const shellHeaderGap = sr.top - hr.bottom;
 
       result.measurements = {
-        tocLeftPx: Math.round(leftGap * 10) / 10,
-        contentGapPx: Math.round(contentGap * 10) / 10,
-        rightGapPx: Math.round(rightGap * 10) / 10,
-        headerTopPx: Math.round(hr.top * 10) / 10,
-        navbarTopPx: Math.round(nr.top * 10) / 10,
-        navbarHeightPx: Math.round(nr.height * 10) / 10,
-        shellHeaderGapPx: Math.round(shellHeaderGap * 10) / 10
+        tocLeftPx: px(leftGap),
+        contentGapPx: px(contentGap),
+        rightGapPx: px(rightGap),
+        headerTopPx: px(hr.top),
+        navbarTopPx: px(nr.top),
+        navbarHeightPx: px(nr.height),
+        shellTopPx: px(sr.top),
+        shellHeaderGapPx: px(shellHeaderGap)
       };
 
-      // HARD CONTRACTS requested for desktop.
+      result.checks.fixApplied = runtimeGeometryState.applied;
       result.checks.tocTouchesViewportLeft = Math.abs(leftGap) <= 2;
       result.checks.tocMarginLeftZero =
         Math.abs(parseFloat(tcs.marginLeft) || 0) <= 1;
@@ -417,6 +612,7 @@
 
       result.checks.sidebarIsLeftOfContent =
         tr.right <= mr.left + 1;
+
       result.checks.smallSidebarContentGap =
         contentGap >= -1 && contentGap <= 28;
 
@@ -425,13 +621,15 @@
 
       result.checks.headerTouchesViewportTop =
         Math.abs(hr.top) <= 1;
+
       result.checks.navbarTouchesViewportTop =
         Math.abs(nr.top) <= 1;
-      result.checks.navbarCompact =
-        nr.height <= 54;
 
-      result.checks.shellStartsImmediatelyAfterHeader =
-        shellHeaderGap >= -1 && shellHeaderGap <= 2;
+      result.checks.navbarCompact =
+        nr.height <= 50;
+
+      result.checks.shellStartsAfterHeader =
+        sr.top >= hr.bottom - 1 && sr.top <= hr.bottom + 2;
 
       result.checks.notStacked =
         mr.top < tr.bottom &&
@@ -449,7 +647,9 @@
 
     const params = new URLSearchParams(window.location.search);
     if (params.get("layout-debug") === "1") {
-      // Visual outlines make the real browser geometry obvious.
+      const existing = document.getElementById("portfolio-layout-debug");
+      if (existing) existing.remove();
+
       if (toc) {
         toc.style.outline = "3px solid #d63230";
         toc.style.outlineOffset = "-3px";
@@ -473,8 +673,8 @@
         position: "fixed",
         right: "10px",
         bottom: "10px",
-        width: "min(520px, 48vw)",
-        maxHeight: "58vh",
+        width: "min(560px, 48vw)",
+        maxHeight: "62vh",
         overflow: "auto",
         zIndex: "99999",
         padding: "12px",
@@ -514,19 +714,31 @@
     createControls();
     initReveal();
 
-    window.setTimeout(runLayoutSelfTest, 350);
-
+    // Measure untouched Quarto layout, then repair desktop geometry.
+    runtimeGeometryState.baseline = measureRuntimeGeometry();
+    enforceRuntimeDesktopGeometry();
 
     window.addEventListener("scroll", onScroll, { passive: true });
+
     window.addEventListener("resize", function () {
+      enforceRuntimeDesktopGeometry();
       revealOnScroll();
+      window.setTimeout(runLayoutSelfTest, 40);
     });
 
-    // Extra safety after Mermaid/layout/font changes settle.
+    // Quarto/Bootstrap scripts can make late layout adjustments.
+    // Re-apply after both short and long settle windows.
     window.setTimeout(function () {
+      enforceRuntimeDesktopGeometry();
       revealOnScroll();
       runLayoutSelfTest();
-    }, 250);
+    }, 80);
+
+    window.setTimeout(function () {
+      enforceRuntimeDesktopGeometry();
+      revealOnScroll();
+      runLayoutSelfTest();
+    }, 400);
   }
 
   if (document.readyState === "loading") {

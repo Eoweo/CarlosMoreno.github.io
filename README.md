@@ -168,3 +168,13 @@ PORTFOLIO_REQUIREMENTS.md
 - The root Quarto named grid is now redefined so `page-start` equals the physical left edge.
 - No fixed-position sidebar is used.
 - `?layout-debug=1` now has hard numeric pass/fail contracts for TOC x-position, content gap, right edge, navbar top and navbar height.
+
+
+## v8.2
+
+- Uses the actual measured Quarto output as baseline before applying layout repair.
+- Keeps Quarto's native TOC content and behavior.
+- Applies desktop geometry directly to `#TOC`, `main.content` and `#quarto-header` with inline `!important` properties.
+- Adds A/B mode: `?layout-debug=1&layout-fix=0`.
+- Normal test mode `?layout-debug=1` reports both baseline and post-fix geometry.
+- Reapplies the geometry after short/long settle windows and on resize.

@@ -1,110 +1,113 @@
-# TOC Diagnostics — v8.1
+# TOC Diagnostics — v8.2
 
-## Resultado observado en v8.0
+## Evidencia recibida desde la página real
 
-El test real entregó:
-
-```text
-viewport.width = 2560
-toc.left       = 293
-toc.width      = 280
-main.left      = 585
-
-sidebar wrapper found = false
-TOC found             = true
-```
-
-Esto cambia el diagnóstico.
-
-## Qué está generando Quarto
-
-El código actual de Quarto define:
-
-```scss
-.sidebar.toc-left {
-  grid-column: page-start / body-start;
-  grid-row: content-top / page-bottom;
-}
-
-.page-columns .content {
-  grid-column: body-content-start / body-content-end;
-}
-```
-
-Por lo tanto, el TOC no está diseñado por defecto para comenzar en `screen-start`.
-
-En el grid capturado por el test, `page-start` estaba varios tracks después del borde de la pantalla. Por eso el TOC comenzó aproximadamente en `x = 293 px`.
-
-## Corrección v8.1
-
-No se utiliza `position: fixed`.
-
-Se conservan los nombres de líneas que Quarto espera, pero se redefine el grid root:
+v8.1 produjo:
 
 ```text
-x=0
-│
-├── [screen-start / page-start]
-│    TOC
-│
-├── [body-start]
-│    gap pequeño
-│
-├── [body-content-start]
-│    contenido
-│
-└── [screen-end]
+viewport.width   = 2560
+toc.left         = 292.5
+toc.width        = 280
+main.left        = 585.3
+main.right       = 2272.5
+right gap        = 287.5
+
+header.top       = 53
+navbar.top       = 53
+navbar.height    = 53
 ```
 
-Así, la regla nativa `.sidebar.toc-left { grid-column: page-start / body-start; }` produce ahora el resultado deseado.
+El `gridTemplateColumns` seguía siendo el generado por Quarto:
 
-## Cómo probar la página real
+```text
+[screen-start] 12.75
+[screen-start-inset] 259.75
+[page-start] 60
+[page-start-inset] 180
+[body-start-outset] 60
+[body-start] 12.75
+[body-content-start] 1574.5
+...
+```
 
-Abrir:
+Esto confirma que la corrección CSS de v8.1 no modificó el grid calculado de la página real.
+
+## Estrategia v8.2
+
+No se reconstruye el TOC.
+
+Se conserva:
+
+```text
+contenido del TOC generado por Quarto
+enlaces
+scroll spy nativo
+toc-expand
+```
+
+Después del render:
+
+```text
+#TOC        → fixed, left 0
+#header     → fixed, top 0
+main        → screen-start / screen-end + margin-left del TOC
+body        → padding-top = altura del navbar
+```
+
+Las propiedades se aplican mediante:
+
+```javascript
+element.style.setProperty(name, value, "important")
+```
+
+de modo que no dependen del orden de las hojas CSS.
+
+## Test A/B
+
+### Quarto sin corrección
+
+```text
+portfolio.html?layout-debug=1&layout-fix=0
+```
+
+Debe mostrar las medidas originales de Quarto.
+
+### Quarto + corrección v8.2
 
 ```text
 portfolio.html?layout-debug=1
 ```
 
-El resultado esperado en desktop es:
+Debe mostrar:
 
 ```text
-PASS
+fixApplied = true
+tocLeftPx ≈ 0
+rightGapPx <= 32
+headerTopPx ≈ 0
+navbarTopPx ≈ 0
 ```
 
-y en el JSON:
+El panel también incluye:
 
 ```text
-tocLeftPx             ≈ 0
-contentGapPx          0 ... 28
-rightGapPx            -1 ... 32
-headerTopPx           ≈ 0
-navbarTopPx           ≈ 0
-navbarHeightPx        <= 54
-shellHeaderGapPx      -1 ... 2
+baseline
 ```
 
-Visualmente:
+para comparar el antes y después dentro del mismo render.
+
+## Contrato PASS desktop
 
 ```text
-ROJO  = TOC
-VERDE = contenido
-AZUL  = navbar
+fixApplied                    = true
+abs(tocLeftPx)                <= 2
+tocMarginLeft                 <= 1
+tocPaddingLeft                <= 1
+contentGapPx                  -1 .. 28
+rightGapPx                    -1 .. 32
+abs(headerTopPx)              <= 1
+abs(navbarTopPx)              <= 1
+navbarHeightPx                <= 50
+shell starts after header     sí
+notStacked                    sí
 ```
-
-## Si vuelve a fallar
-
-Copiar únicamente estas secciones del panel:
-
-```text
-selectorUsed
-rects
-measurements
-computed.sidebar
-computed.toc
-computed.shell
-computed.navbar
-checks
-```
-
-Con esas medidas se puede identificar la regla exacta que está desplazando el layout sin volver a modificarlo a ciegas.

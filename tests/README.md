@@ -1,43 +1,40 @@
-# Layout tests — v8.1
+# Layout tests — v8.2
 
-## 1. Static source contract
-
-Run:
+## Static source test
 
 ```bash
 python tests/check_layout_contract.py
 ```
 
-This verifies that the source contains the required Quarto named-grid contract and the runtime checks.
+## Browser A/B test
 
-## 2. Real browser / rendered Quarto page
+### Baseline Quarto
 
-After GitHub Pages renders the site, open:
+```text
+portfolio.html?layout-debug=1&layout-fix=0
+```
+
+### Corrected v8.2
 
 ```text
 portfolio.html?layout-debug=1
 ```
 
-The test must show `PASS`.
+The corrected version must show `PASS`.
 
-Required desktop values:
-
-```text
-tocLeftPx        <= 2
-contentGapPx     0..28
-rightGapPx       -1..32
-headerTopPx      <= 1
-navbarTopPx      <= 1
-navbarHeightPx   <= 54
-shellHeaderGapPx -1..2
-```
-
-The visual outlines are:
+The result contains:
 
 ```text
-red   = TOC
-green = main content
-blue  = navbar
+baseline        → geometry before repair
+runtimeValues   → values used by repair
+rects           → final rectangles
+measurements    → final gaps/positions
+checks          → pass/fail contracts
 ```
 
-The runtime browser test is authoritative because it measures the actual HTML/CSS emitted by the installed Quarto version.
+For the supplied 2560 px case the key expected change is:
+
+```text
+baseline TOC left ~292.5 px
+final TOC left    ~0 px
+```

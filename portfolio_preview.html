@@ -3,37 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v8.1 — Named Grid Contract</title>
+<title>Portfolio v8.2 — Runtime Geometry</title>
 <style>
-:root{
-  --bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;
-  --border:#cbc7bc;--accent:#d63230;
-  --h:48px;--toc:clamp(15.5rem,16vw,18rem);--gap:clamp(.55rem,.8vw,.9rem);
-}
-*{box-sizing:border-box}html,body{width:100%;margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-header{height:var(--h);min-height:var(--h);display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border)}.brand{font-weight:900}.nav{margin-left:20px;display:flex;gap:18px;font-weight:700}
-#quarto-content{display:grid;width:100%;grid-template-columns:[screen-start screen-start-inset page-start page-start-inset] var(--toc) [body-start-outset body-start] var(--gap) [body-content-start] minmax(0,1fr) [body-content-end body-end body-end-outset page-end-inset page-end screen-end-inset screen-end]}
-#TOC{grid-column:page-start/body-start;margin:0;padding:12px 8px 30px 0;border-right:1px solid var(--border);min-height:calc(100vh - var(--h))}.toc-title{font-size:.72rem;font-weight:900}.group{margin-top:15px;color:var(--accent);font-size:.72rem;font-weight:900}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}
-main{grid-column:body-content-start/body-content-end;margin:0;padding:30px 14px 60px 0;min-width:0}h1{font-size:3rem;margin:0 0 15px;text-transform:uppercase}h2{font-size:1.4rem;margin-top:38px;border-top:4px solid var(--text);padding-top:12px;text-transform:uppercase}p{color:var(--muted);line-height:1.7;max-width:125ch}.wide{height:300px;display:grid;place-items:center;background:var(--surface);border:1px dashed var(--border);margin-top:20px}
-@media(max-width:991px){#quarto-content{display:block}#TOC{display:none}main{padding:20px 14px}}
+:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+header{height:48px;position:fixed;left:0;right:0;top:0;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border);background:var(--bg);z-index:20}.brand{font-weight:900}.nav{margin-left:20px;font-weight:700}
+#TOC{position:fixed;left:0;top:48px;bottom:0;width:288px;overflow:auto;margin:0;padding:12px 8px 25px 0;border-right:1px solid var(--border);background:var(--bg)}.title{font-size:.72rem;font-weight:900}.group{margin-top:14px;color:var(--accent);font-size:.72rem;font-weight:900}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}
+main{margin:0 16px 0 300px;padding:78px 0 60px;width:auto}h1{font-size:3rem;text-transform:uppercase;margin:0 0 15px}h2{font-size:1.4rem;border-top:4px solid var(--text);padding-top:12px;margin-top:36px;text-transform:uppercase}p{color:var(--muted);line-height:1.7;max-width:125ch}.wide{height:300px;background:var(--surface);border:1px dashed var(--border);display:grid;place-items:center;margin-top:22px}
 </style>
 </head>
 <body>
 <header><div class="brand">Carlos Moreno Rojas</div><div class="nav">Portfolio　CV　Contact</div></header>
-<div id="quarto-content">
-<nav id="TOC" class="sidebar toc-left">
-  <div class="toc-title">ON THIS PAGE</div>
-  <div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div>
-  <span class="child">Objective 1 — Perfusion Platform</span>
-  <span class="child">Objective 2 — Baseline Dataset</span>
-  <span class="child">Objective 3 — ICG-NIR Marker</span>
-</nav>
-<main class="content">
-  <h1>Portfolio</h1>
-  <p>This preview uses the same named-grid contract as v8.1: the Quarto TOC begins at physical x=0, and the main body consumes every remaining pixel to the right.</p>
-  <h2>Geometry</h2>
-  <div class="wide">TOC x=0 │ small gap │ content → screen right</div>
-</main>
-</div>
+<nav id="TOC"><div class="title">ON THIS PAGE</div><div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div><span class="child">Objective 1 — Perfusion Platform</span><span class="child">Objective 2 — Baseline Dataset</span></nav>
+<main><h1>Portfolio</h1><p>v8.2 positions the actual rendered TOC directly at x=0 and fixes the navbar at y=0 after Quarto finishes rendering.</p><h2>Expected result</h2><div class="wide">TOC left = 0px │ navbar top = 0px │ content reaches right edge</div></main>
 </body>
 </html>
