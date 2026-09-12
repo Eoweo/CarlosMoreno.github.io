@@ -1188,7 +1188,7 @@ main.content h2 {
 
 
 /* ================================================================
-   VERSION 7.7 — FULL WINDOW + PHYSICAL LEFT-EDGE TOC
+   VERSION 7.8 — FIXED LEFT TOC USING QUARTO'S REAL TOC WRAPPER
    ================================================================ */
 
 :root {
@@ -1257,25 +1257,51 @@ body {
   /*
      The left sidebar begins at the browser's physical x=0 edge.
   */
-  #quarto-margin-sidebar,
-  .margin-sidebar,
-  .quarto-margin-sidebar {
+  /*
+     IMPORTANT:
+     For toc-location: left, Quarto uses #quarto-sidebar-toc-left.
+     This is the element that must be removed from normal document flow.
+  */
+  #quarto-sidebar-toc-left,
+  .sidebar.toc-left {
     position: fixed !important;
+    inset: var(--header-height) auto 0 0 !important;
     left: 0 !important;
     top: var(--header-height) !important;
+    right: auto !important;
     bottom: 0 !important;
     z-index: 900 !important;
+
+    display: block !important;
+    float: none !important;
+    transform: none !important;
 
     width: var(--fixed-toc-width) !important;
     max-width: var(--fixed-toc-width) !important;
     min-width: var(--fixed-toc-width) !important;
+    height: calc(100vh - var(--header-height)) !important;
 
     margin: 0 !important;
     padding: 0 !important;
 
     overflow: hidden !important;
     background: var(--page-bg) !important;
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--border) !important;
+  }
+
+  /*
+     The margin sidebar is not the left TOC. Do not allow it to reserve
+     horizontal or vertical space on these pages.
+  */
+  #quarto-margin-sidebar,
+  .margin-sidebar:not(.toc-left),
+  .quarto-margin-sidebar {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   #TOC {
@@ -1403,15 +1429,24 @@ body {
 
 /* Mobile/tablet returns to normal flow. */
 @media (max-width: 991px) {
-  #quarto-margin-sidebar,
-  .margin-sidebar,
-  .quarto-margin-sidebar {
+  #quarto-sidebar-toc-left,
+  .sidebar.toc-left {
     position: static !important;
+    inset: auto !important;
     width: auto !important;
+    height: auto !important;
     max-width: none !important;
     min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     border-right: 0 !important;
     overflow: visible !important;
+  }
+
+  #quarto-margin-sidebar,
+  .margin-sidebar:not(.toc-left),
+  .quarto-margin-sidebar {
+    display: none !important;
   }
 
   #quarto-content,
@@ -1453,5 +1488,34 @@ body {
 
   .cv-download-button {
     width: 100%;
+  }
+}
+
+
+/* ================================================================
+   V7.8 SAFETY OVERRIDES
+   Prevent the left TOC wrapper from becoming a top block in desktop.
+   ================================================================ */
+@media (min-width: 992px) {
+  body > #quarto-content,
+  body #quarto-content.page-columns {
+    min-height: calc(100vh - var(--header-height));
+  }
+
+  #quarto-sidebar-toc-left + main.content,
+  #quarto-sidebar-toc-left ~ main.content {
+    margin-top: 0 !important;
+  }
+
+  #quarto-sidebar-toc-left #TOC,
+  .sidebar.toc-left #TOC {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
 }

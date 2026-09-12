@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.7 — Swiss Research**
+**v7.8 — Swiss Research**
 
 The current architecture separates:
 
@@ -131,3 +131,11 @@ PORTFOLIO_REQUIREMENTS.md
 - Left TOC is physically fixed at `left: 0` of the browser viewport.
 - Main content starts at the responsive TOC width and fills the remaining `100vw`.
 - This specifically fixes the large blank band visible to the left of the TOC in v7.6.
+
+
+## v7.8
+
+- Corrected the Quarto wrapper used for the left TOC.
+- Desktop left navigation now fixes `#quarto-sidebar-toc-left` / `.sidebar.toc-left`.
+- The unrelated margin sidebar is prevented from reserving layout space.
+- The TOC can no longer become a full-width row above the document on desktop.

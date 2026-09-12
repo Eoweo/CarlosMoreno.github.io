@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.7 — Swiss Research`  
+> **Versión base documentada:** `v7.8 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -3579,16 +3579,19 @@ para determinar su posición física en desktop.
 
 El problema observado en v7.6 fue que Quarto mantenía una columna invisible antes de `screen-start`, produciendo una gran franja vacía a la izquierda aunque los márgenes internos fueran cero.
 
-A partir de v7.7, la columna lateral utiliza coordenadas directas del viewport:
+A partir de v7.8, la columna lateral utiliza coordenadas directas del viewport y se aplica al **contenedor real del TOC izquierdo de Quarto**:
 
 ```css
-#quarto-margin-sidebar {
+#quarto-sidebar-toc-left,
+.sidebar.toc-left {
     position: fixed;
     left: 0;
     top: var(--header-height);
     bottom: 0;
 }
 ```
+
+> **Corrección respecto de v7.7:** `#quarto-margin-sidebar` no es el contenedor del TOC cuando se usa `toc-location: left`. Aplicar el posicionamiento a ese elemento dejaba `#quarto-sidebar-toc-left` dentro del flujo normal y hacía que la lista apareciera arriba del contenido, como en modo móvil.
 
 ### Resultado obligatorio
 
@@ -3652,6 +3655,111 @@ En desktop:
 ```
 
 La navegación interna de Quarto puede seguir existiendo, pero su grid central no debe controlar la posición lateral del TOC ni del cuerpo.
+
+---
+
+
+
+# 23I. Corrección de posición del TOC introducida en v7.8
+
+## REQ-LAYOUT-011 — El TOC desktop debe usar `#quarto-sidebar-toc-left`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Cuando Quarto utiliza:
+
+```yaml
+toc-location: left
+```
+
+el contenedor desktop correcto de la navegación lateral es:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+o su equivalente:
+
+```text
+.sidebar.toc-left
+```
+
+Este elemento debe ser el que recibe:
+
+```css
+position: fixed;
+left: 0;
+top: var(--header-height);
+bottom: 0;
+```
+
+No se debe utilizar `#quarto-margin-sidebar` como sustituto del TOC izquierdo.
+
+---
+
+## REQ-LAYOUT-012 — La lista izquierda no puede ocupar una fila superior en desktop
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En resoluciones desktop (`>= 992px`) la lista lateral:
+
+- permanece a la izquierda;
+- comienza debajo del navbar;
+- ocupa la altura disponible del viewport;
+- queda fuera del flujo vertical del documento;
+- **no puede crear una caja o fila encima de `main.content`**;
+- no puede empujar el título `PORTFOLIO` hacia abajo.
+
+La geometría obligatoria es:
+
+```text
+NAVBAR
+────────────────────────────────────────────────────
+
+TOC │ PORTFOLIO / CONTENIDO
+TOC │
+TOC │
+TOC │
+```
+
+La siguiente geometría está prohibida:
+
+```text
+NAVBAR
+────────────────────────────────────────────────────
+TOC / lista ocupando una fila completa superior
+────────────────────────────────────────────────────
+PORTFOLIO / CONTENIDO
+```
+
+---
+
+## REQ-LAYOUT-013 — `#quarto-margin-sidebar` no debe reservar espacio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+En el layout actual no se utilizan contenidos de margin sidebar.
+
+En desktop debe evitarse que:
+
+```text
+#quarto-margin-sidebar
+.margin-sidebar
+.quarto-margin-sidebar
+```
+
+reserven ancho o alto adicional.
+
+Se pueden ocultar mientras se preserve:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+como navegación lateral funcional.
 
 ---
 
@@ -3861,6 +3969,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.6 | 2026-09-12 | Botones de detalle verificados en los 8 proyectos | REQ-PORTFOLIO-NAV-002 | IMPLEMENTADO |
 | v7.6 | 2026-09-12 | Dos botones de descarga al inicio del CV | REQ-CV-010 | IMPLEMENTADO |
 | v7.7 | 2026-09-12 | Eliminación de columna invisible izquierda de Quarto; TOC fijado a viewport x=0 | REQ-LAYOUT-008/009/010 | IMPLEMENTADO |
+| v7.8 | 2026-09-12 | TOC fijado usando el wrapper real `#quarto-sidebar-toc-left` | REQ-LAYOUT-011/012/013 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -3984,7 +4093,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.7 Swiss Research
+Version: v7.8 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

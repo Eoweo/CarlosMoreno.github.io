@@ -1,14 +1,15 @@
-# Build validation — v7.7
+# Build validation — v7.8
 
-- _quarto.yml: OK
+- Correct left wrapper selector: YES
+- Desktop left wrapper fixed: YES
+- Incorrect margin-sidebar fixed selector removed: YES
+- Margin sidebar hidden: YES
+- Main content offset preserved: YES
+- Desktop/mobile breakpoint preserved: YES
+- CSS braces balanced: YES
 - Search disabled: YES
 - Project Pages absent: YES
-- CSS braces balanced: YES
-- Fixed sidebar left:0: YES
-- Main margin-left TOC width: YES
-- Main width calc viewport: YES
-- Quarto shell display block: YES
-- REQ-LAYOUT-008: OK
-- REQ-LAYOUT-009: OK
-- REQ-LAYOUT-010: OK
+- REQ-LAYOUT-011: OK
+- REQ-LAYOUT-012: OK
+- REQ-LAYOUT-013: OK
 - Global JS 1: OK
