@@ -1,4 +1,4 @@
-# Layout and animation tests — v8.6
+# Layout and animation tests — v8.11
 
 ## Animation source contract
 
@@ -6,7 +6,9 @@
 python tests/check_animation_contract.py
 ```
 
-## Browser test — specific Monitoring section
+Checks that the Swiss Wipe remains active and that Compact Mode / Reduced Motion protocols are absent.
+
+## Monitoring animation test
 
 ```text
 portfolio.html?animation-debug=1&animation-test=monitoring
@@ -20,25 +22,13 @@ mode = raf-waapi
 visibleButPending = 0
 ```
 
-The Monitoring record must show:
-
-```text
-triggered = true
-animationStarted = true
-animationFinished = true
-finalStateVerified = true
-failed = false
-```
-
-## General automatic animation test
+## General animation test
 
 ```text
 portfolio.html?animation-test=1
 ```
 
 ## Layout regression
-
-Existing v8.4/v8.5 layout diagnostics remain unchanged:
 
 ```text
 portfolio.html?layout-debug=1

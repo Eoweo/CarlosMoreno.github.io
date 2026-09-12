@@ -166,11 +166,6 @@ strong {
   color: var(--accent);
 }
 
-.swiss-icon-button.is-on {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
 
 .swiss-icon-button svg {
   width: 18px;
@@ -866,59 +861,6 @@ pre {
   will-change: auto;
 }
 
-/* Existing manual Reduced Motion control. */
-body.swiss-reduce-motion *,
-body.swiss-reduce-motion *::before,
-body.swiss-reduce-motion *::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
-body.swiss-reduce-motion .swiss-reveal,
-body.swiss-reduce-motion .swiss-reveal.swiss-waapi-pending,
-body.swiss-reduce-motion .swiss-reveal.swiss-waapi-animating {
-  opacity: 1 !important;
-  transform: none !important;
-  clip-path: none !important;
-  transition: none !important;
-  animation: none !important;
-  will-change: auto !important;
-}
-
-/* Respect the operating-system accessibility preference as well. */
-@media (prefers-reduced-motion: reduce) {
-  .swiss-reveal,
-  .swiss-reveal.swiss-waapi-pending,
-  .swiss-reveal.swiss-waapi-animating {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-}
-
-body.swiss-compact main.content h1:not(.title),
-body.swiss-compact main.content h2 {
-  margin-top: 2.35rem;
-}
-
-body.swiss-compact .image-slot {
-  min-height: 215px;
-  margin: 1.1rem 0 1.5rem;
-}
-
-body.swiss-compact .image-slot.large {
-  min-height: 300px;
-}
-
-body.swiss-compact p,
-body.swiss-compact li {
-  line-height: 1.5;
-}
-
 /* ================================================================
    RESPONSIVE
    ================================================================ */
@@ -1390,12 +1332,19 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 }
 
 
-.cv-chip strong,
-.cv-card strong,
-.cv-timeline-card strong,
-.cv-language-card strong {
+.cv-chip > strong {
   display: block;
   margin-bottom: .4rem;
+  color: var(--text);
+}
+
+/* Emphasis inside prose must remain inline. */
+.cv-card p strong,
+.cv-timeline-card p strong,
+.cv-language-card p strong,
+.cv-summary-card strong {
+  display: inline;
+  margin: 0;
   color: var(--text);
 }
 
@@ -1416,10 +1365,11 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 
 .cv-timeline-card {
   display: grid;
-  grid-template-columns: minmax(160px, .45fr) minmax(0, 1fr);
+  grid-template-columns: 120px minmax(0, 1fr);
   gap: 1rem;
-  padding: 1rem;
+  padding: .85rem 1rem;
   align-items: start;
+  text-align: left;
 }
 
 .cv-timeline-date {
@@ -1709,11 +1659,6 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
   mask-size: contain;
 }
 
-body.swiss-compact .cv-card,
-body.swiss-compact .cv-chip,
-body.swiss-compact .cv-summary-card {
-  min-height: auto;
-}
 
 @media (max-width: 1050px) {
   .cv-hero,
@@ -1775,5 +1720,70 @@ body.swiss-compact .cv-summary-card {
 @media (max-width: 620px) {
   .cv-skill-grid .cv-card {
     min-height: 0;
+  }
+}
+
+
+/* ================================================================
+   VERSION 8.11 — CV ALIGNMENT / SKILL DENSITY
+   ================================================================ */
+
+.cv-hero,
+.cv-hero-copy,
+.cv-summary-panel,
+.cv-summary-card,
+.cv-chip,
+.cv-timeline,
+.cv-timeline-card,
+.cv-timeline-card > div,
+.cv-card-grid,
+.cv-card,
+.cv-card h3,
+.cv-card p,
+.cv-card-tags,
+.cv-language-card,
+.cv-language-title,
+.cv-language-card p,
+.cv-note {
+  text-align: left !important;
+}
+
+.cv-timeline-card p,
+.cv-card p {
+  max-width: none;
+}
+
+/* Technical Skills only: substantially shorter cards. */
+.cv-skill-grid {
+  gap: .48rem !important;
+  margin: .72rem 0 1.15rem !important;
+}
+
+.cv-skill-grid .cv-card {
+  min-height: 0 !important;
+  padding: .58rem .72rem !important;
+}
+
+.cv-skill-grid .cv-card-icon {
+  --cv-icon-size: 1rem !important;
+  margin-bottom: .36rem !important;
+}
+
+.cv-skill-grid .cv-card h3 {
+  margin: 0 0 .18rem !important;
+  font-size: 1rem !important;
+  line-height: 1.12 !important;
+}
+
+.cv-skill-grid .cv-card p {
+  margin: 0 !important;
+  font-size: .79rem !important;
+  line-height: 1.32 !important;
+}
+
+@media (max-width: 720px) {
+  .cv-timeline-card {
+    grid-template-columns: 1fr !important;
+    gap: .4rem !important;
   }
 }

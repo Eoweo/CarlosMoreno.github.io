@@ -1,19 +1,32 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>v8.10 CV Compile Fix</title>
+<title>v8.11 CV fixes</title>
 <style>
 :root{--bg:#f7f5ef;--surface:#fffdf8;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
 *{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-.wrap{max-width:1400px;margin:auto}h1{font-size:3rem;text-transform:uppercase;margin:0 0 20px}h2{border-top:4px solid var(--text);padding-top:.16rem;text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.62rem}.card{border:1px solid var(--border);background:var(--surface);padding:.78rem .95rem;min-height:132px}.icon{color:var(--accent);font-weight:900;margin-bottom:.45rem}.card h3{font-size:1rem;margin:.1rem 0 .28rem}.card p{font-size:.83rem;line-height:1.4;color:var(--muted);margin:0}.ok{border-left:4px solid var(--accent);padding:12px;background:var(--surface);margin-bottom:22px}
-@media(max-width:800px){.grid{grid-template-columns:1fr}.card{min-height:0}}
-</style></head><body><div class="wrap">
-<h1>Curriculum Vitae</h1>
-<div class="ok"><b>Compile fix:</b> complex CV blocks are emitted through explicit Pandoc raw-HTML blocks, so tags are no longer printed as code.</div>
-<h2>Technical Skills</h2>
-<div class="grid">
-<div class="card"><div class="icon">◫</div><h3>Electronics &amp; Embedded Systems</h3><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></div>
-<div class="card"><div class="icon">&lt;/&gt;</div><h3>Programming &amp; Data</h3><p>Python, C++, acquisition, signal processing and image processing.</p></div>
-<div class="card"><div class="icon">▣</div><h3>FPGA &amp; Digital Design</h3><p>Zybo Z10, Vivado and VHDL.</p></div>
-<div class="card"><div class="icon">♡</div><h3>Biomedical Engineering</h3><p>Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.</p></div>
-</div></div></body></html>
+main{max-width:1500px;margin:auto}h1{border-top:4px solid #111;padding-top:.16rem;text-transform:uppercase}
+.timeline{display:grid;gap:.65rem}.timeline-card{display:grid;grid-template-columns:120px minmax(0,1fr);gap:1rem;padding:.85rem 1rem;border:1px solid var(--border);background:var(--surface);text-align:left}
+.date{color:var(--accent);font-weight:900}.degree{font-size:1.22rem;font-weight:900}.place{font-weight:700;margin:.25rem 0 .4rem}.timeline-card p,.card p{margin:.2rem 0;color:var(--muted);line-height:1.45}.timeline-card p strong,.card p strong{display:inline;margin:0;color:var(--text)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.card{border:1px solid var(--border);background:var(--surface);padding:1rem;text-align:left}.card h3{margin:.35rem 0}.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.48rem}.skill{border:1px solid var(--border);background:var(--surface);padding:.58rem .72rem;text-align:left}.skill .icon{color:var(--accent);margin-bottom:.36rem}.skill h3{font-size:1rem;margin:0 0 .18rem}.skill p{font-size:.79rem;line-height:1.32;margin:0;color:var(--muted)}
+.note{margin-top:18px;padding:10px;border-left:4px solid var(--accent);background:#ece9e0}
+@media(max-width:720px){.timeline-card,.cards,.skills{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>Education</h1>
+<div class="timeline">
+<div class="timeline-card"><div class="date">2025–2027</div><div><div class="degree">MSc Biomedical Engineering</div><div class="place">Pontificia Universidad Católica de Chile</div><p>Research focused on <strong>ex vivo liver perfusion</strong>, biomedical instrumentation and <strong>ICG-NIR functional assessment</strong>.</p></div></div>
+<div class="timeline-card"><div class="date">2025–2026</div><div><div class="degree">Electrical Engineering</div><div class="place">Pontificia Universidad Católica de Chile</div><p>Training in electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.</p></div></div>
+</div>
+<h1>Research & Development</h1>
+<div class="cards">
+<article class="card"><h3>Master’s Research — Liver Viability & ICG-NIR</h3><p>Development of an <strong>ex vivo liver perfusion platform</strong> and investigation of <strong>ICG-NIR kinetics</strong> to explore quantitative indicators of liver function and viability.</p></article>
+<article class="card"><h3>Borealis UC — Organ Supercooling</h3><p>Research participation in organ preservation, focused on <strong>supercooling strategies</strong>, thermal control and experimental support.</p></article>
+</div>
+<h1>Technical Skills</h1>
+<div class="skills">
+<article class="skill"><div class="icon">◫</div><h3>Electronics & Embedded Systems</h3><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></article>
+<article class="skill"><div class="icon">&lt;/&gt;</div><h3>Programming & Data</h3><p>Python, C++, acquisition, signal processing and image processing.</p></article>
+<article class="skill"><div class="icon">▣</div><h3>FPGA & Digital Design</h3><p>Zybo Z10, Vivado and VHDL.</p></article>
+<article class="skill"><div class="icon">◇</div><h3>Biomedical Engineering</h3><p>Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.</p></article>
+</div>
+<div class="note"><b>Swiss controls:</b> Light/Dark only. Compact Mode and Reduced Motion are removed.</div>
+</main></body></html>

@@ -1,14 +1,17 @@
-# Build validation — v8.10
+# Build validation — v8.11
 
 - QMD YAML: OK
-- Plain Pandoc CV compile: OK
-- Escaped CV HTML inside code blocks: 0
-- Escaped cv-* HTML tags: 0
-- CV summary cards rendered: YES
-- CV project buttons rendered: YES
-- Raw HTML fences leaked to output: NO
-- Compact skill grid class: YES
-- Skill card min-height 132px: YES
+- Pandoc CV compile: OK
+- Literal raw HTML fence leakage: 0
+- Escaped cv-* HTML leakage: 0
+- JavaScript syntax: OK
+- Obsolete Compact/Reduced runtime tokens: 0
+- Theme control retained: YES
 - CSS braces balanced: YES
-- Portfolio unchanged from v8.9: YES
-- Runtime/animation JS unchanged: YES
+- Education 120px date column: YES
+- Paragraph strong inline: YES
+- Technical Skills min-height 0: YES
+- Technical Skills compact padding: YES
+- check_animation_contract.py: PASS
+- check_layout_contract.py: PASS
+- Core content/config files changed: 0

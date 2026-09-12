@@ -258,3 +258,15 @@ This version keeps the validated layout / TOC / animation base from v8.6 and int
 - Technical Skills cards now use a compact `cv-skill-grid` variant with 132 px reference minimum height.
 - Other CV cards keep their previous dimensions.
 - Portfolio TOC hierarchy and validated layout/animation systems are unchanged.
+
+
+## v8.11
+
+- CV timeline/cards are explicitly left-aligned.
+- Bold inline phrases in CV prose no longer become block elements, removing artificial line breaks.
+- Education uses a fixed 120 px date column on desktop.
+- Technical Skills cards are substantially shorter.
+- Compact Mode was removed from UI, CSS, JS, localStorage behavior and tests.
+- Reduced Motion was removed from UI, CSS, JS, animation branches and tests.
+- Light/Dark is now the only Swiss display control.
+- Portfolio TOC, runtime TOC portal and project content remain unchanged.

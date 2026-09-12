@@ -734,7 +734,7 @@ No requieren librerías externas de iconos.
 
 ## REQ-CTRL-002 — Control de modo compacto
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINADO EN V8.11`  
 **Prioridad:** `P1`
 
 Icono:
@@ -761,11 +761,14 @@ Preferencia persistente:
 localStorage["swiss-compact"]
 ```
 
+
+> **Actualización v8.11:** Compact Mode fue eliminado completamente: botón, clase, localStorage, CSS y lógica JavaScript.
+
 ---
 
 ## REQ-CTRL-003 — Reduced Motion
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINADO EN V8.11`  
 **Prioridad:** `P0`
 
 Icono conceptual:
@@ -792,6 +795,9 @@ Preferencia persistente:
 ```text
 localStorage["swiss-reduce-motion"]
 ```
+
+
+> **Actualización v8.11:** Reduced Motion fue eliminado completamente como control de usuario y como protocolo runtime.
 
 ---
 
@@ -1719,10 +1725,13 @@ portfolio_preview.html
 
 ## REQ-A11Y-001 — Reduced Motion manual
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINADO EN V8.11`  
 **Prioridad:** `P0`
 
 El usuario puede desactivar explícitamente animaciones.
+
+
+> **Actualización v8.11:** El control manual ya no forma parte de la interfaz.
 
 ---
 
@@ -5045,7 +5054,7 @@ Nunca se debe restaurar una implementación donde `opacity:0` sea el estado HTML
 
 ## REQ-ANIM-012 — Reduced Motion de sistema y control manual
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINADO EN V8.11`  
 **Prioridad:** `P0`
 
 La animación debe respetar simultáneamente:
@@ -5062,6 +5071,9 @@ opacity    = 1
 clip-path  = none
 transition = none
 ```
+
+
+> **Actualización v8.11:** La animación vigente utiliza una sola ruta RAF + WAAPI + watchdog/fail-visible, sin Reduced Motion manual ni `prefers-reduced-motion`.
 
 ---
 
@@ -5628,9 +5640,9 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 5. Sidebar debe seguir la sección durante scroll.
 6. Sidebar debe hacer auto-scroll para mantener visible el elemento activo.
 7. Deben existir modo claro y oscuro.
-8. Debe existir botón de Reduced Motion.
-9. Debe existir modo compacto.
-10. Las preferencias no pueden romper la página si localStorage falla.
+8. No debe existir botón de Reduced Motion.
+9. No debe existir Compact Mode.
+10. Compact/Reduced Motion no deben usar localStorage; solo el fallback de tema puede persistir estado.
 11. Animaciones deben ser fail-safe.
 12. Si JS falla, el contenido debe permanecer visible.
 13. Diseño debe mantener carácter técnico/académico.
@@ -5677,7 +5689,7 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 54. El shell lateral debe seguir en x=0; el contenido interno del TOC usa padding-left:20px y padding-top:20px.
 55. La animación de contenido debe usar Swiss Wipe por bloques lógicos.
 56. requestAnimationFrame + getBoundingClientRect es el trigger principal del Swiss Wipe; IntersectionObserver no es requisito.
-57. La animación debe ser fail-safe y respetar Reduced Motion del sistema y manual.
+57. La animación debe ser fail-safe mediante watchdog/timeout; Reduced Motion no forma parte de la versión vigente.
 58. Debe existir verificación real de Web Animations API mediante ?animation-debug=1.
 59. Debe existir prueba automática mediante ?animation-test=1 y prueba dirigida mediante ?animation-test=monitoring.
 60. La animación no puede alterar TOC, navbar ni geometría runtime.
@@ -5728,7 +5740,7 @@ Una nueva funcionalidad debería incorporarse respetando este orden:
 8. Validar móvil
 9. Validar modo claro
 10. Validar modo oscuro
-11. Validar Reduced Motion
+11. Validar Swiss Wipe y fail-visible
 12. Validar GitHub Pages
 13. Actualizar este documento
 ```
@@ -5743,7 +5755,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.10 Swiss Research / Robust CV Raw HTML + Compact Skills
+Version: v8.11 Swiss Research / CV Alignment + Controls Cleanup
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -5751,8 +5763,9 @@ Hosting target: GitHub Pages
 Navigation: Navbar + dynamic left TOC
 Themes: Light + Dark
 Animations: Swiss Wipe via requestAnimationFrame + Web Animations API, fail-safe
-Accessibility option: Reduced Motion
-Density option: Compact Mode
+Display controls: Light/Dark only
+Compact Mode: removed
+Reduced Motion control/protocol: removed
 Deployment: GitHub Actions
 ```
 
@@ -5852,7 +5865,7 @@ Esto aplica especialmente a títulos de secciones del contenido principal y se i
 La versión vigente después de esta modificación es:
 
 ```text
-Version: v8.10 Swiss Research / Robust CV Raw HTML + Compact Skills
+Version: v8.11 Swiss Research / CV Alignment + Controls Cleanup
 Base funcional: v8.6 WAAPI Reveal + v8.4 validated TOC geometry
 ```
 
@@ -6257,4 +6270,166 @@ Swiss Wipe animation
 project pages
 index.qmd
 contact.qmd
+```
+
+
+---
+
+# 103. Registro incremental — v8.11
+
+## VERSION 8.11 — CV Alignment + Controls Cleanup + Skill Density
+
+### REQ-CV-010 — CV alineado a la izquierda
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Todo el contenido interno de hero, tarjetas, timeline, skills e idiomas debe quedar alineado a la izquierda. Quarto u otros componentes no pueden centrar accidentalmente el contenido curricular.
+
+### REQ-CV-011 — Los `<strong>` de párrafos permanecen inline
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Los énfasis dentro de frases no pueden crear saltos de línea artificiales.
+
+Obligatorio:
+
+```css
+.cv-card p strong,
+.cv-timeline-card p strong,
+.cv-language-card p strong {
+    display: inline;
+    margin: 0;
+}
+```
+
+Problema prohibido:
+
+```text
+Research focused on
+ex vivo liver perfusion
+, biomedical instrumentation and
+ICG-NIR functional assessment
+.
+```
+
+### REQ-CV-012 — Education usa columna de fecha compacta
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop:
+
+```css
+.cv-timeline-card {
+    grid-template-columns: 120px minmax(0, 1fr);
+}
+```
+
+La información académica debe comenzar cerca del borde izquierdo y no en el centro de la página.
+
+### REQ-CV-013 — Technical Skills realmente compacto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Solo `Technical Skills` reduce significativamente altura:
+
+```css
+.cv-skill-grid {
+    gap: .48rem;
+}
+
+.cv-skill-grid .cv-card {
+    min-height: 0;
+    padding: .58rem .72rem;
+}
+```
+
+También se reducen icono, márgenes del título, tamaño del texto y line-height.
+
+### REQ-CTRL-005 — Solo Light/Dark permanece como Swiss Control
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se eliminan de interfaz y código:
+
+```text
+Compact Mode
+Reduced Motion
+```
+
+Identificadores prohibidos en runtime:
+
+```text
+#swissCompactToggle
+#swissMotionToggle
+body.swiss-compact
+body.swiss-reduce-motion
+localStorage["swiss-compact"]
+localStorage["swiss-reduce-motion"]
+```
+
+El único control visual Swiss es:
+
+```text
+#swissThemeToggle
+```
+
+### REQ-ANIM-021 — Swiss Wipe sin ramas Reduced Motion
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La ruta vigente de animación es única:
+
+```text
+requestAnimationFrame
+→ getBoundingClientRect
+→ Web Animations API
+→ watchdog
+→ timeout fail-visible
+```
+
+Se eliminan:
+
+```text
+prefers-reduced-motion
+prefersReducedMotion()
+PASS_REDUCED_MOTION
+manual Reduced Motion
+```
+
+### REQ-QA-020 — Regression test de protocolos eliminados
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`tests/check_animation_contract.py` debe fallar si reaparece Compact Mode o Reduced Motion, y debe comprobar que `swissThemeToggle` siga existiendo.
+
+### Archivos modificados
+
+```text
+assets/site.css
+assets/site-scripts.html
+tests/check_animation_contract.py
+tests/README.md
+PORTFOLIO_REQUIREMENTS.md
+README.md
+BUILD_VALIDATION.md
+portfolio_preview.html
+```
+
+### Archivos no modificados
+
+```text
+cv.qmd
+portfolio.qmd
+index.qmd
+contact.qmd
+projects/*.qmd
+_quarto.yml
+TOC portal/runtime geometry
 ```

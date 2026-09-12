@@ -13,15 +13,7 @@
       <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
     </svg>`;
 
-  const MOTION = `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 12h6M14 12h6M8 8l4 4-4 4M16 8l-4 4 4 4"></path>
-    </svg>`;
 
-  const COMPACT = `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>`;
 
   function safeGet(key) {
     try {
@@ -54,23 +46,7 @@
 
     const controls = document.createElement("div");
     controls.className = "swiss-controls";
-    controls.setAttribute("aria-label", "Display controls");
-
-    const compact = document.createElement("button");
-    compact.type = "button";
-    compact.id = "swissCompactToggle";
-    compact.className = "swiss-icon-button";
-    compact.title = "Compact mode";
-    compact.setAttribute("aria-label", "Toggle compact mode");
-    compact.innerHTML = COMPACT;
-
-    const motion = document.createElement("button");
-    motion.type = "button";
-    motion.id = "swissMotionToggle";
-    motion.className = "swiss-icon-button";
-    motion.title = "Reduce motion";
-    motion.setAttribute("aria-label", "Toggle reduced motion");
-    motion.innerHTML = MOTION;
+    controls.setAttribute("aria-label", "Theme control");
 
     const theme = document.createElement("button");
     theme.type = "button";
@@ -78,7 +54,7 @@
     theme.className = "swiss-icon-button";
     theme.setAttribute("aria-label", "Toggle light or dark mode");
 
-    controls.append(compact, motion, theme);
+    controls.append(theme);
 
     const host =
       document.querySelector("#quarto-header .navbar-container") ||
@@ -88,39 +64,6 @@
 
     host.appendChild(controls);
 
-    // Restore display preferences.
-    if (safeGet("swiss-compact") === "1") {
-      document.body.classList.add("swiss-compact");
-      compact.classList.add("is-on");
-    }
-
-    if (safeGet("swiss-reduce-motion") === "1") {
-      document.body.classList.add("swiss-reduce-motion");
-      motion.classList.add("is-on");
-    }
-
-    compact.addEventListener("click", function () {
-      document.body.classList.toggle("swiss-compact");
-      const on = document.body.classList.contains("swiss-compact");
-      compact.classList.toggle("is-on", on);
-      safeSet("swiss-compact", on ? "1" : "0");
-    });
-
-    motion.addEventListener("click", function () {
-      document.body.classList.toggle("swiss-reduce-motion");
-      const on = document.body.classList.contains("swiss-reduce-motion");
-      motion.classList.toggle("is-on", on);
-      safeSet("swiss-reduce-motion", on ? "1" : "0");
-
-      if (on) {
-        animationState.reducedMotion = true;
-        forceRevealAll("manual-reduced-motion");
-      } else {
-        animationState.reducedMotion = prefersReducedMotion();
-        revealOnScroll();
-      }
-    });
-
     function updateThemeIcon() {
       const dark = isDark();
       theme.innerHTML = dark ? SUN : MOON;
@@ -128,7 +71,6 @@
     }
 
     theme.addEventListener("click", function () {
-      // Prefer Quarto's own theme switch, keeping Bootstrap in sync.
       const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
       if (nativeToggle) {
         nativeToggle.click();
@@ -136,7 +78,6 @@
         return;
       }
 
-      // Standalone fallback.
       document.body.classList.toggle("swiss-manual-dark");
       const dark = document.body.classList.contains("swiss-manual-dark");
       safeSet("swiss-manual-dark", dark ? "1" : "0");
@@ -150,7 +91,6 @@
 
     updateThemeIcon();
 
-    // Keep icon synchronized if Quarto changes classes/data attributes.
     try {
       const observer = new MutationObserver(updateThemeIcon);
       observer.observe(document.documentElement, {
@@ -199,24 +139,12 @@
     canceled: 0,
     failed: 0,
     watchdogScans: 0,
-    reducedMotion: false,
     clipPathSupported: false,
     webAnimationsSupported: !!(Element && Element.prototype && Element.prototype.animate),
     requestAnimationFrameSupported: "requestAnimationFrame" in window,
     records: []
   };
 
-  function prefersReducedMotion() {
-    if (document.body.classList.contains("swiss-reduce-motion")) return true;
-    try {
-      return !!(
-        window.matchMedia &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches
-      );
-    } catch (e) {
-      return false;
-    }
-  }
 
   function animationDescriptor(el, index) {
     const heading = el.querySelector && el.querySelector("h1, h2, h3");
@@ -378,16 +306,10 @@
     }
   }
 
-  function forceRevealAll(reason) {
-    revealTargets.forEach(function (el) {
-      forceRevealTarget(el, reason || "force-all");
-    });
-    syncAnimationState();
-  }
 
   function verifyRevealTarget(el) {
     const record = revealRecordMap.get(el);
-    if (!record || record.initial || animationState.reducedMotion) return;
+    if (!record || record.initial) return;
 
     const finalState = finalVisualStateIsCorrect(el);
     record.finalStateVerified = finalState.ok;
@@ -427,11 +349,6 @@
     el.classList.remove("swiss-waapi-pending");
     el.classList.add("swiss-waapi-animating");
 
-    if (animationState.reducedMotion) {
-      forceRevealTarget(el, "reduced-motion");
-      syncAnimationState();
-      return;
-    }
 
     // If Web Animations API is unavailable, fail visible rather than hidden.
     if (!animationState.webAnimationsSupported || typeof el.animate !== "function") {
@@ -476,7 +393,7 @@
     animation.finished.then(function () {
       finishRevealAnimation(el, record, animation);
     }).catch(function () {
-      // Cancellation caused by Reduced Motion or cleanup is not a hidden-state failure.
+      // Cancellation caused by cleanup is not a hidden-state failure.
       record.animationCanceled = true;
       clearHiddenInlineState(el);
       record.animationObject = null;
@@ -497,7 +414,7 @@
   }
 
   function scanRevealTargets(source) {
-    if (!revealTargets.length || animationState.reducedMotion) return;
+    if (!revealTargets.length) return;
 
     const triggerLine = window.innerHeight * 0.90;
 
@@ -563,9 +480,6 @@
     if (!animationState.initialized) {
       status = "NOT_INITIALIZED";
       pass = false;
-    } else if (animationState.reducedMotion) {
-      status = "PASS_REDUCED_MOTION";
-      pass = true;
     } else if (animationState.failed > 0) {
       status = "FAIL";
       pass = false;
@@ -587,7 +501,6 @@
       debug: params.get("animation-debug") === "1" || params.has("animation-test"),
       autoTest: params.get("animation-test") || null,
       mode: animationState.mode,
-      reducedMotion: animationState.reducedMotion,
       support: {
         webAnimations: animationState.webAnimationsSupported,
         clipPath: animationState.clipPathSupported,
@@ -674,10 +587,6 @@
   function runAutomaticAnimationTest() {
     const params = new URLSearchParams(window.location.search);
     if (!params.has("animation-test")) return;
-    if (animationState.reducedMotion) {
-      forceRevealAll("auto-test-reduced-motion");
-      return;
-    }
 
     const candidate = findAnimationTestCandidate(params.get("animation-test"));
     if (!candidate) {
@@ -706,7 +615,6 @@
   function initReveal() {
     revealTargets = collectRevealTargets();
     animationState.total = revealTargets.length;
-    animationState.reducedMotion = prefersReducedMotion();
     animationState.clipPathSupported = !!(
       window.CSS && CSS.supports && CSS.supports("clip-path", "inset(0 100% 0 0)")
     );
@@ -723,7 +631,7 @@
       record.lastTop = Math.round(rect.top * 10) / 10;
       record.lastBottom = Math.round(rect.bottom * 10) / 10;
 
-      if (animationState.reducedMotion || rect.top < initialCutoff) {
+      if (rect.top < initialCutoff) {
         clearHiddenInlineState(el);
         record.initial = true;
         record.finalStateVerified = true;
@@ -737,16 +645,11 @@
     // use it to hide content in v8.6.
     document.body.classList.add("swiss-js-ready");
 
-    if (animationState.reducedMotion) {
-      animationState.mode = "reduced-motion";
-      forceRevealAll("reduced-motion-init");
-    } else {
-      animationState.mode = animationState.webAnimationsSupported
-        ? "raf-waapi"
-        : "raf-visible-fallback";
-      scheduleRevealScan("initial-scan");
-      startRevealWatchdog();
-    }
+    animationState.mode = animationState.webAnimationsSupported
+      ? "raf-waapi"
+      : "raf-visible-fallback";
+    scheduleRevealScan("initial-scan");
+    startRevealWatchdog();
 
     animationState.initialized = true;
     syncAnimationState();
