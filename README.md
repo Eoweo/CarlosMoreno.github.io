@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.3 — Swiss Research**
+**v7.4 — Swiss Research**
 
 The current architecture separates:
 
@@ -72,6 +72,7 @@ quarto preview
 ## Project documentation
 
 - `PORTFOLIO_REQUIREMENTS.md` — mandatory living requirements specification.
+- `SITE_STRUCTURE.md` — page map, information levels and redundancy analysis.
 - `CONTENT_TO_ADD.md` — images/data/content still to add.
 - `GITHUB_PAGES_GUIDE.md` — deployment guide.
 - `BUILD_VALIDATION.md` — validation of the current version only.
@@ -91,3 +92,12 @@ PORTFOLIO_REQUIREMENTS.md
 - Existing projects are reorganized under those six categories.
 - Non-project sections remain in `portfolio.qmd` but are excluded from the technical TOC.
 - `Project Pages` uses Swiss-styled redirect buttons instead of linked blue project titles.
+
+
+## v7.4
+
+- User-facing pages use a wider `full` page layout.
+- Main content can use up to 1180 px of horizontal body width.
+- Swiss title sizes were reduced globally.
+- `SITE_STRUCTURE.md` documents the current page architecture and highlights the overlap between Portfolio and Project Pages.
+- No page was removed in this version.

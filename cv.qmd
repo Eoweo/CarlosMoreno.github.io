@@ -5,6 +5,7 @@ toc: true
 toc-location: left
 toc-depth: 2
 toc-title: "CV"
+page-layout: full
 ---
 
 # Professional Profile

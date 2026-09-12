@@ -6,6 +6,7 @@ toc: true
 toc-location: left
 toc-depth: 3
 toc-title: "MASTER'S RESEARCH"
+page-layout: full
 ---
 <div class="project-meta">
 <span>Organ Perfusion</span>

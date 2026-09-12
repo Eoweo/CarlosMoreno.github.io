@@ -4,7 +4,7 @@ subtitle: "Biomedical Engineering · Electrical Engineering · Research & Develo
 toc: true
 toc-location: left
 toc-depth: 3
-page-layout: article
+page-layout: full
 ---
 
 This page collects my main engineering, research and development work. The portfolio is organized

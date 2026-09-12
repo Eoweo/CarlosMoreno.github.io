@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.3 — Swiss Research`  
+> **Versión base documentada:** `v7.4 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -2939,6 +2939,176 @@ No se modifica el contenido de las páginas individuales.
 ---
 
 
+
+# 23E. Requisitos introducidos en v7.4
+
+## REQ-LAYOUT-001 — El cuerpo debe utilizar la zona derecha disponible
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El contenido principal no debe quedar visualmente concentrado en una columna angosta dejando una gran zona derecha sin utilizar.
+
+Todas las páginas públicas principales y páginas de proyectos deben utilizar:
+
+```yaml
+page-layout: full
+```
+
+El cuerpo mantiene un límite máximo para evitar líneas excesivamente largas:
+
+```css
+main.content {
+    width: 100%;
+    max-width: 1180px;
+}
+```
+
+### Comportamiento esperado
+
+En desktop:
+
+```text
+TOC izquierdo
+│
+│    CUERPO DE CONTENIDO ────────────────────────────────→
+│    utiliza una porción significativamente mayor
+│    del espacio central/derecho disponible.
+```
+
+Grids, imágenes, tablas, diagramas y tarjetas deben poder utilizar todo el ancho del cuerpo.
+
+El texto corrido puede limitarse aproximadamente a:
+
+```css
+108ch
+```
+
+para conservar legibilidad.
+
+---
+
+## REQ-TYPE-001 — Escala de títulos moderada
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Los títulos deben conservar la jerarquía Swiss Research sin ocupar una parte excesiva de la pantalla.
+
+Escala aproximada actual:
+
+```text
+Título de página:
+2.15rem → 3.4rem responsive
+
+H1 interno:
+1.78rem
+
+H2:
+1.42rem
+
+H3:
+1.08rem
+```
+
+También deben reducirse proporcionalmente:
+
+```text
+home-statement
+contact-heading
+contact-monogram
+```
+
+### Regla
+
+No volver a escalas cercanas a `5rem` para el título normal de una página sin modificar primero este requisito.
+
+---
+
+## REQ-ARCH-005 — Diagrama vivo de la estructura de páginas
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El proyecto debe incluir:
+
+```text
+SITE_STRUCTURE.md
+```
+
+Este archivo documenta:
+
+- páginas públicas existentes;
+- relación entre Home, Portfolio, CV, Contact y Project Pages;
+- páginas individuales de proyectos;
+- nivel de detalle esperado en cada nivel;
+- zonas de solapamiento;
+- posibles simplificaciones futuras.
+
+Este archivo es documentación de arquitectura y **no debe agregarse automáticamente al navbar público**.
+
+---
+
+## REQ-ARCH-006 — Niveles de información para reducir redundancia
+
+**Estado:** `REQUERIDO`  
+**Prioridad:** `P1`
+
+La profundidad de contenido debe seguir:
+
+```text
+HOME < PORTFOLIO < PROJECT PAGE
+```
+
+Interpretación:
+
+```text
+HOME
+→ quién soy + investigación + proyectos destacados
+
+PORTFOLIO
+→ resumen técnico suficiente de cada proyecto
+
+PROJECT PAGE
+→ documentación detallada del proyecto
+```
+
+`CV` debe concentrarse en información curricular.
+
+`Contact` debe concentrarse en contacto/perfiles/documentos.
+
+No se deben copiar bloques extensos idénticos entre estos niveles.
+
+---
+
+## REQ-ARCH-007 — Redundancia Project Pages / Portfolio pendiente de decisión
+
+**Estado:** `VALIDAR`  
+**Prioridad:** `P2`
+
+Actualmente existen dos rutas hacia las páginas individuales:
+
+```text
+Portfolio → proyecto individual
+
+Project Pages → proyecto individual
+```
+
+`SITE_STRUCTURE.md` identifica esta página intermedia como la redundancia estructural más clara.
+
+### Estado v7.4
+
+```text
+projects/index.qmd se mantiene.
+Project pages permanece en el navbar.
+No se elimina contenido.
+```
+
+Una posible versión futura podrá retirar `Project Pages` de la navegación y utilizar `Portfolio` como único índice de proyectos, pero esto requiere aprobación explícita.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -3134,6 +3304,9 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.2 | 2026-09-11 | Prueba de navegación real preparada; sandbox bloquea Chromium | REQ-QA-005 | VALIDAR |
 | v7.3 | 2026-09-11 | Jerarquía fija de seis títulos para el TOC del Portfolio | REQ-PORTFOLIO-TOC-001/002/003 | IMPLEMENTADO |
 | v7.3 | 2026-09-11 | Project Pages reemplaza títulos enlazados por botones | REQ-PROJ-004/005 | IMPLEMENTADO |
+| v7.4 | 2026-09-11 | Cuerpo ampliado y page-layout full | REQ-LAYOUT-001 | IMPLEMENTADO |
+| v7.4 | 2026-09-11 | Reducción global de escala tipográfica | REQ-TYPE-001 | IMPLEMENTADO |
+| v7.4 | 2026-09-11 | Diagrama y análisis de estructura de páginas | REQ-ARCH-005/006/007 | IMPLEMENTADO / VALIDAR |
 | próxima | — | — | — | — |
 
 ---
@@ -3180,6 +3353,10 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 33. El TOC de portfolio.qmd debe tener exactamente seis títulos principales, en el orden definido por REQ-PORTFOLIO-TOC-001.
 34. Teaching, Leadership, Meldic, Skills, Engineering approach y Contact no deben aparecer como títulos del TOC técnico.
 35. Project Pages debe usar botones para abrir proyectos; los nombres de proyecto no deben ser hipervínculos azules.
+36. El cuerpo de contenido debe aprovechar la zona derecha disponible en desktop.
+37. Los títulos deben usar una escala moderada y no dominar el viewport.
+38. SITE_STRUCTURE.md debe mantenerse como diagrama vivo de arquitectura.
+39. Home, Portfolio y Project Page deben respetar el aumento progresivo de detalle.
 ```
 
 ---
@@ -3239,7 +3416,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.3 Swiss Research
+Version: v7.4 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

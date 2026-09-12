@@ -5,6 +5,7 @@ toc: true
 toc-location: left
 toc-depth: 2
 toc-title: "PROJECTS"
+page-layout: full
 ---
 
 # Master's Research

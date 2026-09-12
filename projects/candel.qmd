@@ -5,6 +5,7 @@ toc: true
 toc-location: left
 toc-depth: 3
 toc-title: "CANDELSTIM"
+page-layout: full
 ---
 <div class="project-meta">
 <span>Medical Devices</span><span>Electronics</span><span>Firmware</span><span>Neuroengineering</span>

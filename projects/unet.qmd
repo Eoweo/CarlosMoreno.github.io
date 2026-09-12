@@ -4,6 +4,7 @@ toc: true
 toc-location: left
 toc-depth: 3
 toc-title: "MEDICAL IMAGING"
+page-layout: full
 ---
 ## Overview
 

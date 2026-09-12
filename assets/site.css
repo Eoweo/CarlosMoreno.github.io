@@ -1060,3 +1060,127 @@ body.swiss-compact li {
   content: " →";
   margin-left: .35rem;
 }
+
+
+/* ================================================================
+   VERSION 7.4 — CONTENT WIDTH & TYPOGRAPHY SCALE
+   ================================================================ */
+
+/*
+   Use more of the available horizontal space.
+   Page front matter now uses `page-layout: full`; this max-width
+   prevents excessively wide content on very large monitors.
+*/
+main.content {
+  width: 100%;
+  max-width: 1180px;
+}
+
+/* Keep normal prose readable while allowing technical layouts,
+   diagrams, grids and images to use the wider body. */
+main.content > p,
+main.content > ul,
+main.content > ol,
+main.content > blockquote {
+  max-width: 108ch;
+}
+
+/* Wider technical components use the full body width. */
+.home-intro,
+.home-metric-grid,
+.home-step-grid,
+.home-project-grid,
+.contact-hero,
+.contact-grid,
+.project-grid,
+.skill-grid,
+.download-grid,
+.image-slot,
+.cell,
+table {
+  width: 100%;
+  max-width: none;
+}
+
+/*
+   Reduced title scale.
+   Swiss hierarchy remains strong, but no title should dominate
+   an entire desktop viewport.
+*/
+.quarto-title h1.title {
+  font-size: clamp(2.15rem, 4.1vw, 3.4rem);
+  line-height: 1;
+}
+
+.quarto-title .subtitle {
+  font-size: 1rem;
+}
+
+main.content h1:not(.title) {
+  font-size: 1.78rem;
+  line-height: 1.08;
+}
+
+main.content h2 {
+  font-size: 1.42rem;
+  line-height: 1.12;
+}
+
+main.content h3 {
+  font-size: 1.08rem;
+  line-height: 1.22;
+}
+
+main.content h4 {
+  font-size: .98rem;
+}
+
+/* Home/contact display statements were also oversized in v7.3. */
+.home-statement {
+  font-size: clamp(1.4rem, 2.65vw, 2.2rem);
+  line-height: 1.08;
+}
+
+.contact-heading {
+  font-size: clamp(1.5rem, 2.9vw, 2.25rem);
+  line-height: 1.08;
+}
+
+.contact-monogram {
+  width: 112px;
+  height: 112px;
+  font-size: 1.8rem;
+}
+
+/* Slightly reduce vertical title whitespace to match smaller type. */
+main.content h1:not(.title),
+main.content h2 {
+  margin-top: 3rem;
+  padding-top: .85rem;
+}
+
+@media (min-width: 992px) {
+  /*
+     Quarto full layout supplies the larger grid area.
+     The body itself is allowed to occupy it rather than being
+     visually capped near the center of the page.
+  */
+  #quarto-content.page-columns > main.content,
+  #quarto-content > main.content {
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 620px) {
+  .quarto-title h1.title {
+    font-size: 2rem;
+  }
+
+  main.content h1:not(.title) {
+    font-size: 1.55rem;
+  }
+
+  main.content h2 {
+    font-size: 1.28rem;
+  }
+}

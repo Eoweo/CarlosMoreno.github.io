@@ -1,44 +1,29 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v7.3 — Sidebar hierarchy</title>
+<title>Portfolio v7.4 — Width & Typography</title>
 <style>
 :root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
-html[data-theme="dark"]{--bg:#141414;--surface:#1e1e1e;--text:#f1efe8;--muted:#a7a39a;--border:#383633;--accent:#ff615e}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-header{position:fixed;top:0;left:0;right:0;height:62px;display:flex;align-items:center;padding:0 20px;background:var(--bg);border-bottom:1px solid var(--border);z-index:20}.brand{font-weight:900}.theme{margin-left:auto;width:36px;height:36px;border:1px solid var(--border);background:transparent;color:var(--text)}
-#TOC{position:fixed;left:0;top:62px;bottom:0;width:335px;overflow:auto;padding:14px 12px 30px;border-right:1px solid var(--border);background:var(--bg)}.toc-title{padding:0 8px 10px;border-bottom:1px solid var(--border);font-size:.72rem;font-weight:900;letter-spacing:.07em;color:var(--muted)}
-details{margin-top:15px}summary{position:relative;list-style:none;cursor:pointer}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:7px;top:3px;color:var(--muted)}details[open]>summary:after{content:"−";color:var(--accent)}
-.group-link,.child-link,.grand-link{display:block;text-decoration:none;color:var(--muted);border-left:4px solid transparent}.group-link{padding:5px 24px 5px 8px;font-size:.72rem;font-weight:900;letter-spacing:.045em;text-transform:uppercase;line-height:1.2}.child-link{padding:7px 8px 7px 22px;font-size:.9rem}.grand-link{padding:5px 8px 5px 36px;font-size:.8rem}.active{color:var(--accent)!important;border-left-color:var(--accent)!important;font-weight:700}.grand-list{display:none}.sub-open>.grand-list{display:block}ul{list-style:none;padding:0;margin:4px 0 0}
-main{margin-left:335px;padding:95px 7vw 80px;max-width:1250px}section{min-height:65vh;max-width:900px;scroll-margin-top:85px;padding-top:15px;border-top:4px solid var(--text)}section:first-child{border-top:0}h1{font-size:2.2rem;line-height:1.05;text-transform:uppercase}h2{font-size:1.5rem}h3{font-size:1.1rem}p{color:var(--muted);line-height:1.7}.card{padding:16px;border:1px solid var(--border);background:var(--surface);margin:18px 0}
-.project-button{display:inline-flex;padding:9px 13px;border:1px solid var(--text);background:var(--text);color:var(--bg);font-size:.78rem;font-weight:900;text-decoration:none;text-transform:uppercase}.project-button:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{position:fixed;top:0;left:0;right:0;height:62px;display:flex;align-items:center;padding:0 20px;background:var(--bg);border-bottom:1px solid var(--border);z-index:10}.brand{font-weight:900}
+aside{position:fixed;top:62px;bottom:0;left:0;width:320px;border-right:1px solid var(--border);padding:18px 14px}.group{font-size:.73rem;font-weight:900;color:var(--accent);letter-spacing:.05em;margin-bottom:10px}.link{display:block;color:var(--muted);padding:7px 12px;border-left:4px solid transparent}.link.active{color:var(--accent);border-left-color:var(--accent);font-weight:700}
+main{margin-left:320px;padding:92px 4.5vw 80px;width:calc(100% - 320px)}.content{width:100%;max-width:1180px}h1{font-size:clamp(2.15rem,4.1vw,3.4rem);line-height:1;margin:0 0 18px;text-transform:uppercase}h2{font-size:1.42rem;text-transform:uppercase;border-top:4px solid var(--text);padding-top:14px;margin-top:52px}h3{font-size:1.08rem}p{max-width:108ch;color:var(--muted);line-height:1.7}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.card{min-height:160px;padding:16px;border:1px solid var(--border);background:var(--surface)}.wide{min-height:300px;border:1px dashed var(--border);background:var(--surface);display:grid;place-items:center;margin:25px 0;text-align:center;color:var(--muted)}.note{padding:14px;border-left:4px solid var(--accent);background:var(--surface);color:var(--muted)}
+@media(max-width:900px){aside{display:none}main{margin-left:0;width:100%;padding:90px 20px}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><a class="brand" href="#masters" style="color:inherit;text-decoration:none">Carlos Moreno Rojas</a><button class="theme" id="theme">☾</button></header>
-<nav id="TOC"><div class="toc-title">PORTFOLIO</div></nav>
-<main class="content">
-<section><h1 id="masters">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</h1><h2 id="obj1">Objective 1 — Ex Vivo Perfusion Platform</h2><h3 id="monitoring">Monitoring</h3><p>Pressure, flow, temperature and vascular resistance.</p><h2 id="obj2">Objective 2 — Baseline Dataset without ICG</h2><p>Physiological baseline.</p><h2 id="obj3">Objective 3 — ICG-NIR Functional Marker</h2><p>ICG fluorescence kinetics.</p></section>
-<section><h1 id="robotics">ROBOTICS & REHABILITATION</h1><h2 id="cybathlon">Ciervo UC — CYBATHLON 2024</h2><h3 id="my-role">My role</h3><p>Electrical and electromechanical integration.</p><h2 id="candel">CandelStim — Transcranial Electrical Stimulation</h2><h3 id="technical-work">Technical work</h3><p>Electronics and firmware.</p></section>
-<section><h1 id="organ">ORGAN PRESERVATION & TRANSPLANTATION</h1><h2 id="borealis">Borealis UC — Organ Supercooling</h2><p>Supercooling and preservation.</p><h2 id="preservation">Organ Preservation Machine Redesign</h2><h3 id="engineering-work">Engineering work</h3><p>Mechanical, fluidic and control redesign.</p></section>
-<section><h1 id="imaging">MEDICAL IMAGING & AI</h1><h2 id="unet">Lung Segmentation with U-Net</h2><p>Medical image segmentation.</p></section>
-<section><h1 id="fpga">EMBEDDED SYSTEMS & FPGA</h1><h2 id="testing-machine">FPGA Upgrade — Universal Testing Machine</h2><p>Zybo Z10, Vivado and VHDL.</p></section>
-<section><h1 id="cad">CAD & PROTOTYPING</h1><h2 id="vscan">Vscan Air — Medical Device Enclosure</h2><p>CAD and prototyping.</p><div class="card"><b>Project Pages example</b><p>The project name is plain text. Navigation uses a button.</p><a class="project-button" href="#cad">Open project →</a></div></section>
-</main>
-<script>
-(function(){
-const toc=document.getElementById('TOC'),heads=[...document.querySelectorAll('main h1,main h2,main h3')],base=Math.min(...heads.map(h=>+h.tagName.slice(1))),groups=[];let g=null,c=null;const map=new Map();
-heads.forEach(h=>{const l=+h.tagName.slice(1),n={id:h.id,text:h.textContent,h,children:[],parent:null,group:null,link:null,li:null};map.set(n.id,n);if(l<=base||!g){g=n;g.group=g;groups.push(g);c=null}else if(l===base+1){n.group=g;n.parent=g;g.children.push(n);c=n}else if(c){n.group=g;n.parent=c;c.children.push(n)}else{n.group=g;n.parent=g;g.children.push(n)}});
-const title=toc.querySelector('.toc-title').cloneNode(true),root=document.createElement('div');
-function link(n,cls){const a=document.createElement('a');a.href='#'+n.id;a.textContent=n.text;a.className=cls;n.link=a;a.onclick=e=>e.stopPropagation();return a}
-groups.forEach(gr=>{const d=document.createElement('details');gr.details=d;const s=document.createElement('summary');s.append(link(gr,'group-link'));d.append(s);const ul=document.createElement('ul');gr.children.forEach(ch=>{const li=document.createElement('li');ch.li=li;li.append(link(ch,'child-link'));if(ch.children.length){const gu=document.createElement('ul');gu.className='grand-list';ch.children.forEach(x=>{const gli=document.createElement('li');gli.append(link(x,'grand-link'));gu.append(gli)});li.append(gu)}ul.append(li)});d.append(ul);root.append(d)});toc.replaceChildren(title,root);
-let last='';
-function update(){const marker=Math.min(170,innerHeight*.25);let h=heads[0];heads.forEach(x=>{if(x.getBoundingClientRect().top<=marker)h=x});const n=map.get(h.id),gr=n.group||n;let ch=null;if(n.parent===gr)ch=n;else if(n.parent&&n.parent.parent)ch=n.parent;groups.forEach(x=>{x.details.open=x===gr;x.children.forEach(y=>y.li&&y.li.classList.toggle('sub-open',x===gr&&y===ch))});map.forEach(x=>x.link&&x.link.classList.toggle('active',x.id===n.id));if(last!==n.id){last=n.id;requestAnimationFrame(()=>n.link.scrollIntoView({block:'nearest',behavior:'smooth'}))}}
-addEventListener('scroll',update,{passive:true});update();
-document.getElementById('theme').onclick=function(){document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';this.textContent=document.documentElement.dataset.theme==='dark'?'☀':'☾'};
-})();
-</script>
-</body>
-</html>
+<header><div class="brand">Carlos Moreno Rojas</div></header>
+<aside><div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div><span class="link active">Objective 1 — Perfusion Platform</span><span class="link">Objective 2 — Baseline Dataset</span><span class="link">Objective 3 — ICG-NIR Marker</span></aside>
+<main><div class="content">
+<h1>Portfolio</h1>
+<p>This preview demonstrates the v7.4 changes: the body uses substantially more of the horizontal area available to the right of the sidebar, while titles use a more moderate Swiss typographic scale.</p>
+<div class="grid"><div class="card"><b>Biomedical R&D</b><p>Instrumentation and experimental validation.</p></div><div class="card"><b>Electronics & Embedded</b><p>PCB, sensors, acquisition and embedded systems.</p></div><div class="card"><b>CAD & Prototyping</b><p>Mechanical design and integration.</p></div></div>
+<h2>Master's Research</h2>
+<p>The content area can now accommodate broader diagrams, technical images, result grids and engineering documentation instead of leaving a large unused region on the right side of desktop displays.</p>
+<div class="wide">WIDE TECHNICAL IMAGE / DIAGRAM / RESULTS AREA</div>
+<h2>Page architecture</h2>
+<div class="note">A separate SITE_STRUCTURE.md now maps Home → Portfolio / CV / Contact and the eight detailed project pages, and identifies Project Pages as the main candidate for future simplification.</div>
+</div></main>
+</body></html>
