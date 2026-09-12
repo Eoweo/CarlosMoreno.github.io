@@ -283,10 +283,20 @@
      Append ?layout-debug=1 to any page URL to display the panel.
      -------------------------------------------------------------- */
   function runLayoutSelfTest() {
-    const sidebar = document.getElementById("quarto-sidebar-toc-left");
     const toc = document.getElementById("TOC");
+
+    // Current Quarto can emit the TOC itself as .sidebar.toc-left.
+    // Older/other builds may use a wrapper. Support both.
+    const sidebar =
+      document.querySelector("#TOC.sidebar.toc-left") ||
+      document.querySelector("nav#TOC.toc-left") ||
+      document.querySelector(".sidebar.toc-left") ||
+      document.getElementById("quarto-sidebar-toc-left");
+
     const main = document.querySelector("main.content");
     const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
     const desktop = window.innerWidth >= 992;
 
     const result = {
@@ -296,8 +306,15 @@
         shell: !!shell,
         sidebar: !!sidebar,
         toc: !!toc,
-        main: !!main
+        main: !!main,
+        header: !!header,
+        navbar: !!navbar
       },
+      selectorUsed: sidebar
+        ? (sidebar.id
+            ? "#" + sidebar.id + (sidebar.className ? "." + String(sidebar.className).trim().replace(/\s+/g, ".") : "")
+            : sidebar.tagName.toLowerCase() + "." + String(sidebar.className).trim().replace(/\s+/g, "."))
+        : null,
       checks: {},
       computed: {}
     };
@@ -306,14 +323,22 @@
       if (!el) return null;
       const r = el.getBoundingClientRect();
       return {
-        left: Math.round(r.left), top: Math.round(r.top),
-        right: Math.round(r.right), bottom: Math.round(r.bottom),
-        width: Math.round(r.width), height: Math.round(r.height)
+        left: Math.round(r.left * 10) / 10,
+        top: Math.round(r.top * 10) / 10,
+        right: Math.round(r.right * 10) / 10,
+        bottom: Math.round(r.bottom * 10) / 10,
+        width: Math.round(r.width * 10) / 10,
+        height: Math.round(r.height * 10) / 10
       };
     }
 
     result.rects = {
-      sidebar: rect(sidebar), toc: rect(toc), main: rect(main), shell: rect(shell)
+      sidebar: rect(sidebar),
+      toc: rect(toc),
+      main: rect(main),
+      shell: rect(shell),
+      header: rect(header),
+      navbar: rect(navbar)
     };
 
     if (sidebar) {
@@ -328,46 +353,141 @@
       };
     }
 
+    if (toc) {
+      const s = getComputedStyle(toc);
+      result.computed.toc = {
+        display: s.display,
+        position: s.position,
+        gridColumn: s.gridColumn,
+        marginLeft: s.marginLeft,
+        paddingLeft: s.paddingLeft
+      };
+    }
+
     if (shell) {
       const s = getComputedStyle(shell);
       result.computed.shell = {
         display: s.display,
-        gridTemplateColumns: s.gridTemplateColumns
+        gridTemplateColumns: s.gridTemplateColumns,
+        marginTop: s.marginTop,
+        paddingTop: s.paddingTop
       };
     }
 
-    if (desktop && sidebar && main) {
-      const sr = sidebar.getBoundingClientRect();
+    if (navbar) {
+      const s = getComputedStyle(navbar);
+      result.computed.navbar = {
+        height: s.height,
+        minHeight: s.minHeight,
+        paddingTop: s.paddingTop,
+        paddingBottom: s.paddingBottom,
+        marginTop: s.marginTop
+      };
+    }
+
+    if (desktop && toc && main && shell && header && navbar) {
+      const tr = toc.getBoundingClientRect();
       const mr = main.getBoundingClientRect();
-      result.checks.sidebarVisible = sr.width > 100 && sr.height > 100;
-      result.checks.sidebarNotFullWidth = sr.width < window.innerWidth * 0.4;
-      result.checks.sideBySide = sr.right <= mr.left + 24;
-      result.checks.notStackedAbove = sr.width < mr.width && mr.left > sr.left + 80;
-      result.checks.mainUsesWidth = mr.width > window.innerWidth * 0.5;
+      const sr = shell.getBoundingClientRect();
+      const hr = header.getBoundingClientRect();
+      const nr = navbar.getBoundingClientRect();
+      const tcs = getComputedStyle(toc);
+
+      const leftGap = tr.left;
+      const contentGap = mr.left - tr.right;
+      const rightGap = window.innerWidth - mr.right;
+      const shellHeaderGap = sr.top - hr.bottom;
+
+      result.measurements = {
+        tocLeftPx: Math.round(leftGap * 10) / 10,
+        contentGapPx: Math.round(contentGap * 10) / 10,
+        rightGapPx: Math.round(rightGap * 10) / 10,
+        headerTopPx: Math.round(hr.top * 10) / 10,
+        navbarTopPx: Math.round(nr.top * 10) / 10,
+        navbarHeightPx: Math.round(nr.height * 10) / 10,
+        shellHeaderGapPx: Math.round(shellHeaderGap * 10) / 10
+      };
+
+      // HARD CONTRACTS requested for desktop.
+      result.checks.tocTouchesViewportLeft = Math.abs(leftGap) <= 2;
+      result.checks.tocMarginLeftZero =
+        Math.abs(parseFloat(tcs.marginLeft) || 0) <= 1;
+      result.checks.tocPaddingLeftZero =
+        Math.abs(parseFloat(tcs.paddingLeft) || 0) <= 1;
+
+      result.checks.sidebarIsLeftOfContent =
+        tr.right <= mr.left + 1;
+      result.checks.smallSidebarContentGap =
+        contentGap >= -1 && contentGap <= 28;
+
+      result.checks.mainReachesRightSide =
+        rightGap >= -1 && rightGap <= 32;
+
+      result.checks.headerTouchesViewportTop =
+        Math.abs(hr.top) <= 1;
+      result.checks.navbarTouchesViewportTop =
+        Math.abs(nr.top) <= 1;
+      result.checks.navbarCompact =
+        nr.height <= 54;
+
+      result.checks.shellStartsImmediatelyAfterHeader =
+        shellHeaderGap >= -1 && shellHeaderGap <= 2;
+
+      result.checks.notStacked =
+        mr.top < tr.bottom &&
+        mr.left >= tr.right - 1;
     } else if (!desktop) {
       result.checks.mobileMode = true;
     }
 
     const values = Object.values(result.checks);
     result.pass = values.length > 0 && values.every(Boolean);
+
     document.body.dataset.layoutTest = result.pass ? "pass" : "fail";
     window.__portfolioLayoutTest = result;
     console.info("[Portfolio layout self-test]", result);
 
     const params = new URLSearchParams(window.location.search);
     if (params.get("layout-debug") === "1") {
+      // Visual outlines make the real browser geometry obvious.
+      if (toc) {
+        toc.style.outline = "3px solid #d63230";
+        toc.style.outlineOffset = "-3px";
+      }
+      if (main) {
+        main.style.outline = "3px solid #17833d";
+        main.style.outlineOffset = "-3px";
+      }
+      if (navbar) {
+        navbar.style.outline = "2px solid #176b9a";
+        navbar.style.outlineOffset = "-2px";
+      }
+
       const panel = document.createElement("pre");
       panel.id = "portfolio-layout-debug";
-      panel.textContent = (result.pass ? "PASS" : "FAIL") + "\n" +
+      panel.textContent =
+        (result.pass ? "PASS" : "FAIL") + "\n" +
         JSON.stringify(result, null, 2);
+
       Object.assign(panel.style, {
-        position: "fixed", right: "10px", bottom: "10px",
-        width: "min(460px, 46vw)", maxHeight: "52vh", overflow: "auto",
-        zIndex: "99999", padding: "12px", margin: "0",
+        position: "fixed",
+        right: "10px",
+        bottom: "10px",
+        width: "min(520px, 48vw)",
+        maxHeight: "58vh",
+        overflow: "auto",
+        zIndex: "99999",
+        padding: "12px",
+        margin: "0",
         border: "2px solid " + (result.pass ? "#17833d" : "#b42318"),
-        background: "#fff", color: "#111", fontSize: "11px",
-        lineHeight: "1.35", whiteSpace: "pre-wrap", boxShadow: "0 4px 20px #0003"
+        background: "#fff",
+        color: "#111",
+        fontSize: "11px",
+        lineHeight: "1.35",
+        whiteSpace: "pre-wrap",
+        boxShadow: "0 4px 20px #0003"
       });
+
       document.body.appendChild(panel);
     }
 
@@ -404,8 +524,8 @@
 
     // Extra safety after Mermaid/layout/font changes settle.
     window.setTimeout(function () {
-      tocItems = collectTocItems();
       revealOnScroll();
+      runLayoutSelfTest();
     }, 250);
   }
 

@@ -1,102 +1,110 @@
-# TOC layout diagnosis — v8.0
+# TOC Diagnostics — v8.1
 
-## What changed
+## Resultado observado en v8.0
 
-v8.0 intentionally returns the left table of contents to **Quarto's native layout system**.
-
-The project no longer applies `position: fixed`, `display: block`, custom `margin-left`, or a manually computed `width: calc(100vw - sidebar)` to Quarto's TOC wrapper or page grid.
-
-## Why
-
-Quarto already implements this feature:
-
-```yaml
-format:
-  html:
-    toc: true
-    toc-location: left
-    toc-expand: 1
-    page-layout: full
-```
-
-The early v5/v6 portfolio versions worked because the custom CSS styled `#TOC` but **did not replace Quarto's page grid**.
-
-The later regression was introduced when the project began overriding `.page-columns`, `#quarto-content`, `#quarto-sidebar-toc-left`, and `main.content` to force viewport coordinates. That can cause the left TOC to participate in normal flow and occupy a full-width row above the document.
-
-## Supported Quarto solution used in v8.0
-
-Widths are configured through Quarto's official `grid` option:
-
-```yaml
-grid:
-  sidebar-width: 300px
-  body-width: 1600px
-  margin-width: 100px
-  gutter-width: 0.75rem
-```
-
-No wrapper positioning hack is needed.
-
-## Test 1 — automatic regression test
-
-Run:
-
-```bash
-python tests/run_layout_regression.py
-```
-
-The test checks 1920, 1440, 1100 and 900 px viewports. It asserts that on desktop:
-
-- the TOC is a left column;
-- it is not full-width;
-- main content is to its right;
-- the two regions are not vertically stacked;
-- content retains useful width.
-
-At 900 px it verifies the responsive mobile behavior.
-
-## Test 2 — test the ACTUAL Quarto-rendered page
-
-After deployment, open any page with:
+El test real entregó:
 
 ```text
-?layout-debug=1
+viewport.width = 2560
+toc.left       = 293
+toc.width      = 280
+main.left      = 585
+
+sidebar wrapper found = false
+TOC found             = true
 ```
 
-Example:
+Esto cambia el diagnóstico.
+
+## Qué está generando Quarto
+
+El código actual de Quarto define:
+
+```scss
+.sidebar.toc-left {
+  grid-column: page-start / body-start;
+  grid-row: content-top / page-bottom;
+}
+
+.page-columns .content {
+  grid-column: body-content-start / body-content-end;
+}
+```
+
+Por lo tanto, el TOC no está diseñado por defecto para comenzar en `screen-start`.
+
+En el grid capturado por el test, `page-start` estaba varios tracks después del borde de la pantalla. Por eso el TOC comenzó aproximadamente en `x = 293 px`.
+
+## Corrección v8.1
+
+No se utiliza `position: fixed`.
+
+Se conservan los nombres de líneas que Quarto espera, pero se redefine el grid root:
+
+```text
+x=0
+│
+├── [screen-start / page-start]
+│    TOC
+│
+├── [body-start]
+│    gap pequeño
+│
+├── [body-content-start]
+│    contenido
+│
+└── [screen-end]
+```
+
+Así, la regla nativa `.sidebar.toc-left { grid-column: page-start / body-start; }` produce ahora el resultado deseado.
+
+## Cómo probar la página real
+
+Abrir:
 
 ```text
 portfolio.html?layout-debug=1
 ```
 
-A diagnostic panel appears in the lower-right corner. It reads the real generated DOM and reports:
-
-- whether `#quarto-sidebar-toc-left` exists;
-- the actual sidebar and main-content rectangles;
-- whether they are side-by-side or stacked;
-- sidebar computed `position`, `grid-column`, `grid-row`, margin and padding;
-- whether `#quarto-content` is actually using CSS Grid;
-- PASS / FAIL.
-
-This test is much more useful than visually guessing which Quarto wrapper is active.
-
-## Expected desktop result
+El resultado esperado en desktop es:
 
 ```text
-NAVBAR
-─────────────────────────────────────────────────────────
-TOC                  MAIN CONTENT
-MASTER'S RESEARCH    PORTFOLIO
-  Objective 1        ...
-  Objective 2        ...
+PASS
 ```
 
-Not:
+y en el JSON:
 
 ```text
-NAVBAR
-─────────────────────────────────────────────────────────
-TOC across the page
-─────────────────────────────────────────────────────────
-MAIN CONTENT
+tocLeftPx             ≈ 0
+contentGapPx          0 ... 28
+rightGapPx            -1 ... 32
+headerTopPx           ≈ 0
+navbarTopPx           ≈ 0
+navbarHeightPx        <= 54
+shellHeaderGapPx      -1 ... 2
 ```
+
+Visualmente:
+
+```text
+ROJO  = TOC
+VERDE = contenido
+AZUL  = navbar
+```
+
+## Si vuelve a fallar
+
+Copiar únicamente estas secciones del panel:
+
+```text
+selectorUsed
+rects
+measurements
+computed.sidebar
+computed.toc
+computed.shell
+computed.navbar
+checks
+```
+
+Con esas medidas se puede identificar la regla exacta que está desplazando el layout sin volver a modificarlo a ciegas.

@@ -1,29 +1,43 @@
-# TOC layout tests
+# Layout tests — v8.1
 
-## Test the real rendered website (recommended)
+## 1. Static source contract
 
-After Quarto/GitHub Pages renders the site, append:
+Run:
 
-```text
-?layout-debug=1
+```bash
+python tests/check_layout_contract.py
 ```
 
-Example:
+This verifies that the source contains the required Quarto named-grid contract and the runtime checks.
+
+## 2. Real browser / rendered Quarto page
+
+After GitHub Pages renders the site, open:
 
 ```text
 portfolio.html?layout-debug=1
 ```
 
-A PASS/FAIL panel will show the actual `#quarto-sidebar-toc-left` and `main.content` geometry.
+The test must show `PASS`.
 
-If it says FAIL, capture that panel and send it with a screenshot. It contains the exact wrapper, computed position, grid column, and rectangles needed to diagnose the problem.
+Required desktop values:
 
-## Local regression fixture
-
-With Chromium installed:
-
-```bash
-python tests/run_layout_regression.py
+```text
+tocLeftPx        <= 2
+contentGapPx     0..28
+rightGapPx       -1..32
+headerTopPx      <= 1
+navbarTopPx      <= 1
+navbarHeightPx   <= 54
+shellHeaderGapPx -1..2
 ```
 
-The fixture emulates the documented Quarto `toc-left` DOM/grid and checks desktop and mobile widths.
+The visual outlines are:
+
+```text
+red   = TOC
+green = main content
+blue  = navbar
+```
+
+The runtime browser test is authoritative because it measures the actual HTML/CSS emitted by the installed Quarto version.

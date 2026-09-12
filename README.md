@@ -159,3 +159,12 @@ PORTFOLIO_REQUIREMENTS.md
 - Added `tests/run_layout_regression.py`.
 - Added actual-page diagnostics using `?layout-debug=1`.
 - Added `TOC_DIAGNOSTICS.md`.
+
+
+## v8.1
+
+- The v8.0 runtime test revealed that current Quarto emits the TOC itself as `.sidebar.toc-left`; no `#quarto-sidebar-toc-left` wrapper was present.
+- Quarto's default `page-start / body-start` placement caused a measured 293 px left offset at 2560 px viewport width.
+- The root Quarto named grid is now redefined so `page-start` equals the physical left edge.
+- No fixed-position sidebar is used.
+- `?layout-debug=1` now has hard numeric pass/fail contracts for TOC x-position, content gap, right edge, navbar top and navbar height.

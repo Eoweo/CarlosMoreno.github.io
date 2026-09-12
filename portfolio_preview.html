@@ -3,34 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v7.9 — Left TOC block x=0</title>
+<title>Portfolio v8.1 — Named Grid Contract</title>
 <style>
-:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230;--header:52px;--toc:clamp(15.5rem,16vw,18.5rem)}
+:root{
+  --bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;
+  --border:#cbc7bc;--accent:#d63230;
+  --h:48px;--toc:clamp(15.5rem,16vw,18rem);--gap:clamp(.55rem,.8vw,.9rem);
+}
 *{box-sizing:border-box}html,body{width:100%;margin:0;padding:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text)}
-header{position:fixed;left:0;right:0;top:0;height:var(--header);display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border);background:var(--bg);z-index:20}.brand{font-weight:900}.nav{margin-left:20px;display:flex;gap:20px;font-weight:700}
-#quarto-sidebar-toc-left{position:fixed;left:0;top:var(--header);bottom:0;width:var(--toc);margin:0;padding:0;border-right:1px solid var(--border);background:var(--bg);overflow:hidden}
-#TOC{width:100%;height:100%;margin:0;padding:12px 8px 24px 0;overflow:auto}.toc-title{margin:0;padding:0 0 10px 0;font-size:.72rem;font-weight:900;letter-spacing:.06em}.group{font-size:.72rem;font-weight:900;color:var(--accent);line-height:1.25;padding:8px 0 4px}.child{display:block;color:var(--muted);padding:6px 8px 6px 18px;border-left:4px solid transparent}.child.active{color:var(--accent);border-left-color:var(--accent);font-weight:700}
-main{margin:0 0 0 var(--toc);width:calc(100vw - var(--toc));padding:74px clamp(.75rem,1vw,1.35rem) 60px clamp(.55rem,.8vw,.95rem)}h1{margin:0 0 14px;font-size:clamp(2.15rem,4.1vw,3.4rem);text-transform:uppercase}h2{font-size:1.42rem;border-top:4px solid var(--text);padding-top:12px;margin-top:40px;text-transform:uppercase}p{color:var(--muted);line-height:1.7;max-width:122ch}.wide{height:300px;background:var(--surface);border:1px dashed var(--border);display:grid;place-items:center;margin-top:22px;color:var(--muted)}
-@media(max-width:991px){#quarto-sidebar-toc-left{display:none}main{margin:0;width:100%;padding:70px .9rem 50px}}
+header{height:var(--h);min-height:var(--h);display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border)}.brand{font-weight:900}.nav{margin-left:20px;display:flex;gap:18px;font-weight:700}
+#quarto-content{display:grid;width:100%;grid-template-columns:[screen-start screen-start-inset page-start page-start-inset] var(--toc) [body-start-outset body-start] var(--gap) [body-content-start] minmax(0,1fr) [body-content-end body-end body-end-outset page-end-inset page-end screen-end-inset screen-end]}
+#TOC{grid-column:page-start/body-start;margin:0;padding:12px 8px 30px 0;border-right:1px solid var(--border);min-height:calc(100vh - var(--h))}.toc-title{font-size:.72rem;font-weight:900}.group{margin-top:15px;color:var(--accent);font-size:.72rem;font-weight:900}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}
+main{grid-column:body-content-start/body-content-end;margin:0;padding:30px 14px 60px 0;min-width:0}h1{font-size:3rem;margin:0 0 15px;text-transform:uppercase}h2{font-size:1.4rem;margin-top:38px;border-top:4px solid var(--text);padding-top:12px;text-transform:uppercase}p{color:var(--muted);line-height:1.7;max-width:125ch}.wide{height:300px;display:grid;place-items:center;background:var(--surface);border:1px dashed var(--border);margin-top:20px}
+@media(max-width:991px){#quarto-content{display:block}#TOC{display:none}main{padding:20px 14px}}
 </style>
 </head>
 <body>
-<header><div class="brand">Carlos Moreno Rojas</div><div class="nav"><span>Portfolio</span><span>CV</span><span>Contact</span></div></header>
-<div id="quarto-sidebar-toc-left">
-<nav id="TOC">
-<div class="toc-title">ON THIS PAGE</div>
-<div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div>
-<span class="child active">Objective 1 — Ex Vivo Perfusion Platform</span>
-<span class="child">Objective 2 — Baseline Dataset</span>
-<span class="child">Objective 3 — ICG-NIR Marker</span>
-<div class="group">ROBOTICS & REHABILITATION</div>
+<header><div class="brand">Carlos Moreno Rojas</div><div class="nav">Portfolio　CV　Contact</div></header>
+<div id="quarto-content">
+<nav id="TOC" class="sidebar toc-left">
+  <div class="toc-title">ON THIS PAGE</div>
+  <div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div>
+  <span class="child">Objective 1 — Perfusion Platform</span>
+  <span class="child">Objective 2 — Baseline Dataset</span>
+  <span class="child">Objective 3 — ICG-NIR Marker</span>
 </nav>
-</div>
-<main>
-<h1>Portfolio</h1>
-<p>The complete TOC block begins at viewport x=0 px. It stays below the navbar and does not create a row above the document.</p>
-<h2>Required geometry</h2>
-<div class="wide">LEFT EDGE = 0 px │ FIXED TOC │ MAIN CONTENT USES THE REMAINING WIDTH</div>
+<main class="content">
+  <h1>Portfolio</h1>
+  <p>This preview uses the same named-grid contract as v8.1: the Quarto TOC begins at physical x=0, and the main body consumes every remaining pixel to the right.</p>
+  <h2>Geometry</h2>
+  <div class="wide">TOC x=0 │ small gap │ content → screen right</div>
 </main>
+</div>
 </body>
 </html>

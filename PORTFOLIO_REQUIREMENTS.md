@@ -4249,6 +4249,186 @@ Esta comparación debe conservarse en `TOC_DIAGNOSTICS.md` para evitar reintrodu
 ---
 
 
+
+# 23L. Contrato geométrico verificable — v8.1
+
+## REQ-LAYOUT-020 — `page-start` debe coincidir con el borde físico izquierdo
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El diagnóstico real de v8.0 mostró:
+
+```text
+viewport.width = 2560 px
+toc.left       = 293 px
+```
+
+El origen es el comportamiento nativo actual de Quarto:
+
+```css
+.sidebar.toc-left {
+    grid-column: page-start / body-start;
+}
+```
+
+La línea `page-start` del grid nativo estaba ubicada dentro de una composición centrada.
+
+En v8.1 se conserva la semántica de Quarto, pero se redefine el grid raíz para que:
+
+```text
+page-start = screen-start = x 0 px
+```
+
+La primera columna es el TOC.
+
+---
+
+## REQ-LAYOUT-021 — Grid desktop de dos regiones con líneas Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop, `#quarto-content.page-columns` debe utilizar líneas nombradas compatibles con Quarto:
+
+```text
+[screen-start page-start]
+        TOC
+[body-start]
+        pequeño gap
+[body-content-start]
+        CONTENIDO
+[body-content-end screen-end]
+```
+
+Implementación conceptual:
+
+```css
+grid-template-columns:
+  [screen-start screen-start-inset page-start page-start-inset]
+    var(--portfolio-toc-width)
+  [body-start-outset body-start]
+    var(--portfolio-toc-gap)
+  [body-content-start]
+    minmax(0, 1fr)
+  [body-content-end body-end body-end-outset
+   page-end-inset page-end screen-end-inset screen-end];
+```
+
+Esto permite que las reglas internas de Quarto continúen ubicando:
+
+```text
+.sidebar.toc-left
+.content
+```
+
+sin `position: fixed` y sin crear una fila superior.
+
+---
+
+## REQ-LAYOUT-022 — Selector real del TOC debe detectarse dinámicamente
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El test no debe asumir que existe:
+
+```text
+#quarto-sidebar-toc-left
+```
+
+porque el HTML observado en v8.0 reportó:
+
+```json
+"sidebar": false,
+"toc": true
+```
+
+El detector debe buscar, en este orden:
+
+```text
+#TOC.sidebar.toc-left
+nav#TOC.toc-left
+.sidebar.toc-left
+#quarto-sidebar-toc-left
+```
+
+---
+
+## REQ-QA-006 — Contrato numérico del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop, `?layout-debug=1` solo debe mostrar `PASS` si:
+
+```text
+abs(toc.left) <= 2 px
+toc margin-left <= 1 px
+toc padding-left <= 1 px
+
+0 <= main.left - toc.right <= 28 px
+
+-1 <= viewport.right - main.right <= 32 px
+```
+
+También debe verificar que TOC y contenido estén lado a lado y no apilados.
+
+---
+
+## REQ-NAVBAR-002 — Contrato numérico del navbar
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop, el test solo debe pasar si:
+
+```text
+header.top <= 1 px
+navbar.top <= 1 px
+navbar.height <= 54 px
+```
+
+y:
+
+```text
+#quarto-content.top - #quarto-header.bottom <= 2 px
+```
+
+La altura objetivo actual es:
+
+```text
+48 px
+```
+
+---
+
+## REQ-QA-007 — Debug visual por colores
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Con:
+
+```text
+?layout-debug=1
+```
+
+se deben dibujar:
+
+```text
+TOC     → borde rojo
+CONTENT → borde verde
+NAVBAR  → borde azul
+```
+
+Además del panel JSON.
+
+Esto permite confirmar visualmente qué caja está midiendo el test.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -4457,6 +4637,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.8 | 2026-09-12 | TOC fijado usando el wrapper real `#quarto-sidebar-toc-left` | REQ-LAYOUT-011/012/013 | IMPLEMENTADO |
 | v7.9 | 2026-09-12 | Bloque TOC con left/margin/padding izquierdo en 0 px y diagnóstico explícito | REQ-LAYOUT-014/015, REQ-DIAG-001/002 | IMPLEMENTADO / REQUERIDO |
 | v8.0 | 2026-09-12 | Retorno al TOC/layout nativo de Quarto + tests de regresión y diagnóstico real | REQ-QUARTO-TOC-001/002, REQ-QUARTO-LAYOUT-001, REQ-QUARTO-GRID-001, REQ-QA-006/007/008 | IMPLEMENTADO |
+| v8.1 | 2026-09-12 | Grid Quarto redefinido con page-start en x=0 y test geométrico numérico | REQ-LAYOUT-020/021/022, REQ-QA-006/007, REQ-NAVBAR-002 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -4581,7 +4762,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.0 Swiss Research / Native Quarto TOC
+Version: v8.1 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

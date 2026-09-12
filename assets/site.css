@@ -1015,51 +1015,239 @@ body.swiss-compact li {
 
 
 /* ================================================================
-   VERSION 8.0 — NATIVE QUARTO LAYOUT REGRESSION RESET
+   VERSION 8.1 — QUARTO NAMED-GRID EDGE CONTRACT
+
+   Quarto's own current CSS places:
+     .sidebar.toc-left -> page-start / body-start
+     .content          -> body-content-start / body-content-end
+
+   We preserve those placement rules and redefine ONLY the root
+   named grid so page-start is the physical viewport left edge.
    ================================================================ */
 
-/* Compact navbar retained from v7.6. */
-#quarto-header {
-  top: 0;
-  margin: 0;
-  padding: 0;
+:root {
+  --portfolio-header-height: 48px;
+  --portfolio-toc-width: clamp(15.5rem, 16vw, 18rem);
+  --portfolio-toc-gap: clamp(.55rem, .8vw, .9rem);
+  --portfolio-right-gutter: clamp(.65rem, 1vw, 1.25rem);
 }
 
+/* Browser page begins at the physical top-left corner. */
+html,
+body {
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ------------------------------------------------
+   Compact navbar: physical top = 0 px.
+   ------------------------------------------------ */
+#quarto-header {
+  top: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: var(--portfolio-header-height) !important;
+  min-height: var(--portfolio-header-height) !important;
+}
+
+#quarto-header .navbar,
 #quarto-header .navbar.navbar-expand-lg,
 #quarto-header nav.navbar {
-  margin: 0;
-  min-height: var(--header-height);
-  padding-top: .18rem;
-  padding-bottom: .18rem;
+  top: 0 !important;
+  height: var(--portfolio-header-height) !important;
+  min-height: var(--portfolio-header-height) !important;
+  max-height: var(--portfolio-header-height) !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 #quarto-header .navbar-container,
 #quarto-header .container-fluid {
-  width: 100%;
-  max-width: none;
-  padding-left: clamp(.5rem, .75vw, .9rem);
-  padding-right: clamp(.55rem, .85vw, 1rem);
+  width: 100% !important;
+  max-width: none !important;
+  height: var(--portfolio-header-height) !important;
+  min-height: var(--portfolio-header-height) !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: clamp(.45rem, .65vw, .75rem) !important;
+  padding-right: clamp(.5rem, .75vw, .9rem) !important;
+  align-items: center !important;
 }
 
-/* Search is disabled in YAML; this is only a defensive fallback. */
+#quarto-header .navbar-brand,
+#quarto-header .navbar-title,
+#quarto-header .navbar-nav .nav-link {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#quarto-header .navbar-brand {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.1 !important;
+}
+
+#quarto-header .navbar-nav .nav-link {
+  padding-top: .2rem !important;
+  padding-bottom: .2rem !important;
+}
+
+.swiss-controls {
+  align-self: center !important;
+}
+
+.swiss-icon-button {
+  width: 32px;
+  height: 32px;
+}
+
+/* Search is disabled in YAML; defensive fallback. */
 #quarto-search,
 .quarto-search,
 .quarto-search-button,
 #quarto-search-button,
-.aa-Autocomplete { display: none !important; }
-
-/* IMPORTANT: do not override .page-columns, .sidebar.toc-left,
-   #quarto-content grid display, or place the TOC with fixed/absolute
-   positioning. Quarto owns those rules. */
-
-main.content {
-  width: auto;
-  max-width: none;
-  min-width: 0;
+.aa-Autocomplete {
+  display: none !important;
 }
 
-/* Full layout may use the available body/margin region. Technical
-   components are allowed to fill the native Quarto content column. */
+/* ------------------------------------------------
+   Root Quarto page grid.
+
+   IMPORTANT:
+   We retain Quarto's named grid lines so its native rules continue
+   to place .sidebar.toc-left and .content correctly.
+
+   page-start = viewport x=0
+   body-start = end of TOC
+   body-content-start = after small gap
+   screen-end = viewport right edge
+   ------------------------------------------------ */
+@media (min-width: 992px) {
+  #quarto-content.page-columns {
+    display: grid !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    grid-template-columns:
+      [screen-start screen-start-inset page-start page-start-inset]
+        var(--portfolio-toc-width)
+      [body-start-outset body-start]
+        var(--portfolio-toc-gap)
+      [body-content-start]
+        minmax(0, 1fr)
+      [body-content-end body-end body-end-outset
+       page-end-inset page-end screen-end-inset screen-end]
+      !important;
+  }
+
+  /* Quarto may emit #TOC itself as .sidebar.toc-left. */
+  #TOC.sidebar.toc-left,
+  nav#TOC.toc-left,
+  .sidebar.toc-left {
+    grid-column: page-start / body-start !important;
+    grid-row: content-top / page-bottom !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+
+    justify-self: stretch !important;
+    align-self: start !important;
+  }
+
+  #TOC {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: .45rem !important;
+
+    position: sticky;
+    top: calc(var(--portfolio-header-height) + .5rem);
+    max-height: calc(100vh - var(--portfolio-header-height) - 1rem);
+    overflow-y: auto;
+  }
+
+  /* Top-level text starts at the left edge of the TOC block.
+     Lower levels keep semantic indentation inside the block. */
+  #TOC .toc-title,
+  #TOC > ul {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  #TOC > ul > li {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  #TOC > ul > li > a {
+    padding-left: 0 !important;
+  }
+
+  #TOC > ul > li > ul > li > a {
+    padding-left: .85rem !important;
+  }
+
+  #TOC > ul > li > ul > li > ul > li > a {
+    padding-left: 1.45rem !important;
+  }
+
+  /* Main body uses every remaining pixel to the right edge.
+     This is still the native Quarto .content placement line. */
+  #quarto-content.page-columns > main.content,
+  .page-columns .content {
+    grid-column: body-content-start / body-content-end !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: var(--portfolio-right-gutter) !important;
+    justify-self: stretch !important;
+  }
+
+  /* There is no right margin column in this simplified shell. */
+  #quarto-margin-sidebar,
+  .margin-sidebar {
+    display: none !important;
+  }
+}
+
+/* Tablet/mobile: return to Quarto's responsive behavior. */
+@media (max-width: 991px) {
+  #quarto-header {
+    height: auto !important;
+    min-height: var(--portfolio-header-height) !important;
+  }
+
+  #quarto-header .navbar,
+  #quarto-header .navbar.navbar-expand-lg,
+  #quarto-header nav.navbar {
+    height: auto !important;
+    max-height: none !important;
+    min-height: var(--portfolio-header-height) !important;
+  }
+
+  .swiss-icon-button {
+    width: 31px;
+    height: 31px;
+  }
+
+  main.content {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+/* Technical content may use all available body width. */
 .image-slot,
 .home-intro,
 .home-metric-grid,
@@ -1079,15 +1267,15 @@ table,
   max-width: none;
 }
 
-/* Keep prose readable without constraining media. */
+/* Prose remains readable. */
 main.content > p,
 main.content > ul,
 main.content > ol,
 main.content > blockquote {
-  max-width: min(122ch, 100%);
+  max-width: min(128ch, 100%);
 }
 
-/* Moderate Swiss title scale. */
+/* Moderate Swiss title scale retained. */
 .quarto-title h1.title {
   font-size: clamp(2.15rem, 4.1vw, 3.4rem);
   line-height: 1;
@@ -1101,7 +1289,8 @@ main.content h4 { font-size: .98rem; }
 .home-statement { font-size: clamp(1.4rem, 2.65vw, 2.2rem); line-height: 1.08; }
 .contact-heading { font-size: clamp(1.5rem, 2.9vw, 2.25rem); line-height: 1.08; }
 .contact-monogram { width: 112px; height: 112px; font-size: 1.8rem; }
-main.content h1:not(.title), main.content h2 { margin-top: 3rem; padding-top: .85rem; }
+main.content h1:not(.title),
+main.content h2 { margin-top: 3rem; padding-top: .85rem; }
 
 /* CV download controls retained. */
 .cv-download-actions {
@@ -1134,12 +1323,13 @@ main.content h1:not(.title), main.content h2 { margin-top: 3rem; padding-top: .8
   color: #fff !important;
 }
 
-@media (max-width: 991px) {
-  /* Quarto itself hides the floating left TOC at narrow widths. */
-  .cv-download-actions { gap: .5rem; }
-}
-
 @media (max-width: 520px) {
-  .cv-download-actions { display: grid; grid-template-columns: 1fr; }
-  .cv-download-button { width: 100%; }
+  .cv-download-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cv-download-button {
+    width: 100%;
+  }
 }
