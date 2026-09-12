@@ -12,9 +12,6 @@ website:
       text: CV
     - href: contact.qmd
       text: Contact
-    right:
-    - href: projects/index.qmd
-      text: Project pages
   page-footer:
     left: Carlos Moreno Rojas
     right: Biomedical & Electrical Engineering

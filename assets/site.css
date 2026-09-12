@@ -1184,3 +1184,113 @@ main.content h2 {
     font-size: 1.28rem;
   }
 }
+
+
+/* ================================================================
+   VERSION 7.5 — RESPONSIVE EDGE-TO-EDGE CONTENT
+   ================================================================ */
+
+:root {
+  /*
+     Small, resolution-aware gutters:
+     14px on narrow desktop/tablet, gradually increasing,
+     capped at 32px on large screens.
+  */
+  --portfolio-edge-gutter: clamp(0.875rem, 1.45vw, 2rem);
+  --portfolio-content-gap: clamp(0.65rem, 1.1vw, 1.25rem);
+}
+
+/*
+   `page-layout: full` alone still leaves Quarto's normal body column.
+   On desktop, explicitly let main.content span from the body-start
+   grid line to the right screen edge, preserving the left TOC.
+*/
+@media (min-width: 992px) {
+  #quarto-content.page-columns > main.content,
+  #quarto-content > main.content {
+    grid-column: body-start / screen-end !important;
+    width: auto !important;
+    min-width: 0;
+    max-width: none !important;
+    justify-self: stretch !important;
+    margin: 0 !important;
+    padding-left: var(--portfolio-content-gap);
+    padding-right: var(--portfolio-edge-gutter);
+  }
+
+  /*
+     Reduce Quarto's visual gap between the left navigation and content.
+     The TOC keeps its own width/scroll behavior.
+  */
+  #quarto-margin-sidebar,
+  .margin-sidebar {
+    padding-right: var(--portfolio-content-gap);
+  }
+
+  main.content > * {
+    max-width: 100%;
+  }
+
+  /*
+     Prose remains readable while technical media can actually use
+     the entire available screen width.
+  */
+  main.content > p,
+  main.content > ul,
+  main.content > ol,
+  main.content > blockquote {
+    max-width: min(118ch, 100%);
+  }
+
+  .image-slot,
+  .home-intro,
+  .home-metric-grid,
+  .home-step-grid,
+  .home-project-grid,
+  .contact-hero,
+  .contact-grid,
+  .project-grid,
+  .skill-grid,
+  .download-grid,
+  .cell,
+  .cell-output-display,
+  table,
+  .data-slot {
+    width: 100%;
+    max-width: none !important;
+  }
+}
+
+/* Large monitors: still use the screen instead of centering a narrow 1180px box. */
+@media (min-width: 1600px) {
+  :root {
+    --portfolio-edge-gutter: clamp(1.25rem, 1.7vw, 2.75rem);
+  }
+
+  main.content > p,
+  main.content > ul,
+  main.content > ol,
+  main.content > blockquote {
+    max-width: min(126ch, 100%);
+  }
+}
+
+/* Tablet/mobile: simple dynamic gutters, no hard desktop widths. */
+@media (max-width: 991px) {
+  #quarto-content > main.content,
+  main.content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: clamp(0.9rem, 3.5vw, 1.5rem);
+    padding-right: clamp(0.9rem, 3.5vw, 1.5rem);
+  }
+}
+
+@media (max-width: 520px) {
+  #quarto-content > main.content,
+  main.content {
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+  }
+}

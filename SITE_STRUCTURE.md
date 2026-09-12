@@ -1,27 +1,25 @@
 # Estructura de páginas — Portafolio
 
-> **Versión analizada:** v7.4  
-> **Propósito:** visualizar qué páginas existen, qué función cumple cada una y dónde hay posible redundancia.  
-> **Estado:** documento de arquitectura; **no agrega una página nueva al sitio público**.
+> **Versión vigente:** v7.5  
+> **Estado:** arquitectura aprobada e implementada.  
+> **Propósito:** mantener una estructura simple, sin un índice intermedio redundante.
 
 ---
 
-# 1. Diagrama simple actual
+# 1. Arquitectura pública vigente
 
 ```mermaid
 flowchart TD
     HOME["HOME<br/>index.qmd<br/><small>Resumen profesional</small>"]
-
-    PORT["PORTFOLIO<br/>portfolio.qmd<br/><small>Resumen técnico de todos los proyectos</small>"]
-    CV["CV<br/>cv.qmd<br/><small>Formación + experiencia + habilidades</small>"]
-    CONTACT["CONTACT<br/>contact.qmd<br/><small>Canales de contacto y perfiles</small>"]
-    PINDEX["PROJECT PAGES<br/>projects/index.qmd<br/><small>Índice de páginas individuales</small>"]
+    PORT["PORTFOLIO<br/>portfolio.qmd<br/><small>Índice técnico de proyectos</small>"]
+    CV["CV<br/>cv.qmd"]
+    CONTACT["CONTACT<br/>contact.qmd"]
 
     HOME --> PORT
     HOME --> CV
     HOME --> CONTACT
 
-    PORT --> THESIS["Thesis<br/>projects/thesis.qmd"]
+    PORT --> THESIS["Master's Research<br/>projects/thesis.qmd"]
     PORT --> CYB["CYBATHLON<br/>projects/cybathlon.qmd"]
     PORT --> CANDEL["CandelStim<br/>projects/candel.qmd"]
     PORT --> BOR["Borealis<br/>projects/borealis.qmd"]
@@ -29,217 +27,138 @@ flowchart TD
     PORT --> UNET["U-Net<br/>projects/unet.qmd"]
     PORT --> FPGA["FPGA<br/>projects/fpga.qmd"]
     PORT --> VSCAN["Vscan Air<br/>projects/vscan.qmd"]
-
-    PINDEX --> THESIS
-    PINDEX --> CYB
-    PINDEX --> CANDEL
-    PINDEX --> BOR
-    PINDEX --> PRES
-    PINDEX --> UNET
-    PINDEX --> FPGA
-    PINDEX --> VSCAN
 ```
 
-Versión textual equivalente:
+Versión textual:
 
 ```text
 HOME — index.qmd
 │
 ├── PORTFOLIO — portfolio.qmd
-│   ├── Thesis
+│   ├── Master's Research
+│   │   └── projects/thesis.qmd
 │   ├── CYBATHLON
+│   │   └── projects/cybathlon.qmd
 │   ├── CandelStim
+│   │   └── projects/candel.qmd
 │   ├── Borealis
+│   │   └── projects/borealis.qmd
 │   ├── Preservation Machine
+│   │   └── projects/organ-preservation.qmd
 │   ├── U-Net
+│   │   └── projects/unet.qmd
 │   ├── FPGA
+│   │   └── projects/fpga.qmd
 │   └── Vscan Air
+│       └── projects/vscan.qmd
 │
 ├── CV — cv.qmd
 │
 └── CONTACT — contact.qmd
-
-PROJECT PAGES — projects/index.qmd
-│
-├── Thesis
-├── CYBATHLON
-├── CandelStim
-├── Borealis
-├── Preservation Machine
-├── U-Net
-├── FPGA
-└── Vscan Air
 ```
 
 ---
 
-# 2. Función que debería cumplir cada página
+# 2. Regla de navegación
 
-| Página | Función principal | Nivel de detalle |
+La barra superior pública debe contener únicamente:
+
+```text
+Carlos Moreno Rojas → Home
+Portfolio           → portfolio.qmd
+CV                  → cv.qmd
+Contact             → contact.qmd
+```
+
+No existe una página pública intermedia llamada:
+
+```text
+Project Pages
+```
+
+ni un enlace equivalente en el navbar.
+
+---
+
+# 3. Función de cada nivel
+
+| Página | Función | Nivel de detalle |
 |---|---|---|
-| `index.qmd` | Presentarse rápidamente: quién soy, qué hago y cuáles son mis áreas/proyectos principales. | Bajo |
-| `portfolio.qmd` | Mostrar el conjunto de proyectos con contexto técnico suficiente para decidir cuál abrir. | Medio |
-| `projects/*.qmd` | Documentar en profundidad cada proyecto. | Alto |
-| `cv.qmd` | Mostrar trayectoria académica/profesional de forma cronológica y curricular. | Medio |
-| `contact.qmd` | Facilitar contacto y acceso a perfiles/documentos. | Bajo |
-| `projects/index.qmd` | Índice intermedio hacia páginas individuales. | Bajo |
+| `index.qmd` | Quién soy, investigación actual, áreas y proyectos destacados. | Bajo |
+| `portfolio.qmd` | Índice técnico y resumen intermedio de todos los proyectos. | Medio |
+| `projects/*.qmd` | Desarrollo técnico completo de cada proyecto. | Alto |
+| `cv.qmd` | Formación, experiencia, proyectos y habilidades en formato curricular. | Medio |
+| `contact.qmd` | Contacto, perfiles y documentos. | Bajo |
 
----
-
-# 3. Dónde existe redundancia actualmente
-
-## 3.1 Home ↔ Portfolio
-
-Existe un solapamiento **intencional y útil**, siempre que se controle el nivel de detalle.
+La cantidad de información debe crecer así:
 
 ```text
-HOME
-→ menciona proyectos destacados brevemente
-
-PORTFOLIO
-→ explica técnicamente cada proyecto de manera intermedia
+HOME < PORTFOLIO < PROJECT PAGE
 ```
 
-No deberían repetir párrafos completos.
+---
 
-**Recomendación:** mantener ambos.
+# 4. Portfolio como único índice técnico
+
+`portfolio.qmd` es el único índice general de proyectos.
+
+Debe:
+
+1. mantener los seis títulos principales definidos en `PORTFOLIO_REQUIREMENTS.md`;
+2. mostrar un resumen técnico de cada proyecto;
+3. incluir un botón `Open detailed project` para acceder a la página individual correspondiente.
+
+Rutas:
+
+```text
+Master's Research      → projects/thesis.qmd
+CYBATHLON              → projects/cybathlon.qmd
+CandelStim             → projects/candel.qmd
+Borealis               → projects/borealis.qmd
+Preservation Machine   → projects/organ-preservation.qmd
+U-Net                  → projects/unet.qmd
+FPGA                    → projects/fpga.qmd
+Vscan Air               → projects/vscan.qmd
+```
 
 ---
 
-## 3.2 Portfolio ↔ páginas individuales
+# 5. Regla anti-redundancia
 
-También existe solapamiento, pero debería funcionar como una jerarquía:
+No se debe volver a crear una página cuyo único objetivo sea repetir la lista de proyectos ya disponible en `portfolio.qmd`.
+
+Un mismo proyecto puede aparecer en Home, Portfolio y su página individual, pero con distinta profundidad:
 
 ```text
+Home
+→ una mención / selección
+
 Portfolio
-→ problema + contribución + resultado resumido
+→ resumen técnico
 
-Página individual
-→ arquitectura + desarrollo + pruebas + imágenes + resultados + referencias
+Project page
+→ documentación completa
 ```
-
-**Recomendación:** mantener ambos, pero evitar que `portfolio.qmd` se convierta en una copia larga de cada página individual.
 
 ---
 
-## 3.3 Project Pages ↔ Portfolio
-
-Este es el solapamiento **más fuerte** de la arquitectura actual.
-
-Los dos permiten llegar a los mismos ocho proyectos:
+# 6. Archivos públicos principales
 
 ```text
+index.qmd
 portfolio.qmd
-        ↓
-página individual
+cv.qmd
+contact.qmd
 
-projects/index.qmd
-        ↓
-página individual
+projects/
+├── thesis.qmd
+├── cybathlon.qmd
+├── candel.qmd
+├── borealis.qmd
+├── organ-preservation.qmd
+├── unet.qmd
+├── fpga.qmd
+└── vscan.qmd
 ```
 
-La diferencia es que `portfolio.qmd` contiene contexto técnico, mientras `projects/index.qmd` es principalmente un índice.
-
-### Posible simplificación futura
-
-```text
-HOME
-├── PORTFOLIO
-│   └── páginas individuales
-├── CV
-└── CONTACT
-```
-
-y retirar `Project Pages` de la barra superior.
-
-**No implementado en v7.4.**  
-Debe decidirse explícitamente antes de eliminar esta página.
-
----
-
-# 4. Arquitectura simplificada recomendada
-
-Si en una versión futura se decide reducir navegación, la estructura más simple sería:
-
-```mermaid
-flowchart TD
-    HOME["HOME<br/>Resumen profesional"]
-    PORT["PORTFOLIO<br/>Todos los proyectos"]
-    CV["CV"]
-    CONTACT["CONTACT"]
-
-    HOME --> PORT
-    HOME --> CV
-    HOME --> CONTACT
-
-    PORT --> T["Thesis"]
-    PORT --> C1["CYBATHLON"]
-    PORT --> C2["CandelStim"]
-    PORT --> B["Borealis"]
-    PORT --> P["Preservation"]
-    PORT --> U["U-Net"]
-    PORT --> F["FPGA"]
-    PORT --> V["Vscan"]
-```
-
-```text
-HOME
-├── PORTFOLIO
-│   ├── Thesis
-│   ├── CYBATHLON
-│   ├── CandelStim
-│   ├── Borealis
-│   ├── Preservation
-│   ├── U-Net
-│   ├── FPGA
-│   └── Vscan
-├── CV
-└── CONTACT
-```
-
-Esto elimina únicamente el **índice intermedio `Project Pages`**, no las páginas detalladas de proyectos.
-
----
-
-# 5. Regla de contenido recomendada
-
-Para evitar que el sitio vuelva a crecer de forma redundante:
-
-```text
-HOME
-máximo: resumen
-
-PORTFOLIO
-máximo: ficha técnica intermedia
-
-PROJECT PAGE
-máximo: documentación completa
-
-CV
-máximo: información curricular
-
-CONTACT
-máximo: contacto y enlaces
-```
-
-Un mismo proyecto puede aparecer en varios niveles, pero la cantidad de información debe crecer así:
-
-```text
-Home < Portfolio < Project Page
-```
-
----
-
-# 6. Decisión pendiente
-
-La arquitectura actual se mantiene en v7.4.
-
-La principal decisión pendiente es:
-
-```text
-¿Mantener "Project Pages" como página independiente
-o
-eliminarla del navbar y usar Portfolio como único índice de proyectos?
-```
-
-Hasta que esta decisión se tome, **no se elimina ninguna página ni contenido**.
+`projects/index.qmd` fue eliminado en v7.5 por redundancia.

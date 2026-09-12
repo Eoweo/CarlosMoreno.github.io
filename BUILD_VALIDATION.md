@@ -1,15 +1,30 @@
-# Build validation — v7.4
+# Build validation — v7.5
 
 - _quarto.yml: OK
+- Navbar right removed: YES
+- Navbar left: Portfolio | CV | Contact
+- QMD checked: 12
 - QMD YAML errors: 0
-- Pages using page-layout full: 13/13
+- projects/index.qmd removed: YES
+- Home Project Pages link removed: YES
+- Portfolio button projects/thesis.qmd: YES
+- Portfolio button projects/cybathlon.qmd: YES
+- Portfolio button projects/candel.qmd: YES
+- Portfolio button projects/borealis.qmd: YES
+- Portfolio button projects/organ-preservation.qmd: YES
+- Portfolio button projects/unet.qmd: YES
+- Portfolio button projects/fpga.qmd: YES
+- Portfolio button projects/vscan.qmd: YES
+- Six Portfolio titles preserved exactly: YES
 - CSS braces balanced: YES
-- Content max-width 1180 present: YES
-- Reduced title max 3.4rem present: YES
-- SITE_STRUCTURE.md exists: YES
-- Mermaid diagrams in SITE_STRUCTURE: 2
-- REQ-LAYOUT-001: OK
-- REQ-TYPE-001: OK
-- REQ-ARCH-005: OK
-- REQ-ARCH-006: OK
-- REQ-ARCH-007: OK
+- body-start / screen-end rule: YES
+- Responsive clamp gutters: YES
+- Mobile full-width rule: YES
+- REQ-ARCH-008: OK
+- REQ-NAV-017: OK
+- REQ-PORTFOLIO-NAV-001: OK
+- REQ-LAYOUT-002: OK
+- REQ-LAYOUT-003: OK
+- REQ-LAYOUT-004: OK
+- REQ-LAYOUT-005: OK
+- Global JS 1: OK

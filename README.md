@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.4 — Swiss Research**
+**v7.5 — Swiss Research**
 
 The current architecture separates:
 
@@ -13,8 +13,7 @@ Home                 → index.qmd
 Technical Portfolio  → portfolio.qmd
 CV                   → cv.qmd
 Contact              → contact.qmd
-Project index        → projects/index.qmd
-Individual projects  → projects/*.qmd
+Individual projects  → projects/*.qmd (opened from Portfolio)
 Design               → assets/site.css
 Interaction          → assets/site-scripts.html
 Requirements         → PORTFOLIO_REQUIREMENTS.md
@@ -101,3 +100,14 @@ PORTFOLIO_REQUIREMENTS.md
 - Swiss title sizes were reduced globally.
 - `SITE_STRUCTURE.md` documents the current page architecture and highlights the overlap between Portfolio and Project Pages.
 - No page was removed in this version.
+
+
+## v7.5
+
+- Removed the redundant `Project Pages` navigation layer.
+- Deleted `projects/index.qmd`.
+- Portfolio is now the only general technical index.
+- Each summarized project in Portfolio includes an `Open detailed project` button.
+- Desktop content now spans from Quarto's `body-start` grid line to `screen-end`.
+- Responsive edge gutters use `clamp()` instead of large fixed margins.
+- Technical media can use 100% of available width; prose keeps a character-based readability limit.

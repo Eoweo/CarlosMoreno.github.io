@@ -276,6 +276,5 @@ The complete technical portfolio documents projects in greater depth using the s
 
 ::: {.home-final-actions}
 [Curriculum Vitae](cv.qmd){.home-action}
-[Project Pages](projects/index.qmd){.home-action}
 [Contact](contact.qmd){.home-action}
 :::

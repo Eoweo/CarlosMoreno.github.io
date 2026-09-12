@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.4 — Swiss Research`  
+> **Versión base documentada:** `v7.5 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -2870,7 +2870,7 @@ h3
 
 ## REQ-PROJ-004 — Project Pages utiliza botones de redirección
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINAR`  
 **Prioridad:** `P1`
 
 En `projects/index.qmd`, el nombre de cada proyecto **no debe ser un hipervínculo azul**.
@@ -2901,11 +2901,14 @@ Por lo tanto:
 - hover/focus utiliza el color de acento Swiss;
 - la URL de destino de cada proyecto no cambia.
 
+
+> **Actualización v7.5:** este requisito queda histórico. `projects/index.qmd` fue eliminado y los botones de acceso a páginas detalladas se trasladaron a `portfolio.qmd`, que ahora es el único índice técnico.
+
 ---
 
 ## REQ-PROJ-005 — Proyectos que requieren botón en Project Pages
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `ELIMINAR`  
 **Prioridad:** `P1`
 
 `projects/index.qmd` debe incluir botón de redirección para:
@@ -2935,6 +2938,9 @@ vscan.qmd
 ```
 
 No se modifica el contenido de las páginas individuales.
+
+
+> **Actualización v7.5:** este requisito queda histórico. `projects/index.qmd` fue eliminado y los botones de acceso a páginas detalladas se trasladaron a `portfolio.qmd`, que ahora es el único índice técnico.
 
 ---
 
@@ -3083,7 +3089,7 @@ No se deben copiar bloques extensos idénticos entre estos niveles.
 
 ## REQ-ARCH-007 — Redundancia Project Pages / Portfolio pendiente de decisión
 
-**Estado:** `VALIDAR`  
+**Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P2`
 
 Actualmente existen dos rutas hacia las páginas individuales:
@@ -3105,6 +3111,225 @@ No se elimina contenido.
 ```
 
 Una posible versión futura podrá retirar `Project Pages` de la navegación y utilizar `Portfolio` como único índice de proyectos, pero esto requiere aprobación explícita.
+
+
+### Decisión v7.5
+
+La simplificación fue aprobada e implementada:
+
+```text
+projects/index.qmd → eliminado
+Project Pages en navbar → eliminado
+Portfolio → único índice general de proyectos
+```
+
+Las páginas individuales `projects/*.qmd` se conservan.
+
+---
+
+
+
+# 23F. Requisitos introducidos en v7.5
+
+## REQ-ARCH-008 — Portfolio es el único índice general de proyectos
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La arquitectura pública debe ser:
+
+```text
+HOME
+├── PORTFOLIO
+│   └── páginas individuales de proyectos
+├── CV
+└── CONTACT
+```
+
+Se elimina el nivel intermedio:
+
+```text
+Project Pages
+```
+
+Por lo tanto:
+
+```text
+projects/index.qmd
+```
+
+no debe existir en la arquitectura vigente.
+
+---
+
+## REQ-NAV-017 — Navbar simplificado
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La barra superior debe contener únicamente:
+
+```text
+Carlos Moreno Rojas → Home
+Portfolio           → portfolio.qmd
+CV                  → cv.qmd
+Contact             → contact.qmd
+```
+
+No debe aparecer:
+
+```text
+Project pages
+```
+
+en ningún sector del navbar.
+
+---
+
+## REQ-PORTFOLIO-NAV-001 — Botones desde Portfolio a páginas detalladas
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Como `Portfolio` es el único índice general, cada proyecto resumido en `portfolio.qmd` debe ofrecer un botón:
+
+```text
+Open detailed project →
+```
+
+hacia su página individual.
+
+Rutas obligatorias:
+
+```text
+Master's Research      → projects/thesis.qmd
+CYBATHLON              → projects/cybathlon.qmd
+CandelStim             → projects/candel.qmd
+Borealis               → projects/borealis.qmd
+Preservation Machine   → projects/organ-preservation.qmd
+U-Net                  → projects/unet.qmd
+FPGA                    → projects/fpga.qmd
+Vscan Air               → projects/vscan.qmd
+```
+
+Los botones utilizan la clase Swiss existente:
+
+```text
+.project-page-button
+```
+
+---
+
+## REQ-LAYOUT-002 — Uso dinámico de todo el ancho disponible
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El contenido de escritorio debe utilizar dinámicamente el espacio disponible desde la zona inmediatamente posterior al TOC izquierdo hasta casi el borde derecho de la ventana.
+
+No debe existir un límite fijo como:
+
+```text
+1180 px
+```
+
+que vuelva a producir una gran zona vacía en monitores anchos.
+
+En desktop, `main.content` debe abarcar:
+
+```css
+grid-column: body-start / screen-end;
+```
+
+manteniendo el TOC independiente.
+
+---
+
+## REQ-LAYOUT-003 — Márgenes laterales responsive mediante `clamp()`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Los márgenes no deben ser distancias fijas grandes.
+
+El borde derecho y separación respecto al contenido deben utilizar valores dinámicos similares a:
+
+```css
+--portfolio-edge-gutter: clamp(0.875rem, 1.45vw, 2rem);
+--portfolio-content-gap: clamp(0.65rem, 1.1vw, 1.25rem);
+```
+
+Objetivo:
+
+```text
+pantalla pequeña  → margen pequeño
+pantalla media    → margen proporcional
+pantalla grande   → margen crece ligeramente pero permanece acotado
+```
+
+El contenido no debe quedar pegado al borde, pero tampoco debe desperdiciar una franja grande de pantalla.
+
+---
+
+## REQ-LAYOUT-004 — Distinción entre ancho de contenido técnico y ancho de lectura
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Los elementos técnicos deben poder utilizar el 100% del ancho disponible:
+
+```text
+imágenes
+diagramas
+grids
+tablas
+resultados
+Mermaid
+cards
+```
+
+El texto corrido puede tener un máximo basado en caracteres para preservar legibilidad:
+
+```text
+desktop normal → hasta 118ch
+pantallas muy grandes → hasta 126ch
+```
+
+Esto no debe volver a limitar el ancho de imágenes o componentes técnicos.
+
+---
+
+## REQ-LAYOUT-005 — Comportamiento por resolución
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La distribución debe adaptarse al menos a:
+
+```text
+Desktop ≥ 992 px
+Large desktop ≥ 1600 px
+Tablet / mobile < 992 px
+Small mobile < 520 px
+```
+
+### Desktop
+
+- TOC lateral independiente;
+- contenido se extiende hacia el borde derecho;
+- gutters dinámicos pequeños.
+
+### Large desktop
+
+- se sigue aprovechando toda la pantalla;
+- el margen derecho puede crecer moderadamente mediante `clamp()`;
+- no se centra una columna fija angosta.
+
+### Tablet / mobile
+
+- `main.content` ocupa `100%`;
+- padding horizontal responsive;
+- no existen anchos desktop rígidos.
 
 ---
 
@@ -3307,6 +3532,8 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.4 | 2026-09-11 | Cuerpo ampliado y page-layout full | REQ-LAYOUT-001 | IMPLEMENTADO |
 | v7.4 | 2026-09-11 | Reducción global de escala tipográfica | REQ-TYPE-001 | IMPLEMENTADO |
 | v7.4 | 2026-09-11 | Diagrama y análisis de estructura de páginas | REQ-ARCH-005/006/007 | IMPLEMENTADO / VALIDAR |
+| v7.5 | 2026-09-11 | Eliminación de Project Pages y Portfolio como índice único | REQ-ARCH-007/008, REQ-NAV-017, REQ-PORTFOLIO-NAV-001 | IMPLEMENTADO |
+| v7.5 | 2026-09-11 | Contenido realmente full-width y gutters responsive | REQ-LAYOUT-002/003/004/005 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -3357,6 +3584,11 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 37. Los títulos deben usar una escala moderada y no dominar el viewport.
 38. SITE_STRUCTURE.md debe mantenerse como diagrama vivo de arquitectura.
 39. Home, Portfolio y Project Page deben respetar el aumento progresivo de detalle.
+40. Portfolio debe ser el único índice general de proyectos.
+41. No debe existir Project Pages como nivel intermedio ni enlace de navbar.
+42. Cada proyecto del Portfolio debe tener acceso directo a su página detallada.
+43. En desktop el contenido debe abarcar body-start → screen-end y aprovechar la pantalla disponible.
+44. Los gutters deben ser dinámicos mediante clamp(), no márgenes fijos grandes.
 ```
 
 ---
@@ -3416,7 +3648,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.4 Swiss Research
+Version: v7.5 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

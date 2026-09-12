@@ -162,6 +162,8 @@ Develop a quantitative functional marker from ICG fluorescence kinetics.
   </div>
 </div>
 
+[Open detailed project](projects/thesis.qmd){.project-page-button}
+
 ---
 
 # ROBOTICS & REHABILITATION
@@ -214,6 +216,8 @@ involved developing a robotic transfemoral prosthesis for functional competition
     <small>Ensayos funcionales antes o durante la competencia</small>
   </div>
 </div>
+
+[Open detailed project](projects/cybathlon.qmd){.project-page-button}
 
 ---
 
@@ -268,6 +272,8 @@ for a transcranial electrical stimulation device.
   </div>
 </div>
 
+[Open detailed project](projects/candel.qmd){.project-page-button}
+
 ---
 
 # ORGAN PRESERVATION & TRANSPLANTATION
@@ -304,6 +310,8 @@ transport and potentially extend preservation time.
     <small>Perfil térmico representativo de preservación</small>
   </div>
 </div>
+
+[Open detailed project](projects/borealis.qmd){.project-page-button}
 
 ---
 
@@ -349,6 +357,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
   </div>
 </div>
 
+[Open detailed project](projects/organ-preservation.qmd){.project-page-button}
+
 ---
 
 # MEDICAL IMAGING & AI
@@ -392,6 +402,8 @@ and MRI images.
     <small>Dice, IoU u otras métricas utilizadas</small>
   </div>
 </div>
+
+[Open detailed project](projects/unet.qmd){.project-page-button}
 
 ---
 
@@ -439,6 +451,8 @@ The system processes signals associated with force, displacement, deformation an
   </div>
 </div>
 
+[Open detailed project](projects/fpga.qmd){.project-page-button}
+
 ---
 
 # CAD & PROTOTYPING
@@ -475,6 +489,8 @@ transducer.
     <small>Pieza fabricada y montada</small>
   </div>
 </div>
+
+[Open detailed project](projects/vscan.qmd){.project-page-button}
 
 ---
 
