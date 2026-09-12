@@ -617,7 +617,7 @@ cubic-bezier(.77, 0, .18, 1)
 
 ## REQ-ANIM-003 — Stagger
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P2`
 
 Existe un pequeño desfase entre elementos sucesivos.
@@ -4952,148 +4952,259 @@ noMainOcclusion
 
 
 
-# 23O. Animación de contenido Swiss Wipe — v8.5
+# 23O. Animación Swiss Wipe verificada — v8.5
 
-## REQ-ANIM-001 — Reveal horizontal por bloque/sección
+## REQ-ANIM-008 — Estilo visual Swiss Wipe de la referencia
 
 **Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P1`
+**Prioridad:** `P0`
 
-El contenido de las páginas debe utilizar la animación Swiss Wipe de la referencia visual aprobada.
+La animación de contenido debe reproducir el comportamiento visual de la referencia aprobada:
 
-Estado inicial activado por JavaScript:
-
-```css
-clip-path: inset(0 100% 0 0);
-opacity: 0;
+```text
+oculto  → clip-path: inset(0 100% 0 0) + opacity: 0
+visible → clip-path: inset(0 0 0 0)   + opacity: 1
 ```
 
-Estado visible:
+Curvas y duraciones:
 
 ```css
-clip-path: inset(0 0 0 0);
-opacity: 1;
+clip-path .70s cubic-bezier(.77, 0, .18, 1)
+opacity   .40s ease
 ```
 
-Transición:
-
-```css
-clip-path .7s cubic-bezier(.77, 0, .18, 1)
-opacity .4s ease
-```
-
-La animación produce un reveal horizontal de izquierda a derecha mediante la reducción del recorte derecho.
+La transición es un wipe horizontal de izquierda a derecha, sin desplazamiento vertical.
 
 ---
 
-## REQ-ANIM-002 — Unidad de animación = sección lógica
+## REQ-ANIM-009 — Animar bloques lógicos, no cada línea de texto
 
 **Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P1`
+**Prioridad:** `P0`
 
-La animación no debe aplicarse individualmente a cada párrafo, heading o elemento interno.
-
-Las unidades principales son:
+La unidad principal de reveal debe ser:
 
 ```text
 #title-block-header
-section de Quarto/Pandoc
-bloques top-level anteriores a la primera sección
+section
 ```
 
-Esto reproduce el comportamiento visual de la referencia, donde cada sección aparece como una sola composición.
+Además se permiten bloques top-level de Quarto que existan fuera de `section`.
+
+No se debe aplicar una animación separada a cada:
+
+```text
+p
+h2
+h3
+li
+```
+
+si ya están contenidos en una sección animada.
+
+Esto mantiene el aspecto de la referencia: una sección completa aparece como una lámina Swiss.
 
 ---
 
-## REQ-ANIM-003 — Disparo por scroll
+## REQ-ANIM-010 — IntersectionObserver es el trigger principal
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En navegadores modernos el reveal debe activarse con:
+
+```javascript
+IntersectionObserver
+```
+
+Configuración de referencia:
+
+```text
+root       = viewport
+rootMargin = 0px 0px -10% 0px
+threshold  = 0.01
+```
+
+Esto equivale aproximadamente al trigger visual del ejemplo al 90% de la altura del viewport.
+
+El listener de scroll con `requestAnimationFrame()` queda únicamente como fallback si `IntersectionObserver` no está disponible.
+
+---
+
+## REQ-ANIM-011 — Fail-safe obligatorio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Todo contenido debe ser visible por defecto.
+
+Secuencia obligatoria:
+
+```text
+1. recoger targets
+2. marcar contenido inicialmente visible como swiss-shown
+3. marcar únicamente targets below-fold como swiss-pending
+4. recién entonces agregar swiss-js-ready al body
+5. comenzar observación
+```
+
+Si JavaScript falla antes del paso 4:
+
+```text
+TODO EL CONTENIDO PERMANECE VISIBLE
+```
+
+Nunca se debe restaurar una implementación donde `opacity:0` sea el estado HTML/CSS por defecto.
+
+---
+
+## REQ-ANIM-012 — Reduced Motion de sistema y control manual
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La animación debe respetar simultáneamente:
+
+```text
+body.swiss-reduce-motion
+prefers-reduced-motion: reduce
+```
+
+Con Reduced Motion activo:
+
+```text
+opacity    = 1
+clip-path  = none
+transition = none
+```
+
+---
+
+## REQ-QA-015 — Verificación real mediante eventos de transición
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La prueba de animación no puede limitarse a comprobar clases CSS.
+
+Cada target animado debe instrumentar:
+
+```text
+transitionrun / transitionstart
+transitionend
+transitioncancel
+```
+
+Para considerar una animación completada correctamente se requiere:
+
+```text
+transitionStarted = true
+transitionEnded   = true
+opacity final     >= 0.99
+clip-path final   = inset(0) / equivalente visible
+```
+
+Si después de aproximadamente 900 ms el target visible no cumple estas condiciones, se registra como `failed`.
+
+---
+
+## REQ-QA-016 — Panel `?animation-debug=1`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Cualquier página debe poder abrirse con:
+
+```text
+?animation-debug=1
+```
+
+Debe exponer:
+
+```javascript
+window.__portfolioAnimationTest
+```
+
+con al menos:
+
+```text
+status
+pass
+mode
+support
+counts.total
+counts.pending
+counts.triggered
+counts.started
+counts.completed
+counts.failed
+records
+```
+
+Estados esperados:
+
+```text
+WAITING             → todavía no se ha hecho scroll a un target animable
+PASS                → al menos un target real inició, terminó y verificó estado final
+FAIL                → una transición real falló
+PASS_REDUCED_MOTION → animación correctamente omitida por accesibilidad
+```
+
+---
+
+## REQ-QA-017 — Test automático `?animation-test=1`
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P1`
 
-Una sección pendiente debe mostrarse cuando:
+Para una prueba rápida se puede abrir:
 
-```javascript
-element.getBoundingClientRect().top < window.innerHeight * 0.90
+```text
+?animation-test=1
 ```
 
-Antes de activar el estado oculto, los elementos ya presentes en el viewport deben marcarse visibles usando aproximadamente:
+El test debe:
 
-```javascript
-window.innerHeight * 0.95
+```text
+1. seleccionar el primer target below-fold pendiente
+2. marcarlo visualmente para depuración
+3. hacer scroll automático hasta él
+4. esperar la transición
+5. verificar transition events + estado visual final
+6. mostrar PASS / FAIL en el panel
 ```
+
+El modo `animation-test=1` solo existe para diagnóstico y no debe ejecutarse en navegación normal.
 
 ---
 
-## REQ-ANIM-004 — Animación fail-safe
+## REQ-ANIM-013 — La animación no altera sistemas ya validados
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-El contenido debe permanecer visible por defecto.
-
-Solo después de que JavaScript haya:
-
-1. encontrado los bloques;
-2. marcado los inicialmente visibles;
-
-puede agregarse:
+La v8.5 no debe modificar:
 
 ```text
-body.swiss-js-ready
-```
-
-Si JavaScript falla, no debe quedar contenido invisible.
-
----
-
-## REQ-ANIM-005 — Reduced Motion prevalece
-
-**Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P0`
-
-Con:
-
-```text
-body.swiss-reduce-motion
-```
-
-todo bloque reveal debe mantenerse:
-
-```css
-opacity: 1;
-clip-path: none;
-transform: none;
-transition: none;
-```
-
----
-
-## REQ-ANIM-006 — Animación no puede modificar layout ni navegación
-
-**Estado:** `REQUERIDO`  
-**Prioridad:** `P0`
-
-La implementación v8.5 solo afecta la presentación del contenido.
-
-No debe modificar:
-
-```text
-TOC portal
-padding 20 px del TOC
+TOC portal y geometría runtime
+padding TOC 20 px / 20 px
 navbar
-geometría runtime
-layout debug
-Portfolio structure
+contenido QMD
+botones de detalle
 CV
 Contact
-routing
-themes
-compact mode
-search configuration
+modo claro/oscuro
+modo compacto
+```
+
+La animación debe excluir explícitamente elementos dentro de:
+
+```text
+#TOC
+#quarto-header
 ```
 
 ---
-
 
 # 24. Requisitos pendientes conocidos
 
@@ -5307,7 +5418,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v8.2 | 2026-09-12 | Corrección runtime del TOC/navbar con comparación baseline/post-fix y modo A/B | REQ-LAYOUT-023/024/025, REQ-NAVBAR-003, REQ-QA-008/009/010 | IMPLEMENTADO |
 | v8.3 | 2026-09-12 | TOC portalizado fuera del grid Quarto, limpieza de slot blanco, test de oclusión y right-gap corregido por clientWidth | REQ-LAYOUT-026/027/028/029, REQ-QA-011/012/013, REQ-QUARTO-001 | IMPLEMENTADO |
 | v8.4 | 2026-09-12 | Padding interno TOC 20 px izquierda/superior sin alterar shell x=0 | REQ-LAYOUT-030, REQ-QA-014 | IMPLEMENTADO |
-| v8.5 | 2026-09-12 | Animación Swiss Wipe por secciones lógicas, fail-safe y Reduced Motion | REQ-ANIM-001/002/003/004/005/006 | IMPLEMENTADO / REQUERIDO |
+| v8.5 | 2026-09-12 | Swiss Wipe con IntersectionObserver y test runtime de transición | REQ-ANIM-008/009/010/011/012/013, REQ-QA-015/016/017 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -5373,9 +5484,12 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 52. Antes de alterar el shell, comparar con la implementación v6 que funcionaba.
 53. El TOC debe ser nativo de Quarto: `toc-location: left` + `toc-expand: 1`.
 54. El shell lateral debe seguir en x=0; el contenido interno del TOC usa padding-left:20px y padding-top:20px.
-55. El contenido debe usar Swiss Wipe por secciones lógicas, no animación elemento por elemento.
-56. La animación debe ser fail-safe y Reduced Motion debe prevalecer.
-57. La animación no puede modificar TOC, navbar, geometría runtime ni navegación.
+55. La animación de contenido debe usar Swiss Wipe por bloques lógicos.
+56. IntersectionObserver es el trigger principal; scroll+RAF es solo fallback.
+57. La animación debe ser fail-safe y respetar Reduced Motion del sistema y manual.
+58. Debe existir verificación real con transition events mediante ?animation-debug=1.
+59. Debe existir prueba automática mediante ?animation-test=1.
+60. La animación no puede alterar TOC, navbar ni geometría runtime.
 ```
 
 ---

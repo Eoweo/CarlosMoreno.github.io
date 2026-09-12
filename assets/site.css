@@ -833,33 +833,59 @@ pre {
 }
 
 /* ================================================================
-   FAIL-SAFE REVEAL ANIMATION — SWISS WIPE
-   Reference behavior:
-   - visible by default
-   - JS activates hidden state only after initialization
-   - horizontal clip-path wipe from right to left
-   - Reduced Motion always keeps content visible
+   VERSION 8.5 — SWISS WIPE REVEAL ANIMATION
+
+   Reference style:
+     hidden  -> clip-path: inset(0 100% 0 0), opacity 0
+     shown   -> clip-path: inset(0 0 0 0), opacity 1
+
+   Fail-safe:
+   content is visible by default. JS only hides below-fold targets
+   after it has successfully initialized the observer.
    ================================================================ */
 
 .swiss-reveal {
-  opacity: 1 !important;
-  transform: none !important;
-  clip-path: none !important;
+  opacity: 1;
+  transform: none;
+  clip-path: none;
 }
 
-body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
-  opacity: 0 !important;
-  clip-path: inset(0 100% 0 0) !important;
+/* Pending targets only become hidden after JS is ready. */
+body.swiss-js-ready .swiss-reveal.swiss-pending {
   transition:
-    clip-path .7s cubic-bezier(.77, 0, .18, 1),
-    opacity .4s ease !important;
+    clip-path .70s cubic-bezier(.77, 0, .18, 1),
+    opacity .40s ease;
 }
 
-body.swiss-js-ready .swiss-reveal.swiss-shown {
-  opacity: 1 !important;
-  clip-path: inset(0 0 0 0) !important;
+body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path, opacity;
 }
 
+body.swiss-js-ready .swiss-reveal.swiss-pending.swiss-shown {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+body.swiss-js-ready .swiss-reveal.swiss-animation-done {
+  will-change: auto;
+}
+
+/* Fallback when clip-path is unavailable: retain the opacity reveal. */
+@supports not (clip-path: inset(0 0 0 0)) {
+  body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
+    clip-path: none;
+    opacity: 0;
+  }
+
+  body.swiss-js-ready .swiss-reveal.swiss-pending.swiss-shown {
+    clip-path: none;
+    opacity: 1;
+  }
+}
+
+/* Existing manual Reduced Motion control. */
 body.swiss-reduce-motion *,
 body.swiss-reduce-motion *::before,
 body.swiss-reduce-motion *::after {
@@ -874,6 +900,21 @@ body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
   transform: none !important;
   clip-path: none !important;
   transition: none !important;
+  will-change: auto !important;
+}
+
+/* Respect the operating-system accessibility preference as well. */
+@media (prefers-reduced-motion: reduce) {
+  .swiss-reveal,
+  body.swiss-js-ready .swiss-reveal,
+  body.swiss-js-ready .swiss-reveal.swiss-pending,
+  body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
 }
 
 body.swiss-compact main.content h1:not(.title),

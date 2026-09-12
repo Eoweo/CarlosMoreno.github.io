@@ -198,3 +198,15 @@ PORTFOLIO_REQUIREMENTS.md
 - Adds 20 px internal left padding to the TOC list.
 - Adds 20 px internal top padding to the TOC list.
 - Runtime test now validates both 20 px padding values while still requiring the outer TOC geometry to remain at the viewport edge.
+
+
+## v8.5 — Swiss Wipe animation
+
+- Content reveal now matches the approved Swiss reference: horizontal `clip-path` wipe + opacity.
+- `IntersectionObserver` is the primary scroll trigger; RAF scroll scanning is fallback only.
+- Animations run per logical section/block rather than on every individual paragraph.
+- Fail-safe visibility remains mandatory.
+- System `prefers-reduced-motion` and the manual Reduced Motion control are both respected.
+- `?animation-debug=1` provides live passive verification.
+- `?animation-test=1` automatically scrolls to a pending real section and verifies transition start/end plus final computed styles.
+- See `ANIMATION_DIAGNOSTICS.md`.
