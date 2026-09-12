@@ -1,0 +1,30 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--native-sidebar:300px;--native-body:1500px;--native-margin:50px;--native-gutter:12px}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+#quarto-header{height:52px}.navbar{height:52px;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid #ccc}.navbar-container{width:100%;display:flex}.navbar-nav{display:flex;gap:15px}.navbar-brand{margin-right:20px}
+.page-columns{display:grid;grid-template-columns:[screen-start] minmax(0,1fr) [page-start] minmax(0,var(--native-sidebar)) [body-start] var(--native-gutter) [body-content-start] minmax(0,var(--native-body)) [body-content-end] var(--native-gutter) [body-end] minmax(0,var(--native-margin)) [page-end] minmax(0,1fr) [screen-end];grid-template-rows:[content-top] minmax(850px,1fr) [content-bottom] 60px [page-bottom]}
+.sidebar.toc-left{grid-column:page-start/body-start;grid-row:content-top/page-bottom}
+.page-columns .content{grid-column:body-content-start/body-content-end;grid-row:content-top/content-bottom;align-content:flex-start}
+#TOC{background:#f7f5ef}.content{background:#fffdf8;padding:20px}h1{margin-top:0}.spacer{height:1100px}
+@media(max-width:991px){.page-columns{display:block}.sidebar.toc-left{display:none}.content{width:100%}}
+</style>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="fullcontent quarto-light">
+<header id="quarto-header"><nav class="navbar navbar-expand-lg"><div class="navbar-container"><a class="navbar-brand" href="index.html">Carlos Moreno Rojas</a><div class="navbar-nav"><a class="nav-link" href="portfolio.html">Portfolio</a><a class="nav-link">CV</a><a class="nav-link">Contact</a></div></div></nav></header>
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left"><nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2><ul><li><a href="#a" class="nav-link active">MASTER'S RESEARCH</a><ul class="collapse show"><li><a href="#b" class="nav-link">Objective 1</a></li></ul></li><li><a class="nav-link">ROBOTICS & REHABILITATION</a></li></ul></nav></div>
+<main class="content"><header id="title-block-header"><div class="quarto-title"><h1 class="title">PORTFOLIO</h1></div></header><h1 id="a">MASTER'S RESEARCH</h1><h2 id="b">Objective 1</h2><div class="spacer"></div></main>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar"></div>
+</div>
+<script>
+(function(){
+ const sb=document.getElementById('quarto-sidebar-toc-left'), main=document.querySelector('main.content');
+ const desktop=innerWidth>=992; let pass=true; const out={width:innerWidth,desktop};
+ if(desktop){const s=sb.getBoundingClientRect(),m=main.getBoundingClientRect();Object.assign(out,{sidebar:{left:s.left,top:s.top,right:s.right,width:s.width},main:{left:m.left,top:m.top,right:m.right,width:m.width},shellDisplay:getComputedStyle(document.getElementById('quarto-content')).display}); pass=s.width>150 && s.width<innerWidth*.4 && s.right<=m.left+24 && m.width>innerWidth*.45 && Math.abs(s.top-m.top)<80;} else {pass=getComputedStyle(sb).display==='none';out.sidebarDisplay=getComputedStyle(sb).display}
+ document.body.dataset.testResult=pass?'pass':'fail'; document.body.dataset.testJson=JSON.stringify(out); document.title=(pass?'PASS':'FAIL')+' '+innerWidth;
+})();
+</script>
+</body></html>

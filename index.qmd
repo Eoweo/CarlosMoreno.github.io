@@ -1,0 +1,280 @@
+---
+title: "Carlos Moreno Rojas"
+subtitle: "Biomedical Engineering · Electrical Engineering · Research & Development"
+toc: true
+toc-location: left
+toc-depth: 2
+page-layout: full
+toc-title: "OVERVIEW"
+---
+
+:::: {.home-intro}
+
+::: {.home-intro-copy}
+
+::: {.home-kicker}
+BIOMEDICAL ENGINEERING · ELECTRICAL ENGINEERING
+:::
+
+::: {.home-statement}
+I develop and integrate engineering systems for biomedical research, medical devices and experimental platforms.
+:::
+
+My work combines electronics, embedded systems, biomedical instrumentation, signal and image processing,
+optics, CAD, prototyping and experimental validation. I am particularly interested in problems where
+hardware, software and physiology have to work as one system.
+
+::: {.home-actions}
+[Technical Portfolio](portfolio.qmd){.home-action .primary}
+[Curriculum Vitae](cv.qmd){.home-action}
+[Contact](contact.qmd){.home-action}
+:::
+
+:::
+
+::: {.image-slot .home-portrait}
+
+::: {.slot-label}
+FOTO PRINCIPAL / RETRATO TÉCNICO
+
+Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental
+:::
+
+:::
+
+::::
+
+# Profile
+
+## Biomedical & Electrical Engineering
+
+I have interdisciplinary training in **Biomedical Engineering and Electrical Engineering**, with experience
+across biomedical research, electronics, embedded systems, medical devices, robotics, medical imaging,
+FPGA, CAD and experimental system integration.
+
+My engineering approach is strongly implementation-oriented: define the physiological or technical need,
+translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.
+
+:::: {.home-metric-grid}
+
+::: {.home-metric}
+**Biomedical R&D**
+
+Instrumentation, perfusion, preservation, neuroengineering and experimental validation.
+:::
+
+::: {.home-metric}
+**Electronics & Embedded**
+
+PCB, ESP32, STM32, sensors, acquisition, communications and system integration.
+:::
+
+::: {.home-metric}
+**Engineering Prototyping**
+
+CAD, mechanical integration, 3D printing, machining and iterative testing.
+:::
+
+::::
+
+# Current Research
+
+## Ex Vivo Liver Viability & ICG-NIR
+
+My Master's research focuses on the development of an **ex vivo liver perfusion platform** and the use of
+**indocyanine green fluorescence in the near infrared (ICG-NIR)** to investigate quantitative indicators
+of liver function and viability.
+
+The research progresses through three connected objectives:
+
+:::: {.home-step-grid}
+
+::: {.home-step}
+::: {.step-number}
+01
+:::
+**Perfusion Platform**
+
+Stable circulation, physiological control and instrumentation.
+
+[Open Objective 1](projects/thesis.qmd#objective-1--ex-vivo-perfusion-platform){.inline-project-link}
+:::
+
+::: {.home-step}
+::: {.step-number}
+02
+:::
+**Physiological Baseline**
+
+Pressure, flow, temperature, vascular resistance, pH and gases.
+
+[Open Objective 2](projects/thesis.qmd#objective-2--baseline-dataset-without-icg){.inline-project-link}
+:::
+
+::: {.home-step}
+::: {.step-number}
+03
+:::
+**ICG-NIR Marker**
+
+Fluorescence kinetics and quantitative functional parameters.
+
+[Open Objective 3](projects/thesis.qmd#objective-3--icg-nir-functional-marker){.inline-project-link}
+:::
+
+::::
+
+::: {.image-slot .large}
+
+::: {.slot-label}
+IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER
+
+Plataforma de perfusión completa o montaje ICG-NIR
+:::
+
+:::
+
+# Selected Work
+
+## CYBATHLON 2024 — Ciervo UC
+
+I participated in **CYBATHLON 2024 in Zürich** as Electrical Area Leader of Ciervo UC, working on the
+electrical and electromechanical integration of a robotic transfemoral prosthesis.
+
+[Open project →](projects/cybathlon.qmd){.inline-project-link}
+
+## CandelStim — Neuroengineering
+
+During my professional internship at Candel Medical Company I worked on electronics and firmware for a
+transcranial electrical stimulation platform, including circuit analysis, PCB work, embedded systems,
+communications, signal generation and validation.
+
+[Open project →](projects/candel.qmd){.inline-project-link}
+
+## Other Engineering Projects
+
+:::: {.home-project-grid}
+
+::: {.project-card}
+::: {.project-tag}
+ORGAN PRESERVATION
+:::
+**Borealis UC — Supercooling**
+
+Experimental work in organ preservation and thermal control.
+
+[Open project →](projects/borealis.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+SYSTEM DESIGN
+:::
+**Organ Preservation Machine**
+
+Electromechanical, fluidic and control-system redesign.
+
+[Open project →](projects/organ-preservation.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+MEDICAL IMAGING & AI
+:::
+**Lung Segmentation — U-Net**
+
+Deep-learning segmentation of medical images.
+
+[Open project →](projects/unet.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+FPGA
+:::
+**Universal Testing Machine**
+
+Zybo Z10, Vivado and VHDL for acquisition and processing.
+
+[Open project →](projects/fpga.qmd){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+CAD & PROTOTYPING
+:::
+**Vscan Air Enclosure**
+
+CAD and prototyping for a portable ultrasound accessory.
+
+[Open project →](projects/vscan.qmd){.inline-project-link}
+:::
+
+::::
+
+# Engineering Areas
+
+## Biomedical Instrumentation
+
+Physiological sensing, pressure, flow, temperature, perfusion systems, calibration, acquisition and
+experimental validation.
+
+## Electronics & Embedded Systems
+
+Analog and digital electronics, PCB, microcontrollers, ESP32, STM32, Arduino, communications and
+hardware/software integration.
+
+## Medical Imaging, Signals & Optics
+
+Signal and image processing, deep learning, biomedical optics, NIR fluorescence and experimental data analysis.
+
+## CAD, Prototyping & Integration
+
+Fusion 360, mechanical design, 3D printing, machining and integration of electronics, fluidics and mechanics.
+
+# Education & Leadership
+
+## Education
+
+::: {.home-timeline}
+
+::: {}
+**MSc Biomedical Engineering**
+
+Pontificia Universidad Católica de Chile · 2025–2027
+:::
+
+::: {}
+**Electrical Engineering**
+
+Pontificia Universidad Católica de Chile · 2025–2026
+:::
+
+::: {}
+**Biomedical Engineering**
+
+Pontificia Universidad Católica de Chile · 2021–2024
+:::
+
+:::
+
+## Leadership & Teaching
+
+My experience also includes physics laboratory teaching, leadership of the Biomedical Engineering Student
+Chapter UC and work with IEEE EMBS PUC Chile.
+
+# Explore
+
+## Technical Portfolio
+
+The complete technical portfolio documents projects in greater depth using the structure
+**problem → design → implementation → testing → results / lessons learned**.
+
+[Open Technical Portfolio](portfolio.qmd){.home-action .primary}
+
+## CV & Contact
+
+::: {.home-final-actions}
+[Curriculum Vitae](cv.qmd){.home-action}
+[Contact](contact.qmd){.home-action}
+:::

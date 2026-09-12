@@ -1,0 +1,424 @@
+---
+title: "Ex Vivo Liver Viability with ICG-NIR"
+subtitle: "Master's Thesis — Biomedical Engineering"
+description: "Ex vivo liver perfusion, physiological baseline characterization and ICG-NIR functional assessment."
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "MASTER'S RESEARCH"
+page-layout: full
+---
+<div class="project-meta">
+<span>Organ Perfusion</span>
+<span>Biomedical Instrumentation</span>
+<span>NIR Fluorescence</span>
+<span>Signal Processing</span>
+<span>Experimental Research</span>
+</div>
+
+## Project overview
+
+The thesis addresses the need for a **functional, continuous and non-destructive measurement**
+of liver viability during ex vivo perfusion.
+
+The project is organized into three consecutive objectives:
+
+1. Build and validate a stable ex vivo liver perfusion platform.
+2. Characterize a physiological baseline without ICG.
+3. Develop a functional marker using ICG-NIR kinetics.
+
+<div class="image-slot large">
+  <div class="slot-label">
+    FOTO GENERAL DEL PROYECTO DE TESIS
+    <small>Vista completa de la plataforma de perfusión con hígado, bomba, sensores, oxigenador y computador de adquisición</small>
+  </div>
+</div>
+
+### Need and hypothesis
+
+**Need:** obtain a continuous, functional and non-destructive measurement of liver viability
+during ex vivo perfusion.
+
+**Hypothesis:** ICG uptake and hepatobiliary excretion kinetics measured using NIR fluorescence
+contain parameters capable of discriminating liver functional state.
+
+```{mermaid}
+flowchart TD
+    N["Need"] --> H["Hypothesis"]
+    H --> O1["Objective 1<br/>Stable perfusion platform"]
+    O1 --> O2["Objective 2<br/>Baseline without ICG"]
+    O2 --> O3["Objective 3<br/>ICG-NIR marker"]
+    O3 --> F["Functional viability assessment"]
+```
+
+---
+
+## Objective 1 — Ex Vivo Perfusion Platform
+
+### Objective
+
+Implement an ex vivo perfusion platform capable of maintaining rat livers under controlled
+and physiologically stable conditions.
+
+<div class="image-slot large">
+  <div class="slot-label">
+    FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA
+    <small>Fotografía limpia del sistema armado, idealmente con etiquetas o una segunda versión anotada</small>
+  </div>
+</div>
+
+### Perfusion circuit
+
+The perfusion circuit is organized as:
+
+```{mermaid}
+flowchart LR
+    A["Reservoir"] --> B["Peristaltic Pump"]
+    B --> C["Pulse Damper"]
+    C --> D["Flow Sensor"]
+    D --> E["Oxygenator"]
+    E --> F["Bubble Trap"]
+    F --> G["Liver"]
+    G --> H["Outlet / Return"]
+```
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA REAL DEL CIRCUITO DE PERFUSIÓN
+    <small>Esquema con mangueras, diámetros, dirección de flujo y ubicación de sensores</small>
+  </div>
+</div>
+
+### Reservoir and pumping
+
+The reservoir and peristaltic pump establish the perfusate flow through the system.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL RESERVORIO Y BOMBA PERISTÁLTICA
+    <small>Mostrar conexiones de entrada/salida y cabezal utilizado</small>
+  </div>
+</div>
+
+### Pulse damping
+
+Peristaltic pumping generates pressure pulsations. A pulse-damping stage is used to reduce
+the amplitude of these oscillations before the perfusate reaches the organ.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO / CORTE DEL DAMPER DE PULSACIONES
+    <small>Idealmente incluir una imagen del componente y un pequeño esquema de funcionamiento</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    GRÁFICO ANTES Y DESPUÉS DEL DAMPER
+    <small>Comparación de presión o flujo mostrando la reducción de pulsaciones</small>
+  </div>
+</div>
+
+### Oxygenation and bubble management
+
+The circuit includes oxygenation and bubble-removal stages to maintain appropriate perfusate
+conditions and reduce the risk of air entering the liver.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL OXIGENADOR Y ATRAPABURBUJAS
+    <small>Fotografía donde se vea cómo ambos componentes están integrados al circuito</small>
+  </div>
+</div>
+
+### Physiological monitoring
+
+The platform monitors:
+
+- **P(t):** portal / pre-liver pressure.
+- **Q(t):** portal perfusion flow.
+- **T(t):** perfusate / organ temperature.
+- **R(t)=P/Q:** vascular resistance.
+- **pH / gases:** perfusate chemistry according to protocol.
+
+<div class="image-slot large">
+  <div class="slot-label">
+    CAPTURA DEL MONITOR HIDRODINÁMICO
+    <small>Pantalla mostrando presión, flujo, temperatura y resistencia vascular en tiempo real</small>
+  </div>
+</div>
+
+### Sensors and electronics
+
+The monitoring system combines physiological sensors, acquisition electronics, an embedded
+system and software for visualization and storage.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DE LOS SENSORES Y ELECTRÓNICA DE ADQUISICIÓN
+    <small>Presión, flujo, temperatura, ESP32/Arduino, placas y conexiones principales</small>
+  </div>
+</div>
+
+### Calibration and validation
+
+Measurements are compared with reference instrumentation and characterized using quantitative
+error metrics such as correlation, deviation and RMSE.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL SETUP DE CALIBRACIÓN
+    <small>Monitor desarrollado conectado al patrón o instrumento de referencia</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    GRÁFICO DE CALIBRACIÓN / ERROR
+    <small>Valor medido vs referencia, correlación, RMSE o desviación</small>
+  </div>
+</div>
+
+### Objective 1 success criterion
+
+A reproducible experimental window in which the liver remains perfused, thermally stable
+and its hemodynamic variables are monitored.
+
+---
+
+## Objective 2 — Baseline Dataset without ICG
+
+### Objective
+
+Characterize the stability of the preparation and construct a physiological reference dataset
+before adding ICG.
+
+The purpose is to distinguish expected platform and preparation behavior from effects that may
+later be associated with the fluorophore or with changes in liver function.
+
+<div class="image-slot large">
+  <div class="slot-label">
+    FOTO DE UN EXPERIMENTO BASAL SIN ICG
+    <small>Hígado perfundido durante una corrida utilizada para construir la línea base</small>
+  </div>
+</div>
+
+### Recorded variables
+
+The baseline dataset contains:
+
+- Q(t) — portal flow.
+- P(t) — portal pressure.
+- T(t) — temperature.
+- R(t)=P/Q — vascular resistance.
+- pH / gases — perfusate state.
+
+### Representative traces
+
+<div class="image-slot large">
+  <div class="slot-label">
+    GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA
+    <small>Tres o cuatro curvas alineadas temporalmente durante un experimento estable</small>
+  </div>
+</div>
+
+### Vascular resistance
+
+Vascular resistance provides a derived parameter for interpreting the relationship between
+pressure and flow throughout the experiment.
+
+<div class="image-slot">
+  <div class="slot-label">
+    GRÁFICO DE RESISTENCIA VASCULAR R(t)=P/Q
+    <small>Mostrar su evolución temporal y el rango considerado estable</small>
+  </div>
+</div>
+
+### Reproducibility
+
+The baseline stage is used to estimate expected variability between experiments and determine
+whether the platform provides a sufficiently reproducible experimental window.
+
+<div class="image-slot">
+  <div class="slot-label">
+    COMPARACIÓN ENTRE EXPERIMENTOS BASALES
+    <small>Superposición de 3 o más experimentos o resumen estadístico de sus variables principales</small>
+  </div>
+</div>
+
+<div class="data-slot">
+<strong>DATASET TO ADD:</strong> baseline physiological dataset, variable definitions and public download link if appropriate.
+</div>
+
+---
+
+## Objective 3 — ICG-NIR Functional Marker
+
+### Objective
+
+Develop a quantitative functional marker of liver viability from the temporal kinetics of ICG
+fluorescence.
+
+<div class="image-slot large">
+  <div class="slot-label">
+    FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR
+    <small>Hígado, fuente NIR, filtros, cámara/sensor y geometría completa del ensayo</small>
+  </div>
+</div>
+
+### ICG experiment
+
+ICG is introduced into perfusate containing albumin. The liver uptake and excretion process is
+observed using near-infrared fluorescence acquisition.
+
+```{mermaid}
+flowchart LR
+    A["ICG + albumin"] --> B["Liver uptake"]
+    B --> C["NIR fluorescence"]
+    C --> D["FI(t)"]
+    D --> E["Kinetic parameters"]
+```
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA ÓPTICO DEL SISTEMA ICG-NIR
+    <small>Fuente de excitación → hígado → filtro de emisión → adquisición NIR</small>
+  </div>
+</div>
+
+### Optical calibration
+
+Before interpreting fluorescence physiologically, the system should characterize the relation
+between ICG concentration and measured fluorescence under controlled conditions.
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL ENSAYO DE CALIBRACIÓN ICG + ALBÚMINA
+    <small>Viales o recipiente de calibración con geometría de adquisición fija</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    CURVA CONCENTRACIÓN DE ICG VS INTENSIDAD DE FLUORESCENCIA
+    <small>Mostrar rango lineal, saturación y región útil de trabajo</small>
+  </div>
+</div>
+
+### Fluorescence kinetics
+
+The target signal is the temporal fluorescence curve, FI(t), or a calibrated estimate of
+C_ICG(t).
+
+<div class="image-slot large">
+  <div class="slot-label">
+    CURVA REPRESENTATIVA FI(t) DE ICG
+    <small>Señal temporal completa mostrando captación, peak y eliminación</small>
+  </div>
+</div>
+
+### Functional parameters
+
+Parameters to derive from the curve include:
+
+- ICG-PDR — disappearance rate.
+- ICG-R15 — retention at 15 minutes.
+- ICG-CLR — clearance.
+- Fmax.
+- Tmax.
+- Uptake / washout slopes.
+- AUC.
+
+<div class="image-slot">
+  <div class="slot-label">
+    CURVA ICG CON PARÁMETROS MARCADOS
+    <small>Indicar gráficamente dónde se obtienen PDR, R15, clearance, Fmax, Tmax, slopes y AUC</small>
+  </div>
+</div>
+
+### Functional viability index
+
+The final objective is to investigate whether ICG-derived parameters can be compared or combined
+with physiological and injury-related variables to describe liver functional state.
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA DEL ÍNDICE DE VIABILIDAD
+    <small>ICG + presión + flujo + resistencia + química → parámetros → índice funcional</small>
+  </div>
+</div>
+
+### Validation
+
+<div class="image-slot">
+  <div class="slot-label">
+    COMPARACIÓN DEL ÍNDICE ICG CON VARIABLES FISIOLÓGICAS / DAÑO
+    <small>Correlaciones, grupos experimentales o figura de validación cuando existan resultados</small>
+  </div>
+</div>
+
+---
+
+## Experimental workflow
+
+```{mermaid}
+flowchart LR
+    S1["1<br/>Validate platform"] -->
+    S2["2<br/>Baseline dataset"] -->
+    S3["3<br/>ICG calibration"] -->
+    S4["4<br/>Liver experiment"] -->
+    S5["5<br/>Extract parameters"] -->
+    S6["6<br/>Validate index"]
+```
+
+<div class="image-slot">
+  <div class="slot-label">
+    TIMELINE / FLUJO REAL DE UN EXPERIMENTO COMPLETO
+    <small>Preparación → estabilización → línea base → inyección ICG → adquisición → análisis</small>
+  </div>
+</div>
+
+---
+
+## My engineering contribution
+
+The project integrates:
+
+<div class="skill-chips">
+<span>Organ perfusion</span>
+<span>Fluidics</span>
+<span>Biomedical instrumentation</span>
+<span>Embedded systems</span>
+<span>Signal acquisition</span>
+<span>Signal processing</span>
+<span>Biomedical optics</span>
+<span>NIR fluorescence</span>
+<span>Experimental validation</span>
+<span>System integration</span>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    COLLAGE DE DESARROLLOS REALIZADOS
+    <small>4–6 imágenes: electrónica, damper, sensores, software, circuito de perfusión y montaje NIR</small>
+  </div>
+</div>
+
+---
+
+## Current status
+
+This is an active research project. Results, datasets and code should be added when they are
+sufficiently validated and suitable for public release.
+
+## References
+
+1. Chen Y, Liu G, Wu Y, Cai H. *Assessment of liver injury using indocyanine green fluorescence imaging*. Annals of Translational Medicine, 2021.
+2. *Near-infrared fluorescence imaging with indocyanine green for assessment of donor livers in a rat model of ischemia-reperfusion*. BMC Gastroenterology, 2022.
+3. van der Vorst JR et al. *Near-infrared fluorescence imaging of liver metastases in rats using indocyanine green*. Journal of Surgical Research, 2012.
+4. Sakka SG. *Plasma disappearance rate of indocyanine green in liver dysfunction*. Intensive Care Medicine, 2006.
+
+<div class="page-nav">
+  <a href="index.html">← Projects</a>
+  <a href="cybathlon.html">CYBATHLON →</a>
+</div>

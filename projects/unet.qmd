@@ -1,0 +1,66 @@
+---
+title: "Lung Segmentation with U-Net"
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "MEDICAL IMAGING"
+page-layout: full
+---
+## Overview
+
+Medical image segmentation project using a neural network based on **U-Net**, oriented toward
+lung segmentation in CT and MRI images.
+
+## Areas
+
+- Medical imaging.
+- Deep learning.
+- Neural networks.
+- Segmentation.
+- Biomedical image processing.
+
+
+
+
+
+## Suggested visual material
+
+<div class="image-slot">
+  <div class="slot-label">
+    EJEMPLO DE IMAGEN MÉDICA DE ENTRADA
+    <small>CT o MRI utilizada en el proyecto</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    ARQUITECTURA U-NET UTILIZADA
+    <small>Diagrama de encoder, bottleneck y decoder</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    EJEMPLOS DE SEGMENTACIÓN
+    <small>Imagen original + máscara real + predicción</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    CURVAS DE ENTRENAMIENTO
+    <small>Loss y métricas por época</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    TABLA / GRÁFICO DE MÉTRICAS
+    <small>Dice, IoU u otras métricas utilizadas</small>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="organ-preservation.html">← Organ preservation</a>
+  <a href="fpga.html">FPGA →</a>
+</div>

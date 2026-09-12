@@ -1,0 +1,87 @@
+---
+title: "Ciervo UC — CYBATHLON 2024"
+subtitle: "Electrical Area Leader"
+toc: true
+toc-location: left
+toc-depth: 3
+toc-title: "CYBATHLON 2024"
+page-layout: full
+---
+<div class="project-meta">
+<span>Robotics</span><span>Prosthetics</span><span>Electronics</span><span>Leadership</span>
+</div>
+
+## Overview
+
+Participation in CYBATHLON 2024 in Zürich as part of **Ciervo UC**, developing a robotic
+transfemoral prosthesis for functional competition tasks.
+
+## Role
+
+**Electrical Area Leader**
+
+Responsibilities included:
+
+- Electronic system design.
+- Electronic prototyping and manufacturing.
+- Integration of electronics into the prosthesis.
+- Electromechanical integration.
+- Coordination between electronics, control and mechanics.
+- Diagnosis and correction of integration problems.
+- Development under real-world constraints and with a real user.
+
+```{mermaid}
+flowchart LR
+    A["Functional need"] --> B["Design"]
+    B --> C["Electronic + mechanical prototypes"]
+    C --> D["Integration"]
+    D --> E["Testing with pilot"]
+    E --> F["Iteration"]
+    F --> G["Competition-ready system"]
+```
+
+
+
+
+
+## Suggested visual material
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DEL EQUIPO CIERVO UC EN CYBATHLON
+    <small>Imagen del equipo completo en Zürich</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DE LA PRÓTESIS TRANSFEMORAL
+    <small>Vista completa del sistema</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO DE LA ELECTRÓNICA INTEGRADA EN LA PRÓTESIS
+    <small>Controladores, baterías, sensores y cableado</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    DIAGRAMA ELÉCTRICO / ARQUITECTURA DEL SISTEMA
+    <small>Bloques principales de electrónica, control y actuadores</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <div class="slot-label">
+    FOTO O VIDEO DE PRUEBAS CON EL PILOTO
+    <small>Ensayo funcional antes o durante la competencia</small>
+  </div>
+</div>
+
+<div class="page-nav">
+  <a href="thesis.html">← Master's thesis</a>
+  <a href="candel.html">CandelStim →</a>
+</div>

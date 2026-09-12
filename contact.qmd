@@ -1,0 +1,174 @@
+---
+title: "Contact"
+subtitle: "Research · Engineering · Professional Collaboration"
+toc: true
+toc-location: left
+toc-depth: 2
+toc-title: "CONTACT"
+page-layout: full
+---
+
+:::: {.contact-hero}
+
+::: {}
+
+::: {.contact-kicker}
+GET IN TOUCH
+:::
+
+::: {.contact-heading}
+Research, engineering and technical collaboration.
+:::
+
+Use the channels below to contact me or to access my professional and research profiles.
+Public contact information can be added progressively without changing the page structure.
+
+:::
+
+::: {.contact-monogram}
+CM
+:::
+
+::::
+
+# Direct Contact
+
+## Professional Channels
+
+:::: {.contact-grid .contact-grid-three}
+
+::: {.contact-method}
+
+::: {.contact-icon}
+✉
+:::
+
+::: {.contact-card-label}
+EMAIL
+:::
+
+**Email**
+
+Preferred channel for research and professional enquiries.
+
+`ADD_EMAIL`
+
+:::
+
+::: {.contact-method}
+
+::: {.contact-icon}
+⌘
+:::
+
+::: {.contact-card-label}
+CODE & PROJECTS
+:::
+
+**GitHub**
+
+Repositories, code and technical project material.
+
+`ADD_GITHUB`
+
+:::
+
+::: {.contact-method}
+
+::: {.contact-icon}
+in
+:::
+
+::: {.contact-card-label}
+PROFESSIONAL NETWORK
+:::
+
+**LinkedIn**
+
+Professional profile, engineering experience and network.
+
+`ADD_LINKEDIN`
+
+:::
+
+::::
+
+# Research Profiles
+
+## Academic Identity
+
+:::: {.contact-grid .contact-grid-two}
+
+::: {.contact-method .compact-card}
+
+::: {.contact-card-label}
+RESEARCH ID
+:::
+
+**ORCID**
+
+Persistent academic researcher identifier.
+
+`ADD_ORCID_IF_APPLICABLE`
+
+:::
+
+::: {.contact-method .compact-card}
+
+::: {.contact-card-label}
+PUBLICATIONS
+:::
+
+**Google Scholar**
+
+Research publications and citation profile.
+
+`ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
+
+:::
+
+::::
+
+# Documents & Portfolio
+
+## Explore My Work
+
+:::: {.contact-grid .contact-grid-two}
+
+::: {.contact-method .contact-link-card}
+
+::: {.contact-card-label}
+DOCUMENT
+:::
+
+**Curriculum Vitae**
+
+Education, research, professional experience, projects and technical skills.
+
+[Open CV →](cv.qmd){.inline-project-link}
+
+:::
+
+::: {.contact-method .contact-link-card}
+
+::: {.contact-card-label}
+TECHNICAL WORK
+:::
+
+**Engineering Portfolio**
+
+Detailed technical record of research and engineering projects.
+
+[Open Portfolio →](portfolio.qmd){.inline-project-link}
+
+:::
+
+::::
+
+# Publishing Status
+
+## Public Information
+
+::: {.contact-status}
+**Before publishing:** replace the `ADD_...` placeholders only with information that should be publicly visible.
+:::

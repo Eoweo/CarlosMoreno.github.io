@@ -1,0 +1,1008 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+html,body{margin:0} body{padding-top:64px}
+#quarto-header{position:sticky;top:64px;height:64px}
+.navbar{height:64px}
+#quarto-content{display:grid;grid-template-columns:292.5px 280px 12.8px 940px 1fr;position:relative}
+#old-toc-slot{grid-column:2;background:white;z-index:5;min-height:1000px}
+#TOC{position:sticky;top:140px}
+main.content{grid-column:4;min-height:2000px;background:#f7f5ef}
+#old-toc-slot::after{content:"";position:absolute;left:572.5px;top:128px;width:280px;height:900px;background:white;}
+</style></head>
+<body class="floating nav-fixed quarto-light">
+<header id="quarto-header" class="fixed-top"><nav class="navbar"><div class="navbar-container"><a class="navbar-brand">Carlos</a><ul class="navbar-nav"><li><a class="nav-link">Portfolio</a></li></ul></div></nav></header>
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="old-toc-slot"><nav id="TOC" role="doc-toc" class="toc-active"><h2 class="toc-title">ON THIS PAGE</h2><ul><li><a href="#a">A</a></li></ul></nav></div>
+<main class="content"><header id="title-block-header"><div class="quarto-title"><h1 class="title">Portfolio</h1></div></header><section id="a"><h2>A</h2><p>Text that must not be covered.</p></section></main>
+</div>
+<script>
+(function () {
+  "use strict";
+
+  const SUN = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+    </svg>`;
+
+  const MOON = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+    </svg>`;
+
+  const MOTION = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 12h6M14 12h6M8 8l4 4-4 4M16 8l-4 4 4 4"></path>
+    </svg>`;
+
+  const COMPACT = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>`;
+
+  function safeGet(key) {
+    try {
+      return window.localStorage ? localStorage.getItem(key) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function safeSet(key, value) {
+    try {
+      if (window.localStorage) localStorage.setItem(key, value);
+    } catch (e) {}
+  }
+
+  function isDark() {
+    return (
+      document.body.classList.contains("quarto-dark") ||
+      document.body.classList.contains("swiss-manual-dark") ||
+      document.documentElement.classList.contains("quarto-dark") ||
+      document.documentElement.dataset.bsTheme === "dark"
+    );
+  }
+
+  /* --------------------------------------------------------------
+     Controls
+     -------------------------------------------------------------- */
+  function createControls() {
+    if (document.querySelector(".swiss-controls")) return;
+
+    const controls = document.createElement("div");
+    controls.className = "swiss-controls";
+    controls.setAttribute("aria-label", "Display controls");
+
+    const compact = document.createElement("button");
+    compact.type = "button";
+    compact.id = "swissCompactToggle";
+    compact.className = "swiss-icon-button";
+    compact.title = "Compact mode";
+    compact.setAttribute("aria-label", "Toggle compact mode");
+    compact.innerHTML = COMPACT;
+
+    const motion = document.createElement("button");
+    motion.type = "button";
+    motion.id = "swissMotionToggle";
+    motion.className = "swiss-icon-button";
+    motion.title = "Reduce motion";
+    motion.setAttribute("aria-label", "Toggle reduced motion");
+    motion.innerHTML = MOTION;
+
+    const theme = document.createElement("button");
+    theme.type = "button";
+    theme.id = "swissThemeToggle";
+    theme.className = "swiss-icon-button";
+    theme.setAttribute("aria-label", "Toggle light or dark mode");
+
+    controls.append(compact, motion, theme);
+
+    const host =
+      document.querySelector("#quarto-header .navbar-container") ||
+      document.querySelector("#quarto-header .container-fluid") ||
+      document.querySelector("#quarto-header nav") ||
+      document.body;
+
+    host.appendChild(controls);
+
+    // Restore display preferences.
+    if (safeGet("swiss-compact") === "1") {
+      document.body.classList.add("swiss-compact");
+      compact.classList.add("is-on");
+    }
+
+    if (safeGet("swiss-reduce-motion") === "1") {
+      document.body.classList.add("swiss-reduce-motion");
+      motion.classList.add("is-on");
+    }
+
+    compact.addEventListener("click", function () {
+      document.body.classList.toggle("swiss-compact");
+      const on = document.body.classList.contains("swiss-compact");
+      compact.classList.toggle("is-on", on);
+      safeSet("swiss-compact", on ? "1" : "0");
+    });
+
+    motion.addEventListener("click", function () {
+      document.body.classList.toggle("swiss-reduce-motion");
+      const on = document.body.classList.contains("swiss-reduce-motion");
+      motion.classList.toggle("is-on", on);
+      safeSet("swiss-reduce-motion", on ? "1" : "0");
+
+      if (on) {
+        document.querySelectorAll(".swiss-reveal").forEach(function (el) {
+          el.classList.add("swiss-shown");
+        });
+      } else {
+        revealOnScroll();
+      }
+    });
+
+    function updateThemeIcon() {
+      const dark = isDark();
+      theme.innerHTML = dark ? SUN : MOON;
+      theme.title = dark ? "Light mode" : "Dark mode";
+    }
+
+    theme.addEventListener("click", function () {
+      // Prefer Quarto's own theme switch, keeping Bootstrap in sync.
+      const nativeToggle = document.querySelector(".quarto-color-scheme-toggle");
+      if (nativeToggle) {
+        nativeToggle.click();
+        window.setTimeout(updateThemeIcon, 80);
+        return;
+      }
+
+      // Standalone fallback.
+      document.body.classList.toggle("swiss-manual-dark");
+      const dark = document.body.classList.contains("swiss-manual-dark");
+      safeSet("swiss-manual-dark", dark ? "1" : "0");
+      updateThemeIcon();
+    });
+
+    if (!document.querySelector(".quarto-color-scheme-toggle") &&
+        safeGet("swiss-manual-dark") === "1") {
+      document.body.classList.add("swiss-manual-dark");
+    }
+
+    updateThemeIcon();
+
+    // Keep icon synchronized if Quarto changes classes/data attributes.
+    try {
+      const observer = new MutationObserver(updateThemeIcon);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class", "data-bs-theme"]
+      });
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ["class"]
+      });
+    } catch (e) {}
+  }
+
+  /* --------------------------------------------------------------
+     Reveal animation
+     Important: content is visible before JS adds swiss-js-ready.
+     -------------------------------------------------------------- */
+  let revealTargets = [];
+
+  function collectRevealTargets() {
+    const content =
+      document.querySelector("main.content") ||
+      document.querySelector("#quarto-document-content") ||
+      document.querySelector("main");
+
+    if (!content) return [];
+
+    const candidates = content.querySelectorAll(
+      [
+        "h1:not(.title)",
+        "h2",
+        "h3",
+        "p",
+        ".image-slot",
+        ".project-meta",
+        ".skill-chips",
+        ".project-grid",
+        ".skill-grid",
+        ".download-grid",
+        ".contact-card",
+        ".cell",
+        "table",
+        "blockquote",
+        "ul",
+        "ol"
+      ].join(",")
+    );
+
+    const seen = new Set();
+    const result = [];
+
+    candidates.forEach(function (el) {
+      // Avoid animating elements nested inside a larger selected component.
+      if (el.closest(".image-slot") && !el.classList.contains("image-slot")) return;
+      if (el.closest(".project-meta") && !el.classList.contains("project-meta")) return;
+      if (el.closest(".skill-chips") && !el.classList.contains("skill-chips")) return;
+      if (seen.has(el)) return;
+
+      seen.add(el);
+      el.classList.add("swiss-reveal");
+      result.push(el);
+    });
+
+    result.forEach(function (el, i) {
+      el.style.setProperty("--swiss-delay", ((i % 4) * 24) + "ms");
+    });
+
+    return result;
+  }
+
+  function revealOnScroll() {
+    if (!revealTargets.length) return;
+
+    if (document.body.classList.contains("swiss-reduce-motion")) {
+      revealTargets.forEach(function (el) {
+        el.classList.add("swiss-shown");
+      });
+      return;
+    }
+
+    const trigger = window.innerHeight * 0.91;
+
+    revealTargets.forEach(function (el) {
+      if (el.classList.contains("swiss-shown")) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.top < trigger) {
+        el.classList.add("swiss-shown");
+      }
+    });
+  }
+
+  function initReveal() {
+    revealTargets = collectRevealTargets();
+
+    // Mark current viewport items visible BEFORE enabling hidden states.
+    revealTargets.forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.97) {
+        el.classList.add("swiss-shown");
+      }
+    });
+
+    document.body.classList.add("swiss-js-ready");
+    revealOnScroll();
+  }
+
+  /* --------------------------------------------------------------
+     Navbar routing — preserve Home on site title.
+     -------------------------------------------------------------- */
+  function fixNavbarRouting() {
+    const brand = document.querySelector("#quarto-header .navbar-brand");
+    if (!brand) return;
+
+    const portfolio = Array.from(
+      document.querySelectorAll("#quarto-header .navbar-nav .nav-link")
+    ).find(function (link) {
+      return (link.textContent || "").trim().toLowerCase() === "portfolio";
+    });
+
+    if (portfolio) {
+      const href = portfolio.getAttribute("href") || "portfolio.html";
+      brand.setAttribute(
+        "href",
+        href.replace(/portfolio(?:\.html)?(?:#.*)?$/, "index.html")
+      );
+    }
+  }
+
+  /* --------------------------------------------------------------
+     Layout self-test for the ACTUAL rendered Quarto page.
+     Append ?layout-debug=1 to any page URL to display the panel.
+     -------------------------------------------------------------- */
+
+  /* --------------------------------------------------------------
+     Runtime desktop geometry
+
+     Why this exists:
+     Quarto's generated grid can center the whole page composition.
+     At 2560px the real page measured:
+       TOC left  = 292.5px
+       main right gap = 287.5px
+
+     We keep the native TOC content/scrollspy, but position the real
+     rendered elements directly after Quarto has finished rendering.
+     -------------------------------------------------------------- */
+
+  const runtimeGeometryState = {
+    baseline: null,
+    applied: false,
+    last: null,
+    tocOriginalParent: null,
+    tocOriginalNextSibling: null,
+    tocPortal: null,
+    staleSlots: [],
+    staleSlotStyleSnapshots: []
+  };
+
+  function px(value) {
+    return Math.round(value * 10) / 10;
+  }
+
+  function measureRuntimeGeometry() {
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+    const body = document.body;
+
+    function r(el) {
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      return {
+        left: px(rect.left),
+        top: px(rect.top),
+        right: px(rect.right),
+        bottom: px(rect.bottom),
+        width: px(rect.width),
+        height: px(rect.height)
+      };
+    }
+
+    return {
+      viewport: {
+        width: window.innerWidth,
+        clientWidth: document.documentElement.clientWidth,
+        scrollbarWidth: window.innerWidth - document.documentElement.clientWidth,
+        height: window.innerHeight
+      },
+      rects: {
+        toc: r(toc),
+        main: r(main),
+        shell: r(shell),
+        header: r(header),
+        navbar: r(navbar),
+        body: r(body)
+      },
+      classes: {
+        shell: shell ? shell.className : null,
+        toc: toc ? toc.className : null,
+        body: body ? body.className : null
+      },
+      tocAncestors: tocAncestorChain(toc)
+    };
+  }
+
+  function setImportant(el, prop, value) {
+    if (!el) return;
+    el.style.setProperty(prop, value, "important");
+  }
+
+  function removeRuntimeProperty(el, prop) {
+    if (!el) return;
+    el.style.removeProperty(prop);
+  }
+
+
+  function describeElement(el) {
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    const s = getComputedStyle(el);
+    return {
+      tag: el.tagName ? el.tagName.toLowerCase() : null,
+      id: el.id || null,
+      className: typeof el.className === "string" ? el.className : null,
+      rect: {
+        left: px(r.left),
+        top: px(r.top),
+        right: px(r.right),
+        bottom: px(r.bottom),
+        width: px(r.width),
+        height: px(r.height)
+      },
+      display: s.display,
+      position: s.position,
+      gridColumn: s.gridColumn,
+      zIndex: s.zIndex,
+      backgroundColor: s.backgroundColor
+    };
+  }
+
+  function tocAncestorChain(toc) {
+    const shell = document.getElementById("quarto-content");
+    const chain = [];
+    let el = toc ? toc.parentElement : null;
+    while (el && el !== document.body) {
+      chain.push(describeElement(el));
+      if (el === shell) break;
+      el = el.parentElement;
+    }
+    return chain;
+  }
+
+  function snapshotInlineStyle(el) {
+    return {
+      el: el,
+      style: el.getAttribute("style"),
+      staleAttr: el.getAttribute("data-portfolio-stale-toc-slot")
+    };
+  }
+
+  function restoreStyleSnapshot(snapshot) {
+    if (!snapshot || !snapshot.el) return;
+    if (snapshot.style === null) snapshot.el.removeAttribute("style");
+    else snapshot.el.setAttribute("style", snapshot.style);
+
+    if (snapshot.staleAttr === null) {
+      snapshot.el.removeAttribute("data-portfolio-stale-toc-slot");
+    } else {
+      snapshot.el.setAttribute("data-portfolio-stale-toc-slot", snapshot.staleAttr);
+    }
+  }
+
+  function markOriginalTocSlot(toc, pageShell) {
+    runtimeGeometryState.staleSlots = [];
+    runtimeGeometryState.staleSlotStyleSnapshots = [];
+
+    let el = runtimeGeometryState.tocOriginalParent;
+    while (el && el !== pageShell && el !== document.body) {
+      runtimeGeometryState.staleSlots.push(el);
+      runtimeGeometryState.staleSlotStyleSnapshots.push(snapshotInlineStyle(el));
+
+      const meaningfulChildren = Array.from(el.children).filter(function (child) {
+        return child.id !== "portfolio-toc-shell";
+      });
+
+      const hasVisibleText = (el.textContent || "").trim().length > 0;
+      const empty = meaningfulChildren.length === 0 && !hasVisibleText;
+
+      el.setAttribute(
+        "data-portfolio-stale-toc-slot",
+        empty ? "empty" : "wrapper"
+      );
+
+      if (empty) {
+        setImportant(el, "display", "none");
+      } else {
+        setImportant(el, "background", "transparent");
+        setImportant(el, "border", "0");
+        setImportant(el, "box-shadow", "none");
+        setImportant(el, "pointer-events", "none");
+        setImportant(el, "z-index", "0");
+      }
+
+      el = el.parentElement;
+    }
+  }
+
+  function ensureTocPortal(toc, headerHeight, tocWidth) {
+    if (!toc) return null;
+
+    if (!runtimeGeometryState.tocOriginalParent) {
+      runtimeGeometryState.tocOriginalParent = toc.parentNode;
+      runtimeGeometryState.tocOriginalNextSibling = toc.nextSibling;
+    }
+
+    let portal = document.getElementById("portfolio-toc-shell");
+    if (!portal) {
+      portal = document.createElement("aside");
+      portal.id = "portfolio-toc-shell";
+      portal.setAttribute("aria-label", "On this page");
+      document.body.appendChild(portal);
+    }
+
+    runtimeGeometryState.tocPortal = portal;
+
+    if (toc.parentNode !== portal) {
+      portal.appendChild(toc);
+    }
+
+    setImportant(portal, "position", "fixed");
+    setImportant(portal, "left", "0px");
+    setImportant(portal, "top", headerHeight + "px");
+    setImportant(portal, "bottom", "0px");
+    setImportant(portal, "width", tocWidth + "px");
+    setImportant(portal, "margin", "0px");
+    setImportant(portal, "padding", "0px");
+    setImportant(portal, "overflow-y", "auto");
+    setImportant(portal, "overflow-x", "hidden");
+    setImportant(portal, "z-index", "1050");
+
+    setImportant(toc, "position", "static");
+    setImportant(toc, "left", "auto");
+    setImportant(toc, "top", "auto");
+    setImportant(toc, "bottom", "auto");
+    setImportant(toc, "width", "100%");
+    setImportant(toc, "height", "auto");
+    setImportant(toc, "max-height", "none");
+    setImportant(toc, "overflow", "visible");
+    setImportant(toc, "z-index", "auto");
+    setImportant(toc, "grid-column", "auto");
+    setImportant(toc, "grid-row", "auto");
+    setImportant(toc, "margin-left", "0px");
+    setImportant(toc, "margin-right", "0px");
+    setImportant(toc, "padding-left", "0px");
+
+    return portal;
+  }
+
+  function restoreTocToQuarto() {
+    const toc = document.getElementById("TOC");
+    const originalParent = runtimeGeometryState.tocOriginalParent;
+    const originalNext = runtimeGeometryState.tocOriginalNextSibling;
+
+    if (toc && originalParent && toc.parentNode !== originalParent) {
+      if (originalNext && originalNext.parentNode === originalParent) {
+        originalParent.insertBefore(toc, originalNext);
+      } else {
+        originalParent.appendChild(toc);
+      }
+    }
+
+    runtimeGeometryState.staleSlotStyleSnapshots.forEach(restoreStyleSnapshot);
+    runtimeGeometryState.staleSlots = [];
+    runtimeGeometryState.staleSlotStyleSnapshots = [];
+
+    const portal = document.getElementById("portfolio-toc-shell");
+    if (portal) portal.remove();
+
+    runtimeGeometryState.tocPortal = null;
+  }
+
+  function detectMainOcclusion(main, tocPortal, header) {
+    if (!main) return { clear: false, probes: [] };
+
+    const mr = main.getBoundingClientRect();
+    const hr = header ? header.getBoundingClientRect() : { bottom: 0 };
+
+    const xs = [
+      mr.left + 8,
+      mr.left + Math.min(64, Math.max(16, mr.width * 0.04))
+    ];
+    const ys = [
+      Math.max(mr.top + 20, hr.bottom + 20),
+      Math.max(mr.top + 110, hr.bottom + 80),
+      Math.max(mr.top + 240, hr.bottom + 160)
+    ];
+
+    const probes = [];
+
+    xs.forEach(function (x) {
+      ys.forEach(function (y) {
+        if (x >= mr.right || y >= Math.min(mr.bottom, window.innerHeight - 5)) return;
+
+        const stack = document.elementsFromPoint(x, y);
+        const visible = stack.filter(function (el) {
+          if (el.id === "portfolio-layout-debug") return false;
+          if (el.closest && el.closest("#portfolio-layout-debug")) return false;
+          return true;
+        });
+
+        const top = visible[0] || null;
+        const allowed =
+          !top ||
+          main === top ||
+          main.contains(top) ||
+          (tocPortal && (tocPortal === top || tocPortal.contains(top))) ||
+          (header && (header === top || header.contains(top)));
+
+        probes.push({
+          x: px(x),
+          y: px(y),
+          allowed: allowed,
+          top: top ? {
+            tag: top.tagName.toLowerCase(),
+            id: top.id || null,
+            className: typeof top.className === "string" ? top.className : null
+          } : null
+        });
+      });
+    });
+
+    return {
+      clear: probes.length > 0 && probes.every(function (p) { return p.allowed; }),
+      probes: probes
+    };
+  }
+
+  function clearRuntimeDesktopGeometry() {
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+
+    document.body.classList.remove("portfolio-runtime-layout");
+
+    restoreTocToQuarto();
+
+    [
+      [document.body, ["padding-top"]],
+      [document.documentElement, ["scroll-padding-top"]],
+      [header, ["position","left","right","top","height","min-height","max-height","margin","padding","width"]],
+      [navbar, ["height","min-height","max-height","margin","padding-top","padding-bottom"]],
+      [shell, ["margin-top","padding-top"]],
+      [toc, ["position","left","top","bottom","width","height","max-height","overflow","overflow-y","z-index","grid-column","grid-row","margin-left","margin-right","padding-left"]],
+      [main, ["position","z-index","background","grid-column","grid-row","margin-left","margin-right","width","max-width","min-width","padding-left","padding-right","justify-self"]]
+    ].forEach(function (pair) {
+      const el = pair[0];
+      pair[1].forEach(function (prop) {
+        removeRuntimeProperty(el, prop);
+      });
+    });
+
+    runtimeGeometryState.applied = false;
+    runtimeGeometryState.last = null;
+  }
+
+  function enforceRuntimeDesktopGeometry() {
+    const desktop = window.innerWidth >= 992;
+    const params = new URLSearchParams(window.location.search);
+
+    // A/B diagnostic mode: ?layout-fix=0 leaves Quarto untouched.
+    if (!desktop || params.get("layout-fix") === "0") {
+      clearRuntimeDesktopGeometry();
+      return false;
+    }
+
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+
+    if (!toc || !main || !shell || !header || !navbar) {
+      return false;
+    }
+
+    if (!runtimeGeometryState.baseline) {
+      runtimeGeometryState.baseline = measureRuntimeGeometry();
+    }
+
+    const rootStyle = getComputedStyle(document.documentElement);
+
+    const headerHeight =
+      parseFloat(rootStyle.getPropertyValue("--runtime-header-height")) || 48;
+
+    // Equivalent to clamp(15.5rem, 16vw, 18rem) at the current root font size.
+    const rootFont = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    const tocMin = 15.5 * rootFont;
+    const tocMax = 18 * rootFont;
+    const tocWidth = Math.min(tocMax, Math.max(tocMin, window.innerWidth * 0.16));
+
+    const gap =
+      Math.min(14.4, Math.max(8.8, window.innerWidth * 0.008));
+
+    const rightGutter =
+      Math.min(14.4, Math.max(6.4, document.documentElement.clientWidth * 0.0075));
+
+    const mainLeft = tocWidth + gap;
+
+    document.body.classList.add("portfolio-runtime-layout");
+
+    // Header physically at y=0.
+    setImportant(header, "position", "fixed");
+    setImportant(header, "left", "0px");
+    setImportant(header, "right", "0px");
+    setImportant(header, "top", "0px");
+    setImportant(header, "height", headerHeight + "px");
+    setImportant(header, "min-height", headerHeight + "px");
+    setImportant(header, "max-height", headerHeight + "px");
+    setImportant(header, "margin", "0px");
+    setImportant(header, "padding", "0px");
+    setImportant(header, "width", "100%");
+
+    setImportant(navbar, "height", headerHeight + "px");
+    setImportant(navbar, "min-height", headerHeight + "px");
+    setImportant(navbar, "max-height", headerHeight + "px");
+    setImportant(navbar, "margin", "0px");
+    setImportant(navbar, "padding-top", "0px");
+    setImportant(navbar, "padding-bottom", "0px");
+
+    // Header is removed from normal flow, so reserve exactly its height.
+    setImportant(document.body, "padding-top", headerHeight + "px");
+    setImportant(document.documentElement, "scroll-padding-top", (headerHeight + 8) + "px");
+
+    // Shell begins immediately under header.
+    setImportant(shell, "margin-top", "0px");
+    setImportant(shell, "padding-top", "0px");
+
+    // Move the real TOC to a body-level fixed shell. This removes the
+    // original Quarto TOC slot from the painting/stacking path.
+    const tocPortal = ensureTocPortal(toc, headerHeight, tocWidth);
+    markOriginalTocSlot(toc, shell);
+
+    // Main spans Quarto's full screen lines, then uses margins for the TOC.
+    setImportant(main, "grid-column", "screen-start / screen-end");
+    setImportant(main, "grid-row", "content-top / content-bottom");
+    setImportant(main, "margin-left", mainLeft + "px");
+    setImportant(main, "margin-right", rightGutter + "px");
+    setImportant(main, "width", "auto");
+    setImportant(main, "max-width", "none");
+    setImportant(main, "min-width", "0px");
+    setImportant(main, "padding-left", "0px");
+    setImportant(main, "padding-right", "0px");
+    setImportant(main, "justify-self", "stretch");
+    setImportant(main, "position", "relative");
+    setImportant(main, "z-index", "2");
+    setImportant(main, "background", "var(--page-bg)");
+
+    runtimeGeometryState.applied = true;
+    runtimeGeometryState.last = {
+      headerHeight: px(headerHeight),
+      tocWidth: px(tocWidth),
+      gap: px(gap),
+      mainLeft: px(mainLeft),
+      rightGutter: px(rightGutter),
+      portalCreated: !!tocPortal,
+      staleSlots: runtimeGeometryState.staleSlots.map(describeElement)
+    };
+
+    return true;
+  }
+
+  function runLayoutSelfTest() {
+    const toc = document.getElementById("TOC");
+    const main = document.querySelector("main.content");
+    const shell = document.getElementById("quarto-content");
+    const header = document.getElementById("quarto-header");
+    const navbar = document.querySelector("#quarto-header .navbar");
+    const tocPortal = document.getElementById("portfolio-toc-shell");
+    const desktop = window.innerWidth >= 992;
+
+    const result = {
+      viewport: { width: window.innerWidth, height: window.innerHeight },
+      desktop: desktop,
+      fixApplied: runtimeGeometryState.applied,
+      runtimeValues: runtimeGeometryState.last,
+      baseline: runtimeGeometryState.baseline,
+      found: {
+        shell: !!shell,
+        toc: !!toc,
+        tocPortal: !!tocPortal,
+        main: !!main,
+        header: !!header,
+        navbar: !!navbar
+      },
+      classes: {
+        shell: shell ? shell.className : null,
+        toc: toc ? toc.className : null,
+        body: document.body.className
+      },
+      checks: {},
+      computed: {}
+    };
+
+    function rect(el) {
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return {
+        left: px(r.left),
+        top: px(r.top),
+        right: px(r.right),
+        bottom: px(r.bottom),
+        width: px(r.width),
+        height: px(r.height)
+      };
+    }
+
+    result.rects = {
+      toc: rect(toc),
+      main: rect(main),
+      shell: rect(shell),
+      header: rect(header),
+      navbar: rect(navbar)
+    };
+
+    [
+      ["toc", toc],
+      ["main", main],
+      ["shell", shell],
+      ["header", header],
+      ["navbar", navbar],
+      ["body", document.body]
+    ].forEach(function (pair) {
+      const name = pair[0];
+      const el = pair[1];
+      if (!el) return;
+      const s = getComputedStyle(el);
+      result.computed[name] = {
+        display: s.display,
+        position: s.position,
+        gridColumn: s.gridColumn,
+        gridRow: s.gridRow,
+        marginLeft: s.marginLeft,
+        marginRight: s.marginRight,
+        marginTop: s.marginTop,
+        paddingLeft: s.paddingLeft,
+        paddingRight: s.paddingRight,
+        paddingTop: s.paddingTop,
+        paddingBottom: s.paddingBottom,
+        height: s.height,
+        minHeight: s.minHeight,
+        maxHeight: s.maxHeight
+      };
+    });
+
+    if (desktop && toc && main && shell && header && navbar) {
+      const tr = toc.getBoundingClientRect();
+      const mr = main.getBoundingClientRect();
+      const sr = shell.getBoundingClientRect();
+      const hr = header.getBoundingClientRect();
+      const nr = navbar.getBoundingClientRect();
+      const tcs = getComputedStyle(toc);
+
+      const leftGap = tr.left;
+      const contentGap = mr.left - tr.right;
+      const layoutViewportWidth = document.documentElement.clientWidth;
+      const rightGap = layoutViewportWidth - mr.right;
+      const shellHeaderGap = sr.top - hr.bottom;
+
+      result.measurements = {
+        tocLeftPx: px(leftGap),
+        contentGapPx: px(contentGap),
+        rightGapPx: px(rightGap),
+        viewportClientWidthPx: layoutViewportWidth,
+        scrollbarWidthPx: window.innerWidth - layoutViewportWidth,
+        headerTopPx: px(hr.top),
+        navbarTopPx: px(nr.top),
+        navbarHeightPx: px(nr.height),
+        shellTopPx: px(sr.top),
+        shellHeaderGapPx: px(shellHeaderGap)
+      };
+
+      result.checks.fixApplied = runtimeGeometryState.applied;
+      result.checks.tocTouchesViewportLeft = Math.abs(leftGap) <= 2;
+      result.checks.tocMarginLeftZero =
+        Math.abs(parseFloat(tcs.marginLeft) || 0) <= 1;
+      result.checks.tocPaddingLeftZero =
+        Math.abs(parseFloat(tcs.paddingLeft) || 0) <= 1;
+
+      result.checks.sidebarIsLeftOfContent =
+        tr.right <= mr.left + 1;
+
+      result.checks.smallSidebarContentGap =
+        contentGap >= -1 && contentGap <= 28;
+
+      result.checks.mainReachesRightSide =
+        rightGap >= -1 && rightGap <= 18;
+
+      result.checks.headerTouchesViewportTop =
+        Math.abs(hr.top) <= 1;
+
+      result.checks.navbarTouchesViewportTop =
+        Math.abs(nr.top) <= 1;
+
+      result.checks.navbarCompact =
+        nr.height <= 50;
+
+      result.checks.shellStartsAfterHeader =
+        sr.top >= hr.bottom - 1 && sr.top <= hr.bottom + 2;
+
+      result.checks.tocPortalCreated = !!tocPortal;
+
+      const occlusion = detectMainOcclusion(main, tocPortal, header);
+      result.occlusion = occlusion;
+      result.checks.noMainOcclusion = occlusion.clear;
+
+      result.checks.notStacked =
+        mr.top < tr.bottom &&
+        mr.left >= tr.right - 1;
+    } else if (!desktop) {
+      result.checks.mobileMode = true;
+    }
+
+    const values = Object.values(result.checks);
+    result.pass = values.length > 0 && values.every(Boolean);
+
+    document.body.dataset.layoutTest = result.pass ? "pass" : "fail";
+    window.__portfolioLayoutTest = result;
+    console.info("[Portfolio layout self-test]", result);
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("layout-debug") === "1") {
+      const existing = document.getElementById("portfolio-layout-debug");
+      if (existing) existing.remove();
+
+      if (tocPortal || toc) {
+        const redTarget = tocPortal || toc;
+        redTarget.style.outline = "3px solid #d63230";
+        redTarget.style.outlineOffset = "-3px";
+      }
+      if (main) {
+        main.style.outline = "3px solid #17833d";
+        main.style.outlineOffset = "-3px";
+      }
+      if (navbar) {
+        navbar.style.outline = "2px solid #176b9a";
+        navbar.style.outlineOffset = "-2px";
+      }
+
+      const panel = document.createElement("pre");
+      panel.id = "portfolio-layout-debug";
+      panel.textContent =
+        (result.pass ? "PASS" : "FAIL") + "\n" +
+        JSON.stringify(result, null, 2);
+
+      Object.assign(panel.style, {
+        position: "fixed",
+        right: "10px",
+        bottom: "10px",
+        width: "min(560px, 48vw)",
+        maxHeight: "62vh",
+        overflow: "auto",
+        zIndex: "99999",
+        padding: "12px",
+        margin: "0",
+        border: "2px solid " + (result.pass ? "#17833d" : "#b42318"),
+        background: "#fff",
+        color: "#111",
+        fontSize: "11px",
+        lineHeight: "1.35",
+        whiteSpace: "pre-wrap",
+        boxShadow: "0 4px 20px #0003"
+      });
+
+      document.body.appendChild(panel);
+    }
+
+    return result;
+  }
+
+  /* --------------------------------------------------------------
+     Main loop
+     -------------------------------------------------------------- */
+  let ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+
+    window.requestAnimationFrame(function () {
+      revealOnScroll();
+      ticking = false;
+    });
+  }
+
+  function init() {
+    fixNavbarRouting();
+    createControls();
+    initReveal();
+
+    // Measure untouched Quarto layout, then repair desktop geometry.
+    runtimeGeometryState.baseline = measureRuntimeGeometry();
+    enforceRuntimeDesktopGeometry();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    window.addEventListener("resize", function () {
+      enforceRuntimeDesktopGeometry();
+      revealOnScroll();
+      window.setTimeout(runLayoutSelfTest, 40);
+    });
+
+    // Quarto/Bootstrap scripts can make late layout adjustments.
+    // Re-apply after both short and long settle windows.
+    window.setTimeout(function () {
+      enforceRuntimeDesktopGeometry();
+      revealOnScroll();
+      runLayoutSelfTest();
+    }, 80);
+
+    window.setTimeout(function () {
+      enforceRuntimeDesktopGeometry();
+      revealOnScroll();
+      runLayoutSelfTest();
+    }, 400);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body></html>

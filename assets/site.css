@@ -1,0 +1,1263 @@
+/* ================================================================
+   CARLOS MORENO ROJAS — PORTFOLIO
+   VERSION 7.2 — SWISS RESEARCH
+
+   Single consolidated stylesheet.
+   ================================================================ */
+
+:root {
+  --page-bg: #f7f5ef;
+  --surface: #ece9e0;
+  --surface-2: #fffdf8;
+  --text: #111111;
+  --muted: #66635d;
+  --border: #cbc7bc;
+  --accent: #d63230;
+  --accent-soft: rgba(214, 50, 48, .08);
+  --header-height: 52px;
+}
+
+.quarto-light,
+body.quarto-light,
+html[data-bs-theme="light"] {
+  --page-bg: #f7f5ef;
+  --surface: #ece9e0;
+  --surface-2: #fffdf8;
+  --text: #111111;
+  --muted: #66635d;
+  --border: #cbc7bc;
+  --accent: #d63230;
+  --accent-soft: rgba(214, 50, 48, .08);
+}
+
+.quarto-dark,
+body.quarto-dark,
+html[data-bs-theme="dark"],
+body.swiss-manual-dark {
+  --page-bg: #141414;
+  --surface: #1e1e1e;
+  --surface-2: #181818;
+  --text: #f1efe8;
+  --muted: #a7a39a;
+  --border: #383633;
+  --accent: #ff615e;
+  --accent-soft: rgba(255, 97, 94, .09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--page-bg);
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg) !important;
+  color: var(--text) !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  line-height: 1.66;
+  transition: background .18s ease, color .18s ease;
+}
+
+p,
+li,
+dd,
+dt {
+  color: var(--muted);
+}
+
+a {
+  color: var(--accent);
+}
+
+strong {
+  color: var(--text);
+}
+
+/* ================================================================
+   NAVBAR
+   ================================================================ */
+
+#quarto-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+}
+
+.navbar {
+  min-height: var(--header-height);
+  background: color-mix(in srgb, var(--page-bg) 94%, transparent) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(12px);
+}
+
+.navbar-container,
+.navbar .container-fluid {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-brand,
+.navbar-title,
+.navbar-nav .nav-link,
+.navbar-nav .menu-text {
+  color: var(--text) !important;
+}
+
+.navbar-brand {
+  font-weight: 900 !important;
+  letter-spacing: -.02em;
+  cursor: pointer;
+}
+
+.navbar-nav .nav-link {
+  font-size: .88rem;
+  font-weight: 700;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--accent) !important;
+}
+
+/* Native Quarto theme button is used internally, but replaced visually. */
+.quarto-color-scheme-toggle {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.swiss-controls {
+  order: 9999 !important;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  flex: 0 0 auto;
+}
+
+.swiss-icon-button {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease,
+              background .16s ease, color .16s ease;
+}
+
+.swiss-icon-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.swiss-icon-button.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.swiss-icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ================================================================
+   PAGE TITLE / MAIN TYPOGRAPHY
+   ================================================================ */
+
+#title-block-header {
+  margin-bottom: 3rem;
+}
+
+.quarto-title h1.title {
+  max-width: 900px;
+  margin: .3rem 0 .8rem;
+  color: var(--text) !important;
+  font-size: clamp(2.7rem, 5.8vw, 5rem);
+  line-height: .97;
+  letter-spacing: -.05em;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.quarto-title .subtitle {
+  max-width: 760px;
+  color: var(--muted) !important;
+  font-size: 1.06rem;
+  line-height: 1.55;
+}
+
+main.content {
+  max-width: 940px;
+  color: var(--text);
+}
+
+main.content h1,
+main.content h2,
+main.content h3,
+main.content h4 {
+  color: var(--text) !important;
+}
+
+main.content h1:not(.title),
+main.content h2 {
+  margin-top: 3.6rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--text);
+  font-weight: 900;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+}
+
+main.content h1:not(.title) {
+  font-size: 2.1rem;
+  line-height: 1.05;
+}
+
+main.content h2 {
+  font-size: 1.75rem;
+  line-height: 1.08;
+}
+
+main.content h3 {
+  margin-top: 2rem;
+  font-size: 1.24rem;
+  line-height: 1.18;
+  font-weight: 800;
+}
+
+main.content h4 {
+  margin-top: 1.5rem;
+  font-weight: 800;
+}
+
+hr {
+  margin: 3.3rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  opacity: 1;
+}
+
+/* ================================================================
+   NATIVE QUARTO LEFT TOC — restored from the working v6 approach
+   Quarto owns the page grid and responsive placement. We style #TOC
+   only; we do NOT reposition #quarto-sidebar-toc-left.
+   ================================================================ */
+
+#quarto-sidebar-toc-left.sidebar.toc-left {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#TOC {
+  position: sticky;
+  top: calc(var(--header-height) + 10px);
+  max-height: calc(100vh - var(--header-height) - 20px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 .55rem 1.75rem 0;
+  border-right: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  font-size: .93rem;
+}
+
+#TOC::-webkit-scrollbar { width: 5px; }
+#TOC::-webkit-scrollbar-thumb { background: var(--border); }
+
+#TOC .toc-title,
+#TOC #toc-title {
+  margin: 0 0 .42rem 0;
+  padding: 0 0 .65rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+#TOC ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#TOC li { margin: 0; padding: 0; }
+#TOC > ul > li { margin-top: 1.05rem; }
+#TOC > ul > li:first-child { margin-top: .4rem; }
+
+#TOC > ul > li > a {
+  display: block;
+  padding: .2rem .4rem .25rem 0;
+  border-left: 4px solid transparent;
+  color: var(--muted) !important;
+  font-size: .72rem;
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+#TOC > ul > li > ul { margin-top: .22rem; }
+#TOC > ul > li > ul > li > a {
+  display: block;
+  padding: .36rem .4rem .36rem 1rem;
+  border-left: 4px solid transparent;
+  color: var(--muted) !important;
+  font-size: .9rem;
+  line-height: 1.25;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+#TOC > ul > li > ul > li > ul { margin: .04rem 0 .18rem; }
+#TOC > ul > li > ul > li > ul > li > a {
+  display: block;
+  padding: .28rem .35rem .28rem 1.55rem;
+  border-left: 4px solid transparent;
+  color: var(--muted) !important;
+  font-size: .8rem;
+  line-height: 1.24;
+  text-decoration: none;
+}
+
+#TOC a.active,
+#TOC a:hover {
+  color: var(--accent) !important;
+}
+
+#TOC a.active {
+  border-left-color: var(--accent) !important;
+  background: transparent !important;
+  font-weight: 700 !important;
+}
+
+/* Preserve Quarto/Bootstrap's own .collapse/.show logic. */
+#TOC ul.collapse:not(.show) { display: none; }
+#TOC ul.collapse.show { display: block; }
+
+
+/* ================================================================
+   HOME
+   ================================================================ */
+
+.home-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+  gap: 2.4rem;
+  align-items: center;
+  margin: .5rem 0 4rem;
+}
+
+.home-kicker,
+.contact-kicker {
+  margin-bottom: .9rem;
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.home-statement {
+  max-width: 760px;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: clamp(1.65rem, 3.3vw, 2.85rem);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  font-weight: 900;
+}
+
+.home-actions,
+.home-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: 1.45rem;
+}
+
+.home-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: .58rem .82rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text) !important;
+  font-size: .8rem;
+  font-weight: 800;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+.home-action:hover {
+  border-color: var(--accent);
+  color: var(--accent) !important;
+}
+
+.home-action.primary {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--page-bg) !important;
+}
+
+.home-action.primary:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff !important;
+}
+
+.home-metric-grid,
+.home-step-grid,
+.home-project-grid {
+  display: grid;
+  gap: .75rem;
+  margin: 1.4rem 0 2rem;
+}
+
+.home-metric-grid,
+.home-step-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.home-project-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.home-metric,
+.home-step {
+  min-height: 150px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.home-step {
+  min-height: 180px;
+}
+
+.home-metric strong,
+.home-step strong {
+  display: block;
+  margin-bottom: .6rem;
+}
+
+.home-metric p,
+.home-step p {
+  margin-bottom: 0;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.step-number {
+  margin-bottom: 1.6rem;
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.inline-project-link {
+  display: inline-block;
+  margin-top: .35rem;
+  color: var(--accent) !important;
+  font-size: .82rem;
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+.home-timeline {
+  margin: 1.3rem 0 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.home-timeline > div {
+  display: grid;
+  grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr);
+  gap: 1rem;
+  padding: .85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-timeline p {
+  margin: 0;
+}
+
+/* ================================================================
+   CONTACT
+   ================================================================ */
+
+.contact-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 2rem;
+  align-items: center;
+  margin: .5rem 0 3.4rem;
+  padding: 1.5rem 0 2rem;
+  border-bottom: 4px solid var(--text);
+}
+
+.contact-heading {
+  max-width: 760px;
+  color: var(--text);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -.04em;
+  font-weight: 900;
+}
+
+.contact-monogram {
+  width: 132px;
+  height: 132px;
+  display: grid;
+  place-items: center;
+  justify-self: end;
+  border: 4px solid var(--text);
+  color: var(--text);
+  font-size: 2.1rem;
+  font-weight: 900;
+}
+
+.contact-grid {
+  display: grid;
+  gap: .75rem;
+  margin: 1.3rem 0 2.3rem;
+}
+
+.contact-grid-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.contact-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-method {
+  min-height: 215px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.contact-method.compact-card {
+  min-height: 165px;
+}
+
+.contact-icon {
+  min-height: 30px;
+  margin-bottom: 1.6rem;
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.contact-card-label {
+  margin-bottom: .35rem;
+  color: var(--accent);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.contact-method strong {
+  display: block;
+  margin-bottom: .45rem;
+  font-size: 1.15rem;
+}
+
+.contact-method p {
+  margin-bottom: 1.1rem;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.contact-method code {
+  word-break: break-word;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.contact-link-card {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.contact-link-card:hover {
+  border-color: var(--accent);
+}
+
+.contact-status {
+  margin: 1.2rem 0 2rem;
+  padding: 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+/* ================================================================
+   PROJECT / SKILL COMPONENTS
+   ================================================================ */
+
+.project-meta,
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 0 0 1.35rem;
+}
+
+.project-meta span,
+.skill-chips span {
+  padding: .38rem .55rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.project-grid,
+.skill-grid,
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: .75rem;
+}
+
+.project-card,
+.skill-card,
+.download-card,
+.contact-card {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.project-card {
+  text-decoration: none;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+}
+
+.project-tag {
+  margin-bottom: .35rem;
+  color: var(--accent);
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .065em;
+  text-transform: uppercase;
+}
+
+.tech {
+  color: var(--muted);
+  font-size: .84rem;
+}
+
+.data-slot {
+  margin: 1.2rem 0 2rem;
+  padding: .8rem 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+/* ================================================================
+   IMAGE PLACEHOLDERS
+   ================================================================ */
+
+.image-slot {
+  position: relative;
+  width: 100%;
+  min-height: 270px;
+  margin: 1.5rem 0 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px dashed var(--border);
+  background: var(--surface);
+  text-align: center;
+}
+
+.image-slot.large {
+  min-height: 420px;
+}
+
+.image-slot.small {
+  min-height: 190px;
+}
+
+.image-slot.home-portrait {
+  min-height: 390px;
+  margin: 0;
+}
+
+.image-slot::before,
+.image-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.image-slot::before {
+  background: linear-gradient(
+    135deg,
+    transparent 49.72%,
+    var(--border) 49.88%,
+    var(--border) 50.12%,
+    transparent 50.28%
+  );
+}
+
+.image-slot::after {
+  background: linear-gradient(
+    45deg,
+    transparent 49.72%,
+    var(--border) 49.88%,
+    var(--border) 50.12%,
+    transparent 50.28%
+  );
+}
+
+.image-slot .slot-label {
+  position: relative;
+  z-index: 2;
+  max-width: 76%;
+  padding: .78rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--page-bg);
+  color: var(--text);
+  font-size: .86rem;
+  font-weight: 900;
+}
+
+.image-slot .slot-label small {
+  display: block;
+  margin-top: .28rem;
+  color: var(--muted);
+  font-size: .78rem;
+  line-height: 1.35;
+  font-weight: 400;
+}
+
+/* ================================================================
+   TABLES / CODE / PAGE NAV
+   ================================================================ */
+
+table {
+  --bs-table-bg: transparent !important;
+  --bs-table-color: var(--text) !important;
+  --bs-table-border-color: var(--border) !important;
+}
+
+table th {
+  color: var(--text) !important;
+}
+
+table td {
+  color: var(--muted) !important;
+}
+
+pre,
+code,
+.cell-output-display {
+  border-radius: 0 !important;
+}
+
+pre {
+  border: 1px solid var(--border) !important;
+}
+
+.cell-output-display svg {
+  max-width: 100%;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: .7rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 4px solid var(--text);
+}
+
+.page-nav a {
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.nav-footer {
+  background: var(--page-bg) !important;
+  border-top: 1px solid var(--border);
+  color: var(--muted) !important;
+}
+
+/* ================================================================
+   FAIL-SAFE REVEAL ANIMATION — SWISS WIPE
+   Reference behavior:
+   - visible by default
+   - JS activates hidden state only after initialization
+   - horizontal clip-path wipe from right to left
+   - Reduced Motion always keeps content visible
+   ================================================================ */
+
+.swiss-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+
+body.swiss-js-ready .swiss-reveal:not(.swiss-shown) {
+  opacity: 0 !important;
+  clip-path: inset(0 100% 0 0) !important;
+  transition:
+    clip-path .7s cubic-bezier(.77, 0, .18, 1),
+    opacity .4s ease !important;
+}
+
+body.swiss-js-ready .swiss-reveal.swiss-shown {
+  opacity: 1 !important;
+  clip-path: inset(0 0 0 0) !important;
+}
+
+body.swiss-reduce-motion *,
+body.swiss-reduce-motion *::before,
+body.swiss-reduce-motion *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+body.swiss-reduce-motion .swiss-reveal,
+body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+  transition: none !important;
+}
+
+body.swiss-compact main.content h1:not(.title),
+body.swiss-compact main.content h2 {
+  margin-top: 2.35rem;
+}
+
+body.swiss-compact .image-slot {
+  min-height: 215px;
+  margin: 1.1rem 0 1.5rem;
+}
+
+body.swiss-compact .image-slot.large {
+  min-height: 300px;
+}
+
+body.swiss-compact p,
+body.swiss-compact li {
+  line-height: 1.5;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+
+@media (max-width: 1050px) {
+  .home-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .home-portrait {
+    min-height: 300px;
+  }
+
+  .contact-grid-three {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 991px) {
+  .swiss-controls {
+    position: fixed;
+    top: 12px;
+    right: 62px;
+    z-index: 1200;
+    margin-left: 0 !important;
+  }
+
+  #TOC {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .quarto-title h1.title {
+    font-size: clamp(2.35rem, 10vw, 4rem);
+  }
+
+  .image-slot.large {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 780px) {
+  .home-metric-grid,
+  .home-step-grid,
+  .home-project-grid,
+  .contact-grid-three,
+  .contact-grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .home-timeline > div {
+    grid-template-columns: 1fr;
+    gap: .25rem;
+  }
+
+  .contact-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-monogram {
+    justify-self: start;
+    width: 100px;
+    height: 100px;
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 620px) {
+  .swiss-icon-button {
+    width: 31px;
+    height: 31px;
+  }
+
+  .quarto-title h1.title {
+    font-size: 2.45rem;
+  }
+}
+
+
+/* ================================================================
+   VERSION 7.3 — PROJECT PAGE BUTTONS
+   Project titles remain plain text. Navigation occurs via buttons.
+   ================================================================ */
+
+.project-page-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin: .25rem 0 1.5rem;
+  padding: .55rem .85rem;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--page-bg) !important;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .045em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease,
+    transform .16s ease;
+}
+
+.project-page-button:hover,
+.project-page-button:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.project-page-button::after {
+  content: " →";
+  margin-left: .35rem;
+}
+
+
+
+
+/* ================================================================
+   VERSION 8.4 — TOC PORTAL + 20PX INNER PADDING
+
+   The actual #TOC is moved at runtime into #portfolio-toc-shell.
+   This prevents the original Quarto TOC grid slot from remaining as
+   a white overlay over full-width content.
+
+   The native TOC element, links, active classes and Quarto scrollspy
+   are preserved; only its parent/layout box changes.
+   ================================================================ */
+
+:root {
+  --runtime-header-height: 48px;
+  --runtime-toc-width: clamp(15.5rem, 16vw, 18rem);
+  --runtime-toc-gap: clamp(.55rem, .8vw, .9rem);
+  --runtime-right-gutter: clamp(.4rem, .75vw, .9rem);
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+#quarto-search,
+.quarto-search,
+.quarto-search-button,
+#quarto-search-button,
+.aa-Autocomplete {
+  display: none !important;
+}
+
+@media (min-width: 992px) {
+  body.portfolio-runtime-layout {
+    padding-top: var(--runtime-header-height) !important;
+  }
+
+  body.portfolio-runtime-layout #quarto-header {
+    position: fixed !important;
+    inset: 0 0 auto 0 !important;
+    z-index: 1200 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.portfolio-runtime-layout #quarto-header .navbar,
+  body.portfolio-runtime-layout #quarto-header .navbar.navbar-expand-lg {
+    margin: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* New stable shell: physically outside Quarto's page grid. */
+  #portfolio-toc-shell {
+    position: fixed;
+    left: 0;
+    top: var(--runtime-header-height);
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--page-bg);
+    border-right: 1px solid var(--border);
+    z-index: 1050;
+    box-sizing: border-box;
+  }
+
+  body.portfolio-runtime-layout #portfolio-toc-shell #TOC {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+
+    margin: 0 !important;
+    margin-left: 0 !important;
+    padding-left: 20px !important;
+    padding-top: 20px !important;
+    padding-right: .45rem !important;
+
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  body.portfolio-runtime-layout #TOC .toc-title,
+  body.portfolio-runtime-layout #TOC > ul {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  body.portfolio-runtime-layout #TOC > ul > li {
+    margin-left: 0 !important;
+  }
+
+  body.portfolio-runtime-layout #TOC > ul > li > a {
+    padding-left: 0 !important;
+  }
+
+  body.portfolio-runtime-layout #TOC > ul > li > ul > li > a {
+    padding-left: .85rem !important;
+  }
+
+  body.portfolio-runtime-layout #TOC > ul > li > ul > li > ul > li > a {
+    padding-left: 1.45rem !important;
+  }
+
+  /*
+    Quarto has had left-TOC issues where a white vertical layout box
+    can cover text in screen-spanning content. Any empty original TOC
+    slot left after portalization is removed; non-empty slot ancestors
+    are forced behind the body.
+  */
+  body.portfolio-runtime-layout [data-portfolio-stale-toc-slot="empty"] {
+    display: none !important;
+  }
+
+  body.portfolio-runtime-layout [data-portfolio-stale-toc-slot="wrapper"] {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+
+  body.portfolio-runtime-layout main.content {
+    position: relative !important;
+    z-index: 2 !important;
+    box-sizing: border-box !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    background: var(--page-bg);
+  }
+
+  body.portfolio-runtime-layout #quarto-margin-sidebar,
+  body.portfolio-runtime-layout .margin-sidebar {
+    display: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  body {
+    padding-top: 0 !important;
+  }
+
+  #portfolio-toc-shell {
+    display: none !important;
+  }
+
+  main.content {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+.image-slot,
+.home-intro,
+.home-metric-grid,
+.home-step-grid,
+.home-project-grid,
+.contact-hero,
+.contact-grid,
+.project-grid,
+.skill-grid,
+.download-grid,
+.cv-download-actions,
+.cell,
+.cell-output-display,
+table,
+.data-slot {
+  width: 100%;
+  max-width: none;
+}
+
+main.content > p,
+main.content > ul,
+main.content > ol,
+main.content > blockquote {
+  max-width: min(128ch, 100%);
+}
+
+.quarto-title h1.title {
+  font-size: clamp(2.15rem, 4.1vw, 3.4rem);
+  line-height: 1;
+}
+
+.quarto-title .subtitle { font-size: 1rem; }
+main.content h1:not(.title) { font-size: 1.78rem; line-height: 1.08; }
+main.content h2 { font-size: 1.42rem; line-height: 1.12; }
+main.content h3 { font-size: 1.08rem; line-height: 1.22; }
+main.content h4 { font-size: .98rem; }
+.home-statement { font-size: clamp(1.4rem, 2.65vw, 2.2rem); line-height: 1.08; }
+.contact-heading { font-size: clamp(1.5rem, 2.9vw, 2.25rem); line-height: 1.08; }
+.contact-monogram { width: 112px; height: 112px; font-size: 1.8rem; }
+main.content h1:not(.title),
+main.content h2 { margin-top: 3rem; padding-top: .85rem; }
+
+.cv-download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin: 0 0 2rem;
+}
+
+.cv-download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: .62rem .9rem;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--page-bg) !important;
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .035em;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+.cv-download-button:hover,
+.cv-download-button:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff !important;
+}
+
+@media (max-width: 520px) {
+  .cv-download-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cv-download-button {
+    width: 100%;
+  }
+}
