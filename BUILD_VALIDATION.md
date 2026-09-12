@@ -1,19 +1,26 @@
-# Build validation — v8.6
+# Build validation — v8.7 Dynamic CV
 
-- Global JS 1: OK
-- Preview JS 1: OK
-- Animation contract: PASS
-- PASS: v8.6 WAAPI CSS marker
-- PASS: Element.animate used
-- PASS: RAF geometry scan
-- PASS: IntersectionObserver not animation dependency
-- PASS: watchdog present
-- PASS: fail-visible timeout
-- PASS: targeted monitoring test
-- PASS: visibleButPending diagnostic
-- PASS: reduced motion
-- PASS: no CSS pending transition
-- CSS braces balanced: YES
-- IntersectionObserver animation code removed: YES
-- Monitoring targeted test present: YES
-- Non-animation files changed: 0
+## Scope
+
+This release modifies only:
+
+- heading top-rule spacing;
+- `cv.qmd` presentation;
+- CV-specific CSS;
+- requirements / documentation.
+
+Validated layout, TOC portal and WAAPI reveal behavior are preserved from v8.6.
+
+## Results
+
+- PASS: Reduced heading top padding
+- PASS: Dynamic CV hero
+- PASS: Education timeline
+- PASS: CV card grid
+- PASS: Emoji / icon markers
+- PASS: Research CV download preserved
+- PASS: Engineering CV download preserved
+- PASS: Requirements current version v8.7
+- PASS: QMD YAML errors = 0
+- PASS: Global JavaScript syntax
+- PASS: CSS braces balanced

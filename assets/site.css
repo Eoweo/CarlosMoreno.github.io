@@ -1243,7 +1243,7 @@ main.content h4 { font-size: .98rem; }
 .contact-heading { font-size: clamp(1.5rem, 2.9vw, 2.25rem); line-height: 1.08; }
 .contact-monogram { width: 112px; height: 112px; font-size: 1.8rem; }
 main.content h1:not(.title),
-main.content h2 { margin-top: 3rem; padding-top: .85rem; }
+main.content h2 { margin-top: 2.75rem; padding-top: .38rem; }
 
 .cv-download-actions {
   display: flex;
@@ -1283,5 +1283,253 @@ main.content h2 { margin-top: 3rem; padding-top: .85rem; }
 
   .cv-download-button {
     width: 100%;
+  }
+}
+
+
+/* ================================================================
+   VERSION 8.7 — DYNAMIC CV LAYOUT
+   - Reduced rule-to-title gap.
+   - CV redesigned from list layout to card/timeline layout.
+   - Uses subtle emoji / visual markers where useful.
+   ================================================================ */
+
+.cv-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin: .2rem 0 2rem;
+}
+
+.cv-hero-copy {
+  padding: 1.1rem 0 0;
+}
+
+.cv-kicker {
+  margin-bottom: .75rem;
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cv-hero-statement {
+  max-width: 820px;
+  margin: 0 0 .9rem;
+  color: var(--text);
+  font-size: clamp(1.55rem, 2.75vw, 2.5rem);
+  line-height: 1.06;
+  letter-spacing: -.03em;
+  font-weight: 900;
+}
+
+.cv-hero p:last-child { margin-bottom: 0; }
+
+.cv-summary-panel {
+  display: grid;
+  gap: .72rem;
+  align-content: start;
+}
+
+.cv-summary-card,
+.cv-card,
+.cv-timeline-card,
+.cv-language-card {
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.cv-summary-card {
+  padding: 1rem;
+}
+
+.cv-summary-label,
+.cv-card-label,
+.cv-meta-label {
+  margin-bottom: .45rem;
+  color: var(--accent);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.cv-summary-value {
+  color: var(--text);
+  font-size: 1.14rem;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.cv-summary-helper {
+  margin-top: .35rem;
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.45;
+}
+
+.cv-chip-grid,
+.cv-card-grid,
+.cv-language-grid {
+  display: grid;
+  gap: .75rem;
+  margin: 1.2rem 0 2rem;
+}
+
+.cv-chip-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cv-chip {
+  min-height: 124px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.cv-chip-icon,
+.cv-card-icon {
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.cv-chip strong,
+.cv-card strong,
+.cv-timeline-card strong,
+.cv-language-card strong {
+  display: block;
+  margin-bottom: .4rem;
+  color: var(--text);
+}
+
+.cv-chip p,
+.cv-card p,
+.cv-timeline-card p,
+.cv-language-card p {
+  margin-bottom: 0;
+  font-size: .86rem;
+  line-height: 1.52;
+}
+
+.cv-timeline {
+  display: grid;
+  gap: .85rem;
+  margin: 1.25rem 0 2rem;
+}
+
+.cv-timeline-card {
+  display: grid;
+  grid-template-columns: minmax(160px, .45fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  align-items: start;
+}
+
+.cv-timeline-date {
+  color: var(--accent);
+  font-size: .8rem;
+  line-height: 1.35;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.cv-timeline-degree {
+  margin-bottom: .28rem;
+  color: var(--text);
+  font-size: 1.28rem;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.cv-timeline-place {
+  margin-bottom: .5rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.cv-card-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cv-card {
+  min-height: 210px;
+  padding: 1rem;
+}
+
+.cv-card.with-button {
+  display: flex;
+  flex-direction: column;
+}
+
+.cv-card.with-button .project-page-button {
+  margin-top: auto;
+  align-self: flex-start;
+  margin-bottom: 0;
+}
+
+.cv-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .38rem;
+  margin: .85rem 0 0;
+}
+
+.cv-card-tags span {
+  padding: .32rem .5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.cv-language-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cv-language-card {
+  padding: .95rem 1rem;
+}
+
+.cv-note {
+  margin: 1rem 0 2rem;
+  padding: .95rem 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.cv-inline-emoji {
+  margin-right: .25rem;
+}
+
+body.swiss-compact .cv-card,
+body.swiss-compact .cv-chip,
+body.swiss-compact .cv-summary-card {
+  min-height: auto;
+}
+
+@media (max-width: 1050px) {
+  .cv-hero,
+  .cv-timeline-card {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-chip-grid,
+  .cv-card-grid,
+  .cv-language-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .cv-chip-grid,
+  .cv-card-grid,
+  .cv-language-grid {
+    grid-template-columns: 1fr;
   }
 }

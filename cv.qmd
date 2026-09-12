@@ -4,7 +4,6 @@ subtitle: "Carlos Moreno Rojas"
 toc: true
 toc-location: left
 toc-depth: 2
-toc-title: "CV"
 page-layout: full
 ---
 
@@ -13,128 +12,413 @@ page-layout: full
 [Download Engineering CV](downloads/Carlos_Moreno_Engineering_CV.pdf){.cv-download-button download="Carlos_Moreno_Engineering_CV.pdf"}
 :::
 
-
-
 # Professional Profile
 
-## Biomedical & Electrical Engineering
+::: {.cv-hero .swiss-reveal}
+::: {.cv-hero-copy}
+::: {.cv-kicker}
+Biomedical & Electrical Engineering
+:::
 
-Engineer with interdisciplinary training in **Biomedical Engineering and Electrical Engineering**,
-with experience in biomedical research, electronics, embedded systems, instrumentation, medical
-devices, signal and image processing, biomedical optics, robotics, FPGA and experimental validation.
+::: {.cv-hero-statement}
+I build and integrate engineering systems for biomedical research, medical devices and experimental platforms.
+:::
+
+My background combines **biomedical engineering, electronics, embedded systems, instrumentation, biomedical optics, robotics, FPGA and experimental validation**. I am especially motivated by problems where hardware, software and physiology need to work as one system.
+
+I work with an implementation-oriented mindset: define the need, translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.
+:::
+
+::: {.cv-summary-panel}
+::: {.cv-summary-card}
+::: {.cv-summary-label}
+🎯 Current focus
+:::
+::: {.cv-summary-value}
+Biomedical instrumentation · organ perfusion · ICG-NIR functional assessment
+:::
+::: {.cv-summary-helper}
+Research and engineering work centered on experimental platforms, monitoring and validation.
+:::
+:::
+
+::: {.cv-summary-card}
+::: {.cv-summary-label}
+📍 Snapshot
+:::
+::: {.cv-summary-value}
+Pontificia Universidad Católica de Chile
+:::
+::: {.cv-summary-helper}
+Biomedical Engineering · Electrical Engineering · Research & Development
+:::
+:::
+:::
+:::
+
+::: {.cv-chip-grid .swiss-reveal}
+::: {.cv-chip}
+::: {.cv-chip-icon}
+🔬
+:::
+**Research**
+Experimental design, organ perfusion, instrumentation and functional assessment.
+:::
+::: {.cv-chip}
+::: {.cv-chip-icon}
+⚙️
+:::
+**Systems**
+Embedded systems, electronics, sensing, acquisition and integration.
+:::
+::: {.cv-chip}
+::: {.cv-chip-icon}
+🧠
+:::
+**Medical tech**
+Biomedical devices, neurostimulation, imaging and validation workflows.
+:::
+::: {.cv-chip}
+::: {.cv-chip-icon}
+🛠️
+:::
+**Build approach**
+CAD, prototyping, testing, debugging and iteration from data.
+:::
+:::
 
 # Education
 
-## MSc Biomedical Engineering
+::: {.cv-timeline .swiss-reveal}
+::: {.cv-timeline-card}
+::: {.cv-timeline-date}
+2025–2027
+:::
+::: {}
+::: {.cv-timeline-degree}
+🎓 MSc Biomedical Engineering
+:::
+::: {.cv-timeline-place}
+Pontificia Universidad Católica de Chile
+:::
+Research focused on **ex vivo liver perfusion**, biomedical instrumentation and **ICG-NIR functional assessment**.
+:::
+:::
 
-**Pontificia Universidad Católica de Chile — 2025–2027**
+::: {.cv-timeline-card}
+::: {.cv-timeline-date}
+2025–2026
+:::
+::: {}
+::: {.cv-timeline-degree}
+⚡ Electrical Engineering
+:::
+::: {.cv-timeline-place}
+Pontificia Universidad Católica de Chile
+:::
+Training in electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.
+:::
+:::
 
-Research focused on ex vivo liver perfusion, biomedical instrumentation and ICG-NIR functional assessment.
-
-## Electrical Engineering
-
-**Pontificia Universidad Católica de Chile — 2025–2026**
-
-Electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.
-
-## Biomedical Engineering
-
-**Pontificia Universidad Católica de Chile — 2021–2024**
-
-Bachelor’s Degree in Engineering Sciences — Biomedical Engineering.
+::: {.cv-timeline-card}
+::: {.cv-timeline-date}
+2021–2024
+:::
+::: {}
+::: {.cv-timeline-degree}
+🧬 Biomedical Engineering
+:::
+::: {.cv-timeline-place}
+Pontificia Universidad Católica de Chile
+:::
+Bachelor’s Degree in Engineering Sciences with specialization in Biomedical Engineering.
+:::
+:::
+:::
 
 # Research & Development
 
-## Master's Research — Liver Viability & ICG-NIR
+::: {.cv-card-grid .swiss-reveal}
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+🧪
+:::
+::: {.cv-card-label}
+Main research line
+:::
+**Master’s Research — Liver Viability & ICG-NIR**
+Development of an **ex vivo liver perfusion platform** and investigation of **ICG-NIR kinetics** to explore quantitative indicators of liver function and viability.
 
-- Ex vivo liver perfusion platform.
-- Pressure, flow and temperature monitoring.
-- Vascular resistance.
-- Calibration and validation.
-- Baseline physiological dataset.
-- ICG-NIR fluorescence kinetics.
-- Functional parameter extraction.
+::: {.cv-card-tags}
+<span>Ex vivo perfusion</span>
+<span>Monitoring</span>
+<span>ICG-NIR</span>
+<span>Validation</span>
+:::
 
-## Borealis UC — Organ Supercooling
+[View project detail](projects/thesis.qmd){.project-page-button}
+:::
 
-Organ preservation research focused on supercooling and thermal control.
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+❄️
+:::
+::: {.cv-card-label}
+Preservation research
+:::
+**Borealis UC — Organ Supercooling**
+Research participation in organ preservation, focused on **supercooling strategies**, thermal control and experimental support.
 
-## Organ Preservation Machine
+::: {.cv-card-tags}
+<span>Organ preservation</span>
+<span>Thermal control</span>
+<span>Research support</span>
+:::
 
-Electromechanical redesign, fluid systems, control and miniaturization.
+[View project detail](projects/borealis.qmd){.project-page-button}
+:::
+
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+🫀
+:::
+::: {.cv-card-label}
+Device development
+:::
+**Organ Preservation Machine**
+Electromechanical redesign of an organ preservation system, integrating **fluidics, control and miniaturization**.
+
+::: {.cv-card-tags}
+<span>Mechanics</span>
+<span>Fluid system</span>
+<span>Control</span>
+:::
+
+[View project detail](projects/organ-preservation.qmd){.project-page-button}
+:::
+
+::: {.cv-card}
+::: {.cv-card-icon}
+📈
+:::
+::: {.cv-card-label}
+Engineering method
+:::
+**Typical workflow**
+Problem definition → measurable requirements → architecture → implementation → calibration → testing → lessons learned.
+
+This same structure organizes my portfolio and guides how I approach technical development.
+:::
+:::
 
 # Professional Experience
 
-## Candel Medical Company
+::: {.cv-card-grid .swiss-reveal}
+::: {.cv-card}
+::: {.cv-card-icon}
+⚕️
+:::
+::: {.cv-card-label}
+Internship
+:::
+**Candel Medical Company**
+Professional internship in **hardware, electronics and firmware** for transcranial electrical stimulation systems.
 
-Professional internship in hardware, electronics and firmware for transcranial electrical stimulation.
+::: {.cv-card-tags}
+<span>Electronics</span>
+<span>Firmware</span>
+<span>Medical device</span>
+:::
+:::
 
-## Meldic Ltda.
+::: {.cv-card}
+::: {.cv-card-icon}
+🏢
+:::
+::: {.cv-card-label}
+Industry connection
+:::
+**Meldic Ltda.**
+Experience linked to medical equipment, technical development and engineering-oriented problem solving in applied settings.
 
-Medical equipment experience and technical development projects.
+::: {.cv-card-tags}
+<span>Technical support</span>
+<span>Engineering</span>
+<span>Medical equipment</span>
+:::
+:::
+:::
 
 # Selected Engineering Projects
 
-## CYBATHLON 2024
+::: {.cv-card-grid .swiss-reveal}
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+🤖
+:::
+::: {.cv-card-label}
+Robotics & rehabilitation
+:::
+**CYBATHLON 2024**
+Electrical Area Leader at **Ciervo UC**, integrating electronics for a robotic transfemoral prosthesis.
 
-Electrical Area Leader — Ciervo UC. Development and integration of electronics for a robotic
-transfemoral prosthesis.
+[View project detail](projects/cybathlon.qmd){.project-page-button}
+:::
 
-## Lung Segmentation — U-Net
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+🖼️
+:::
+::: {.cv-card-label}
+Medical imaging & AI
+:::
+**Lung Segmentation — U-Net**
+Deep-learning project for medical image segmentation using a **U-Net** architecture.
 
-Medical image segmentation using deep learning.
+[View project detail](projects/unet.qmd){.project-page-button}
+:::
 
-## FPGA — Universal Testing Machine
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+💻
+:::
+::: {.cv-card-label}
+Embedded systems & FPGA
+:::
+**FPGA — Universal Testing Machine**
+Development with **Zybo Z10, Vivado and VHDL** for force, displacement, deformation and speed signals.
 
-Zybo Z10, Vivado and VHDL for force, displacement, deformation and speed signals.
+[View project detail](projects/fpga.qmd){.project-page-button}
+:::
 
-## Vscan Air Enclosure
+::: {.cv-card .with-button}
+::: {.cv-card-icon}
+📐
+:::
+::: {.cv-card-label}
+CAD & prototyping
+:::
+**Vscan Air Enclosure**
+CAD design and prototyping of an accessory for a portable ultrasound device.
 
-CAD and prototyping for a portable ultrasound device accessory.
+[View project detail](projects/vscan.qmd){.project-page-button}
+:::
+:::
 
 # Teaching & Leadership
 
-## Physics Laboratory Teaching Assistant
+::: {.cv-card-grid .swiss-reveal}
+::: {.cv-card}
+::: {.cv-card-icon}
+🧲
+:::
+::: {.cv-card-label}
+Teaching
+:::
+**Physics Laboratory Teaching Assistant**
+Faculty of Physics UC — **FIS154**.
+:::
 
-Faculty of Physics UC — FIS154.
+::: {.cv-card}
+::: {.cv-card-icon}
+🌱
+:::
+::: {.cv-card-label}
+Student leadership
+:::
+**Biomedical Engineering Student Chapter UC**
+President, **2024–2025**.
+:::
 
-## Biomedical Engineering Student Chapter UC
+::: {.cv-card}
+::: {.cv-card-icon}
+🌐
+:::
+::: {.cv-card-label}
+Professional chapter
+:::
+**IEEE EMBS PUC Chile**
+Webmaster since **2024**.
+:::
 
-President, 2024–2025.
-
-## IEEE EMBS PUC Chile
-
-Webmaster since 2024.
+::: {.cv-card}
+::: {.cv-card-icon}
+🤝
+:::
+::: {.cv-card-label}
+Collaboration style
+:::
+**Interdisciplinary work**
+Comfortable working across research, engineering and implementation teams.
+:::
+:::
 
 # Technical Skills
 
-## Electronics & Embedded Systems
-
+::: {.cv-card-grid .swiss-reveal}
+::: {.cv-card}
+::: {.cv-card-icon}
+🔌
+:::
+**Electronics & Embedded Systems**
 Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.
+:::
 
-## FPGA & Digital Design
-
-Zybo Z10, Vivado and VHDL.
-
-## Programming & Data
-
+::: {.cv-card}
+::: {.cv-card-icon}
+🧮
+:::
+**Programming & Data**
 Python, C++, acquisition, signal processing and image processing.
+:::
 
-## Biomedical Engineering
+::: {.cv-card}
+::: {.cv-card-icon}
+🧷
+:::
+**FPGA & Digital Design**
+Zybo Z10, Vivado and VHDL.
+:::
 
+::: {.cv-card}
+::: {.cv-card-icon}
+🧫
+:::
+**Biomedical Engineering**
 Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.
+:::
 
-## CAD & Prototyping
-
+::: {.cv-card}
+::: {.cv-card-icon}
+📏
+:::
+**CAD & Prototyping**
 Fusion 360, CAD, 3D printing, machining and electromechanical integration.
+:::
+
+::: {.cv-card}
+::: {.cv-card-icon}
+🧭
+:::
+**Engineering approach**
+Implementation-oriented, systems-level thinking and iterative validation.
+:::
+:::
 
 # Languages
 
-## Spanish
-
+::: {.cv-language-grid .swiss-reveal}
+::: {.cv-language-card}
+**🇨🇱 Spanish**
 Native.
+:::
 
-## English
-
+::: {.cv-language-card}
+**🇬🇧 English**
 B2 / ALTE 3.
+:::
+:::
 
+::: {.cv-note}
+<span class="cv-inline-emoji">💡</span>The CV page is intentionally more visual than previous versions: it keeps the same information base, but reorganizes it into panels, cards and project entry points so it reads faster and feels less like a plain list.
+:::

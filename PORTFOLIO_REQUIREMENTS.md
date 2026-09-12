@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v8.0 — Swiss Research / Native Quarto TOC`  
+> **Versión base documentada:** `v8.7 — Swiss Research / Dynamic CV`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -5760,14 +5760,14 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.6 Swiss Research / Native Quarto TOC
+Version: v8.7 Swiss Research / Dynamic CV
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
 Hosting target: GitHub Pages
 Navigation: Navbar + dynamic left TOC
 Themes: Light + Dark
-Animations: Scroll reveal, fail-safe
+Animations: Swiss Wipe via requestAnimationFrame + Web Animations API, fail-safe
 Accessibility option: Reduced Motion
 Density option: Compact Mode
 Deployment: GitHub Actions
@@ -5782,4 +5782,114 @@ Requisitos agregados:
 Requisitos modificados:
 Requisitos eliminados:
 Pruebas realizadas:
+```
+
+
+---
+
+# 99. Registro incremental — v8.7
+
+## VERSION 8.7 — Dynamic CV + tighter title rule spacing
+
+### Cambio solicitado
+
+Se solicita:
+
+1. **reducir el espacio/padding visual** entre la línea superior de sección y los títulos;
+2. **rediseñar la página CV** para que deje de sentirse como una lista lineal;
+3. incorporar una presentación **más dinámica y visual**;
+4. usar **dibujos / emoticones / marcadores visuales** cuando aporten claridad;
+5. mantener la base Swiss Research y las mejoras previas ya validadas.
+
+### Requisitos añadidos / actualizados
+
+#### REQ-CV-001 — Descargas al inicio del CV
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La página `cv.qmd` debe mantener al inicio dos botones de descarga:
+
+- Research CV
+- Engineering CV
+
+Estos botones siguen ubicados antes del contenido principal del CV.
+
+#### REQ-CV-002 — CV dinámico en lugar de lista simple
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La página CV ya no debe presentarse principalmente como una lista textual lineal.
+
+Debe usar una combinación de:
+
+- bloque hero / introducción;
+- tarjetas resumen;
+- secciones tipo timeline para educación;
+- grillas de tarjetas para experiencia, proyectos, liderazgo y habilidades;
+- botones de acceso a proyectos cuando corresponda.
+
+#### REQ-CV-003 — Uso moderado de emoticones / iconografía textual
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El CV puede usar emojis o iconos textuales simples para reforzar lectura visual, por ejemplo en:
+
+- áreas temáticas;
+- foco de investigación;
+- proyectos;
+- habilidades;
+- idiomas.
+
+El uso debe ser **moderado** y no debe romper el tono profesional.
+
+#### REQ-UI-020 — Menor separación entre regla superior y títulos de sección
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La separación vertical entre la línea superior (border-top) y el texto del título debe ser **más compacta** que en la versión anterior.
+
+Esto aplica especialmente a títulos de secciones del contenido principal y se implementa reduciendo el `padding-top` visual del bloque de heading.
+
+### Resultado esperado de v8.7
+
+- El CV debe sentirse **más editorial, más escaneable y menos listado**.
+- La información debe quedar agrupada por función y no solo por enumeración.
+- Los títulos deben conservar la línea superior Swiss, pero con **menos aire vertical** entre línea y texto.
+- Se mantiene compatibilidad con la navegación, TOC, animaciones y estilo general ya existentes.
+
+
+---
+
+## Referencia vigente v8.7
+
+La versión vigente después de esta modificación es:
+
+```text
+Version: v8.7 Swiss Research / Dynamic CV
+Base funcional: v8.6 WAAPI Reveal + v8.4 validated TOC geometry
+```
+
+Cambios visuales vigentes:
+
+```text
+Línea superior de headings → menor padding vertical
+CV → hero + summary cards + timeline + card grids
+Iconografía → emojis moderados y funcionales
+```
+
+No se modificaron:
+
+```text
+TOC
+navbar
+padding 20 px del TOC
+runtime geometry / TOC portal
+Swiss Wipe animation
+portfolio.qmd
+project pages
+contact.qmd
 ```

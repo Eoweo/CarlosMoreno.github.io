@@ -220,3 +220,12 @@ PORTFOLIO_REQUIREMENTS.md
 - Adds a 450 ms watchdog and 1100 ms fail-visible timeout.
 - Adds targeted test mode: `?animation-test=monitoring`.
 - Keeps all v8.5 layout, TOC, navbar, content and CV behavior unchanged.
+
+
+## v8.7 — Dynamic CV
+
+This version keeps the validated layout / TOC / animation base from v8.6 and introduces:
+
+- a more dynamic CV page built with hero, card and timeline sections;
+- lighter section-title spacing (smaller gap below the top rule);
+- moderate emoji / textual icon cues for faster reading.
