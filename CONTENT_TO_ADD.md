@@ -1,5 +1,7 @@
 # Content checklist
 
+> **Arquitectura v9.0:** todo el material técnico de proyectos se incorpora en `portfolio.qmd`. No existen páginas individuales de proyecto.
+
 Use this checklist project by project.
 
 ## Master's thesis

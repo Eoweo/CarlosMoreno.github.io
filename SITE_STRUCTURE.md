@@ -1,8 +1,8 @@
 # Estructura de páginas — Portafolio
 
-> **Versión vigente:** v7.8  
-> **Estado:** arquitectura aprobada e implementada.  
-> **Propósito:** mantener una estructura simple, sin un índice intermedio redundante.
+> **Versión vigente:** v9.0  
+> **Estado:** arquitectura simplificada e implementada.  
+> **Propósito:** eliminar redundancia y concentrar el detalle técnico en una única página Portfolio.
 
 ---
 
@@ -10,23 +10,14 @@
 
 ```mermaid
 flowchart TD
-    HOME["HOME<br/>index.qmd<br/><small>Resumen profesional</small>"]
-    PORT["PORTFOLIO<br/>portfolio.qmd<br/><small>Índice técnico de proyectos</small>"]
-    CV["CV<br/>cv.qmd"]
-    CONTACT["CONTACT<br/>contact.qmd"]
+    HOME["HOME<br/>index.qmd<br/><small>Quién soy</small>"]
+    PORT["PORTFOLIO<br/>portfolio.qmd<br/><small>Qué he hecho</small>"]
+    CV["CV<br/>cv.qmd<br/><small>Trayectoria</small>"]
+    CONTACT["CONTACT<br/>contact.qmd<br/><small>Cómo contactarme</small>"]
 
     HOME --> PORT
     HOME --> CV
     HOME --> CONTACT
-
-    PORT --> THESIS["Master's Research<br/>projects/thesis.qmd"]
-    PORT --> CYB["CYBATHLON<br/>projects/cybathlon.qmd"]
-    PORT --> CANDEL["CandelStim<br/>projects/candel.qmd"]
-    PORT --> BOR["Borealis<br/>projects/borealis.qmd"]
-    PORT --> PRES["Preservation Machine<br/>projects/organ-preservation.qmd"]
-    PORT --> UNET["U-Net<br/>projects/unet.qmd"]
-    PORT --> FPGA["FPGA<br/>projects/fpga.qmd"]
-    PORT --> VSCAN["Vscan Air<br/>projects/vscan.qmd"]
 ```
 
 Versión textual:
@@ -36,21 +27,21 @@ HOME — index.qmd
 │
 ├── PORTFOLIO — portfolio.qmd
 │   ├── Master's Research
-│   │   └── projects/thesis.qmd
-│   ├── CYBATHLON
-│   │   └── projects/cybathlon.qmd
-│   ├── CandelStim
-│   │   └── projects/candel.qmd
-│   ├── Borealis
-│   │   └── projects/borealis.qmd
-│   ├── Preservation Machine
-│   │   └── projects/organ-preservation.qmd
-│   ├── U-Net
-│   │   └── projects/unet.qmd
-│   ├── FPGA
-│   │   └── projects/fpga.qmd
-│   └── Vscan Air
-│       └── projects/vscan.qmd
+│   │   ├── Objective 1
+│   │   ├── Objective 2
+│   │   └── Objective 3
+│   ├── Robotics & Rehabilitation
+│   │   ├── CYBATHLON
+│   │   └── CandelStim
+│   ├── Organ Preservation & Transplantation
+│   │   ├── Borealis
+│   │   └── Preservation Machine
+│   ├── Medical Imaging & AI
+│   │   └── U-Net
+│   ├── Embedded Systems & FPGA
+│   │   └── Universal Testing Machine
+│   └── CAD & Prototyping
+│       └── Vscan Air
 │
 ├── CV — cv.qmd
 │
@@ -59,9 +50,91 @@ HOME — index.qmd
 
 ---
 
-# 2. Regla de navegación
+# 2. Función única de cada página
 
-La barra superior pública debe contener únicamente:
+| Página | Pregunta que responde | Contenido |
+|---|---|---|
+| `index.qmd` | ¿Quién es Carlos Moreno? | Perfil, investigación actual, trabajo seleccionado y áreas de ingeniería. |
+| `portfolio.qmd` | ¿Qué ha investigado / construido? | Único archivo técnico de proyectos, imágenes, diagramas, contribución y validación. |
+| `cv.qmd` | ¿Cuál es su trayectoria? | Formación, experiencia, investigación, liderazgo, skills e idiomas. |
+| `contact.qmd` | ¿Cómo puedo contactarlo? | Contacto y perfiles profesionales. |
+
+Regla anti-redundancia:
+
+```text
+Home      → presentación
+Portfolio → evidencia técnica
+CV        → trayectoria
+Contact   → contacto
+```
+
+Una página no debe convertirse en una copia de otra.
+
+---
+
+# 3. Portfolio como único documento técnico
+
+No existen páginas QMD individuales por proyecto.
+
+El contenido técnico vive exclusivamente en:
+
+```text
+portfolio.qmd
+```
+
+Los seis grupos principales son:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+ROBOTICS & REHABILITATION
+ORGAN PRESERVATION & TRANSPLANTATION
+MEDICAL IMAGING & AI
+EMBEDDED SYSTEMS & FPGA
+CAD & PROTOTYPING
+```
+
+La navegación lateral mantiene dos niveles visibles.
+
+---
+
+# 4. Compatibilidad con URLs antiguas
+
+Los antiguos archivos:
+
+```text
+projects/thesis.qmd
+projects/cybathlon.qmd
+projects/candel.qmd
+projects/borealis.qmd
+projects/organ-preservation.qmd
+projects/unet.qmd
+projects/fpga.qmd
+projects/vscan.qmd
+```
+
+fueron eliminados.
+
+Para evitar errores 404 desde bookmarks o enlaces antiguos, existe únicamente una capa de redirección estática:
+
+```text
+projects/index.html                 → ../portfolio.html
+projects/thesis.html                → ../portfolio.html#masters-research
+projects/cybathlon.html             → ../portfolio.html#cybathlon
+projects/candel.html                → ../portfolio.html#candelstim
+projects/borealis.html              → ../portfolio.html#borealis
+projects/organ-preservation.html    → ../portfolio.html#organ-preservation-machine
+projects/unet.html                  → ../portfolio.html#unet
+projects/fpga.html                  → ../portfolio.html#fpga
+projects/vscan.html                 → ../portfolio.html#vscan
+```
+
+Estas páginas no contienen documentación de proyecto; solo preservan compatibilidad de URLs.
+
+---
+
+# 5. Navegación superior
+
+La barra superior contiene únicamente:
 
 ```text
 Carlos Moreno Rojas → Home
@@ -70,75 +143,14 @@ CV                  → cv.qmd
 Contact             → contact.qmd
 ```
 
-No existe una página pública intermedia llamada:
+No existe:
 
 ```text
 Project Pages
+Search
 ```
 
-ni un enlace equivalente en el navbar.
-
----
-
-# 3. Función de cada nivel
-
-| Página | Función | Nivel de detalle |
-|---|---|---|
-| `index.qmd` | Quién soy, investigación actual, áreas y proyectos destacados. | Bajo |
-| `portfolio.qmd` | Índice técnico y resumen intermedio de todos los proyectos. | Medio |
-| `projects/*.qmd` | Desarrollo técnico completo de cada proyecto. | Alto |
-| `cv.qmd` | Formación, experiencia, proyectos y habilidades en formato curricular. | Medio |
-| `contact.qmd` | Contacto, perfiles y documentos. | Bajo |
-
-La cantidad de información debe crecer así:
-
-```text
-HOME < PORTFOLIO < PROJECT PAGE
-```
-
----
-
-# 4. Portfolio como único índice técnico
-
-`portfolio.qmd` es el único índice general de proyectos.
-
-Debe:
-
-1. mantener los seis títulos principales definidos en `PORTFOLIO_REQUIREMENTS.md`;
-2. mostrar un resumen técnico de cada proyecto;
-3. incluir un botón `Open detailed project` para acceder a la página individual correspondiente.
-
-Rutas:
-
-```text
-Master's Research      → projects/thesis.qmd
-CYBATHLON              → projects/cybathlon.qmd
-CandelStim             → projects/candel.qmd
-Borealis               → projects/borealis.qmd
-Preservation Machine   → projects/organ-preservation.qmd
-U-Net                  → projects/unet.qmd
-FPGA                    → projects/fpga.qmd
-Vscan Air               → projects/vscan.qmd
-```
-
----
-
-# 5. Regla anti-redundancia
-
-No se debe volver a crear una página cuyo único objetivo sea repetir la lista de proyectos ya disponible en `portfolio.qmd`.
-
-Un mismo proyecto puede aparecer en Home, Portfolio y su página individual, pero con distinta profundidad:
-
-```text
-Home
-→ una mención / selección
-
-Portfolio
-→ resumen técnico
-
-Project page
-→ documentación completa
-```
+El único Swiss Control visible es Light/Dark.
 
 ---
 
@@ -150,42 +162,9 @@ portfolio.qmd
 cv.qmd
 contact.qmd
 
-projects/
-├── thesis.qmd
-├── cybathlon.qmd
-├── candel.qmd
-├── borealis.qmd
-├── organ-preservation.qmd
-├── unet.qmd
-├── fpga.qmd
-└── vscan.qmd
+assets/
+downloads/
+projects/   ← redirects de compatibilidad, no project pages
 ```
 
-`projects/index.qmd` fue eliminado en v7.5 por redundancia.
-
-
----
-
-# 7. Reglas de interfaz v7.6
-
-La arquitectura pública permanece sin cambios:
-
-```text
-Home
-├── Portfolio
-├── CV
-└── Contact
-```
-
-No existe `Project Pages`.
-
-Además:
-
-```text
-Portfolio → botón al final de cada proyecto → projects/*.qmd
-
-CV → Download Research CV
-   → Download Engineering CV
-
-Search → eliminado
-```
+No se deben volver a crear páginas QMD individuales salvo una decisión explícita futura registrada primero en `PORTFOLIO_REQUIREMENTS.md`.

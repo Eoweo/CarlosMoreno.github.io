@@ -270,3 +270,26 @@ This version keeps the validated layout / TOC / animation base from v8.6 and int
 - Reduced Motion was removed from UI, CSS, JS, animation branches and tests.
 - Light/Dark is now the only Swiss display control.
 - Portfolio TOC, runtime TOC portal and project content remain unchanged.
+
+
+## v9.0 — Consolidated architecture
+
+The public site now has four real content pages:
+
+```text
+Home
+Portfolio
+CV
+Contact
+```
+
+Changes:
+
+- Deleted all eight dedicated project `.qmd` pages.
+- Consolidated their useful technical content into `portfolio.qmd`.
+- Removed all project-detail buttons and internal links to deleted project files.
+- Simplified Home to profile, current research, selected work and engineering areas.
+- Simplified CV so it presents trajectory rather than duplicating the Portfolio.
+- Removed Teaching / Leadership / Skills / Contact sections from the bottom of Portfolio because those belong to CV or Contact.
+- Preserved legacy `/projects/...` URLs through static redirect-only HTML files to avoid 404s.
+- Preserved Swiss layout, TOC portal, animations, responsive behavior and Light/Dark control.

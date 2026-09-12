@@ -30,7 +30,7 @@ carlosmoreno.github.io
 
 La forma más sencilla, sin usar comandos:
 
-1. Descomprime `carlos_moreno_portfolio_v4.zip`.
+1. Descomprime `carlos_moreno_portfolio_v9_0_consolidated_architecture.zip`.
 2. Entra al repositorio creado en GitHub.
 3. Presiona:
 
@@ -165,10 +165,10 @@ por Markdown:
 ![Plataforma de perfusión](assets/images/thesis/perfusion-platform.webp)
 ```
 
-Dentro de archivos ubicados en `projects/`, la ruta relativa será normalmente:
+Las imágenes de proyectos ahora se insertan directamente en `portfolio.qmd`, por lo que se utilizan rutas desde la raíz del proyecto:
 
 ```markdown
-![Plataforma de perfusión](../assets/images/thesis/perfusion-platform.webp)
+![Plataforma de perfusión](assets/images/thesis/perfusion-platform.webp)
 ```
 
 ---
@@ -205,3 +205,19 @@ La salida queda en:
 ```text
 _site/
 ```
+
+
+---
+
+# Arquitectura v9.0
+
+Las únicas páginas de contenido público son:
+
+```text
+Home
+Portfolio
+CV
+Contact
+```
+
+`projects/` contiene exclusivamente redirecciones HTML de compatibilidad para URLs antiguas. No edites esos archivos para agregar contenido; todo el contenido técnico debe incorporarse en `portfolio.qmd`.

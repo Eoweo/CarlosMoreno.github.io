@@ -21,7 +21,7 @@ page-layout: full
   <div class="cv-hero-copy">
     <div class="cv-kicker">Biomedical &amp; Electrical Engineering</div>
     <div class="cv-hero-statement">I build and integrate engineering systems for biomedical research, medical devices and experimental platforms.</div>
-    <p>My background combines <strong>biomedical engineering, electronics, embedded systems, instrumentation, biomedical optics, robotics, FPGA and experimental validation</strong>. I am especially motivated by problems where hardware, software and physiology need to work as one system.</p>
+    <p>My background combines <strong>biomedical engineering, electronics, embedded systems, instrumentation, biomedical optics, robotics, FPGA and experimental validation</strong>.</p>
     <p>I work with an implementation-oriented mindset: define the need, translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.</p>
   </div>
 
@@ -29,7 +29,7 @@ page-layout: full
     <article class="cv-summary-card">
       <div class="cv-summary-label"><span class="cv-ui-icon cv-icon-target" aria-hidden="true"></span>Current focus</div>
       <div class="cv-summary-value">Biomedical instrumentation · organ perfusion · ICG-NIR functional assessment</div>
-      <div class="cv-summary-helper">Research and engineering work centered on experimental platforms, monitoring and validation.</div>
+      <div class="cv-summary-helper">Research and engineering centered on experimental platforms, monitoring and validation.</div>
     </article>
 
     <article class="cv-summary-card">
@@ -43,29 +43,10 @@ page-layout: full
 
 ```{=html}
 <section class="cv-chip-grid swiss-reveal">
-  <article class="cv-chip">
-    <span class="cv-chip-icon cv-icon-microscope" aria-hidden="true"></span>
-    <strong>Research</strong>
-    <p>Experimental design, organ perfusion, instrumentation and functional assessment.</p>
-  </article>
-
-  <article class="cv-chip">
-    <span class="cv-chip-icon cv-icon-cpu" aria-hidden="true"></span>
-    <strong>Systems</strong>
-    <p>Embedded systems, electronics, sensing, acquisition and integration.</p>
-  </article>
-
-  <article class="cv-chip">
-    <span class="cv-chip-icon cv-icon-medical" aria-hidden="true"></span>
-    <strong>Medical technology</strong>
-    <p>Biomedical devices, neurostimulation, imaging and validation workflows.</p>
-  </article>
-
-  <article class="cv-chip">
-    <span class="cv-chip-icon cv-icon-tools" aria-hidden="true"></span>
-    <strong>Build approach</strong>
-    <p>CAD, prototyping, testing, debugging and iteration from data.</p>
-  </article>
+  <article class="cv-chip"><span class="cv-chip-icon cv-icon-microscope" aria-hidden="true"></span><strong>Research</strong><p>Experimental design, organ perfusion, instrumentation and functional assessment.</p></article>
+  <article class="cv-chip"><span class="cv-chip-icon cv-icon-cpu" aria-hidden="true"></span><strong>Systems</strong><p>Embedded systems, electronics, sensing, acquisition and integration.</p></article>
+  <article class="cv-chip"><span class="cv-chip-icon cv-icon-medical" aria-hidden="true"></span><strong>Medical technology</strong><p>Biomedical devices, neurostimulation, imaging and validation workflows.</p></article>
+  <article class="cv-chip"><span class="cv-chip-icon cv-icon-tools" aria-hidden="true"></span><strong>Build approach</strong><p>CAD, prototyping, testing, debugging and iteration from data.</p></article>
 </section>
 ```
 
@@ -87,7 +68,7 @@ page-layout: full
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-bolt" aria-hidden="true"></span>Electrical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
-      <p>Training in electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.</p>
+      <p>Electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.</p>
     </div>
   </article>
 
@@ -102,109 +83,51 @@ page-layout: full
 </section>
 ```
 
-# Research & Development
+# Research & Engineering Experience
 
 ```{=html}
 <section class="cv-card-grid swiss-reveal">
-  <article class="cv-card with-button">
+  <article class="cv-card">
     <span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span>
-    <div class="cv-card-label">Main research line</div>
+    <div class="cv-card-label">2025–present · Research</div>
     <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
-    <p>Development of an <strong>ex vivo liver perfusion platform</strong> and investigation of <strong>ICG-NIR kinetics</strong> to explore quantitative indicators of liver function and viability.</p>
-    <div class="cv-card-tags">
-      <span>Ex vivo perfusion</span><span>Monitoring</span><span>ICG-NIR</span><span>Validation</span>
-    </div>
-    <a class="project-page-button" href="projects/thesis.html">View project detail</a>
-  </article>
-
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-snow" aria-hidden="true"></span>
-    <div class="cv-card-label">Preservation research</div>
-    <h3>Borealis UC — Organ Supercooling</h3>
-    <p>Research participation in organ preservation, focused on <strong>supercooling strategies</strong>, thermal control and experimental support.</p>
-    <div class="cv-card-tags">
-      <span>Organ preservation</span><span>Thermal control</span><span>Research support</span>
-    </div>
-    <a class="project-page-button" href="projects/borealis.html">View project detail</a>
-  </article>
-
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-heart-pulse" aria-hidden="true"></span>
-    <div class="cv-card-label">Device development</div>
-    <h3>Organ Preservation Machine</h3>
-    <p>Electromechanical redesign of an organ preservation system, integrating <strong>fluidics, control and miniaturization</strong>.</p>
-    <div class="cv-card-tags">
-      <span>Mechanics</span><span>Fluid system</span><span>Control</span>
-    </div>
-    <a class="project-page-button" href="projects/organ-preservation.html">View project detail</a>
+    <p>Ex vivo liver perfusion, biomedical instrumentation and ICG-NIR functional assessment.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-chart" aria-hidden="true"></span>
-    <div class="cv-card-label">Engineering method</div>
-    <h3>Typical workflow</h3>
-    <p>Problem definition → measurable requirements → architecture → implementation → calibration → testing → lessons learned.</p>
-    <p>This same structure organizes my portfolio and guides how I approach technical development.</p>
+    <span class="cv-card-icon cv-icon-robot" aria-hidden="true"></span>
+    <div class="cv-card-label">2024 · Robotics</div>
+    <h3>CYBATHLON 2024 — Ciervo UC</h3>
+    <p>Electrical Area Leader for electronics and electromechanical integration of a robotic transfemoral prosthesis.</p>
   </article>
-</section>
-```
 
-# Professional Experience
-
-```{=html}
-<section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
     <span class="cv-card-icon cv-icon-medical" aria-hidden="true"></span>
-    <div class="cv-card-label">Internship</div>
+    <div class="cv-card-label">Professional internship · Medical devices</div>
     <h3>Candel Medical Company</h3>
-    <p>Professional internship in <strong>hardware, electronics and firmware</strong> for transcranial electrical stimulation systems.</p>
-    <div class="cv-card-tags"><span>Electronics</span><span>Firmware</span><span>Medical device</span></div>
+    <p>Hardware, electronics and firmware development for a transcranial electrical stimulation platform.</p>
+  </article>
+
+  <article class="cv-card">
+    <span class="cv-card-icon cv-icon-snow" aria-hidden="true"></span>
+    <div class="cv-card-label">Research · Organ preservation</div>
+    <h3>Borealis UC</h3>
+    <p>Experimental work related to organ preservation, supercooling and thermal control.</p>
   </article>
 
   <article class="cv-card">
     <span class="cv-card-icon cv-icon-briefcase" aria-hidden="true"></span>
-    <div class="cv-card-label">Industry connection</div>
+    <div class="cv-card-label">Industry</div>
     <h3>Meldic Ltda.</h3>
     <p>Experience linked to medical equipment, technical development and engineering-oriented problem solving in applied settings.</p>
-    <div class="cv-card-tags"><span>Technical support</span><span>Engineering</span><span>Medical equipment</span></div>
-  </article>
-</section>
-```
-
-# Selected Engineering Projects
-
-```{=html}
-<section class="cv-card-grid swiss-reveal">
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-robot" aria-hidden="true"></span>
-    <div class="cv-card-label">Robotics &amp; rehabilitation</div>
-    <h3>CYBATHLON 2024</h3>
-    <p>Electrical Area Leader at <strong>Ciervo UC</strong>, integrating electronics for a robotic transfemoral prosthesis.</p>
-    <a class="project-page-button" href="projects/cybathlon.html">View project detail</a>
   </article>
 
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-image" aria-hidden="true"></span>
-    <div class="cv-card-label">Medical imaging &amp; AI</div>
-    <h3>Lung Segmentation — U-Net</h3>
-    <p>Deep-learning project for medical image segmentation using a <strong>U-Net</strong> architecture.</p>
-    <a class="project-page-button" href="projects/unet.html">View project detail</a>
-  </article>
-
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-circuit" aria-hidden="true"></span>
-    <div class="cv-card-label">Embedded systems &amp; FPGA</div>
-    <h3>FPGA — Universal Testing Machine</h3>
-    <p>Development with <strong>Zybo Z10, Vivado and VHDL</strong> for force, displacement, deformation and speed signals.</p>
-    <a class="project-page-button" href="projects/fpga.html">View project detail</a>
-  </article>
-
-  <article class="cv-card with-button">
-    <span class="cv-card-icon cv-icon-ruler" aria-hidden="true"></span>
-    <div class="cv-card-label">CAD &amp; prototyping</div>
-    <h3>Vscan Air Enclosure</h3>
-    <p>CAD design and prototyping of an accessory for a portable ultrasound device.</p>
-    <a class="project-page-button" href="projects/vscan.html">View project detail</a>
+  <article class="cv-card">
+    <span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span>
+    <div class="cv-card-label">Technical record</div>
+    <h3>Engineering Portfolio</h3>
+    <p>Detailed engineering work, architectures, validation and visual evidence are consolidated in the technical portfolio.</p>
+    <a class="project-page-button" href="portfolio.html">View Technical Portfolio</a>
   </article>
 </section>
 ```
@@ -236,9 +159,9 @@ page-layout: full
 
   <article class="cv-card">
     <span class="cv-card-icon cv-icon-users" aria-hidden="true"></span>
-    <div class="cv-card-label">Collaboration style</div>
+    <div class="cv-card-label">Collaboration</div>
     <h3>Interdisciplinary work</h3>
-    <p>Comfortable working across research, engineering and implementation teams.</p>
+    <p>Experience working across research, engineering and implementation teams.</p>
   </article>
 </section>
 ```
@@ -270,11 +193,4 @@ page-layout: full
     <p>B2 / ALTE 3.</p>
   </article>
 </section>
-```
-
-```{=html}
-<div class="cv-note">
-  <span class="cv-inline-icon cv-icon-lightbulb" aria-hidden="true"></span>
-  <p>The CV page is intentionally visual and scannable: the same information base is organized into panels, cards, a timeline and project entry points rather than a plain sequential list.</p>
-</div>
 ```

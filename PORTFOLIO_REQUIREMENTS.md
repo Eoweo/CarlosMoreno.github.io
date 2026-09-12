@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v8.7 — Swiss Research / Dynamic CV`  
+> **Versión base documentada:** `v9.0 — Swiss Research / Consolidated Architecture`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -149,40 +149,39 @@ Los futuros cambios de diseño deben intentar conservar esta separación.
 ## REQ-ARCH-004 — Estructura principal de archivos
 
 **Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P1`
+**Prioridad:** `P0`
 
-Estructura actual relevante:
+Estructura pública vigente desde v9.0:
 
 ```text
 /
 ├── _quarto.yml
 ├── index.qmd
+├── portfolio.qmd
 ├── cv.qmd
 ├── contact.qmd
-├── portfolio.qmd
-│
-├── projects/
-│   ├── index.qmd
-│   ├── thesis.qmd
-│   ├── cybathlon.qmd
-│   ├── candel.qmd
-│   ├── borealis.qmd
-│   ├── organ-preservation.qmd
-│   ├── unet.qmd
-│   ├── fpga.qmd
-│   └── vscan.qmd
 │
 ├── assets/
 │   ├── site.css
-│   ├── site-scripts.html
-│   └── images/
+│   └── site-scripts.html
 │
-├── .github/
-│   └── workflows/
-│       └── publish.yml
+├── downloads/
+│   ├── Carlos_Moreno_Research_CV.pdf
+│   └── Carlos_Moreno_Engineering_CV.pdf
 │
-└── portfolio_preview.html
+├── projects/
+│   └── *.html   ← solo redirects de compatibilidad
+│
+└── .github/workflows/publish.yml
 ```
+
+No existen archivos:
+
+```text
+projects/*.qmd
+```
+
+Todo el contenido técnico de proyectos está consolidado en `portfolio.qmd`.
 
 ---
 
@@ -193,51 +192,39 @@ Estructura actual relevante:
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-La barra superior debe incluir:
-
-### Izquierda
+La barra superior pública contiene:
 
 ```text
-Portfolio
-CV
-Contact
+Carlos Moreno Rojas → Home
+Portfolio           → portfolio.qmd
+CV                  → cv.qmd
+Contact             → contact.qmd
 ```
 
-### Derecha
+Está prohibido reintroducir:
 
 ```text
-Project pages
+Project Pages
+projects/index.qmd
 ```
 
-Configuración actual:
-
-```yaml
-website:
-  navbar:
-    left:
-      - href: index.qmd
-        text: Portfolio
-      - href: cv.qmd
-        text: CV
-      - href: contact.qmd
-        text: Contact
-    right:
-      - href: projects/index.qmd
-        text: Project pages
-```
+El único Swiss Control visible es Light/Dark.
 
 ---
 
 ## REQ-QUARTO-002 — Buscador
 
 **Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P2`
+**Prioridad:** `P0`
 
-El sitio utiliza el buscador nativo de Quarto:
+El buscador está desactivado:
 
 ```yaml
-search: true
+website:
+  search: false
 ```
+
+No debe existir lupa, campo de búsqueda ni espacio reservado para search.
 
 ---
 
@@ -5755,7 +5742,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.11 Swiss Research / CV Alignment + Controls Cleanup
+Version: v9.0 Swiss Research / Consolidated Four-Page Architecture
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -6432,4 +6419,232 @@ contact.qmd
 projects/*.qmd
 _quarto.yml
 TOC portal/runtime geometry
+```
+
+
+---
+
+# 104. Registro incremental — v9.0
+
+## VERSION 9.0 — Consolidated Four-Page Architecture
+
+### REQ-ARCH-020 — Solo cuatro páginas públicas de contenido
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La arquitectura pública real queda reducida a:
+
+```text
+HOME
+PORTFOLIO
+CV
+CONTACT
+```
+
+No existen páginas de contenido individuales por proyecto.
+
+### REQ-ARCH-021 — Portfolio es el único documento técnico
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`portfolio.qmd` contiene toda la evidencia técnica de proyectos.
+
+Debe conservar exactamente los seis grupos principales:
+
+```text
+MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
+ROBOTICS & REHABILITATION
+ORGAN PRESERVATION & TRANSPLANTATION
+MEDICAL IMAGING & AI
+EMBEDDED SYSTEMS & FPGA
+CAD & PROTOTYPING
+```
+
+Las páginas individuales de proyecto quedan eliminadas.
+
+### REQ-ARCH-022 — Eliminación de project QMD pages
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Deben estar ausentes:
+
+```text
+projects/thesis.qmd
+projects/cybathlon.qmd
+projects/candel.qmd
+projects/borealis.qmd
+projects/organ-preservation.qmd
+projects/unet.qmd
+projects/fpga.qmd
+projects/vscan.qmd
+```
+
+Ningún `.qmd`, navbar, footer, card, button o script público puede enlazar a esos archivos.
+
+### REQ-ARCH-023 — Redirects de compatibilidad para evitar 404
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Las URLs históricas se preservan con HTML estático de redirección:
+
+```text
+/projects/                         → /portfolio.html
+/projects/thesis.html              → /portfolio.html#masters-research
+/projects/cybathlon.html           → /portfolio.html#cybathlon
+/projects/candel.html              → /portfolio.html#candelstim
+/projects/borealis.html            → /portfolio.html#borealis
+/projects/organ-preservation.html  → /portfolio.html#organ-preservation-machine
+/projects/unet.html                → /portfolio.html#unet
+/projects/fpga.html                → /portfolio.html#fpga
+/projects/vscan.html               → /portfolio.html#vscan
+```
+
+Estos HTML no son project pages: solo compatibilidad para enlaces antiguos.
+
+`_quarto.yml` debe incluirlos como resources.
+
+### REQ-HOME-020 — Home es resumen, no archivo
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Home contiene únicamente:
+
+```text
+Profile
+Current Research
+Selected Work
+Engineering Areas
+```
+
+Se eliminan de Home las secciones detalladas de Education/Leadership y cualquier listado exhaustivo de todos los proyectos.
+
+Los enlaces de proyectos destacados deben apuntar a anchors de `portfolio.qmd`, nunca a `projects/*`.
+
+### REQ-PORTFOLIO-020 — Sin botones de project detail
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se eliminan todos los botones:
+
+```text
+Open detailed project
+View project detail
+```
+
+El visitante debe obtener la información técnica sin salir de `portfolio.html`.
+
+### REQ-PORTFOLIO-021 — Contenido no-proyecto fuera del Portfolio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Se eliminan del final de Portfolio, por redundancia:
+
+```text
+Teaching — Physics Laboratory
+Biomedical Engineering Student Chapter UC
+IEEE EMBS PUC Chile
+Meldic Ltda.
+Skills
+Engineering approach
+Contact
+```
+
+Ese contenido vive en CV o Contact.
+
+### REQ-CV-020 — CV representa trayectoria
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+CV contiene:
+
+```text
+Professional Profile
+Education
+Research & Engineering Experience
+Teaching & Leadership
+Technical Skills
+Languages
+```
+
+No existe `Selected Engineering Projects` como segundo Portfolio.
+
+Las experiencias técnicas se describen en 1–2 líneas; el detalle vive en Portfolio.
+
+### REQ-CV-021 — Un solo acceso general al Portfolio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+CV puede incluir un único botón general:
+
+```text
+View Technical Portfolio
+```
+
+Está prohibido incluir botones individuales hacia proyectos eliminados.
+
+### REQ-QA-030 — Cero enlaces internos hacia project pages eliminadas
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La validación debe confirmar:
+
+```text
+public QMD references to projects/*.qmd  = 0
+public QMD href to projects/*.html       = 0
+```
+
+La única presencia permitida de `/projects/` es dentro de redirects estáticos y documentación de compatibilidad.
+
+### REQ-QA-031 — Redirects legacy verificables
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Deben existir nueve redirects:
+
+```text
+index + 8 proyectos
+```
+
+Cada redirect debe apuntar a un anchor existente de Portfolio.
+
+### REQ-QA-032 — Sistemas visuales estables no se modifican
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La v9.0 no modifica:
+
+```text
+assets/site.css
+assets/site-scripts.html
+TOC portal/runtime geometry
+20px TOC internal padding
+Swiss Wipe animation
+Light/Dark
+responsive behavior
+Contact layout
+```
+
+### Precedencia de requisitos
+
+Los requisitos v9.0 anteriores **anulan cualquier requisito histórico previo** que exigiera mantener `projects/*.qmd`, botones de detalle individuales o una jerarquía `HOME < PORTFOLIO < PROJECT PAGE`.
+
+La arquitectura canónica vigente es:
+
+```text
+HOME
+PORTFOLIO
+CV
+CONTACT
 ```

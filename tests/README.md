@@ -33,3 +33,19 @@ portfolio.html?animation-test=1
 ```text
 portfolio.html?layout-debug=1
 ```
+
+
+## Architecture v9.0
+
+```bash
+python tests/check_architecture_v9.py
+```
+
+Checks:
+
+- no `projects/*.qmd`;
+- no public links to deleted project pages;
+- nine legacy redirects exist;
+- redirect targets point to valid Portfolio anchors;
+- exact six Portfolio groups remain;
+- Home and CV follow the simplified architecture.

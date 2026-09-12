@@ -52,7 +52,7 @@ I have interdisciplinary training in **Biomedical Engineering and Electrical Eng
 across biomedical research, electronics, embedded systems, medical devices, robotics, medical imaging,
 FPGA, CAD and experimental system integration.
 
-My engineering approach is strongly implementation-oriented: define the physiological or technical need,
+My engineering approach is implementation-oriented: define the physiological or technical need,
 translate it into measurable requirements, build the system, calibrate it, test it and iterate from data.
 
 :::: {.home-metric-grid}
@@ -97,7 +97,7 @@ The research progresses through three connected objectives:
 
 Stable circulation, physiological control and instrumentation.
 
-[Open Objective 1](projects/thesis.qmd#objective-1--ex-vivo-perfusion-platform){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#objective-1){.inline-project-link}
 :::
 
 ::: {.home-step}
@@ -108,7 +108,7 @@ Stable circulation, physiological control and instrumentation.
 
 Pressure, flow, temperature, vascular resistance, pH and gases.
 
-[Open Objective 2](projects/thesis.qmd#objective-2--baseline-dataset-without-icg){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#objective-2){.inline-project-link}
 :::
 
 ::: {.home-step}
@@ -119,7 +119,7 @@ Pressure, flow, temperature, vascular resistance, pH and gases.
 
 Fluorescence kinetics and quantitative functional parameters.
 
-[Open Objective 3](projects/thesis.qmd#objective-3--icg-nir-functional-marker){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#objective-3){.inline-project-link}
 :::
 
 ::::
@@ -136,24 +136,29 @@ Plataforma de perfusión completa o montaje ICG-NIR
 
 # Selected Work
 
-## CYBATHLON 2024 — Ciervo UC
-
-I participated in **CYBATHLON 2024 in Zürich** as Electrical Area Leader of Ciervo UC, working on the
-electrical and electromechanical integration of a robotic transfemoral prosthesis.
-
-[Open project →](projects/cybathlon.qmd){.inline-project-link}
-
-## CandelStim — Neuroengineering
-
-During my professional internship at Candel Medical Company I worked on electronics and firmware for a
-transcranial electrical stimulation platform, including circuit analysis, PCB work, embedded systems,
-communications, signal generation and validation.
-
-[Open project →](projects/candel.qmd){.inline-project-link}
-
-## Other Engineering Projects
-
 :::: {.home-project-grid}
+
+::: {.project-card}
+::: {.project-tag}
+ROBOTICS & REHABILITATION
+:::
+**CYBATHLON 2024 — Ciervo UC**
+
+Electrical Area Leader for the electrical and electromechanical integration of a robotic transfemoral prosthesis.
+
+[View in Portfolio →](portfolio.qmd#cybathlon){.inline-project-link}
+:::
+
+::: {.project-card}
+::: {.project-tag}
+MEDICAL DEVICES
+:::
+**CandelStim — Neuroengineering**
+
+Electronics and firmware development for a transcranial electrical stimulation platform.
+
+[View in Portfolio →](portfolio.qmd#candelstim){.inline-project-link}
+:::
 
 ::: {.project-card}
 ::: {.project-tag}
@@ -161,53 +166,20 @@ ORGAN PRESERVATION
 :::
 **Borealis UC — Supercooling**
 
-Experimental work in organ preservation and thermal control.
+Experimental work in organ preservation, supercooling and thermal control.
 
-[Open project →](projects/borealis.qmd){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#borealis){.inline-project-link}
 :::
 
 ::: {.project-card}
 ::: {.project-tag}
-SYSTEM DESIGN
-:::
-**Organ Preservation Machine**
-
-Electromechanical, fluidic and control-system redesign.
-
-[Open project →](projects/organ-preservation.qmd){.inline-project-link}
-:::
-
-::: {.project-card}
-::: {.project-tag}
-MEDICAL IMAGING & AI
-:::
-**Lung Segmentation — U-Net**
-
-Deep-learning segmentation of medical images.
-
-[Open project →](projects/unet.qmd){.inline-project-link}
-:::
-
-::: {.project-card}
-::: {.project-tag}
-FPGA
+EMBEDDED SYSTEMS & FPGA
 :::
 **Universal Testing Machine**
 
-Zybo Z10, Vivado and VHDL for acquisition and processing.
+Zybo Z10, Vivado and VHDL for acquisition and processing in a mechanical testing system.
 
-[Open project →](projects/fpga.qmd){.inline-project-link}
-:::
-
-::: {.project-card}
-::: {.project-tag}
-CAD & PROTOTYPING
-:::
-**Vscan Air Enclosure**
-
-CAD and prototyping for a portable ultrasound accessory.
-
-[Open project →](projects/vscan.qmd){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#fpga){.inline-project-link}
 :::
 
 ::::
@@ -231,50 +203,3 @@ Signal and image processing, deep learning, biomedical optics, NIR fluorescence 
 ## CAD, Prototyping & Integration
 
 Fusion 360, mechanical design, 3D printing, machining and integration of electronics, fluidics and mechanics.
-
-# Education & Leadership
-
-## Education
-
-::: {.home-timeline}
-
-::: {}
-**MSc Biomedical Engineering**
-
-Pontificia Universidad Católica de Chile · 2025–2027
-:::
-
-::: {}
-**Electrical Engineering**
-
-Pontificia Universidad Católica de Chile · 2025–2026
-:::
-
-::: {}
-**Biomedical Engineering**
-
-Pontificia Universidad Católica de Chile · 2021–2024
-:::
-
-:::
-
-## Leadership & Teaching
-
-My experience also includes physics laboratory teaching, leadership of the Biomedical Engineering Student
-Chapter UC and work with IEEE EMBS PUC Chile.
-
-# Explore
-
-## Technical Portfolio
-
-The complete technical portfolio documents projects in greater depth using the structure
-**problem → design → implementation → testing → results / lessons learned**.
-
-[Open Technical Portfolio](portfolio.qmd){.home-action .primary}
-
-## CV & Contact
-
-::: {.home-final-actions}
-[Curriculum Vitae](cv.qmd){.home-action}
-[Contact](contact.qmd){.home-action}
-:::
