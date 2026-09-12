@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.6 — Swiss Research**
+**v7.7 — Swiss Research**
 
 The current architecture separates:
 
@@ -123,3 +123,11 @@ PORTFOLIO_REQUIREMENTS.md
 - CV Downloads section removed.
 - Research and Engineering CV download buttons are now placed at the beginning of the CV.
 - Actual downloadable PDF files are included in `/downloads`.
+
+
+## v7.7
+
+- Removed Quarto's centered page-grid dependency from the desktop shell.
+- Left TOC is physically fixed at `left: 0` of the browser viewport.
+- Main content starts at the responsive TOC width and fills the remaining `100vw`.
+- This specifically fixes the large blank band visible to the left of the TOC in v7.6.

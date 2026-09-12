@@ -1,6 +1,6 @@
 # Estructura de páginas — Portafolio
 
-> **Versión vigente:** v7.6  
+> **Versión vigente:** v7.7  
 > **Estado:** arquitectura aprobada e implementada.  
 > **Propósito:** mantener una estructura simple, sin un índice intermedio redundante.
 

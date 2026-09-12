@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.6 — Swiss Research`  
+> **Versión base documentada:** `v7.7 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -3559,6 +3559,103 @@ La página no debe quedar dentro de un contenedor general centrado con márgenes
 ---
 
 
+
+# 23H. Corrección de layout introducida en v7.7
+
+## REQ-LAYOUT-008 — El TOC se ancla al borde físico del viewport
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La lista izquierda no debe depender de:
+
+```text
+screen-start
+body-start
+page-columns
+```
+
+para determinar su posición física en desktop.
+
+El problema observado en v7.6 fue que Quarto mantenía una columna invisible antes de `screen-start`, produciendo una gran franja vacía a la izquierda aunque los márgenes internos fueran cero.
+
+A partir de v7.7, la columna lateral utiliza coordenadas directas del viewport:
+
+```css
+#quarto-margin-sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    bottom: 0;
+}
+```
+
+### Resultado obligatorio
+
+```text
+x = 0 px del navegador
+│
+├── TOC / lista izquierda
+│
+└── contenido inmediatamente después del ancho del TOC
+```
+
+No se permite ninguna columna vacía antes del TOC en desktop.
+
+---
+
+## REQ-LAYOUT-009 — El contenido principal se posiciona respecto al ancho real del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El contenido principal debe comenzar mediante:
+
+```css
+margin-left: var(--fixed-toc-width);
+```
+
+y utilizar:
+
+```css
+width: calc(100vw - var(--fixed-toc-width));
+```
+
+Esto reemplaza el uso de columnas de grid Quarto para el shell principal del sitio.
+
+El ancho del TOC es responsive:
+
+```css
+--fixed-toc-width: clamp(15.5rem, 16vw, 18.5rem);
+```
+
+En pantallas muy grandes puede ajustarse moderadamente, pero el TOC debe seguir empezando en `left: 0`.
+
+---
+
+## REQ-LAYOUT-010 — Quarto page grid desactivado para el shell de escritorio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop:
+
+```css
+#quarto-content,
+#quarto-content.page-columns {
+    display: block;
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+```
+
+La navegación interna de Quarto puede seguir existiendo, pero su grid central no debe controlar la posición lateral del TOC ni del cuerpo.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -3763,6 +3860,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.6 | 2026-09-12 | Eliminación defensiva de Project Pages y buscador | REQ-NAV-018, REQ-SEARCH-001 | IMPLEMENTADO |
 | v7.6 | 2026-09-12 | Botones de detalle verificados en los 8 proyectos | REQ-PORTFOLIO-NAV-002 | IMPLEMENTADO |
 | v7.6 | 2026-09-12 | Dos botones de descarga al inicio del CV | REQ-CV-010 | IMPLEMENTADO |
+| v7.7 | 2026-09-12 | Eliminación de columna invisible izquierda de Quarto; TOC fijado a viewport x=0 | REQ-LAYOUT-008/009/010 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -3824,6 +3922,9 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 48. Cada proyecto del Portfolio debe terminar con su botón de detalle.
 49. El CV debe comenzar con dos botones de descarga y no tener sección Downloads al final.
 50. El sitio no debe mostrar buscador.
+51. En desktop el TOC debe comenzar físicamente en left: 0 del viewport.
+52. El contenido debe comenzar después del ancho real del TOC, no mediante el grid central de Quarto.
+53. El shell de escritorio no debe depender de page-columns para su posicionamiento horizontal.
 ```
 
 ---
@@ -3883,7 +3984,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.6 Swiss Research
+Version: v7.7 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
