@@ -162,7 +162,7 @@ Develop a quantitative functional marker from ICG fluorescence kinetics.
   </div>
 </div>
 
-[Open detailed project](projects/thesis.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/thesis.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -217,7 +217,7 @@ involved developing a robotic transfemoral prosthesis for functional competition
   </div>
 </div>
 
-[Open detailed project](projects/cybathlon.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/cybathlon.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -272,7 +272,7 @@ for a transcranial electrical stimulation device.
   </div>
 </div>
 
-[Open detailed project](projects/candel.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/candel.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -311,7 +311,7 @@ transport and potentially extend preservation time.
   </div>
 </div>
 
-[Open detailed project](projects/borealis.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/borealis.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -357,7 +357,7 @@ Electromechanical redesign and size reduction of an organ preservation machine.
   </div>
 </div>
 
-[Open detailed project](projects/organ-preservation.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/organ-preservation.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -403,7 +403,7 @@ and MRI images.
   </div>
 </div>
 
-[Open detailed project](projects/unet.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/unet.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -451,7 +451,7 @@ The system processes signals associated with force, displacement, deformation an
   </div>
 </div>
 
-[Open detailed project](projects/fpga.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/fpga.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 
@@ -490,7 +490,7 @@ transducer.
   </div>
 </div>
 
-[Open detailed project](projects/vscan.qmd){.home-action .primary .project-detail-button}
+[Open detailed project →](projects/vscan.qmd){.home-action .primary .portfolio-detail-button}
 
 ---
 

@@ -8,11 +8,16 @@ toc-title: "CV"
 page-layout: full
 ---
 
+::: {.cv-download-intro}
+Choose the CV version that best matches the context.
+:::
 
 ::: {.cv-download-actions}
-[Download Research CV](assets/cv/Carlos_Moreno_Research_CV.pdf){.home-action .primary download="Carlos_Moreno_Research_CV.pdf"}
-[Download Engineering / Work CV](assets/cv/Carlos_Moreno_Engineering_CV.pdf){.home-action download="Carlos_Moreno_Engineering_CV.pdf"}
+[Download Research CV](assets/cv/Carlos_Moreno_Research_CV.pdf){.cv-download-button download="Carlos_Moreno_Research_CV.pdf"}
+
+[Download Engineering / Work CV](assets/cv/Carlos_Moreno_Engineering_CV.pdf){.cv-download-button download="Carlos_Moreno_Engineering_CV.pdf"}
 :::
+
 
 
 # Professional Profile

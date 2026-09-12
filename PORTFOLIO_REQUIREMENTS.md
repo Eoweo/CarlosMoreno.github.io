@@ -193,62 +193,46 @@ Estructura actual relevante:
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-La barra superior debe incluir:
-
-### Izquierda
+La barra superior pública debe contener únicamente:
 
 ```text
-Portfolio
-CV
-Contact
+Carlos Moreno Rojas → Home / index.qmd
+
+Portfolio → portfolio.qmd
+CV        → cv.qmd
+Contact   → contact.qmd
 ```
 
-### Derecha
+No debe existir ningún acceso a `Project Pages`.
 
-```text
-Project pages
-```
-
-Configuración actual:
+Configuración conceptual vigente:
 
 ```yaml
 website:
   navbar:
     left:
-      - href: index.qmd
+      - href: portfolio.qmd
         text: Portfolio
       - href: cv.qmd
         text: CV
       - href: contact.qmd
         text: Contact
-    right:
-      - href: projects/index.qmd
-        text: Project pages
 ```
 
 ---
 
 ## REQ-QUARTO-002 — Buscador
 
-**Estado:** `ELIMINAR`  
-**Prioridad:** `P1`
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
 
-A partir de v7.6 el sitio **no debe mostrar buscador**.
-
-Configuración obligatoria:
+El buscador de Quarto debe permanecer **desactivado**:
 
 ```yaml
 search: false
 ```
 
-No debe aparecer:
-
-- icono de búsqueda;
-- caja de búsqueda;
-- overlay de búsqueda;
-- acceso de búsqueda en el navbar.
-
-> **Cambio v7.6:** se elimina para simplificar la barra superior y reducir elementos que no aportan a la navegación principal.
+No debe mostrarse ningún icono, campo o overlay de búsqueda en el navbar.
 
 ---
 
@@ -1363,21 +1347,26 @@ English
 
 ---
 
-## REQ-CV-009 — Descargas PDF
+## REQ-CV-009 — Descargas PDF al inicio del CV
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P1`
 
-Existen dos archivos descargables:
+La página `cv.qmd` debe comenzar, inmediatamente después del título/subtítulo, con dos botones:
+
+```text
+DOWNLOAD RESEARCH CV
+DOWNLOAD ENGINEERING / WORK CV
+```
+
+Archivos incluidos en el proyecto:
 
 ```text
 assets/cv/Carlos_Moreno_Research_CV.pdf
 assets/cv/Carlos_Moreno_Engineering_CV.pdf
 ```
 
-Los botones deben estar al inicio de `cv.qmd`, antes de `Professional Profile`.
-
-No debe existir una sección `Downloads` al final del CV.
+La sección final `Downloads` no debe existir.
 
 ---
 
@@ -3350,204 +3339,174 @@ Small mobile < 520 px
 
 # 23G. Requisitos introducidos en v7.6
 
-## REQ-LAYOUT-006 — La página debe comenzar en el borde izquierdo de la ventana
+## REQ-LAYOUT-006 — TOC pegado al borde izquierdo de la ventana
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-En desktop no debe existir un gutter externo antes de la navegación lateral.
-
-La geometría debe ser:
-
-```text
-x = 0
-│
-├── TOC / lista izquierda
-│
-└── contenido principal → hasta el borde derecho
-```
-
-El TOC debe utilizar:
+En desktop, la lista lateral debe comenzar exactamente en:
 
 ```css
 left: 0;
-margin: 0;
 ```
 
-y el layout general no debe conservar márgenes externos de la grilla de Quarto.
+No debe existir un gutter, margen o columna vacía a la izquierda del TOC.
 
----
-
-## REQ-LAYOUT-007 — Layout desktop independiente de la grilla externa de Quarto
-
-**Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P0`
-
-Para garantizar uso completo de la ventana en desktop:
-
-```text
-#quarto-content
-→ width: 100vw
-
-TOC
-→ fixed al borde izquierdo
-
-main.content
-→ margin-left = ancho del TOC
-→ width = 100vw - ancho del TOC
-```
-
-Ancho responsive del TOC:
+El TOC utiliza un ancho responsive:
 
 ```css
---portfolio-toc-width: clamp(270px, 20vw, 330px);
+--portfolio-toc-width: clamp(17rem, 20vw, 20.5rem);
 ```
 
-El contenido debe usar el resto real de la ventana.
+y se posiciona directamente contra el borde físico de la ventana.
 
 ---
 
-## REQ-NAV-018 — Barra superior compacta y pegada al borde superior
+## REQ-LAYOUT-007 — Página ocupa el ancho completo de la ventana
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-La barra superior debe comenzar en:
+La composición desktop debe ser:
 
 ```text
-top: 0
+| TOC | CONTENIDO -------------------------------------- | borde |
+0 px                                                100vw
 ```
 
-sin espacio vacío superior.
-
-Altura objetivo actual:
+El cuerpo debe utilizar:
 
 ```css
---header-height: 48px;
+width: calc(100vw - var(--portfolio-toc-width));
+margin-left: var(--portfolio-toc-width);
 ```
 
-Se deben eliminar paddings verticales excesivos del navbar y reducir el espacio entre navbar y título de página.
+No debe existir un contenedor centrado de ancho fijo.
+
+Los márgenes de contenido deben ser pequeños y responsive:
+
+```css
+--portfolio-window-gutter: clamp(0.75rem, 1vw, 1.25rem);
+```
 
 ---
 
-## REQ-NAV-019 — No debe existir ningún acceso público a Project Pages
+## REQ-NAVBAR-001 — Navbar pegado a la parte superior
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-Desde v7.5 `Project Pages` dejó de formar parte de la arquitectura.
+`navbar navbar-expand-lg` debe comenzar en la parte superior de la ventana sin espacio libre previo.
 
-En v7.6 se reafirma:
+Requisitos:
 
 ```text
-navbar          → sin Project Pages
-Home            → sin Project Pages
-Portfolio       → acceso directo a páginas individuales
-projects/index  → no existe
+margin-top = 0
+padding-top = 0
+#quarto-header top = 0
 ```
 
-No debe existir un botón, enlace de navbar ni acceso visual llamado `Project Pages`.
+Altura vigente:
+
+```css
+--header-height: 52px;
+```
+
+El navbar no debe incorporar un bloque vertical vacío por encima de los enlaces.
 
 ---
 
-## REQ-PORTFOLIO-NAV-002 — Botón de detalle al final de cada proyecto
+## REQ-NAV-018 — Eliminación completa de acceso a Project Pages
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-Cada uno de los ocho proyectos resumidos en `portfolio.qmd` debe terminar con un botón:
+Como `projects/index.qmd` no existe:
+
+- no debe haber enlace `Project Pages` en el navbar;
+- no debe haber botón `Project Pages` en Home;
+- no debe haber navegación pública hacia `projects/index.qmd`;
+- `Portfolio` es el único índice general de proyectos.
+
+Las menciones históricas pueden permanecer únicamente en el registro de versiones del documento de requisitos.
+
+---
+
+## REQ-PORTFOLIO-NAV-002 — Botón al final de cada proyecto del Portfolio
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Cada uno de los ocho proyectos resumidos en `portfolio.qmd` debe terminar con un botón visible:
 
 ```text
 OPEN DETAILED PROJECT →
 ```
 
-El botón debe usar el mismo sistema visual de botones de `index.qmd`:
+El botón debe utilizar la misma familia visual de botones Swiss de Home:
 
 ```text
 .home-action
 .primary
-.project-detail-button
+.portfolio-detail-button
 ```
 
-Debe aparecer **al final del contenido de ese proyecto y antes del separador / siguiente proyecto**.
+Debe aparecer después del contenido del proyecto y antes del siguiente proyecto/separador.
 
-Proyectos:
+Destinos:
 
 ```text
-Master's Research
-CYBATHLON
-CandelStim
-Borealis
-Preservation Machine
-U-Net
-FPGA
-Vscan Air
+Master's Research      → projects/thesis.qmd
+CYBATHLON              → projects/cybathlon.qmd
+CandelStim             → projects/candel.qmd
+Borealis               → projects/borealis.qmd
+Preservation Machine   → projects/organ-preservation.qmd
+U-Net                  → projects/unet.qmd
+FPGA                    → projects/fpga.qmd
+Vscan Air               → projects/vscan.qmd
 ```
 
 ---
 
-## REQ-CV-010 — Dos botones de descarga al inicio del CV
+## REQ-CV-010 — Botones de descarga en cabecera del CV
 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-Al comienzo de `cv.qmd`, inmediatamente después del encabezado de página y antes de `Professional Profile`, deben existir dos botones:
+Antes de `Professional Profile`, el CV debe mostrar dos botones de descarga:
 
 ```text
 DOWNLOAD RESEARCH CV
 DOWNLOAD ENGINEERING / WORK CV
 ```
 
-Destinos:
+Los botones deben realizar descarga directa de los PDF incluidos en `assets/cv/`.
 
-```text
-assets/cv/Carlos_Moreno_Research_CV.pdf
-assets/cv/Carlos_Moreno_Engineering_CV.pdf
-```
-
-Los botones deben utilizar estilo Swiss y atributo de descarga.
-
----
-
-## REQ-CV-011 — Eliminar sección Downloads al final del CV
-
-**Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P0`
-
-No debe existir:
+La antigua sección inferior:
 
 ```text
 # Downloads
 ```
 
-ni subsecciones de descarga al final de `cv.qmd`.
-
-La única interfaz pública de descarga del CV son los dos botones iniciales definidos en `REQ-CV-010`.
+queda prohibida.
 
 ---
 
-## REQ-SEARCH-001 — Sitio sin buscador
+## REQ-SEARCH-001 — Buscador eliminado
 
 **Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P1`
+**Prioridad:** `P0`
 
-La configuración debe utilizar:
+El sitio no debe presentar buscador.
+
+Configuración obligatoria:
 
 ```yaml
-search: false
+website:
+  search: false
 ```
 
-La barra superior se reserva para:
-
-```text
-Carlos Moreno Rojas
-Portfolio
-CV
-Contact
-Swiss Controls
-```
-
-No se incorpora búsqueda mientras este requisito permanezca vigente.
+Además, el CSS debe ocultar cualquier componente de búsqueda residual que pudiera quedar en HTML cacheado.
 
 ---
 
@@ -3564,6 +3523,8 @@ Esta sección representa trabajo todavía no terminado.
 | REQ-PEND-004 | Agregar LinkedIn público | PENDIENTE | P1 |
 | REQ-PEND-005 | Agregar ORCID si corresponde | PENDIENTE | P2 |
 | REQ-PEND-006 | Agregar Google Scholar si corresponde | PENDIENTE | P2 |
+| REQ-PEND-007 | Incorporar CV Research PDF | PENDIENTE | P2 |
+| REQ-PEND-008 | Incorporar CV Engineering PDF | PENDIENTE | P2 |
 | REQ-PEND-009 | Revisar alt text de imágenes | PENDIENTE | P1 |
 | REQ-PEND-010 | Optimizar imágenes finales | PENDIENTE | P1 |
 | REQ-PEND-011 | Revisión WCAG formal | VALIDAR | P1 |
@@ -3750,10 +3711,12 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.4 | 2026-09-11 | Diagrama y análisis de estructura de páginas | REQ-ARCH-005/006/007 | IMPLEMENTADO / VALIDAR |
 | v7.5 | 2026-09-11 | Eliminación de Project Pages y Portfolio como índice único | REQ-ARCH-007/008, REQ-NAV-017, REQ-PORTFOLIO-NAV-001 | IMPLEMENTADO |
 | v7.5 | 2026-09-11 | Contenido realmente full-width y gutters responsive | REQ-LAYOUT-002/003/004/005 | IMPLEMENTADO |
-| v7.6 | 2026-09-11 | Layout sin gutter izquierdo y header compacto | REQ-LAYOUT-006/007, REQ-NAV-018 | IMPLEMENTADO |
-| v7.6 | 2026-09-11 | Eliminación definitiva de Project Pages y buscador | REQ-NAV-019, REQ-SEARCH-001, REQ-QUARTO-002 | IMPLEMENTADO |
-| v7.6 | 2026-09-11 | Botones de detalle al final de cada proyecto | REQ-PORTFOLIO-NAV-002 | IMPLEMENTADO |
-| v7.6 | 2026-09-11 | Descargas de CV al inicio y eliminación de sección Downloads | REQ-CV-009/010/011 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | TOC pegado a borde izquierdo y layout 100vw | REQ-LAYOUT-006/007 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Navbar sin espacio superior | REQ-NAVBAR-001 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Eliminación completa de acceso Project Pages | REQ-NAV-018 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Botón al final de cada proyecto en Portfolio | REQ-PORTFOLIO-NAV-002 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Dos descargas al inicio del CV y eliminación de Downloads | REQ-CV-009/010 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Buscador desactivado | REQ-QUARTO-002 / REQ-SEARCH-001 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -3767,7 +3730,7 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 
 1. Quarto continúa siendo la base del sitio.
 2. El contenido .qmd debe permanecer separado de CSS/JS.
-3. Portfolio / CV / Contact / Project Pages deben seguir funcionando.
+3. Portfolio / CV / Contact deben seguir funcionando; Project Pages no debe existir.
 4. Sidebar izquierda debe ser jerárquica.
 5. Sidebar debe seguir la sección durante scroll.
 6. Sidebar debe hacer auto-scroll para mantener visible el elemento activo.
@@ -3799,7 +3762,7 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 32. CSS y JS deben mantenerse consolidados, sin implementaciones históricas duplicadas.
 33. El TOC de portfolio.qmd debe tener exactamente seis títulos principales, en el orden definido por REQ-PORTFOLIO-TOC-001.
 34. Teaching, Leadership, Meldic, Skills, Engineering approach y Contact no deben aparecer como títulos del TOC técnico.
-35. Project Pages debe usar botones para abrir proyectos; los nombres de proyecto no deben ser hipervínculos azules.
+35. Project Pages es un requisito histórico eliminado; Portfolio es el único índice general de proyectos.
 36. El cuerpo de contenido debe aprovechar la zona derecha disponible en desktop.
 37. Los títulos deben usar una escala moderada y no dominar el viewport.
 38. SITE_STRUCTURE.md debe mantenerse como diagrama vivo de arquitectura.
@@ -3809,12 +3772,11 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 42. Cada proyecto del Portfolio debe tener acceso directo a su página detallada.
 43. En desktop el contenido debe abarcar body-start → screen-end y aprovechar la pantalla disponible.
 44. Los gutters deben ser dinámicos mediante clamp(), no márgenes fijos grandes.
-45. No debe existir espacio externo antes del TOC izquierdo en desktop.
-46. La barra superior debe comenzar en top:0 y mantener una altura compacta.
-47. No debe existir ningún acceso público llamado Project Pages.
-48. Cada proyecto del Portfolio debe terminar con su botón de detalle.
-49. CV debe comenzar con los dos botones de descarga y no tener sección Downloads al final.
-50. El sitio no debe mostrar buscador.
+45. El TOC debe tocar el borde izquierdo físico de la ventana en desktop.
+46. El navbar debe comenzar en top: 0 sin espacio vacío superior.
+47. El buscador debe permanecer desactivado.
+48. El CV debe iniciar con dos botones de descarga reales y no tener una sección Downloads al final.
+49. Cada proyecto del Portfolio debe terminar con un botón Open detailed project.
 ```
 
 ---
@@ -3824,10 +3786,10 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 | Sistema | Archivo principal |
 |---|---|
 | Configuración Quarto | `_quarto.yml` |
-| Portfolio principal | `index.qmd` |
+| Home / resumen profesional | `index.qmd` |
+| Portfolio técnico | `portfolio.qmd` |
 | CV | `cv.qmd` |
 | Contact | `contact.qmd` |
-| Índice proyectos | `projects/index.qmd` |
 | Tesis | `projects/thesis.qmd` |
 | CYBATHLON | `projects/cybathlon.qmd` |
 | CandelStim | `projects/candel.qmd` |
@@ -3841,6 +3803,7 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 | Preview local | `portfolio_preview.html` |
 | Deploy | `.github/workflows/publish.yml` |
 | Imágenes | `assets/images/` |
+| CV PDFs | `assets/cv/` |
 
 ---
 
