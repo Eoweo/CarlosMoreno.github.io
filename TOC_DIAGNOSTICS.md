@@ -1,4 +1,4 @@
-# TOC Diagnostics — v8.3
+# TOC Diagnostics — v8.4
 
 ## Conclusión de las dos pruebas v8.2
 
@@ -106,3 +106,34 @@ scrollbarWidthPx
 ```
 
 Si aún aparece una caja blanca, copiar esas cuatro secciones.
+
+
+## Ajuste visual validado en v8.4
+
+v8.3 ya validó correctamente la geometría exterior:
+
+```text
+tocLeftPx = 0
+contentGapPx ≈ 15.4
+rightGapPx ≈ 14.4
+navbarTopPx = 0
+noMainOcclusion = true
+```
+
+v8.4 **no modifica esas coordenadas**.
+
+Solo agrega espacio dentro de la lista:
+
+```text
+padding-left = 20px
+padding-top  = 20px
+```
+
+El shell exterior continúa en `left: 0`.
+
+El test debe conservar `PASS` y reportar:
+
+```text
+tocPaddingLeftTwenty = true
+tocPaddingTopTwenty  = true
+```

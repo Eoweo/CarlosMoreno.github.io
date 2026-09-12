@@ -4863,6 +4863,94 @@ La geometría final del proyecto se controla mediante el contrato runtime valida
 ---
 
 
+
+# 23N. Padding interno de la lista lateral — v8.4
+
+## REQ-LAYOUT-030 — Padding interno de 20 px en el TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La geometría exterior validada en v8.3 **no debe cambiar**.
+
+El bloque lateral continúa comenzando en:
+
+```text
+portal.left = 0 px
+```
+
+pero el contenido visual de la lista debe comenzar con un padding interno de:
+
+```text
+20 px desde el borde izquierdo
+20 px desde el borde superior
+```
+
+Implementación requerida sobre el `#TOC` portalizado:
+
+```css
+#portfolio-toc-shell #TOC {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+```
+
+### Regla importante
+
+El padding pertenece **al contenido interno de la lista**, no al shell exterior.
+
+Por tanto:
+
+```text
+BORDE DE LA VENTANA
+x = 0 px
+│
+│ #portfolio-toc-shell
+│ └── 20 px → contenido del TOC
+│
+```
+
+No se debe volver a introducir un margen exterior entre el navegador y el bloque lateral.
+
+---
+
+## REQ-QA-014 — Test del padding interno del TOC
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+El test `?layout-debug=1` debe mantener:
+
+```text
+toc.left ≈ 0 px
+```
+
+porque la caja `#TOC` sigue comenzando en el borde del portal, pero sus estilos calculados deben cumplir:
+
+```text
+padding-left ≈ 20 px
+padding-top  ≈ 20 px
+```
+
+Criterio de aceptación:
+
+```text
+abs(toc.padding-left - 20px) <= 1px
+abs(toc.padding-top  - 20px) <= 1px
+```
+
+Esto debe pasar sin modificar:
+
+```text
+contentGapPx
+rightGapPx
+navbarTopPx
+noMainOcclusion
+```
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -5074,6 +5162,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v8.1 | 2026-09-12 | Grid Quarto redefinido con page-start en x=0 y test geométrico numérico | REQ-LAYOUT-020/021/022, REQ-QA-006/007, REQ-NAVBAR-002 | IMPLEMENTADO |
 | v8.2 | 2026-09-12 | Corrección runtime del TOC/navbar con comparación baseline/post-fix y modo A/B | REQ-LAYOUT-023/024/025, REQ-NAVBAR-003, REQ-QA-008/009/010 | IMPLEMENTADO |
 | v8.3 | 2026-09-12 | TOC portalizado fuera del grid Quarto, limpieza de slot blanco, test de oclusión y right-gap corregido por clientWidth | REQ-LAYOUT-026/027/028/029, REQ-QA-011/012/013, REQ-QUARTO-001 | IMPLEMENTADO |
+| v8.4 | 2026-09-12 | Padding interno TOC 20 px izquierda/superior sin alterar shell x=0 | REQ-LAYOUT-030, REQ-QA-014 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -5138,6 +5227,7 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 51. Debe poder probarse el layout real añadiendo `?layout-debug=1`.
 52. Antes de alterar el shell, comparar con la implementación v6 que funcionaba.
 53. El TOC debe ser nativo de Quarto: `toc-location: left` + `toc-expand: 1`.
+54. El shell lateral debe seguir en x=0; el contenido interno del TOC usa padding-left:20px y padding-top:20px.
 ```
 
 ---
@@ -5198,7 +5288,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.3 Swiss Research / Native Quarto TOC
+Version: v8.4 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto

@@ -504,7 +504,8 @@
     setImportant(toc, "grid-row", "auto");
     setImportant(toc, "margin-left", "0px");
     setImportant(toc, "margin-right", "0px");
-    setImportant(toc, "padding-left", "0px");
+    setImportant(toc, "padding-left", "20px");
+    setImportant(toc, "padding-top", "20px");
 
     return portal;
   }
@@ -605,7 +606,7 @@
       [header, ["position","left","right","top","height","min-height","max-height","margin","padding","width"]],
       [navbar, ["height","min-height","max-height","margin","padding-top","padding-bottom"]],
       [shell, ["margin-top","padding-top"]],
-      [toc, ["position","left","top","bottom","width","height","max-height","overflow","overflow-y","z-index","grid-column","grid-row","margin-left","margin-right","padding-left"]],
+      [toc, ["position","left","top","bottom","width","height","max-height","overflow","overflow-y","z-index","grid-column","grid-row","margin-left","margin-right","padding-left","padding-top"]],
       [main, ["position","z-index","background","grid-column","grid-row","margin-left","margin-right","width","max-width","min-width","padding-left","padding-right","justify-self"]]
     ].forEach(function (pair) {
       const el = pair[0];
@@ -838,8 +839,11 @@
       result.checks.tocTouchesViewportLeft = Math.abs(leftGap) <= 2;
       result.checks.tocMarginLeftZero =
         Math.abs(parseFloat(tcs.marginLeft) || 0) <= 1;
-      result.checks.tocPaddingLeftZero =
-        Math.abs(parseFloat(tcs.paddingLeft) || 0) <= 1;
+      result.checks.tocPaddingLeftTwenty =
+        Math.abs((parseFloat(tcs.paddingLeft) || 0) - 20) <= 1;
+
+      result.checks.tocPaddingTopTwenty =
+        Math.abs((parseFloat(tcs.paddingTop) || 0) - 20) <= 1;
 
       result.checks.sidebarIsLeftOfContent =
         tr.right <= mr.left + 1;

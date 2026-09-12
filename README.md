@@ -190,3 +190,11 @@ PORTFOLIO_REQUIREMENTS.md
 - Right-edge testing now uses `document.documentElement.clientWidth`, excluding the vertical scrollbar.
 - The debug test now probes for visual occlusion using `document.elementsFromPoint()`.
 - Custom Quarto `grid:` widths were removed from `_quarto.yml`.
+
+
+## v8.4
+
+- Keeps the validated v8.3 TOC portal geometry unchanged.
+- Adds 20 px internal left padding to the TOC list.
+- Adds 20 px internal top padding to the TOC list.
+- Runtime test now validates both 20 px padding values while still requiring the outer TOC geometry to remain at the viewport edge.

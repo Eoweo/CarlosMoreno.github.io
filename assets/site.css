@@ -1015,7 +1015,7 @@ body.swiss-compact li {
 
 
 /* ================================================================
-   VERSION 8.3 — TOC PORTAL + OCCLUSION FIX
+   VERSION 8.4 — TOC PORTAL + 20PX INNER PADDING
 
    The actual #TOC is moved at runtime into #portfolio-toc-shell.
    This prevents the original Quarto TOC grid slot from remaining as
@@ -1095,7 +1095,8 @@ body {
 
     margin: 0 !important;
     margin-left: 0 !important;
-    padding-left: 0 !important;
+    padding-left: 20px !important;
+    padding-top: 20px !important;
     padding-right: .45rem !important;
 
     border: 0 !important;

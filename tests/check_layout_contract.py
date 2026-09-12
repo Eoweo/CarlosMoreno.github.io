@@ -18,6 +18,12 @@ checks = {
     "clientWidth right gap": "document.documentElement.clientWidth" in js,
     "occlusion probe": "elementsFromPoint" in js,
     "ancestor diagnostics": "tocAncestorChain" in js,
+    "toc 20px left padding runtime": 'setImportant(toc, "padding-left", "20px")' in js,
+    "toc 20px top padding runtime": 'setImportant(toc, "padding-top", "20px")' in js,
+    "toc 20px left padding CSS": "padding-left: 20px !important;" in css,
+    "toc 20px top padding CSS": "padding-top: 20px !important;" in css,
+    "padding left QA": "tocPaddingLeftTwenty" in js,
+    "padding top QA": "tocPaddingTopTwenty" in js,
 }
 
 for name, ok in checks.items():
