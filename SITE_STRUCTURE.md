@@ -1,6 +1,6 @@
 # Estructura de páginas — Portafolio
 
-> **Versión vigente:** v7.5  
+> **Versión vigente:** v7.6  
 > **Estado:** arquitectura aprobada e implementada.  
 > **Propósito:** mantener una estructura simple, sin un índice intermedio redundante.
 
@@ -162,3 +162,23 @@ projects/
 ```
 
 `projects/index.qmd` fue eliminado en v7.5 por redundancia.
+
+
+---
+
+# 7. Barra superior vigente
+
+```text
+Carlos Moreno Rojas → Home
+Portfolio           → portfolio.qmd
+CV                  → cv.qmd
+Contact             → contact.qmd
+Swiss Controls      → Compact / Reduced Motion / Light-Dark
+```
+
+No existen:
+
+```text
+Project Pages
+Search
+```

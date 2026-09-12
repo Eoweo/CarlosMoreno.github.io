@@ -4,7 +4,7 @@ Quarto-based portfolio for biomedical engineering, electrical engineering, resea
 
 ## Current version
 
-**v7.5 — Swiss Research**
+**v7.6 — Swiss Research**
 
 The current architecture separates:
 
@@ -111,3 +111,14 @@ PORTFOLIO_REQUIREMENTS.md
 - Desktop content now spans from Quarto's `body-start` grid line to `screen-end`.
 - Responsive edge gutters use `clamp()` instead of large fixed margins.
 - Technical media can use 100% of available width; prose keeps a character-based readability limit.
+
+
+## v7.6
+
+- Desktop layout starts at the left viewport edge with no outer gutter before the TOC.
+- Top navbar height reduced to 48 px and kept flush with the top edge.
+- Search disabled.
+- No public `Project Pages` access exists.
+- Every Portfolio project ends with a Home-style `Open detailed project` button.
+- CV starts with two real PDF download buttons for Research and Engineering/Work versions.
+- The old CV `Downloads` section was removed.

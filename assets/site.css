@@ -1294,3 +1294,232 @@ main.content h2 {
     padding-right: 0.875rem;
   }
 }
+
+
+/* ================================================================
+   VERSION 7.6 — TRUE FULL WINDOW + COMPACT HEADER
+   ================================================================ */
+
+:root {
+  --header-height: 48px;
+  --portfolio-toc-width: clamp(270px, 20vw, 330px);
+  --portfolio-edge-gutter: clamp(0.75rem, 1.15vw, 1.5rem);
+  --portfolio-content-gap: clamp(0.55rem, 0.9vw, 1rem);
+}
+
+/* Browser viewport must be used from edge to edge. */
+html,
+body {
+  width: 100%;
+  min-width: 100%;
+  max-width: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#quarto-header {
+  top: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.navbar {
+  min-height: var(--header-height) !important;
+  height: var(--header-height);
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#quarto-header .navbar-container,
+#quarto-header .container-fluid,
+#quarto-header nav {
+  min-height: var(--header-height);
+  height: var(--header-height);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: .25rem !important;
+  padding-bottom: .25rem !important;
+}
+
+.swiss-controls {
+  height: var(--header-height);
+}
+
+.swiss-icon-button {
+  width: 31px;
+  height: 31px;
+}
+
+/* Remove unnecessary vertical air between navbar and page title. */
+#title-block-header {
+  margin-top: 0 !important;
+  margin-bottom: 1.35rem !important;
+  padding-top: clamp(.65rem, 1.15vw, 1rem) !important;
+}
+
+/*
+   Desktop: bypass Quarto's outer page grid for the actual page body.
+   The TOC starts exactly at the left viewport edge.
+   Main content begins immediately after it and continues to the right edge.
+*/
+@media (min-width: 992px) {
+  #quarto-content,
+  #quarto-content.page-columns {
+    display: block !important;
+    width: 100vw !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  .quarto-margin-sidebar {
+    position: fixed !important;
+    top: var(--header-height) !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: var(--portfolio-toc-width) !important;
+    max-width: var(--portfolio-toc-width) !important;
+    height: calc(100vh - var(--header-height)) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--page-bg);
+    border-right: 1px solid var(--border);
+    z-index: 900;
+  }
+
+  #TOC {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding:
+      clamp(.65rem, 1vw, .9rem)
+      .65rem
+      1.5rem
+      .25rem !important;
+    border-right: 0 !important;
+  }
+
+  #quarto-content > main.content,
+  #quarto-content.page-columns > main.content,
+  main.content {
+    display: block !important;
+    width: calc(100vw - var(--portfolio-toc-width)) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin:
+      0
+      0
+      0
+      var(--portfolio-toc-width) !important;
+    padding:
+      0
+      var(--portfolio-edge-gutter)
+      4rem
+      var(--portfolio-content-gap) !important;
+  }
+
+  main.content > * {
+    max-width: 100%;
+  }
+
+  main.content > p,
+  main.content > ul,
+  main.content > ol,
+  main.content > blockquote {
+    max-width: min(120ch, 100%);
+  }
+
+  .image-slot,
+  .home-intro,
+  .home-metric-grid,
+  .home-step-grid,
+  .home-project-grid,
+  .contact-hero,
+  .contact-grid,
+  .project-grid,
+  .skill-grid,
+  .download-grid,
+  .cv-download-actions,
+  .cell,
+  .cell-output-display,
+  table,
+  .data-slot {
+    width: 100%;
+    max-width: none !important;
+  }
+}
+
+/* Tablet/mobile: page uses the full window with small adaptive gutters. */
+@media (max-width: 991px) {
+  #quarto-content,
+  #quarto-content.page-columns {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  .quarto-margin-sidebar {
+    position: static !important;
+    width: auto !important;
+    max-width: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-right: 0 !important;
+  }
+
+  #quarto-content > main.content,
+  main.content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: clamp(.75rem, 3vw, 1.25rem) !important;
+    padding-right: clamp(.75rem, 3vw, 1.25rem) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #quarto-content > main.content,
+  main.content {
+    padding-left: .75rem !important;
+    padding-right: .75rem !important;
+  }
+}
+
+/* CV actions placed at the very beginning of the page. */
+.cv-download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: .15rem 0 2rem;
+}
+
+.cv-download-actions .home-action {
+  margin: 0;
+}
+
+/* Detailed-project button should visually match the Home action button. */
+.project-detail-button {
+  display: inline-flex;
+  margin-top: .65rem;
+  margin-bottom: 1.35rem;
+}

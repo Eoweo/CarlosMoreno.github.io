@@ -15,7 +15,7 @@ website:
   page-footer:
     left: Carlos Moreno Rojas
     right: Biomedical & Electrical Engineering
-  search: true
+  search: false
 format:
   html:
     theme:

@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v7.5 — Swiss Research`  
+> **Versión base documentada:** `v7.6 — Swiss Research`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -230,14 +230,25 @@ website:
 
 ## REQ-QUARTO-002 — Buscador
 
-**Estado:** `IMPLEMENTADO`  
-**Prioridad:** `P2`
+**Estado:** `ELIMINAR`  
+**Prioridad:** `P1`
 
-El sitio utiliza el buscador nativo de Quarto:
+A partir de v7.6 el sitio **no debe mostrar buscador**.
+
+Configuración obligatoria:
 
 ```yaml
-search: true
+search: false
 ```
+
+No debe aparecer:
+
+- icono de búsqueda;
+- caja de búsqueda;
+- overlay de búsqueda;
+- acceso de búsqueda en el navbar.
+
+> **Cambio v7.6:** se elimina para simplificar la barra superior y reducir elementos que no aportan a la navegación principal.
 
 ---
 
@@ -1354,17 +1365,19 @@ English
 
 ## REQ-CV-009 — Descargas PDF
 
-**Estado:** `PENDIENTE`  
-**Prioridad:** `P2`
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
 
-La estructura contempla:
+Existen dos archivos descargables:
 
 ```text
-Research CV
-Engineering CV
+assets/cv/Carlos_Moreno_Research_CV.pdf
+assets/cv/Carlos_Moreno_Engineering_CV.pdf
 ```
 
-Falta incorporar los archivos PDF reales.
+Los botones deben estar al inicio de `cv.qmd`, antes de `Professional Profile`.
+
+No debe existir una sección `Downloads` al final del CV.
 
 ---
 
@@ -3334,6 +3347,211 @@ Small mobile < 520 px
 ---
 
 
+
+# 23G. Requisitos introducidos en v7.6
+
+## REQ-LAYOUT-006 — La página debe comenzar en el borde izquierdo de la ventana
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+En desktop no debe existir un gutter externo antes de la navegación lateral.
+
+La geometría debe ser:
+
+```text
+x = 0
+│
+├── TOC / lista izquierda
+│
+└── contenido principal → hasta el borde derecho
+```
+
+El TOC debe utilizar:
+
+```css
+left: 0;
+margin: 0;
+```
+
+y el layout general no debe conservar márgenes externos de la grilla de Quarto.
+
+---
+
+## REQ-LAYOUT-007 — Layout desktop independiente de la grilla externa de Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Para garantizar uso completo de la ventana en desktop:
+
+```text
+#quarto-content
+→ width: 100vw
+
+TOC
+→ fixed al borde izquierdo
+
+main.content
+→ margin-left = ancho del TOC
+→ width = 100vw - ancho del TOC
+```
+
+Ancho responsive del TOC:
+
+```css
+--portfolio-toc-width: clamp(270px, 20vw, 330px);
+```
+
+El contenido debe usar el resto real de la ventana.
+
+---
+
+## REQ-NAV-018 — Barra superior compacta y pegada al borde superior
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La barra superior debe comenzar en:
+
+```text
+top: 0
+```
+
+sin espacio vacío superior.
+
+Altura objetivo actual:
+
+```css
+--header-height: 48px;
+```
+
+Se deben eliminar paddings verticales excesivos del navbar y reducir el espacio entre navbar y título de página.
+
+---
+
+## REQ-NAV-019 — No debe existir ningún acceso público a Project Pages
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Desde v7.5 `Project Pages` dejó de formar parte de la arquitectura.
+
+En v7.6 se reafirma:
+
+```text
+navbar          → sin Project Pages
+Home            → sin Project Pages
+Portfolio       → acceso directo a páginas individuales
+projects/index  → no existe
+```
+
+No debe existir un botón, enlace de navbar ni acceso visual llamado `Project Pages`.
+
+---
+
+## REQ-PORTFOLIO-NAV-002 — Botón de detalle al final de cada proyecto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Cada uno de los ocho proyectos resumidos en `portfolio.qmd` debe terminar con un botón:
+
+```text
+OPEN DETAILED PROJECT →
+```
+
+El botón debe usar el mismo sistema visual de botones de `index.qmd`:
+
+```text
+.home-action
+.primary
+.project-detail-button
+```
+
+Debe aparecer **al final del contenido de ese proyecto y antes del separador / siguiente proyecto**.
+
+Proyectos:
+
+```text
+Master's Research
+CYBATHLON
+CandelStim
+Borealis
+Preservation Machine
+U-Net
+FPGA
+Vscan Air
+```
+
+---
+
+## REQ-CV-010 — Dos botones de descarga al inicio del CV
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Al comienzo de `cv.qmd`, inmediatamente después del encabezado de página y antes de `Professional Profile`, deben existir dos botones:
+
+```text
+DOWNLOAD RESEARCH CV
+DOWNLOAD ENGINEERING / WORK CV
+```
+
+Destinos:
+
+```text
+assets/cv/Carlos_Moreno_Research_CV.pdf
+assets/cv/Carlos_Moreno_Engineering_CV.pdf
+```
+
+Los botones deben utilizar estilo Swiss y atributo de descarga.
+
+---
+
+## REQ-CV-011 — Eliminar sección Downloads al final del CV
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+No debe existir:
+
+```text
+# Downloads
+```
+
+ni subsecciones de descarga al final de `cv.qmd`.
+
+La única interfaz pública de descarga del CV son los dos botones iniciales definidos en `REQ-CV-010`.
+
+---
+
+## REQ-SEARCH-001 — Sitio sin buscador
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+La configuración debe utilizar:
+
+```yaml
+search: false
+```
+
+La barra superior se reserva para:
+
+```text
+Carlos Moreno Rojas
+Portfolio
+CV
+Contact
+Swiss Controls
+```
+
+No se incorpora búsqueda mientras este requisito permanezca vigente.
+
+---
+
+
 # 24. Requisitos pendientes conocidos
 
 Esta sección representa trabajo todavía no terminado.
@@ -3346,8 +3564,6 @@ Esta sección representa trabajo todavía no terminado.
 | REQ-PEND-004 | Agregar LinkedIn público | PENDIENTE | P1 |
 | REQ-PEND-005 | Agregar ORCID si corresponde | PENDIENTE | P2 |
 | REQ-PEND-006 | Agregar Google Scholar si corresponde | PENDIENTE | P2 |
-| REQ-PEND-007 | Incorporar CV Research PDF | PENDIENTE | P2 |
-| REQ-PEND-008 | Incorporar CV Engineering PDF | PENDIENTE | P2 |
 | REQ-PEND-009 | Revisar alt text de imágenes | PENDIENTE | P1 |
 | REQ-PEND-010 | Optimizar imágenes finales | PENDIENTE | P1 |
 | REQ-PEND-011 | Revisión WCAG formal | VALIDAR | P1 |
@@ -3534,6 +3750,10 @@ Utilizar esta tabla para mantener trazabilidad.
 | v7.4 | 2026-09-11 | Diagrama y análisis de estructura de páginas | REQ-ARCH-005/006/007 | IMPLEMENTADO / VALIDAR |
 | v7.5 | 2026-09-11 | Eliminación de Project Pages y Portfolio como índice único | REQ-ARCH-007/008, REQ-NAV-017, REQ-PORTFOLIO-NAV-001 | IMPLEMENTADO |
 | v7.5 | 2026-09-11 | Contenido realmente full-width y gutters responsive | REQ-LAYOUT-002/003/004/005 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Layout sin gutter izquierdo y header compacto | REQ-LAYOUT-006/007, REQ-NAV-018 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Eliminación definitiva de Project Pages y buscador | REQ-NAV-019, REQ-SEARCH-001, REQ-QUARTO-002 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Botones de detalle al final de cada proyecto | REQ-PORTFOLIO-NAV-002 | IMPLEMENTADO |
+| v7.6 | 2026-09-11 | Descargas de CV al inicio y eliminación de sección Downloads | REQ-CV-009/010/011 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -3589,6 +3809,12 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 42. Cada proyecto del Portfolio debe tener acceso directo a su página detallada.
 43. En desktop el contenido debe abarcar body-start → screen-end y aprovechar la pantalla disponible.
 44. Los gutters deben ser dinámicos mediante clamp(), no márgenes fijos grandes.
+45. No debe existir espacio externo antes del TOC izquierdo en desktop.
+46. La barra superior debe comenzar en top:0 y mantener una altura compacta.
+47. No debe existir ningún acceso público llamado Project Pages.
+48. Cada proyecto del Portfolio debe terminar con su botón de detalle.
+49. CV debe comenzar con los dos botones de descarga y no tener sección Downloads al final.
+50. El sitio no debe mostrar buscador.
 ```
 
 ---
@@ -3648,7 +3874,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v7.5 Swiss Research
+Version: v7.6 Swiss Research
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
