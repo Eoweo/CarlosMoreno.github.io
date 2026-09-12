@@ -113,10 +113,10 @@
       safeSet("swiss-reduce-motion", on ? "1" : "0");
 
       if (on) {
-        document.querySelectorAll(".swiss-reveal").forEach(function (el) {
-          el.classList.add("swiss-shown");
-        });
+        animationState.reducedMotion = true;
+        forceRevealAll("manual-reduced-motion");
       } else {
+        animationState.reducedMotion = prefersReducedMotion();
         revealOnScroll();
       }
     });
@@ -165,25 +165,31 @@
   }
 
   /* --------------------------------------------------------------
-     Swiss Wipe reveal animation — v8.5
+     Swiss Wipe reveal animation — v8.6
 
-     Primary trigger: IntersectionObserver.
-     Fallback trigger: requestAnimationFrame + getBoundingClientRect.
+     WHY v8.6:
+     v8.5 showed transitionStarted=true for hidden pending sections but
+     triggered=0. The CSS transition was starting when content was hidden,
+     while IntersectionObserver never delivered the reveal trigger.
 
-     The reference animation is kept:
+     NEW METHOD:
+       1. requestAnimationFrame + getBoundingClientRect is the PRIMARY trigger.
+       2. Element.animate() (Web Animations API) performs the wipe.
+       3. A watchdog scan catches late layout changes / missed scroll events.
+       4. CSS never owns the hidden state or transition timing.
+
+     Reference visual is preserved:
        clip-path inset(0 100% 0 0) -> inset(0 0 0 0)
        opacity 0 -> 1
-
-     Fail-safe rule: content is visible before swiss-js-ready exists.
      -------------------------------------------------------------- */
   let revealTargets = [];
-  let revealObserver = null;
-  let revealFallbackMode = false;
   let revealRecordMap = new WeakMap();
+  let revealScanScheduled = false;
+  let revealWatchdogId = null;
 
   const animationState = {
     initialized: false,
-    mode: "not-initialized",
+    mode: "raf-waapi",
     total: 0,
     initiallyVisible: 0,
     pending: 0,
@@ -192,9 +198,11 @@
     completed: 0,
     canceled: 0,
     failed: 0,
+    watchdogScans: 0,
     reducedMotion: false,
     clipPathSupported: false,
-    intersectionObserverSupported: "IntersectionObserver" in window,
+    webAnimationsSupported: !!(Element && Element.prototype && Element.prototype.animate),
+    requestAnimationFrameSupported: "requestAnimationFrame" in window,
     records: []
   };
 
@@ -215,7 +223,7 @@
     const ownHeading = el.matches && el.matches("h1, h2, h3") ? el : null;
     const labelSource = ownHeading || heading;
     const label = labelSource
-      ? (labelSource.textContent || "").trim().slice(0, 90)
+      ? (labelSource.textContent || "").trim().slice(0, 100)
       : ((el.getAttribute && (el.getAttribute("aria-label") || el.id)) || el.tagName || "block");
 
     return {
@@ -226,14 +234,17 @@
       initial: false,
       pending: false,
       triggered: false,
-      transitionStarted: false,
-      transitionEnded: false,
-      transitionCanceled: false,
+      animationStarted: false,
+      animationFinished: false,
+      animationCanceled: false,
       finalStateVerified: false,
       failed: false,
       trigger: null,
       triggeredAt: null,
-      completedAt: null
+      completedAt: null,
+      lastTop: null,
+      lastBottom: null,
+      animationObject: null
     };
   }
 
@@ -256,15 +267,14 @@
     const result = [];
     const seen = new Set();
 
-    // Page title is one reveal unit.
     addRevealTarget(result, seen, document.querySelector("#title-block-header"));
 
-    // Match the supplied reference: reveal logical page sections as blocks.
+    // Quarto sections are the primary reveal units, matching the reference demo.
     content.querySelectorAll("section").forEach(function (section) {
       addRevealTarget(result, seen, section);
     });
 
-    // Some Quarto/custom pages have meaningful top-level blocks outside sections.
+    // Meaningful top-level content outside <section> still participates.
     Array.from(content.children).forEach(function (el) {
       if (el.tagName === "SECTION") return;
       if (el.matches && el.matches("script, style, link")) return;
@@ -282,30 +292,6 @@
     });
 
     return result;
-  }
-
-  function syncAnimationState() {
-    animationState.pending = animationState.records.filter(function (r) {
-      return r.pending && !r.triggered;
-    }).length;
-    animationState.triggered = animationState.records.filter(function (r) {
-      return r.triggered;
-    }).length;
-    animationState.started = animationState.records.filter(function (r) {
-      return r.transitionStarted;
-    }).length;
-    animationState.completed = animationState.records.filter(function (r) {
-      return r.transitionEnded && r.finalStateVerified && !r.failed;
-    }).length;
-    animationState.canceled = animationState.records.filter(function (r) {
-      return r.transitionCanceled;
-    }).length;
-    animationState.failed = animationState.records.filter(function (r) {
-      return r.failed;
-    }).length;
-
-    window.__portfolioAnimationTest = getAnimationTestSnapshot();
-    updateAnimationDebugPanel();
   }
 
   function normalizedClipPath(value) {
@@ -328,11 +314,75 @@
       clip === "inset(0%)" ||
       clip === "inset(0% 0% 0% 0%)";
 
-    return {
-      ok: opacityOK && clipOK,
-      opacity: opacity,
-      clipPath: clip
-    };
+    return { ok: opacityOK && clipOK, opacity: opacity, clipPath: clip };
+  }
+
+  function syncAnimationState() {
+    animationState.pending = animationState.records.filter(function (r) {
+      return r.pending && !r.triggered;
+    }).length;
+    animationState.triggered = animationState.records.filter(function (r) {
+      return r.triggered;
+    }).length;
+    animationState.started = animationState.records.filter(function (r) {
+      return r.animationStarted;
+    }).length;
+    animationState.completed = animationState.records.filter(function (r) {
+      return r.animationFinished && r.finalStateVerified && !r.failed;
+    }).length;
+    animationState.canceled = animationState.records.filter(function (r) {
+      return r.animationCanceled;
+    }).length;
+    animationState.failed = animationState.records.filter(function (r) {
+      return r.failed;
+    }).length;
+
+    window.__portfolioAnimationTest = getAnimationTestSnapshot();
+    updateAnimationDebugPanel();
+  }
+
+  function clearHiddenInlineState(el) {
+    el.style.opacity = "1";
+    el.style.clipPath = "none";
+    el.style.webkitClipPath = "none";
+    el.style.willChange = "auto";
+    el.classList.remove("swiss-waapi-pending", "swiss-waapi-animating");
+    el.classList.add("swiss-shown", "swiss-animation-done");
+  }
+
+  function preparePendingTarget(el, record) {
+    // No CSS transition: hiding cannot be mistaken for a reveal animation.
+    el.classList.add("swiss-waapi-pending");
+    el.style.opacity = "0";
+    if (animationState.clipPathSupported) {
+      el.style.clipPath = "inset(0 100% 0 0)";
+      el.style.webkitClipPath = "inset(0 100% 0 0)";
+    }
+    el.style.willChange = animationState.clipPathSupported
+      ? "clip-path, opacity"
+      : "opacity";
+    record.pending = true;
+  }
+
+  function forceRevealTarget(el, reason) {
+    const record = revealRecordMap.get(el);
+    if (record && record.animationObject) {
+      try { record.animationObject.cancel(); } catch (e) {}
+      record.animationObject = null;
+    }
+    clearHiddenInlineState(el);
+    if (record) {
+      record.pending = false;
+      if (!record.trigger) record.trigger = reason || "forced-visible";
+      record.finalStateVerified = true;
+    }
+  }
+
+  function forceRevealAll(reason) {
+    revealTargets.forEach(function (el) {
+      forceRevealTarget(el, reason || "force-all");
+    });
+    syncAnimationState();
   }
 
   function verifyRevealTarget(el) {
@@ -343,126 +393,162 @@
     record.finalStateVerified = finalState.ok;
     record.finalOpacity = finalState.opacity;
     record.finalClipPath = finalState.clipPath;
-
-    // A real animated target must have started and ended a CSS transition.
-    const transitionObserved = record.transitionStarted && record.transitionEnded;
-    record.failed = !(finalState.ok && transitionObserved);
+    record.failed = !(finalState.ok && record.animationStarted && record.animationFinished);
 
     if (!record.failed) {
       record.completedAt = Math.round(performance.now());
-      el.classList.add("swiss-animation-done");
     }
+    syncAnimationState();
+  }
+
+  function finishRevealAnimation(el, record, animation) {
+    // Commit a clean static final state, then release the WAAPI animation.
+    clearHiddenInlineState(el);
+    record.pending = false;
+    record.animationFinished = true;
+    record.animationObject = null;
+
+    try { animation.cancel(); } catch (e) {}
+
+    window.requestAnimationFrame(function () {
+      verifyRevealTarget(el);
+    });
+  }
+
+  function animateRevealTarget(el, trigger) {
+    if (!el) return;
+    const record = revealRecordMap.get(el);
+    if (!record || record.initial || record.triggered) return;
+
+    record.triggered = true;
+    record.trigger = trigger;
+    record.triggeredAt = Math.round(performance.now());
+    record.pending = false;
+    el.classList.remove("swiss-waapi-pending");
+    el.classList.add("swiss-waapi-animating");
+
+    if (animationState.reducedMotion) {
+      forceRevealTarget(el, "reduced-motion");
+      syncAnimationState();
+      return;
+    }
+
+    // If Web Animations API is unavailable, fail visible rather than hidden.
+    if (!animationState.webAnimationsSupported || typeof el.animate !== "function") {
+      clearHiddenInlineState(el);
+      record.animationStarted = false;
+      record.animationFinished = false;
+      record.finalStateVerified = true;
+      record.failed = false;
+      record.fallbackVisible = true;
+      syncAnimationState();
+      return;
+    }
+
+    const fromFrame = { opacity: 0 };
+    const toFrame = { opacity: 1 };
+
+    if (animationState.clipPathSupported) {
+      fromFrame.clipPath = "inset(0 100% 0 0)";
+      toFrame.clipPath = "inset(0 0 0 0)";
+    }
+
+    let animation;
+    try {
+      animation = el.animate([fromFrame, toFrame], {
+        duration: 700,
+        easing: "cubic-bezier(.77, 0, .18, 1)",
+        fill: "forwards"
+      });
+    } catch (error) {
+      clearHiddenInlineState(el);
+      record.failed = false;
+      record.fallbackVisible = true;
+      record.error = String(error && error.message ? error.message : error);
+      syncAnimationState();
+      return;
+    }
+
+    record.animationObject = animation;
+    record.animationStarted = true;
+    syncAnimationState();
+
+    animation.finished.then(function () {
+      finishRevealAnimation(el, record, animation);
+    }).catch(function () {
+      // Cancellation caused by Reduced Motion or cleanup is not a hidden-state failure.
+      record.animationCanceled = true;
+      clearHiddenInlineState(el);
+      record.animationObject = null;
+      syncAnimationState();
+    });
+
+    // Independent safety: content can never remain hidden indefinitely.
+    window.setTimeout(function () {
+      if (!record.animationFinished && !record.finalStateVerified) {
+        const state = finalVisualStateIsCorrect(el);
+        if (!state.ok) {
+          forceRevealTarget(el, "animation-timeout-safety");
+          record.safetyReveal = true;
+          syncAnimationState();
+        }
+      }
+    }, 1100);
+  }
+
+  function scanRevealTargets(source) {
+    if (!revealTargets.length || animationState.reducedMotion) return;
+
+    const triggerLine = window.innerHeight * 0.90;
+
+    revealTargets.forEach(function (el) {
+      const record = revealRecordMap.get(el);
+      if (!record || record.initial || record.triggered) return;
+
+      const rect = el.getBoundingClientRect();
+      record.lastTop = Math.round(rect.top * 10) / 10;
+      record.lastBottom = Math.round(rect.bottom * 10) / 10;
+
+      // Original reference logic: once the top crosses 90% viewport,
+      // reveal it. Elements already passed above the viewport are also
+      // revealed, preventing permanently hidden sections after jumps.
+      if (rect.top < triggerLine) {
+        animateRevealTarget(el, source || "raf-scan");
+      }
+    });
 
     syncAnimationState();
   }
 
-  function attachTransitionInstrumentation(el, record) {
-    function relevant(event) {
-      return event.propertyName === "clip-path" ||
-             event.propertyName === "-webkit-clip-path" ||
-             event.propertyName === "opacity";
-    }
-
-    el.addEventListener("transitionrun", function (event) {
-      if (!relevant(event) || record.initial) return;
-      if (!record.transitionStarted) record.transitionStarted = true;
-      syncAnimationState();
-    });
-
-    el.addEventListener("transitionstart", function (event) {
-      if (!relevant(event) || record.initial) return;
-      if (!record.transitionStarted) record.transitionStarted = true;
-      syncAnimationState();
-    });
-
-    el.addEventListener("transitionend", function (event) {
-      if (!relevant(event) || record.initial) return;
-
-      // clip-path is the longest transition; use it as the definitive end
-      // when supported. Otherwise use opacity.
-      const definitive = animationState.clipPathSupported
-        ? (event.propertyName === "clip-path" || event.propertyName === "-webkit-clip-path")
-        : event.propertyName === "opacity";
-
-      if (!definitive) return;
-      record.transitionEnded = true;
-      window.setTimeout(function () {
-        verifyRevealTarget(el);
-      }, 20);
-    });
-
-    el.addEventListener("transitioncancel", function (event) {
-      if (!relevant(event) || record.initial) return;
-      record.transitionCanceled = true;
-      syncAnimationState();
-    });
-  }
-
-  function revealTarget(el, trigger) {
-    if (!el || el.classList.contains("swiss-shown")) return;
-
-    const record = revealRecordMap.get(el);
-    if (record && !record.triggered) {
-      record.triggered = true;
-      record.trigger = trigger;
-      record.triggeredAt = Math.round(performance.now());
-    }
-
-    // One animation frame keeps the hidden state committed before reveal.
+  function scheduleRevealScan(source) {
+    if (revealScanScheduled) return;
+    revealScanScheduled = true;
     window.requestAnimationFrame(function () {
-      el.classList.add("swiss-shown");
-      syncAnimationState();
-
-      // Independent timeout catches missing transitionend / interrupted CSS.
-      window.setTimeout(function () {
-        const rec = revealRecordMap.get(el);
-        if (rec && !rec.initial && !rec.finalStateVerified) {
-          verifyRevealTarget(el);
-        }
-      }, 900);
-    });
-  }
-
-  function fallbackRevealScan() {
-    if (!revealTargets.length || animationState.reducedMotion) return;
-
-    const triggerLine = window.innerHeight * 0.90;
-    revealTargets.forEach(function (el) {
-      if (el.classList.contains("swiss-shown")) return;
-      if (el.getBoundingClientRect().top < triggerLine) {
-        revealTarget(el, "scroll-fallback");
-      }
+      revealScanScheduled = false;
+      scanRevealTargets(source || "requestAnimationFrame");
     });
   }
 
   function revealOnScroll() {
-    // Kept for integration with the existing main loop and controls.
-    // IntersectionObserver is primary; scroll scanning is fallback only.
-    if (revealFallbackMode) fallbackRevealScan();
+    scheduleRevealScan("scroll-raf");
   }
 
-  function buildRevealObserver() {
-    if (!("IntersectionObserver" in window)) {
-      revealFallbackMode = true;
-      animationState.mode = "scroll-fallback";
-      return null;
-    }
-
-    revealFallbackMode = false;
-    animationState.mode = "intersection-observer";
-
-    return new IntersectionObserver(function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        revealTarget(entry.target, "intersection-observer");
-        observer.unobserve(entry.target);
+  function startRevealWatchdog() {
+    if (revealWatchdogId) window.clearInterval(revealWatchdogId);
+    revealWatchdogId = window.setInterval(function () {
+      const stillPending = animationState.records.some(function (r) {
+        return r.pending && !r.triggered;
       });
-    }, {
-      root: null,
-      // Trigger when the target enters approximately the first 90% of viewport.
-      rootMargin: "0px 0px -10% 0px",
-      threshold: 0.01
-    });
+
+      if (!stillPending) {
+        window.clearInterval(revealWatchdogId);
+        revealWatchdogId = null;
+        return;
+      }
+
+      animationState.watchdogScans += 1;
+      scanRevealTargets("watchdog");
+    }, 450);
   }
 
   function getAnimationTestSnapshot() {
@@ -491,17 +577,21 @@
       pass = true;
     }
 
+    const visibleButPending = animationState.records.filter(function (r) {
+      return r.pending && !r.triggered && typeof r.lastTop === "number" && r.lastTop < window.innerHeight * 0.90;
+    }).length;
+
     return {
       status: status,
       pass: pass,
-      debug: params.get("animation-debug") === "1" || params.get("animation-test") === "1",
-      autoTest: params.get("animation-test") === "1",
+      debug: params.get("animation-debug") === "1" || params.has("animation-test"),
+      autoTest: params.get("animation-test") || null,
       mode: animationState.mode,
       reducedMotion: animationState.reducedMotion,
       support: {
-        intersectionObserver: animationState.intersectionObserverSupported,
+        webAnimations: animationState.webAnimationsSupported,
         clipPath: animationState.clipPathSupported,
-        transitionEvents: "ontransitionend" in document.documentElement
+        requestAnimationFrame: animationState.requestAnimationFrameSupported
       },
       counts: {
         total: animationState.total,
@@ -511,17 +601,21 @@
         started: animationState.started,
         completed: animationState.completed,
         canceled: animationState.canceled,
-        failed: animationState.failed
+        failed: animationState.failed,
+        watchdogScans: animationState.watchdogScans,
+        visibleButPending: visibleButPending
       },
       records: animationState.records.map(function (r) {
-        return Object.assign({}, r);
+        const copy = Object.assign({}, r);
+        delete copy.animationObject;
+        return copy;
       })
     };
   }
 
   function updateAnimationDebugPanel() {
     const params = new URLSearchParams(window.location.search);
-    if (params.get("animation-debug") !== "1" && params.get("animation-test") !== "1") return;
+    if (params.get("animation-debug") !== "1" && !params.has("animation-test")) return;
 
     const snapshot = getAnimationTestSnapshot();
     window.__portfolioAnimationTest = snapshot;
@@ -534,8 +628,8 @@
         position: "fixed",
         left: "10px",
         bottom: "10px",
-        width: "min(520px, 46vw)",
-        maxHeight: "56vh",
+        width: "min(540px, 46vw)",
+        maxHeight: "58vh",
         overflow: "auto",
         zIndex: "99998",
         padding: "12px",
@@ -562,32 +656,51 @@
       JSON.stringify(snapshot, null, 2);
   }
 
+  function findAnimationTestCandidate(value) {
+    const pending = revealTargets.filter(function (el) {
+      const r = revealRecordMap.get(el);
+      return r && !r.initial && !r.triggered;
+    });
+
+    if (!value || value === "1" || value === "true") return pending[0] || null;
+
+    const needle = decodeURIComponent(value).toLowerCase();
+    return pending.find(function (el) {
+      const r = revealRecordMap.get(el);
+      return r && String(r.label || "").toLowerCase().includes(needle);
+    }) || pending[0] || null;
+  }
+
   function runAutomaticAnimationTest() {
     const params = new URLSearchParams(window.location.search);
-    if (params.get("animation-test") !== "1") return;
+    if (!params.has("animation-test")) return;
     if (animationState.reducedMotion) {
-      syncAnimationState();
+      forceRevealAll("auto-test-reduced-motion");
       return;
     }
 
-    const candidate = revealTargets.find(function (el) {
-      const r = revealRecordMap.get(el);
-      return r && r.pending && !r.triggered;
-    });
-
+    const candidate = findAnimationTestCandidate(params.get("animation-test"));
     if (!candidate) {
       syncAnimationState();
       return;
     }
 
+    const record = revealRecordMap.get(candidate);
     candidate.style.outline = "2px dashed #d63230";
     candidate.style.outlineOffset = "4px";
     candidate.scrollIntoView({ behavior: "auto", block: "center" });
 
     window.setTimeout(function () {
-      verifyRevealTarget(candidate);
-      updateAnimationDebugPanel();
-    }, 1000);
+      scheduleRevealScan("auto-test");
+    }, 30);
+
+    window.setTimeout(function () {
+      const state = finalVisualStateIsCorrect(candidate);
+      if (record && !record.animationFinished && !state.ok) {
+        record.failed = true;
+      }
+      syncAnimationState();
+    }, 950);
   }
 
   function initReveal() {
@@ -598,61 +711,50 @@
       window.CSS && CSS.supports && CSS.supports("clip-path", "inset(0 100% 0 0)")
     );
 
+    const initialCutoff = window.innerHeight * 0.95;
+
     revealTargets.forEach(function (el, index) {
       const record = animationDescriptor(el, index);
       revealRecordMap.set(el, record);
       animationState.records.push(record);
       el.dataset.swissRevealId = record.id;
-      attachTransitionInstrumentation(el, record);
-    });
 
-    const initialCutoff = window.innerHeight * 0.95;
-
-    revealTargets.forEach(function (el) {
-      const record = revealRecordMap.get(el);
       const rect = el.getBoundingClientRect();
+      record.lastTop = Math.round(rect.top * 10) / 10;
+      record.lastBottom = Math.round(rect.bottom * 10) / 10;
 
       if (animationState.reducedMotion || rect.top < initialCutoff) {
-        el.classList.add("swiss-shown");
+        clearHiddenInlineState(el);
         record.initial = true;
         record.finalStateVerified = true;
         animationState.initiallyVisible += 1;
       } else {
-        el.classList.add("swiss-pending");
-        record.pending = true;
+        preparePendingTarget(el, record);
       }
     });
 
-    // Only now can pending targets become hidden. If JS failed before this
-    // point, all content would still be visible.
+    // This class is retained only as an initialization marker; CSS does not
+    // use it to hide content in v8.6.
     document.body.classList.add("swiss-js-ready");
 
     if (animationState.reducedMotion) {
       animationState.mode = "reduced-motion";
-      revealTargets.forEach(function (el) {
-        el.classList.add("swiss-shown");
-      });
+      forceRevealAll("reduced-motion-init");
     } else {
-      revealObserver = buildRevealObserver();
-      if (revealObserver) {
-        revealTargets.forEach(function (el) {
-          const record = revealRecordMap.get(el);
-          if (record && record.pending && !record.triggered) {
-            revealObserver.observe(el);
-          }
-        });
-      } else {
-        fallbackRevealScan();
-      }
+      animationState.mode = animationState.webAnimationsSupported
+        ? "raf-waapi"
+        : "raf-visible-fallback";
+      scheduleRevealScan("initial-scan");
+      startRevealWatchdog();
     }
 
     animationState.initialized = true;
     syncAnimationState();
 
     window.setTimeout(function () {
-      if (revealFallbackMode) fallbackRevealScan();
-      updateAnimationDebugPanel();
+      scheduleRevealScan("post-init");
       runAutomaticAnimationTest();
+      updateAnimationDebugPanel();
     }, 180);
   }
 
@@ -1339,18 +1441,9 @@
   /* --------------------------------------------------------------
      Main loop
      -------------------------------------------------------------- */
-  let ticking = false;
-
   function onScroll() {
-    // IntersectionObserver owns reveal triggering in modern browsers.
-    // The RAF scroll loop is retained only for the fallback path.
-    if (!revealFallbackMode || ticking) return;
-    ticking = true;
-
-    window.requestAnimationFrame(function () {
-      revealOnScroll();
-      ticking = false;
-    });
+    // v8.6 primary path: every scroll schedules one RAF geometry scan.
+    revealOnScroll();
   }
 
   function init() {
@@ -1374,13 +1467,13 @@
     // Re-apply after both short and long settle windows.
     window.setTimeout(function () {
       enforceRuntimeDesktopGeometry();
-      revealOnScroll();
+      scheduleRevealScan("layout-settle-80");
       runLayoutSelfTest();
     }, 80);
 
     window.setTimeout(function () {
       enforceRuntimeDesktopGeometry();
-      revealOnScroll();
+      scheduleRevealScan("layout-settle-400");
       runLayoutSelfTest();
     }, 400);
   }

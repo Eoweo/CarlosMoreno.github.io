@@ -833,15 +833,19 @@ pre {
 }
 
 /* ================================================================
-   VERSION 8.5 — SWISS WIPE REVEAL ANIMATION
+   VERSION 8.6 — SWISS WIPE VIA WEB ANIMATIONS API
 
-   Reference style:
-     hidden  -> clip-path: inset(0 100% 0 0), opacity 0
-     shown   -> clip-path: inset(0 0 0 0), opacity 1
+   Trigger method:
+     requestAnimationFrame + getBoundingClientRect on every scroll/resize
+     plus a low-frequency watchdog scan.
 
-   Fail-safe:
-   content is visible by default. JS only hides below-fold targets
-   after it has successfully initialized the observer.
+   Animation engine:
+     Element.animate() (Web Animations API).
+
+   IMPORTANT:
+   CSS never hides future content. Pending elements are hidden only by
+   JavaScript after the animation controller has initialized correctly.
+   If JS fails, all content remains visible.
    ================================================================ */
 
 .swiss-reveal {
@@ -850,39 +854,16 @@ pre {
   clip-path: none;
 }
 
-/* Pending targets only become hidden after JS is ready. */
-body.swiss-js-ready .swiss-reveal.swiss-pending {
-  transition:
-    clip-path .70s cubic-bezier(.77, 0, .18, 1),
-    opacity .40s ease;
+/* WAAPI owns timing. There are deliberately NO CSS transitions here. */
+.swiss-reveal.swiss-waapi-pending,
+.swiss-reveal.swiss-waapi-animating {
+  transform: none;
 }
 
-body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  will-change: clip-path, opacity;
-}
-
-body.swiss-js-ready .swiss-reveal.swiss-pending.swiss-shown {
+.swiss-reveal.swiss-animation-done {
   opacity: 1;
-  clip-path: inset(0 0 0 0);
-}
-
-body.swiss-js-ready .swiss-reveal.swiss-animation-done {
+  clip-path: none;
   will-change: auto;
-}
-
-/* Fallback when clip-path is unavailable: retain the opacity reveal. */
-@supports not (clip-path: inset(0 0 0 0)) {
-  body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
-    clip-path: none;
-    opacity: 0;
-  }
-
-  body.swiss-js-ready .swiss-reveal.swiss-pending.swiss-shown {
-    clip-path: none;
-    opacity: 1;
-  }
 }
 
 /* Existing manual Reduced Motion control. */
@@ -895,24 +876,26 @@ body.swiss-reduce-motion *::after {
 }
 
 body.swiss-reduce-motion .swiss-reveal,
-body.swiss-reduce-motion.swiss-js-ready .swiss-reveal {
+body.swiss-reduce-motion .swiss-reveal.swiss-waapi-pending,
+body.swiss-reduce-motion .swiss-reveal.swiss-waapi-animating {
   opacity: 1 !important;
   transform: none !important;
   clip-path: none !important;
   transition: none !important;
+  animation: none !important;
   will-change: auto !important;
 }
 
 /* Respect the operating-system accessibility preference as well. */
 @media (prefers-reduced-motion: reduce) {
   .swiss-reveal,
-  body.swiss-js-ready .swiss-reveal,
-  body.swiss-js-ready .swiss-reveal.swiss-pending,
-  body.swiss-js-ready .swiss-reveal.swiss-pending:not(.swiss-shown) {
+  .swiss-reveal.swiss-waapi-pending,
+  .swiss-reveal.swiss-waapi-animating {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
     transition: none !important;
+    animation: none !important;
     will-change: auto !important;
   }
 }

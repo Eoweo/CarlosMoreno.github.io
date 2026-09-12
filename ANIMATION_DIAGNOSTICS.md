@@ -1,104 +1,109 @@
-# Animation diagnostics — v8.5
+# Animation Diagnostics — v8.6
 
-## Estilo implementado
+## Causa confirmada del fallo de v8.5
 
-Swiss Wipe horizontal:
-
-```text
-hidden  : clip-path inset(0 100% 0 0), opacity 0
-visible : clip-path inset(0 0 0 0), opacity 1
-```
-
-Trigger principal:
+El log real de `Monitoring` mostró:
 
 ```text
-IntersectionObserver
-rootMargin = 0px 0px -10% 0px
-threshold  = 0.01
+initial = false
+pending = true
+triggered = false
+transitionStarted = true
+transitionEnded = false
 ```
 
-El listener scroll + requestAnimationFrame existe únicamente como fallback.
-
-## Test pasivo
-
-Abrir cualquier página con:
+Y el resumen global mostró:
 
 ```text
-?animation-debug=1
+pending   = 25
+triggered = 0
+started   = 25
+completed = 0
 ```
 
-Al cargar, el panel puede indicar:
+Esto demuestra dos problemas:
+
+1. La transición comenzaba al aplicar el estado oculto (`pending`), por eso `started=25` aunque ningún bloque fue revelado.
+2. `IntersectionObserver` no entregó triggers para los bloques posteriores, por lo que `Monitoring` y el resto quedaron ocultos.
+
+## Método v8.6
+
+### Trigger
 
 ```text
-ANIMATION WAITING
+scroll / resize / watchdog
+        ↓
+requestAnimationFrame
+        ↓
+getBoundingClientRect()
+        ↓
+rect.top < 90% viewport
+        ↓
+Element.animate()
 ```
 
-Esto es correcto si aún no se ha hecho scroll hasta una sección pendiente.
-
-Al bajar hasta una sección nueva, el resultado esperado es:
+### Animación
 
 ```text
-ANIMATION PASS
+clip-path: inset(0 100% 0 0) → inset(0 0 0 0)
+opacity:   0                    → 1
 ```
 
-El objeto completo también queda disponible en:
+La animación se ejecuta con Web Animations API, no CSS transitions.
 
-```javascript
-window.__portfolioAnimationTest
-```
-
-## Test automático
+## Prueba específica de Monitoring
 
 Abrir:
 
 ```text
-?animation-test=1
+portfolio.html?animation-debug=1&animation-test=monitoring
 ```
 
-El sitio buscará el primer bloque below-fold pendiente, hará scroll automático y verificará una animación real.
-
-Resultado correcto:
+Resultado esperado:
 
 ```text
-status = PASS
-pass   = true
-counts.started   >= 1
-counts.completed >= 1
-counts.failed    = 0
+ANIMATION PASS
+mode = raf-waapi
+visibleButPending = 0
 ```
 
-## Qué significa PASS
-
-No basta con encontrar la clase `swiss-shown`.
-
-PASS requiere:
+En el registro `Monitoring`:
 
 ```text
-transitionrun / transitionstart detectado
-transitionend detectado
-opacity final >= 0.99
-clip-path final visible
+triggered = true
+animationStarted = true
+animationFinished = true
+finalStateVerified = true
+failed = false
 ```
 
-## Reduced Motion
+## Prueba manual
 
-Con Reduced Motion activo, el test esperado es:
+Abrir:
 
 ```text
-PASS_REDUCED_MOTION
+portfolio.html?animation-debug=1
 ```
 
-porque la omisión de la animación es el comportamiento accesible correcto.
+Bajar lentamente desde Objective 1 hacia Monitoring.
 
-## Fail-safe
-
-Antes de que JavaScript agregue `swiss-js-ready`, `.swiss-reveal` es visible.
-
-Por ello, si JS falla durante inicialización:
+Cuando Monitoring entra al 90% superior del viewport:
 
 ```text
-contenido visible
-animación ausente
+triggered aumenta
+started aumenta
+completed aumenta ~700 ms después
+pending disminuye
+visibleButPending permanece 0
 ```
 
-nunca contenido invisible.
+## Seguridad
+
+Existen dos capas adicionales:
+
+```text
+watchdog cada 450 ms
+animation timeout ~1100 ms
+```
+
+Si algo falla, el contenido se fuerza visible; nunca debe quedar oculto de forma permanente.

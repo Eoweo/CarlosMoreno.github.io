@@ -1,30 +1,19 @@
-# Build validation — v8.5
+# Build validation — v8.6
 
 - Global JS 1: OK
+- Preview JS 1: OK
+- Animation contract: PASS
+- PASS: v8.6 WAAPI CSS marker
+- PASS: Element.animate used
+- PASS: RAF geometry scan
+- PASS: IntersectionObserver not animation dependency
+- PASS: watchdog present
+- PASS: fail-visible timeout
+- PASS: targeted monitoring test
+- PASS: visibleButPending diagnostic
+- PASS: reduced motion
+- PASS: no CSS pending transition
 - CSS braces balanced: YES
-- Animation static contract: PASS
-- PASS: wipe hidden state
-PASS: wipe shown state
-PASS: fail-safe visible base
-PASS: system reduced motion
-PASS: IntersectionObserver primary
-PASS: observer root margin
-PASS: scroll fallback exists
-PASS: transition start instrumentation
-PASS: transition end instrumentation
-PASS: transition cancel instrumentation
-PASS: debug query
-PASS: automatic test query
-PASS: global test object
-PASS: toc excluded
-PASS: navbar excluded
-- Non-animation files unchanged: YES
-- REQ-ANIM-008: OK
-- REQ-ANIM-009: OK
-- REQ-ANIM-010: OK
-- REQ-ANIM-011: OK
-- REQ-ANIM-012: OK
-- REQ-ANIM-013: OK
-- REQ-QA-015: OK
-- REQ-QA-016: OK
-- REQ-QA-017: OK
+- IntersectionObserver animation code removed: YES
+- Monitoring targeted test present: YES
+- Non-animation files changed: 0

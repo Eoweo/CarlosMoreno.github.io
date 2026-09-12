@@ -210,3 +210,13 @@ PORTFOLIO_REQUIREMENTS.md
 - `?animation-debug=1` provides live passive verification.
 - `?animation-test=1` automatically scrolls to a pending real section and verifies transition start/end plus final computed styles.
 - See `ANIMATION_DIAGNOSTICS.md`.
+
+
+## v8.6
+
+- Replaces IntersectionObserver reveal triggering with `requestAnimationFrame + getBoundingClientRect` on every scroll/resize.
+- Uses the Web Animations API (`Element.animate`) for the Swiss wipe.
+- Removes CSS transition instrumentation that could count the hide transition as a reveal.
+- Adds a 450 ms watchdog and 1100 ms fail-visible timeout.
+- Adds targeted test mode: `?animation-test=monitoring`.
+- Keeps all v8.5 layout, TOC, navbar, content and CV behavior unchanged.

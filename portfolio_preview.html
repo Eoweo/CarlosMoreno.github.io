@@ -1,14 +1,45 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>v8.3 TOC portal</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio v8.6 — WAAPI Swiss Wipe</title>
 <style>
-:root{--bg:#f7f5ef;--text:#111;--muted:#666;--border:#cbc7bc;--accent:#d63230}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);font-family:Arial;color:var(--text)}
-header{position:fixed;top:0;left:0;right:0;height:48px;display:flex;align-items:center;padding:0 10px;border-bottom:1px solid var(--border);background:var(--bg);z-index:20}
-aside{position:fixed;left:0;top:48px;bottom:0;width:288px;padding:12px 8px 20px 0;border-right:1px solid var(--border);overflow:auto}
-main{margin-left:300px;margin-right:10px;padding-top:78px;min-height:100vh}h1{font-size:3rem;margin:0}.group{font-size:.72rem;font-weight:900;color:var(--accent);margin-top:15px}.child{display:block;padding:7px 8px 7px 14px;color:var(--muted)}.wide{height:320px;background:#ece9e0;border:1px dashed var(--border);display:grid;place-items:center;margin-top:25px}
-</style></head><body>
-<header><b>Carlos Moreno Rojas</b>&nbsp;&nbsp; Portfolio　CV　Contact</header>
-<aside><b>ON THIS PAGE</b><div class="group">MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR</div><span class="child">Objective 1</span><span class="child">Objective 2</span></aside>
-<main><h1>PORTFOLIO</h1><p>The TOC is now in an independent body-level shell. No original Quarto sidebar slot remains above the main text.</p><div class="wide">FULL-WIDTH CONTENT — NO WHITE OCCLUSION BAR</div></main>
+:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{position:fixed;top:0;left:0;right:0;height:48px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;z-index:5;font-weight:900}
+aside{position:fixed;left:0;top:48px;bottom:0;width:305px;padding:20px;border-right:1px solid var(--border)}aside b{font-size:.72rem;color:var(--accent)}aside div{padding:7px 0;color:var(--muted)}
+main{margin-left:320px;padding:75px 20px 60px}.section{min-height:72vh;border-top:4px solid var(--text);padding-top:15px;margin-bottom:40px}.section:first-child{border:0}h1{font-size:3rem}h2{font-size:1.6rem}p{color:var(--muted);line-height:1.7}.media{height:280px;background:var(--surface);border:1px dashed var(--border);display:grid;place-items:center;margin-top:20px}.swiss-reveal{opacity:1;clip-path:none}
+#panel{position:fixed;right:10px;bottom:10px;background:#fff;border:2px solid #9a6700;padding:10px;z-index:10;font:12px monospace;white-space:pre-wrap;max-width:360px}
+</style>
+</head>
+<body>
+<header>Carlos Moreno Rojas — v8.6 Animation Preview</header>
+<aside><b>ON THIS PAGE</b><div>Objective 1</div><div>Monitoring</div><div>Objective 2</div></aside>
+<main>
+<section class="section swiss-reveal"><h1>Objective 1 — Perfusion Platform</h1><p>Initial content remains visible.</p><div class="media">PLATFORM</div></section>
+<section class="section swiss-reveal" data-label="Monitoring"><h2>Monitoring</h2><p>This block should wipe from left to right when it enters the viewport.</p><div class="media">PRESSURE · FLOW · TEMPERATURE</div></section>
+<section class="section swiss-reveal"><h2>Objective 2 — Baseline Dataset</h2><p>This is another below-fold reveal target.</p><div class="media">BASELINE DATA</div></section>
+</main>
+<pre id="panel">WAITING</pre>
+<script>
+(function(){
+ const targets=[...document.querySelectorAll('.swiss-reveal')];
+ const panel=document.getElementById('panel');
+ let pending=[]; let completed=0; let scheduled=false;
+ const cutoff=innerHeight*.95;
+ targets.forEach((el,i)=>{
+   const r=el.getBoundingClientRect();
+   if(r.top>=cutoff){el.style.opacity='0';el.style.clipPath='inset(0 100% 0 0)';el.style.willChange='clip-path,opacity';pending.push(el)}
+ });
+ function trigger(el){
+   if(el.dataset.done)return; el.dataset.done='1';
+   const a=el.animate([{opacity:0,clipPath:'inset(0 100% 0 0)'},{opacity:1,clipPath:'inset(0 0 0 0)'}],{duration:700,easing:'cubic-bezier(.77,0,.18,1)',fill:'forwards'});
+   a.finished.then(()=>{el.style.opacity='1';el.style.clipPath='none';el.style.willChange='auto';a.cancel();completed++;panel.textContent='PASS\ncompleted='+completed+'\npending='+pending.filter(x=>!x.dataset.done).length;panel.style.borderColor='#17833d'});
+ }
+ function scan(){scheduled=false;const line=innerHeight*.9;pending.forEach(el=>{if(!el.dataset.done&&el.getBoundingClientRect().top<line)trigger(el)})}
+ function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(scan)}
+ addEventListener('scroll',schedule,{passive:true});addEventListener('resize',schedule);setInterval(schedule,450);schedule();
+})();
+</script>
 </body></html>

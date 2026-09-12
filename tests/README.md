@@ -1,40 +1,45 @@
-# Layout tests — v8.2
+# Layout and animation tests — v8.6
 
-## Static source test
+## Animation source contract
 
 ```bash
-python tests/check_layout_contract.py
+python tests/check_animation_contract.py
 ```
 
-## Browser A/B test
-
-### Baseline Quarto
+## Browser test — specific Monitoring section
 
 ```text
-portfolio.html?layout-debug=1&layout-fix=0
+portfolio.html?animation-debug=1&animation-test=monitoring
 ```
 
-### Corrected v8.2
+Expected:
+
+```text
+ANIMATION PASS
+mode = raf-waapi
+visibleButPending = 0
+```
+
+The Monitoring record must show:
+
+```text
+triggered = true
+animationStarted = true
+animationFinished = true
+finalStateVerified = true
+failed = false
+```
+
+## General automatic animation test
+
+```text
+portfolio.html?animation-test=1
+```
+
+## Layout regression
+
+Existing v8.4/v8.5 layout diagnostics remain unchanged:
 
 ```text
 portfolio.html?layout-debug=1
-```
-
-The corrected version must show `PASS`.
-
-The result contains:
-
-```text
-baseline        → geometry before repair
-runtimeValues   → values used by repair
-rects           → final rectangles
-measurements    → final gaps/positions
-checks          → pass/fail contracts
-```
-
-For the supplied 2560 px case the key expected change is:
-
-```text
-baseline TOC left ~292.5 px
-final TOC left    ~0 px
 ```

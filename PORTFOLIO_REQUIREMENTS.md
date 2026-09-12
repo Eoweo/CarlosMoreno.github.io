@@ -5008,7 +5008,7 @@ Esto mantiene el aspecto de la referencia: una sección completa aparece como un
 
 ## REQ-ANIM-010 — IntersectionObserver es el trigger principal
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 En navegadores modernos el reveal debe activarse con:
@@ -5028,6 +5028,8 @@ threshold  = 0.01
 Esto equivale aproximadamente al trigger visual del ejemplo al 90% de la altura del viewport.
 
 El listener de scroll con `requestAnimationFrame()` queda únicamente como fallback si `IntersectionObserver` no está disponible.
+
+> **Actualización v8.6:** este método queda superado por `REQ-ANIM-014`. Los datos reales mostraron `triggered = 0` para todos los targets posteriores aunque las transiciones de ocultación sí comenzaban. El trigger principal pasa a ser `requestAnimationFrame + getBoundingClientRect`.
 
 ---
 
@@ -5082,7 +5084,7 @@ transition = none
 
 ## REQ-QA-015 — Verificación real mediante eventos de transición
 
-**Estado:** `IMPLEMENTADO`  
+**Estado:** `SUPERADO`  
 **Prioridad:** `P0`
 
 La prueba de animación no puede limitarse a comprobar clases CSS.
@@ -5105,6 +5107,8 @@ clip-path final   = inset(0) / equivalente visible
 ```
 
 Si después de aproximadamente 900 ms el target visible no cumple estas condiciones, se registra como `failed`.
+
+> **Actualización v8.6:** la instrumentación mediante eventos `transition*` queda superada por Web Animations API (`Animation.finished`) según `REQ-ANIM-015` y `REQ-QA-018/019`.
 
 ---
 
@@ -5203,6 +5207,209 @@ La animación debe excluir explícitamente elementos dentro de:
 #TOC
 #quarto-header
 ```
+
+---
+
+
+# 23P. Animación Swiss Wipe robusta sin IntersectionObserver — v8.6
+
+## REQ-ANIM-014 — `requestAnimationFrame + getBoundingClientRect` pasa a ser el trigger principal
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El diagnóstico real de v8.5 mostró el fallo:
+
+```text
+Monitoring:
+pending = true
+triggered = false
+transitionStarted = true
+transitionEnded = false
+```
+
+Por lo tanto, `IntersectionObserver` deja de ser el trigger principal.
+
+En v8.6, durante scroll/resize se ejecuta como máximo un escaneo por frame:
+
+```text
+scroll
+  ↓
+requestAnimationFrame
+  ↓
+getBoundingClientRect()
+  ↓
+si rect.top < 90% del viewport
+  ↓
+activar reveal
+```
+
+Este método debe ser el camino principal en todas las páginas.
+
+---
+
+## REQ-ANIM-015 — Web Animations API controla el Swiss Wipe
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La animación no debe depender de CSS `transitionstart/transitionend`.
+
+Debe utilizar:
+
+```javascript
+element.animate(
+  [
+    { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+    { opacity: 1, clipPath: "inset(0 0 0 0)" }
+  ],
+  {
+    duration: 700,
+    easing: "cubic-bezier(.77, 0, .18, 1)",
+    fill: "forwards"
+  }
+)
+```
+
+Al finalizar, el elemento debe quedar en estado estático visible:
+
+```text
+opacity = 1
+clip-path = none
+will-change = auto
+```
+
+---
+
+## REQ-ANIM-016 — Ocultar contenido no puede generar una falsa animación
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El fallo v8.5 mostraba:
+
+```text
+transitionStarted = true
+triggered = false
+```
+
+Esto significa que el sistema estaba registrando la transición usada para **ocultar** el contenido, no el reveal.
+
+En v8.6:
+
+- no existen transiciones CSS sobre el estado pending;
+- el estado oculto se aplica directamente mediante estilos inline;
+- solo `Element.animate()` cuenta como animación iniciada;
+- `animationStarted` no puede pasar a `true` antes de `triggered`.
+
+---
+
+## REQ-ANIM-017 — Watchdog anti-contenido-oculto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Mientras existan elementos pending, debe ejecutarse un escaneo de seguridad aproximadamente cada:
+
+```text
+450 ms
+```
+
+Su objetivo es cubrir:
+
+- cambios tardíos de layout;
+- carga de imágenes;
+- saltos mediante anchors;
+- eventos de scroll perdidos;
+- modificaciones de geometría realizadas por Quarto.
+
+Si ya no existen elementos pendientes, el watchdog debe detenerse.
+
+---
+
+## REQ-ANIM-018 — Timeout de seguridad: ningún contenido puede permanecer oculto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Después de iniciar un reveal, si después de aproximadamente:
+
+```text
+1100 ms
+```
+
+la animación no finalizó correctamente, el sistema debe forzar:
+
+```text
+opacity = 1
+clip-path = none
+```
+
+Un fallo de animación nunca puede dejar texto invisible permanentemente.
+
+---
+
+## REQ-QA-018 — Test dirigido a una sección por nombre
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El parámetro:
+
+```text
+?animation-test=monitoring
+```
+
+debe localizar una sección pending cuyo label contenga `monitoring`, hacer scroll hacia ella y comprobar que:
+
+```text
+triggered = true
+animationStarted = true
+animationFinished = true
+finalStateVerified = true
+failed = false
+```
+
+También debe seguir aceptando:
+
+```text
+?animation-test=1
+```
+
+para probar el primer target pendiente.
+
+---
+
+## REQ-QA-019 — Debug debe detectar elementos visibles que continúan pending
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+`?animation-debug=1` debe reportar:
+
+```text
+counts.visibleButPending
+counts.watchdogScans
+```
+
+La condición saludable mientras se navega es:
+
+```text
+visibleButPending = 0
+```
+
+Si un bloque ya cruzó la línea de activación pero sigue pending, el diagnóstico debe hacerlo explícito.
+
+---
+
+## REQ-ANIM-020 — IntersectionObserver queda eliminado del contrato de animación
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+`IntersectionObserver` no debe ser necesario para revelar contenido.
+
+Puede seguir siendo utilizado en el futuro para otras funciones, pero no puede ser dependencia del Swiss Wipe.
 
 ---
 
@@ -5419,6 +5626,7 @@ Utilizar esta tabla para mantener trazabilidad.
 | v8.3 | 2026-09-12 | TOC portalizado fuera del grid Quarto, limpieza de slot blanco, test de oclusión y right-gap corregido por clientWidth | REQ-LAYOUT-026/027/028/029, REQ-QA-011/012/013, REQ-QUARTO-001 | IMPLEMENTADO |
 | v8.4 | 2026-09-12 | Padding interno TOC 20 px izquierda/superior sin alterar shell x=0 | REQ-LAYOUT-030, REQ-QA-014 | IMPLEMENTADO |
 | v8.5 | 2026-09-12 | Swiss Wipe con IntersectionObserver y test runtime de transición | REQ-ANIM-008/009/010/011/012/013, REQ-QA-015/016/017 | IMPLEMENTADO |
+| v8.6 | 2026-09-12 | Swiss Wipe cambia a RAF geometry scan + Web Animations API + watchdog y test dirigido | REQ-ANIM-014/015/016/017/018/020, REQ-QA-018/019 | IMPLEMENTADO |
 | próxima | — | — | — | — |
 
 ---
@@ -5485,11 +5693,13 @@ Este bloque sirve como resumen mínimo antes de modificar el código.
 53. El TOC debe ser nativo de Quarto: `toc-location: left` + `toc-expand: 1`.
 54. El shell lateral debe seguir en x=0; el contenido interno del TOC usa padding-left:20px y padding-top:20px.
 55. La animación de contenido debe usar Swiss Wipe por bloques lógicos.
-56. IntersectionObserver es el trigger principal; scroll+RAF es solo fallback.
+56. requestAnimationFrame + getBoundingClientRect es el trigger principal del Swiss Wipe; IntersectionObserver no es requisito.
 57. La animación debe ser fail-safe y respetar Reduced Motion del sistema y manual.
-58. Debe existir verificación real con transition events mediante ?animation-debug=1.
-59. Debe existir prueba automática mediante ?animation-test=1.
+58. Debe existir verificación real de Web Animations API mediante ?animation-debug=1.
+59. Debe existir prueba automática mediante ?animation-test=1 y prueba dirigida mediante ?animation-test=monitoring.
 60. La animación no puede alterar TOC, navbar ni geometría runtime.
+61. Ningún elemento puede permanecer oculto si la animación falla; existe watchdog y timeout de seguridad.
+62. visibleButPending debe tender a 0 durante la navegación.
 ```
 
 ---
@@ -5550,7 +5760,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.5 Swiss Research / Native Quarto TOC
+Version: v8.6 Swiss Research / Native Quarto TOC
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
