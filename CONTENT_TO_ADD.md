@@ -1,90 +1,24 @@
-# Content checklist
+# Content checklist — v9.2
 
-> **v9.1:** todas las imágenes ya tienen nombre y ruta definitiva. Reemplaza los archivos vacíos de `imagenes/` siguiendo `IMAGENES_REQUERIDAS.md`.
+## Imágenes
 
-> **Arquitectura v9.0:** todo el material técnico de proyectos se incorpora en `portfolio.qmd`. No existen páginas individuales de proyecto.
+Todos los nombres vigentes están definidos en `IMAGENES_REQUERIDAS.md`.
 
-Use this checklist project by project.
-
-## Master's thesis
-
-### Objective 1
-- [ ] Full platform photo
-- [ ] Fluidic diagram
-- [ ] Damper photo / drawing
-- [ ] Oxygenator
-- [ ] Bubble trap
-- [ ] Sensor locations
-- [ ] Monitor screenshot
-- [ ] Short video of platform operating
-
-### Objective 2
-- [ ] Representative pressure trace
-- [ ] Flow trace
-- [ ] Temperature trace
-- [ ] Vascular resistance
-- [ ] Calibration plots
-- [ ] Error / RMSE table
-- [ ] Baseline dataset link if publishable
-
-### Objective 3
-- [ ] Optical setup photo / diagram
-- [ ] ICG calibration curve
-- [ ] Representative FI(t)
-- [ ] Parameter extraction diagram
-- [ ] PDR / R15 / CLR
-- [ ] Code / notebook link if publishable
-
-## CYBATHLON
-- [ ] Team photo
-- [ ] Prosthesis photo
-- [ ] Electronics integration
-- [ ] Testing photo
-- [ ] Competition video
-- [ ] My contribution diagram
-
-## Candel
-- [ ] Publication permission confirmed
-- [ ] Non-confidential PCB/prototype images
-- [ ] Architecture diagram
-- [ ] Test setup
-- [ ] What can / cannot be publicly described
-
-## Borealis / preservation machine
-- [ ] Project photos
-- [ ] System architecture
-- [ ] My role
-- [ ] Validation / experiment
-- [ ] Publication permission
-
-## U-Net
-- [ ] Dataset
-- [ ] Architecture
-- [ ] Training metrics
-- [ ] Example segmentations
-- [ ] Repository
-
-## FPGA
-- [ ] Block diagram
-- [ ] Board photo
-- [ ] VHDL modules
-- [ ] Acquisition signals
-- [ ] Validation
-
-## Vscan Air
-- [ ] CAD renders
-- [ ] Prototype photos
-- [ ] Constraints
-- [ ] Final design
-
-
-## CV PDF maintenance
-
-The site currently includes generated CV PDFs at:
+Reemplaza únicamente los archivos vacíos dentro de:
 
 ```text
-downloads/Carlos_Moreno_Research_CV.pdf
-downloads/Carlos_Moreno_Engineering_CV.pdf
+imagenes/
 ```
 
-If final externally designed CV versions become available, replace these files while preserving the filenames so the website buttons continue working.
+No cambies nombres ni extensiones.
+
+## Enlace pendiente
+
+Falta incorporar la URL exacta del video de Instagram de CYBATHLON donde se ve la prótesis funcionando.
+
+## Restricciones de contenido
+
+- Objective 3 / ICG-NIR: todavía en proceso. No publicar resultados, curvas, parámetros ni montaje como avance realizado.
+- CandelStim: mantener descripción de alto nivel y únicamente material apto para publicación por existir obligaciones de confidencialidad.
+- Organ Preservation Machine Redesign: sin imágenes asignadas por ahora.
+- FPGA Upgrade: sin imágenes asignadas por ahora.

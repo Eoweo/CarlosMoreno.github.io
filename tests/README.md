@@ -51,8 +51,9 @@ Checks:
 - Home and CV follow the simplified architecture.
 
 
-## Image assets v9.1
+
+## Media assets v9.2
 
 ```bash
-python tests/check_image_assets_v91.py
+python tests/check_media_assets_v92.py
 ```

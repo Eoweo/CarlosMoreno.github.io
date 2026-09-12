@@ -28,8 +28,8 @@ page-layout: full
   <div class="cv-summary-panel">
     <article class="cv-summary-card">
       <div class="cv-summary-label"><span class="cv-ui-icon cv-icon-target" aria-hidden="true"></span>Current focus</div>
-      <div class="cv-summary-value">Biomedical instrumentation · organ perfusion · ICG-NIR functional assessment</div>
-      <div class="cv-summary-helper">Research and engineering centered on experimental platforms, monitoring and validation.</div>
+      <div class="cv-summary-value">Biomedical instrumentation · ex vivo rat liver perfusion · ICG-NIR research in progress</div>
+      <div class="cv-summary-helper">Research and engineering centered on experimental platforms, monitoring, baseline characterization and validation.</div>
     </article>
 
     <article class="cv-summary-card">
@@ -59,7 +59,7 @@ page-layout: full
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-education" aria-hidden="true"></span>MSc Biomedical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
-      <p>Research focused on <strong>ex vivo liver perfusion</strong>, biomedical instrumentation and <strong>ICG-NIR functional assessment</strong>.</p>
+      <p>Research focused on <strong>ex vivo rat liver perfusion</strong>, biomedical instrumentation and baseline characterization; the <strong>ICG-NIR objective is in progress</strong>.</p>
     </div>
   </article>
 
@@ -91,7 +91,7 @@ page-layout: full
     <span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span>
     <div class="cv-card-label">2025–present · Research</div>
     <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
-    <p>Ex vivo liver perfusion, biomedical instrumentation and ICG-NIR functional assessment.</p>
+    <p>Ex vivo rat liver perfusion, biomedical instrumentation and baseline characterization; ICG-NIR objective in progress.</p>
   </article>
 
   <article class="cv-card">
@@ -105,7 +105,7 @@ page-layout: full
     <span class="cv-card-icon cv-icon-medical" aria-hidden="true"></span>
     <div class="cv-card-label">Professional internship · Medical devices</div>
     <h3>Candel Medical Company</h3>
-    <p>Hardware, electronics and firmware development for a transcranial electrical stimulation platform.</p>
+    <p>Electronics, firmware and verification work for a transcranial electrical stimulation platform; public detail is intentionally limited by confidentiality obligations.</p>
   </article>
 
   <article class="cv-card">

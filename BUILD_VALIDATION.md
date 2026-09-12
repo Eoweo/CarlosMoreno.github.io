@@ -1,27 +1,34 @@
-# Build validation — v9.1
+# Build validation — v9.2
 
 - QMD YAML: OK
 - Pandoc index.qmd: OK
 - Pandoc portfolio.qmd: OK
 - Pandoc cv.qmd: OK
 - Pandoc contact.qmd: OK
-- check_image_assets_v91.py: PASS
-- PASS: 54 references
-PASS: 54 unique references
-PASS: 54 files
-PASS: no missing/orphan files
-PASS: load fallback
-PASS: error fallback
-PASS: inventory
-PASS: quarto resources
+- check_media_assets_v92.py: PASS
 - check_architecture_v9.py: PASS
 - check_animation_contract.py: PASS
 - check_layout_contract.py: PASS
-- Image references: 54
-- Image template files: 54
-- Zero-byte image templates: 54
-- Missing images: 0
-- Orphan images: 0
-- site-scripts.html unchanged from v9.0: YES
-- cv.qmd unchanged from v9.0: YES
-- contact.qmd unchanged from v9.0: YES
+- Media references total: 31
+- Unique media references: 29
+- Media template files: 29
+- Zero-byte media templates: 29
+- Missing media: 0
+- Orphan media: 0
+- Rat experimental model explicit: YES
+- Objective 3 / ICG-NIR: title + coming soon only
+- Objective 3 image references: 0
+- Objective 3 parameter/result references: 0
+- Dedicated damper section: removed
+- Damper image references: 0
+- Calibration and validation: text-only
+- Current one-channel monitor screenshot: configured
+- Future multichannel pig-experiment monitor screenshot: configured
+- Candel public section restricted for confidentiality: YES
+- Candel detailed protocol/electronics disclosure list removed: YES
+- FPGA media placeholders: 0
+- Organ Preservation Machine media placeholders: 0
+- Instagram fake/broken href: 0
+- site.css unchanged from v9.1: YES
+- site-scripts.html unchanged from v9.1: YES
+- contact.qmd unchanged from v9.1: YES

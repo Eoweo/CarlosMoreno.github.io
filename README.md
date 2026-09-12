@@ -303,3 +303,16 @@ Changes:
 - Valid replacement images appear automatically on reload.
 - See `IMAGENES_REQUERIDAS.md`.
 - `_quarto.yml` includes `imagenes/*`.
+
+
+## v9.2 — Real media only
+
+- Reduced image inventory from 54 placeholders to **29 actual planned media files**.
+- Thesis explicitly identifies the experimental model as ex vivo rat liver.
+- Removed dedicated damper section and damper images.
+- Monitoring now shows only software screenshots.
+- Calibration/validation is text-only.
+- Objective 3 / ICG-NIR is now only a title plus "Coming soon".
+- CandelStim public detail is intentionally restricted because of confidentiality obligations.
+- Organ Preservation Machine and FPGA remain text-only for now.
+- CYBATHLON Instagram video is documented as pending until the exact URL is provided.

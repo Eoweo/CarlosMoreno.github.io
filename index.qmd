@@ -34,12 +34,12 @@ hardware, software and physiology have to work as one system.
 
 ::: {.image-slot .home-portrait}
 
-<img class="portfolio-image asset-cover" src="imagenes/home_retrato_tecnico.jpg" alt="Foto principal / retrato técnico" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-contain" src="imagenes/tesis_setup_vista_lejana.jpg" alt="Vista general del setup experimental" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
 
 ::: {.slot-label}
-FOTO PRINCIPAL / RETRATO TÉCNICO
+SETUP EXPERIMENTAL DE TESIS
 
-Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental
+Vista general del montaje experimental de perfusión ex vivo
 :::
 
 :::
@@ -83,9 +83,7 @@ CAD, mechanical integration, 3D printing, machining and iterative testing.
 
 ## Ex Vivo Liver Viability & ICG-NIR
 
-My Master's research focuses on the development of an **ex vivo liver perfusion platform** and the use of
-**indocyanine green fluorescence in the near infrared (ICG-NIR)** to investigate quantitative indicators
-of liver function and viability.
+My Master's research develops an **ex vivo rat liver perfusion model** for biomedical instrumentation, physiological monitoring and baseline characterization. A third objective involving **ICG-NIR** is currently in preparation.
 
 The research progresses through three connected objectives:
 
@@ -117,9 +115,9 @@ Pressure, flow, temperature, vascular resistance, pH and gases.
 ::: {.step-number}
 03
 :::
-**ICG-NIR Marker**
+**ICG-NIR Functional Marker**
 
-Fluorescence kinetics and quantitative functional parameters.
+Coming soon — this objective is currently in progress.
 
 [View in Portfolio →](portfolio.qmd#objective-3){.inline-project-link}
 :::
@@ -128,12 +126,12 @@ Fluorescence kinetics and quantitative functional parameters.
 
 ::: {.image-slot .large}
 
-<img class="portfolio-image asset-contain" src="imagenes/home_investigacion_magister.jpg" alt="Imagen principal de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-contain" src="imagenes/tesis_equipo_laboratorio.jpg" alt="Equipo / entorno de laboratorio" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
 
 ::: {.slot-label}
-IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER
+EQUIPO / ENTORNO DE LABORATORIO
 
-Plataforma de perfusión completa o montaje ICG-NIR
+Imagen asociada al trabajo experimental de la tesis
 :::
 
 :::

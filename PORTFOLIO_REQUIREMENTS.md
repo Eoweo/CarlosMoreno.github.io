@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v9.1 — Swiss Research / Image Asset Wiring`  
+> **Versión base documentada:** `v9.2 — Swiss Research / Real Media Only`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -5742,7 +5742,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v9.1 Swiss Research / Image Asset Wiring
+Version: v9.2 Swiss Research / Real Media Only
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -6687,3 +6687,213 @@ Referencias = 54, archivos = 54, faltantes = 0, huérfanos = 0.
 ### REQ-QA-041 — Arquitectura preservada
 **Estado:** `IMPLEMENTADO`  
 No se modifica Home/Portfolio/CV/Contact, TOC portal, Swiss Wipe, Light/Dark, orden de contenido ni redirects legacy.
+
+
+---
+
+# 106. Registro incremental — v9.2
+
+## VERSION 9.2 — Real Media Only / Thesis Reduction / Confidentiality
+
+### REQ-THESIS-030 — Modelo experimental explícito
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La tesis debe indicar explícitamente que el modelo experimental vigente corresponde a:
+
+```text
+ex vivo rat liver perfusion
+```
+
+No debe inducirse a pensar que los experimentos actuales se realizan con cerdo.
+
+El monitor multicanal puede identificarse como desarrollo para **futuros experimentos con modelo porcino**.
+
+### REQ-THESIS-031 — Objective 3 sin resultados públicos
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Objective 3 debe mostrar únicamente:
+
+```text
+Objective 3 — ICG-NIR Functional Marker
+
+Coming soon — this objective is currently in progress.
+```
+
+Se eliminan de la página pública de Objective 3:
+
+```text
+montaje ICG-NIR
+diagrama óptico
+curva concentración-fluorescencia
+FI(t)
+PDR
+R15
+clearance
+Fmax
+Tmax
+AUC
+workflow ICG
+collage de ICG
+```
+
+Mientras el objetivo siga en proceso, no debe presentarse ese material como avance realizado.
+
+### REQ-THESIS-032 — Eliminar sección dedicada al damper
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+No debe existir una sección pública dedicada a:
+
+```text
+Pumping, pulse damping and oxygenation
+Damper de pulsaciones
+Gráfico antes/después del damper
+```
+
+El componente puede seguir apareciendo en un diagrama general del circuito si forma parte real del setup.
+
+### REQ-THESIS-033 — Monitoring limitado a software
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La sección Monitoring muestra solo software:
+
+```text
+tesis_monitor_1_canal.png
+tesis_monitor_multicanal_cerdo.png
+```
+
+No se incluyen fotografías adicionales de sensores/electrónica en esa sección.
+
+### REQ-THESIS-034 — Calibration and validation sin imágenes
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Calibration and validation debe ser una explicación textual breve.
+
+Debe indicar uso de:
+
+```text
+certified reference instrumentation / standards
+correlation
+deviation
+RMSE
+```
+
+No debe contener imágenes o gráficos.
+
+### REQ-CANDEL-020 — Publicación restringida por NDA
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La página pública de CandelStim debe mantener una descripción deliberadamente de alto nivel por obligaciones
+de confidencialidad.
+
+No publicar:
+
+```text
+esquemas no autorizados
+arquitectura interna detallada
+firmware
+protocolo técnico interno
+parámetros confidenciales
+información del producto no autorizada
+```
+
+El material público queda limitado a:
+
+```text
+candel_calibracion_dds.png
+candel_circuito_pixelado.jpg
+candel_software_protocolo.png
+```
+
+La duración específica del NDA no se publica en el sitio.
+
+### REQ-IMG-020 — Inventario real de medios
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La carpeta `imagenes/` contiene únicamente los **29 recursos visuales** indicados por el usuario:
+
+```text
+Tesis      7
+CYBATHLON  5
+Vscan      5
+Borealis   4
+Candel     3
+U-Net      5
+TOTAL     29
+```
+
+Se eliminan todos los demás placeholders e imágenes anteriores.
+
+### REQ-CYB-020 — Video Instagram
+
+**Estado:** `PENDIENTE DE URL`  
+**Prioridad:** `P1`
+
+CYBATHLON debe incluir un enlace al video de Instagram de la prótesis funcionando.
+
+Hasta recibir la URL exacta:
+
+```text
+no generar un href falso
+no generar un enlace roto
+mostrar únicamente una nota de que el video existe y la URL está pendiente
+```
+
+### REQ-IMG-021 — Proyectos sin imágenes actuales
+
+**Estado:** `IMPLEMENTADO`
+
+Actualmente no se asignan imágenes a:
+
+```text
+Organ Preservation Machine Redesign
+FPGA Upgrade — Universal Testing Machine
+Objective 3 — ICG-NIR Functional Marker
+```
+
+No deben mostrarse placeholders artificiales para estos proyectos.
+
+### REQ-QA-050 — Limpieza de medios obsoletos
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La validación debe confirmar:
+
+```text
+archivos visuales definidos = 29
+archivos visuales presentes = 29
+archivos visuales huérfanos = 0
+referencias a imágenes ICG antiguas = 0
+referencias a damper images = 0
+imágenes en Calibration and validation = 0
+```
+
+### REQ-QA-051 — Mantener infraestructura existente
+
+**Estado:** `IMPLEMENTADO`
+
+La v9.2 mantiene:
+
+```text
+arquitectura Home / Portfolio / CV / Contact
+TOC lateral
+orden de grupos
+Swiss Wipe
+Light/Dark
+layout responsive
+legacy redirects
+```
