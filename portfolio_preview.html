@@ -3,44 +3,59 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Portfolio v8.8 — Dynamic CV + Vector Icons</title>
+<title>Portfolio v8.9 — TOC + CV Fix</title>
 <style>
-:root{--bg:#f7f5ef;--surface:#ece9e0;--surface2:#fffdf8;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
-*{box-sizing:border-box}body{margin:0;padding:28px;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-.wrap{max-width:1250px;margin:auto}h1{font-size:3rem;margin:.2rem 0 1rem;text-transform:uppercase}
-h2{font-size:1.55rem;border-top:4px solid var(--text);padding-top:.16rem;margin-top:2.4rem;text-transform:uppercase}
-p{color:var(--muted);line-height:1.6}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.statement{font-size:2rem;line-height:1.08;font-weight:900}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.chips{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{padding:16px;border:1px solid var(--border);background:var(--surface2);min-height:150px}.label{font-size:.7rem;letter-spacing:.07em;color:var(--accent);font-weight:900;text-transform:uppercase}
-.icon{width:22px;height:22px;background:var(--accent);display:block;margin-bottom:14px;mask-repeat:no-repeat;mask-position:center;mask-size:contain;-webkit-mask-repeat:no-repeat;-webkit-mask-position:center;-webkit-mask-size:contain}
-.microscope{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 21h12M9 3h4v6H9zM11 9v3a5 5 0 0 1-5 5H4M14 13a6 6 0 0 1 5 6v2M8 17h8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 21h12M9 3h4v6H9zM11 9v3a5 5 0 0 1-5 5H4M14 13a6 6 0 0 1 5 6v2M8 17h8' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")}
-.cpu{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='6' y='6' width='12' height='12' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4' stroke='black' stroke-width='2'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='6' y='6' width='12' height='12' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4' stroke='black' stroke-width='2'/%3E%3C/svg%3E")}
-.med{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='4' y='4' width='16' height='16' rx='3' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M12 8v8M8 12h8' stroke='black' stroke-width='2'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='4' y='4' width='16' height='16' rx='3' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M12 8v8M8 12h8' stroke='black' stroke-width='2'/%3E%3C/svg%3E")}
-.tools{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.5 5.5a4 4 0 0 0 4.7 5.2l-8.5 8.5a2 2 0 1 1-2.8-2.8l8.5-8.5a4 4 0 0 0-1.9-5.4Z' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.5 5.5a4 4 0 0 0 4.7 5.2l-8.5 8.5a2 2 0 1 1-2.8-2.8l8.5-8.5a4 4 0 0 0-1.9-5.4Z' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E")}
-.timeline{display:grid;gap:10px}.row{display:grid;grid-template-columns:150px 1fr;gap:20px;border:1px solid var(--border);background:var(--surface2);padding:15px}.date{color:var(--accent);font-weight:900}.degree{font-size:1.2rem;font-weight:900}
-@media(max-width:800px){.hero,.grid,.chips,.row{grid-template-columns:1fr}}
+:root{--bg:#f7f5ef;--surface:#ece9e0;--text:#111;--muted:#66635d;--border:#cbc7bc;--accent:#d63230}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+aside{position:fixed;left:0;top:0;bottom:0;width:320px;padding:20px;border-right:1px solid var(--border);background:#202020;color:#ddd}
+aside h4{font-size:.75rem;letter-spacing:.08em;margin:0 0 18px;color:#ddd}
+.group{margin:17px 0 7px;font-size:.76rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.group.active{color:#ff7665;border-left:4px solid #ff7665;padding-left:12px}
+.child{display:block;padding:7px 0 7px 26px;color:#ddd;font-size:.9rem}
+.plus{float:right;color:#bbb}
+main{margin-left:320px;padding:34px 26px;max-width:1400px}
+h1{font-size:3rem;margin:0 0 25px;text-transform:uppercase}
+h2{border-top:4px solid var(--text);padding-top:.16rem;margin-top:2.2rem;text-transform:uppercase}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{padding:18px;border:1px solid var(--border);background:#fffdf8;min-height:170px}
+.label{font-size:.7rem;color:var(--accent);text-transform:uppercase;font-weight:900;letter-spacing:.06em}
+.tag{display:inline-block;padding:4px 7px;border:1px solid var(--border);margin:8px 5px 0 0;font-size:.75rem}
+@media(max-width:850px){aside{display:none}main{margin:0}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>Curriculum Vitae</h1>
-<div class="hero">
-  <div><div class="label">Biomedical & Electrical Engineering</div><div class="statement">Engineering systems for biomedical research, medical devices and experimental platforms.</div><p>Dynamic card-based layout with technical vector iconography.</p></div>
-  <div class="card"><div class="label">Current focus</div><b>Biomedical instrumentation · organ perfusion · ICG-NIR</b><p>Research and engineering centered on experimental platforms, monitoring and validation.</p></div>
-</div>
-<div class="grid chips">
-  <div class="card"><span class="icon microscope"></span><b>Research</b><p>Experimental design and instrumentation.</p></div>
-  <div class="card"><span class="icon cpu"></span><b>Systems</b><p>Embedded systems and acquisition.</p></div>
-  <div class="card"><span class="icon med"></span><b>Medical technology</b><p>Devices, imaging and validation.</p></div>
-  <div class="card"><span class="icon tools"></span><b>Build approach</b><p>CAD, prototyping and iterative testing.</p></div>
-</div>
-<h2>Education</h2>
-<div class="timeline">
-  <div class="row"><div class="date">2025–2027</div><div><div class="degree">MSc Biomedical Engineering</div><p>Ex vivo liver perfusion, instrumentation and ICG-NIR functional assessment.</p></div></div>
-  <div class="row"><div class="date">2025–2026</div><div><div class="degree">Electrical Engineering</div><p>Electronics, embedded systems, FPGA and integration.</p></div></div>
-</div>
-<h2>Research & Development</h2>
-<div class="grid"><div class="card"><span class="icon microscope"></span><div class="label">Main research line</div><b>Master’s Research — Liver Viability & ICG-NIR</b></div><div class="card"><span class="icon tools"></span><div class="label">Engineering method</div><b>Requirements → build → validate → iterate</b></div></div>
-</div>
+<aside>
+  <h4>ON THIS PAGE</h4>
+  <div class="group active">MASTER'S RESEARCH — LIVER VIABILITY &amp; ICG-NIR <span class="plus">−</span></div>
+  <span class="child">Objective 1 — Ex Vivo Perfusion Platform</span>
+  <span class="child">Objective 2 — Baseline Dataset without ICG</span>
+  <span class="child">Objective 3 — ICG-NIR Functional Marker</span>
+
+  <div class="group">ROBOTICS &amp; REHABILITATION <span class="plus">+</span></div>
+  <div class="group">ORGAN PRESERVATION &amp; TRANSPLANTATION <span class="plus">+</span></div>
+  <div class="group">MEDICAL IMAGING &amp; AI <span class="plus">+</span></div>
+  <div class="group">EMBEDDED SYSTEMS &amp; FPGA <span class="plus">+</span></div>
+  <div class="group">CAD &amp; PROTOTYPING <span class="plus">+</span></div>
+</aside>
+<main>
+  <h1>Curriculum Vitae</h1>
+  <p>The CV now uses explicit semantic HTML rather than nested fenced divs, preventing raw <code>:::</code> markup from appearing in the rendered page.</p>
+
+  <h2>Research &amp; Development</h2>
+  <div class="grid">
+    <article class="card">
+      <div class="label">Main research line</div>
+      <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
+      <p>Development of an ex vivo liver perfusion platform and ICG-NIR functional assessment.</p>
+      <span class="tag">Ex vivo perfusion</span><span class="tag">ICG-NIR</span>
+    </article>
+    <article class="card">
+      <div class="label">Preservation research</div>
+      <h3>Borealis UC — Organ Supercooling</h3>
+      <p>Organ preservation, supercooling strategies and thermal control.</p>
+      <span class="tag">Organ preservation</span><span class="tag">Thermal control</span>
+    </article>
+  </div>
+</main>
 </body>
 </html>

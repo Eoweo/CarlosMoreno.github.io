@@ -239,3 +239,13 @@ This version keeps the validated layout / TOC / animation base from v8.6 and int
 - Added vector download icons to both CV download buttons.
 - Re-validated the Portfolio TOC against the exact six-title hierarchy documented in `PORTFOLIO_REQUIREMENTS.md`.
 - No changes to TOC geometry, navbar, runtime portal, project content or Swiss Wipe animation.
+
+
+## v8.9
+
+- Portfolio sidebar now follows the approved screenshot exactly at the visible hierarchy level.
+- `portfolio.qmd` uses `toc-depth: 2`; H3 items such as Monitoring are content-only and no longer appear in the sidebar.
+- CV card/timeline design is preserved.
+- Replaced fragile nested Pandoc fenced divs with explicit semantic HTML (`section`, `article`, `div`) to prevent literal `::: {.class}` compilation artifacts.
+- Added a Pandoc render test that fails if fenced-div markup leaks into `cv.html`.
+- No changes to the validated TOC portal geometry or reveal animation.

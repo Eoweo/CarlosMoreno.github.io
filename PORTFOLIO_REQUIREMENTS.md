@@ -2729,15 +2729,16 @@ Este requisito debe pasar a `IMPLEMENTADO` una vez comprobado el ZIP/preview en 
 **Estado:** `IMPLEMENTADO`  
 **Prioridad:** `P0`
 
-La lista lateral del **Portfolio técnico (`portfolio.qmd`)** debe utilizar **exactamente tres niveles jerárquicos**:
+La captura aprobada por el usuario es la referencia visual canónica.
+
+La lista lateral del **Portfolio técnico (`portfolio.qmd`)** debe utilizar **dos niveles visibles**:
 
 ```text
-TÍTULO
+TÍTULO PRINCIPAL
     SUBTÍTULO
-        SUBSUBTÍTULO
 ```
 
-Los **únicos títulos principales permitidos** son, exactamente y en este orden:
+Los únicos títulos principales permitidos, exactamente y en este orden, son:
 
 ```text
 MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
@@ -2748,27 +2749,21 @@ EMBEDDED SYSTEMS & FPGA
 CAD & PROTOTYPING
 ```
 
-> **Regla estricta:** no se debe crear, renombrar, eliminar, dividir ni agregar ningún otro título principal del TOC del Portfolio sin modificar primero este requisito.
-
-La lista completa debe ser **exactamente** la siguiente:
+La jerarquía visible requerida es:
 
 ```text
 MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
     Objective 1 — Ex Vivo Perfusion Platform
-        Monitoring
     Objective 2 — Baseline Dataset without ICG
     Objective 3 — ICG-NIR Functional Marker
 
 ROBOTICS & REHABILITATION
     Ciervo UC — CYBATHLON 2024
-        My role
     CandelStim — Transcranial Electrical Stimulation
-        Technical work
 
 ORGAN PRESERVATION & TRANSPLANTATION
     Borealis UC — Organ Supercooling
     Organ Preservation Machine Redesign
-        Engineering work
 
 MEDICAL IMAGING & AI
     Lung Segmentation with U-Net
@@ -2780,31 +2775,26 @@ CAD & PROTOTYPING
     Vscan Air — Medical Device Enclosure
 ```
 
-### Interpretación de los niveles
+### Contenido H3 que NO debe aparecer en la lista
+
+Los encabezados H3 pueden mantenerse dentro del contenido de la página, pero no deben aparecer como un tercer nivel en el TOC. Ejemplos:
 
 ```text
-H1 → TÍTULO
-H2 → SUBTÍTULO
-H3 → SUBSUBTÍTULO
+Monitoring
+My role
+Technical work
+Engineering work
 ```
 
-La navegación dinámica descrita en `REQ-NAV-012` a `REQ-NAV-016` debe respetar esta jerarquía.
+### Comportamiento visual esperado
 
-### Asignación de CandelStim
+- El grupo activo se muestra expandido.
+- Los otros cinco títulos principales se muestran contraídos con `+`.
+- El primer grupo, cuando está activo, muestra únicamente `Objective 1`, `Objective 2` y `Objective 3`.
+- `Monitoring` no debe aparecer bajo `Objective 1`.
+- No se deben agregar Teaching, Leadership, Meldic, Skills, Engineering approach o Contact como títulos principales.
 
-`CandelStim — Transcranial Electrical Stimulation` debe integrarse dentro de:
-
-```text
-ROBOTICS & REHABILITATION
-```
-
-y no debe generar un título principal independiente como:
-
-```text
-MEDICAL DEVICES & NEUROENGINEERING
-```
-
-Esto es deliberado porque los seis títulos principales anteriores son la estructura fija definida para el Portfolio.
+> Regla estricta: cualquier cambio posterior en esta lista requiere modificar primero este requisito.
 
 ---
 
@@ -2847,24 +2837,17 @@ El hecho de que estas secciones existan en la página **no autoriza** a converti
 `portfolio.qmd` debe utilizar:
 
 ```yaml
-toc-depth: 3
+toc-depth: 2
 ```
 
-para que el fallback nativo de Quarto pueda representar:
+El TOC debe leer únicamente:
 
 ```text
-título
-subtítulo
-subsubtítulo
+H1 → título principal
+H2 → subtítulo
 ```
 
-La navegación personalizada también debe leer:
-
-```text
-h1
-h2
-h3
-```
+Los H3 se mantienen como contenido interno y no forman parte de la lista lateral.
 
 ---
 
@@ -5760,7 +5743,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v8.8 Swiss Research / Dynamic CV + Vector Icons
+Version: v8.9 Swiss Research / TOC + CV Compile Fix
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -5869,7 +5852,7 @@ Esto aplica especialmente a títulos de secciones del contenido principal y se i
 La versión vigente después de esta modificación es:
 
 ```text
-Version: v8.8 Swiss Research / Dynamic CV + Vector Icons
+Version: v8.9 Swiss Research / TOC + CV Compile Fix
 Base funcional: v8.6 WAAPI Reveal + v8.4 validated TOC geometry
 ```
 
@@ -5994,14 +5977,14 @@ Download Engineering CV
 
 deben mantener su ubicación y archivos, añadiendo un icono vectorial de descarga mediante CSS.
 
-### REQ-PORTFOLIO-TOC-004 — Verificación v8.8 de la lista técnica
+### REQ-PORTFOLIO-TOC-004 — Verificación de la lista técnica
 
 **Estado:** `VERIFICADO`  
 **Prioridad:** `P0`
 
-La modificación del CV **no puede alterar** la lista del Portfolio.
+La lista del Portfolio debe seguir la referencia canónica de `REQ-PORTFOLIO-TOC-001` y utilizar `toc-depth: 2`.
 
-Los seis títulos principales deben seguir siendo exactamente:
+Los seis títulos principales siguen siendo exactamente:
 
 ```text
 MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
@@ -6012,49 +5995,9 @@ EMBEDDED SYSTEMS & FPGA
 CAD & PROTOTYPING
 ```
 
-Jerarquía completa requerida:
+Los H3 como `Monitoring`, `My role`, `Technical work` y `Engineering work` no deben mostrarse en la lista.
 
-```text
-MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR
-    Objective 1 — Ex Vivo Perfusion Platform
-        Monitoring
-    Objective 2 — Baseline Dataset without ICG
-    Objective 3 — ICG-NIR Functional Marker
-
-ROBOTICS & REHABILITATION
-    Ciervo UC — CYBATHLON 2024
-        My role
-    CandelStim — Transcranial Electrical Stimulation
-        Technical work
-
-ORGAN PRESERVATION & TRANSPLANTATION
-    Borealis UC — Organ Supercooling
-    Organ Preservation Machine Redesign
-        Engineering work
-
-MEDICAL IMAGING & AI
-    Lung Segmentation with U-Net
-
-EMBEDDED SYSTEMS & FPGA
-    FPGA Upgrade — Universal Testing Machine
-
-CAD & PROTOTYPING
-    Vscan Air — Medical Device Enclosure
-```
-
-Las secciones:
-
-```text
-Teaching — Physics Laboratory
-Biomedical Engineering Student Chapter UC
-IEEE EMBS PUC Chile
-Meldic Ltda.
-Skills
-Engineering approach
-Contact
-```
-
-permanecen en `portfolio.qmd` con `.toc-ignore` y no pueden convertirse en títulos principales del TOC.
+Las secciones Teaching, Student Chapter, IEEE EMBS, Meldic, Skills, Engineering approach y Contact permanecen fuera del TOC técnico mediante `.toc-ignore`.
 
 ### Archivos modificados en v8.8
 
@@ -6078,4 +6021,102 @@ assets/site-scripts.html
 _quarto.yml
 TOC portal/runtime geometry
 Swiss Wipe animation
+```
+
+
+---
+
+# 101. Registro incremental — v8.9
+
+## VERSION 8.9 — Portfolio TOC canonical + CV compile fix
+
+### REQ-PORTFOLIO-TOC-005 — La captura aprobada manda sobre versiones anteriores
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La captura entregada por el usuario en v8.9 define la presentación correcta del TOC.
+
+Consecuencia:
+
+```text
+toc-depth: 2
+```
+
+y ningún H3 debe mostrarse en la lista lateral del Portfolio.
+
+### REQ-CV-007 — CV sin fenced-divs anidados frágiles
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+El error observado en `cv.html` mostraba literalmente fragmentos como:
+
+```text
+::: {.cv-card-label}
+```
+
+Esto ocurre cuando los fenced divs `:::` anidados quedan ambiguos y Pandoc/Quarto cierra un contenedor antes de lo esperado.
+
+A partir de v8.9, `cv.qmd` debe usar HTML semántico explícito para la estructura visual:
+
+```html
+<section class="cv-card-grid">
+  <article class="cv-card">
+    <div class="cv-card-label">...</div>
+  </article>
+</section>
+```
+
+No se deben reintroducir fenced divs anidados de igual longitud para estas tarjetas.
+
+### REQ-QA-015 — Test de compilación del CV
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La validación debe convertir `cv.qmd` con Pandoc y comprobar que el HTML generado no contenga:
+
+```text
+::: {.cv-
+::: 
+```
+
+ni otros delimitadores de fenced div impresos como texto.
+
+### REQ-QA-016 — Test exacto del TOC visible
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+La validación debe comprobar:
+
+```text
+portfolio.qmd toc-depth = 2
+exactamente seis H1 técnicos
+H2 organizados dentro de esos seis grupos
+H3 excluidos de la lista visible
+```
+
+### Archivos modificados en v8.9
+
+```text
+portfolio.qmd
+cv.qmd
+PORTFOLIO_REQUIREMENTS.md
+README.md
+BUILD_VALIDATION.md
+portfolio_preview.html
+```
+
+No se modifican:
+
+```text
+assets/site-scripts.html
+_quarto.yml
+TOC portal/runtime geometry
+Swiss Wipe animation
+project pages
+contact.qmd
+index.qmd
 ```

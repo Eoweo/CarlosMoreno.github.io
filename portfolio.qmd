@@ -3,7 +3,7 @@ title: "Portfolio"
 subtitle: "Biomedical Engineering · Electrical Engineering · Research & Development"
 toc: true
 toc-location: left
-toc-depth: 3
+toc-depth: 2
 page-layout: full
 ---
 
