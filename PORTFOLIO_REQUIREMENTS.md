@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v9.0 — Swiss Research / Consolidated Architecture`  
+> **Versión base documentada:** `v9.1 — Swiss Research / Image Asset Wiring`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -5742,7 +5742,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v9.0 Swiss Research / Consolidated Four-Page Architecture
+Version: v9.1 Swiss Research / Image Asset Wiring
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -6648,3 +6648,42 @@ PORTFOLIO
 CV
 CONTACT
 ```
+
+
+---
+
+# 105. Registro incremental — v9.1
+
+## VERSION 9.1 — Image Asset Wiring
+
+### REQ-IMG-001 — Carpeta única de imágenes
+**Estado:** `IMPLEMENTADO`  
+Todos los recursos visuales reemplazables por el usuario están en `imagenes/`. La versión define **54 archivos**.
+
+### REQ-IMG-002 — Reemplazo sin editar código
+**Estado:** `IMPLEMENTADO`  
+El flujo debe ser: reemplazar archivo vacío → conservar nombre/extensión → recargar/publicar.
+
+### REQ-IMG-003 — Fallback automático
+**Estado:** `IMPLEMENTADO`  
+Archivo vacío/inválido → placeholder visible. Imagen válida → clase `.has-image`, imagen visible y placeholder oculto.
+
+### REQ-IMG-004 — Política de ajuste
+**Estado:** `IMPLEMENTADO`  
+Retrato Home → `cover`. Resto de imágenes técnicas → `contain`.
+
+### REQ-IMG-005 — Recursos Quarto
+**Estado:** `IMPLEMENTADO`  
+`_quarto.yml` incluye `imagenes/*` en `project.resources`.
+
+### REQ-IMG-006 — Inventario obligatorio
+**Estado:** `IMPLEMENTADO`  
+Debe existir `IMAGENES_REQUERIDAS.md` con nombre, sección, descripción y relación de aspecto sugerida.
+
+### REQ-QA-040 — Correspondencia 1:1
+**Estado:** `IMPLEMENTADO`  
+Referencias = 54, archivos = 54, faltantes = 0, huérfanos = 0.
+
+### REQ-QA-041 — Arquitectura preservada
+**Estado:** `IMPLEMENTADO`  
+No se modifica Home/Portfolio/CV/Contact, TOC portal, Swiss Wipe, Light/Dark, orden de contenido ni redirects legacy.

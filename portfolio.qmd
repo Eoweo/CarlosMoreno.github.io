@@ -31,6 +31,8 @@ flowchart TD
 ```
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_foto_general_proyecto.jpg" alt="Foto general del proyecto de tesis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO GENERAL DEL PROYECTO DE TESIS
     <small>Plataforma completa de perfusión con hígado, bomba, sensores, oxigenador y computador de adquisición</small>
@@ -56,6 +58,8 @@ flowchart LR
 ```
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_plataforma_perfusion_completa.jpg" alt="Plataforma de perfusión completa" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE LA PLATAFORMA DE PERFUSIÓN COMPLETA
     <small>Vista limpia del sistema armado y conectado</small>
@@ -63,6 +67,8 @@ flowchart LR
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_diagrama_circuito_perfusion.png" alt="Diagrama real del circuito de perfusión" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA REAL DEL CIRCUITO DE PERFUSIÓN
     <small>Dirección de flujo, diámetros de tubería, sensores y componentes principales</small>
@@ -76,6 +82,8 @@ pressure pulsations, a pulse-damping stage is used before the perfusate reaches 
 and bubble-removal stages support controlled perfusate conditions and reduce the risk of air entering the liver.
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_damper_pulsaciones.jpg" alt="Damper de pulsaciones" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL DAMPER DE PULSACIONES
     <small>Componente utilizado para reducir los pulsos de presión de la bomba peristáltica</small>
@@ -83,6 +91,8 @@ and bubble-removal stages support controlled perfusate conditions and reduce the
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_grafico_damper_antes_despues.png" alt="Gráfico antes y después del damper" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO ANTES Y DESPUÉS DEL DAMPER
     <small>Comparación de pulsaciones de presión o flujo</small>
@@ -100,6 +110,8 @@ The platform monitors:
 - **pH / gases:** perfusate chemistry according to protocol.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_monitor_hidrodinamico.png" alt="Captura del monitor hidrodinámico" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CAPTURA DEL MONITOR HIDRODINÁMICO
     <small>Presión, flujo, temperatura y resistencia vascular en tiempo real</small>
@@ -107,6 +119,8 @@ The platform monitors:
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_sensores_electronica.jpg" alt="Sensores y electrónica de adquisición" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE SENSORES Y ELECTRÓNICA DE ADQUISICIÓN
     <small>Presión, flujo, temperatura, microcontrolador y conexiones</small>
@@ -119,6 +133,8 @@ Measurements are compared with reference instrumentation and characterized with 
 such as correlation, deviation and RMSE.
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_setup_calibracion.jpg" alt="Setup de calibración" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL SETUP DE CALIBRACIÓN
     <small>Sistema desarrollado conectado al patrón de referencia</small>
@@ -126,6 +142,8 @@ such as correlation, deviation and RMSE.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_grafico_calibracion_error.png" alt="Gráfico de calibración / error" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO DE CALIBRACIÓN / ERROR
     <small>Valor medido vs referencia, correlación, RMSE o desviación</small>
@@ -150,6 +168,8 @@ functional changes.
 - pH / gases — perfusate state.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_experimento_basal.jpg" alt="Experimento basal sin ICG" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE UN EXPERIMENTO BASAL SIN ICG
     <small>Hígado perfundido durante una corrida utilizada para construir la línea base</small>
@@ -157,6 +177,8 @@ functional changes.
 </div>
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_grafico_basal_presion_flujo_temperatura.png" alt="Gráfico basal de presión, flujo y temperatura" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO BASAL DE PRESIÓN, FLUJO Y TEMPERATURA
     <small>Curvas alineadas temporalmente durante un experimento estable</small>
@@ -170,6 +192,8 @@ Repeated baseline experiments are used to estimate expected variability and veri
 a sufficiently reproducible window.
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_resistencia_vascular.png" alt="Gráfico de resistencia vascular R(t)=P/Q" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO DE RESISTENCIA VASCULAR R(t)=P/Q
     <small>Evolución temporal y rango estable</small>
@@ -177,6 +201,8 @@ a sufficiently reproducible window.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_comparacion_basales.png" alt="Comparación entre experimentos basales" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     COMPARACIÓN ENTRE EXPERIMENTOS BASALES
     <small>Superposición de varias corridas o resumen de reproducibilidad</small>
@@ -205,6 +231,8 @@ flowchart LR
 ```
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_montaje_icg_nir.jpg" alt="Montaje experimental ICG-NIR" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL MONTAJE EXPERIMENTAL ICG-NIR
     <small>Hígado, fuente NIR, filtros y sistema de adquisición</small>
@@ -212,6 +240,8 @@ flowchart LR
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_diagrama_optico_icg_nir.png" alt="Diagrama óptico del sistema ICG-NIR" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA ÓPTICO DEL SISTEMA ICG-NIR
     <small>Excitación → hígado → emisión → filtro → adquisición</small>
@@ -225,6 +255,8 @@ and measured fluorescence under controlled conditions. The target signal is the 
 FI(t), or a calibrated estimate of C_ICG(t).
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_curva_concentracion_fluorescencia.png" alt="Curva concentración de ICG vs fluorescencia" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CURVA CONCENTRACIÓN DE ICG VS FLUORESCENCIA
     <small>Rango lineal, saturación y región útil</small>
@@ -232,6 +264,8 @@ FI(t), or a calibrated estimate of C_ICG(t).
 </div>
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_curva_fi_t.png" alt="Curva representativa FI(t) de ICG" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CURVA REPRESENTATIVA FI(t) DE ICG
     <small>Captación, peak y eliminación</small>
@@ -251,6 +285,8 @@ Parameters to derive from the curve include:
 - AUC.
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_curva_parametros_icg.png" alt="Curva ICG con PDR, R15, clearance, Fmax, Tmax y AUC" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CURVA ICG CON PDR, R15, CLEARANCE, FMAX, TMAX Y AUC
     <small>Parámetros cuantitativos extraídos desde FI(t)</small>
@@ -286,6 +322,8 @@ signal acquisition, signal processing, biomedical optics, NIR fluorescence and e
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/tesis_collage_desarrollos.png" alt="Collage de desarrollos realizados" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     COLLAGE DE DESARROLLOS REALIZADOS
     <small>Electrónica, damper, sensores, software, circuito de perfusión y montaje NIR</small>
@@ -325,6 +363,8 @@ flowchart LR
 ```
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_equipo_zurich.jpg" alt="Equipo Ciervo UC en CYBATHLON 2024" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL EQUIPO CIERVO UC EN CYBATHLON 2024
     <small>Equipo completo durante la competencia en Zürich</small>
@@ -332,6 +372,8 @@ flowchart LR
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_protesis_completa.jpg" alt="Prótesis transfemoral completa" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE LA PRÓTESIS TRANSFEMORAL COMPLETA
     <small>Vista del sistema desarrollado para CYBATHLON</small>
@@ -339,6 +381,8 @@ flowchart LR
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_electronica_integrada.jpg" alt="Electrónica integrada en la prótesis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE LA ELECTRÓNICA INTEGRADA EN LA PRÓTESIS
     <small>Controladores, baterías, sensores y cableado</small>
@@ -346,6 +390,8 @@ flowchart LR
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_arquitectura_electromecanica.png" alt="Arquitectura eléctrica y electromecánica" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DE ARQUITECTURA ELÉCTRICA Y ELECTROMECÁNICA
     <small>Electrónica → control → sensores → actuadores</small>
@@ -353,6 +399,8 @@ flowchart LR
 </div>
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_pruebas_piloto.jpg" alt="Pruebas con el piloto" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO / VIDEO DE PRUEBAS CON EL PILOTO
     <small>Ensayos funcionales antes o durante la competencia</small>
@@ -396,6 +444,8 @@ flowchart TD
 ```
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/candelstim_prototipo_general.jpg" alt="Prototipo general CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO GENERAL DEL PROTOTIPO CANDELSTIM
     <small>Equipo o prototipo completo, solo si la publicación está autorizada</small>
@@ -403,6 +453,8 @@ flowchart TD
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/candelstim_pcb_electronica.jpg" alt="PCB / electrónica" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE PCB / ELECTRÓNICA
     <small>Placa principal, microcontrolador y etapa analógica no confidencial</small>
@@ -410,6 +462,8 @@ flowchart TD
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/candelstim_arquitectura_hw_fw.png" alt="Arquitectura hardware / firmware" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DE ARQUITECTURA HARDWARE / FIRMWARE
     <small>Interfaz → firmware → MCU → electrónica → fuente de corriente → electrodos</small>
@@ -417,6 +471,8 @@ flowchart TD
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/candelstim_setup_prueba.jpg" alt="Setup de prueba" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL SETUP DE PRUEBA
     <small>Instrumentación utilizada para verificar señales y funcionamiento</small>
@@ -424,6 +480,8 @@ flowchart TD
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/candelstim_validacion_senal.png" alt="Validación de señal" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO DE VALIDACIÓN DE SEÑAL
     <small>Corriente, frecuencia, fase o forma de onda representativa no confidencial</small>
@@ -444,6 +502,8 @@ broader objective of extending preservation time and supporting transplantation.
 Organ preservation · thermal control · experimental physiology · transport constraints · technology for transplantation.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/borealis_proyecto_general.jpg" alt="Foto general del proyecto Borealis UC" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO GENERAL DEL PROYECTO BOREALIS UC
     <small>Sistema o montaje experimental de preservación</small>
@@ -451,6 +511,8 @@ Organ preservation · thermal control · experimental physiology · transport co
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/borealis_diagrama_supercooling.png" alt="Diagrama del principio de supercooling" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DEL PRINCIPIO DE SUPERCOOLING
     <small>Órgano, recipiente, control térmico y condiciones experimentales</small>
@@ -458,6 +520,8 @@ Organ preservation · thermal control · experimental physiology · transport co
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/borealis_setup_experimental.jpg" alt="Setup experimental" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL SETUP EXPERIMENTAL
     <small>Montaje utilizado para las pruebas</small>
@@ -465,6 +529,8 @@ Organ preservation · thermal control · experimental physiology · transport co
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/borealis_temperatura_tiempo.png" alt="Gráfico temperatura vs tiempo" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO DE TEMPERATURA VS TIEMPO
     <small>Perfil térmico representativo de preservación</small>
@@ -488,6 +554,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 - Experimental testing.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/preservacion_maquina_general.jpg" alt="Máquina de preservación" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE LA MÁQUINA DE PRESERVACIÓN
     <small>Vista general del sistema</small>
@@ -495,6 +563,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/preservacion_diagrama_bloques.png" alt="Diagrama de bloques del sistema" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DE BLOQUES DEL SISTEMA
     <small>Fluidos, electrónica, control y sensores</small>
@@ -502,6 +572,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/preservacion_cad_rediseno.png" alt="CAD del rediseño mecánico" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CAD DEL REDISEÑO MECÁNICO
     <small>Comparación de volumen o arquitectura antes y después</small>
@@ -509,6 +581,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/preservacion_prototipo_rediseno.jpg" alt="Prototipo rediseñado" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL PROTOTIPO REDISEÑADO
     <small>Sistema armado y listo para pruebas</small>
@@ -516,6 +590,8 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/preservacion_resultados_pruebas.png" alt="Resultados de pruebas" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     RESULTADOS DE PRUEBAS
     <small>Temperatura, flujo, presión u otras variables relevantes</small>
@@ -535,6 +611,8 @@ Medical image segmentation project using a U-Net-based neural network for lung s
 Medical imaging · deep learning · neural networks · segmentation · biomedical image processing.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/unet_imagen_entrada.png" alt="Imagen médica de entrada" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     EJEMPLO DE IMAGEN MÉDICA DE ENTRADA
     <small>CT o MRI utilizada en el proyecto</small>
@@ -542,6 +620,8 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/unet_arquitectura.png" alt="Arquitectura U-Net utilizada" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     ARQUITECTURA U-NET UTILIZADA
     <small>Encoder → bottleneck → decoder</small>
@@ -549,6 +629,8 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 </div>
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/unet_segmentacion_ejemplos.png" alt="Ejemplos de segmentación" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     EJEMPLOS DE SEGMENTACIÓN
     <small>Imagen original + máscara de referencia + predicción</small>
@@ -556,6 +638,8 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/unet_curvas_entrenamiento.png" alt="Curvas de entrenamiento" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CURVAS DE ENTRENAMIENTO
     <small>Loss y métricas por época</small>
@@ -563,6 +647,8 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/unet_metricas.png" alt="Tabla / gráfico de métricas" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     TABLA / GRÁFICO DE MÉTRICAS
     <small>Dice, IoU u otras métricas utilizadas</small>
@@ -581,6 +667,8 @@ The system processes signals associated with **force, displacement, deformation 
 **Zybo Z10, Vivado and VHDL**.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/fpga_zybo_z10_hardware.jpg" alt="Zybo Z10 / hardware del proyecto" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DE LA ZYBO Z10 / HARDWARE DEL PROYECTO
     <small>Tarjeta utilizada en el upgrade</small>
@@ -588,6 +676,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/fpga_diagrama_bloques.png" alt="Diagrama de bloques FPGA" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DE BLOQUES FPGA
     <small>Entradas → acondicionamiento / adquisición → procesamiento → salidas</small>
@@ -595,6 +685,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/fpga_adquisicion_fuerza_desplazamiento.png" alt="Adquisición de fuerza y desplazamiento" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DE ADQUISICIÓN DE FUERZA Y DESPLAZAMIENTO
     <small>Sensores y cadena de señal</small>
@@ -602,6 +694,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/fpga_vivado_vhdl.png" alt="Captura Vivado / VHDL" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     CAPTURA DE VIVADO / VHDL
     <small>Bloques o módulo representativo</small>
@@ -609,6 +703,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/fpga_validacion_sistema.png" alt="Validación del sistema" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO DE VALIDACIÓN DEL SISTEMA
     <small>Comparación de señal procesada con referencia</small>
@@ -631,6 +727,8 @@ The system processes signals associated with **force, displacement, deformation 
 - Medical-device-oriented prototyping.
 
 <div class="image-slot large">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_dispositivo_original.jpg" alt="Vscan Air original" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL VSCAN AIR ORIGINAL
     <small>Dispositivo para el cual se diseñó la cubierta</small>
@@ -638,6 +736,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_cad_primer_diseno.png" alt="CAD del primer diseño" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     RENDER CAD DEL PRIMER DISEÑO
     <small>Primera propuesta geométrica</small>
@@ -645,6 +745,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_cad_diseno_final.png" alt="CAD del diseño final" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     RENDER CAD DEL DISEÑO FINAL
     <small>Modelo final seleccionado</small>
@@ -652,6 +754,8 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
+  
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_prototipo_3d.jpg" alt="Prototipo impreso en 3D" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     FOTO DEL PROTOTIPO IMPRESO EN 3D
     <small>Pieza fabricada y montada</small>

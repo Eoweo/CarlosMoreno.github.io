@@ -1,48 +1,27 @@
-# Build validation — v9.0
+# Build validation — v9.1
 
-- QMD YAML errors: 0
+- QMD YAML: OK
 - Pandoc index.qmd: OK
 - Pandoc portfolio.qmd: OK
 - Pandoc cv.qmd: OK
 - Pandoc contact.qmd: OK
-- JavaScript syntax: OK
-- Architecture v9 test: PASS
-- PASS: no project qmd files
-PASS: no public projects qmd links
-PASS: no public projects html links
-PASS: no detailed-project labels
-PASS: nine compatibility redirects
-PASS: redirect index.html target
-PASS: redirect thesis.html target
-PASS: redirect cybathlon.html target
-PASS: redirect candel.html target
-PASS: redirect borealis.html target
-PASS: redirect organ-preservation.html target
-PASS: redirect unet.html target
-PASS: redirect fpga.html target
-PASS: redirect vscan.html target
-PASS: portfolio anchor masters-research
-PASS: portfolio anchor objective-1
-PASS: portfolio anchor objective-2
-PASS: portfolio anchor objective-3
-PASS: portfolio anchor cybathlon
-PASS: portfolio anchor candelstim
-PASS: portfolio anchor borealis
-PASS: portfolio anchor organ-preservation-machine
-PASS: portfolio anchor unet
-PASS: portfolio anchor fpga
-PASS: portfolio anchor vscan
-PASS: exact six portfolio groups
-PASS: home sections simplified
-PASS: cv selected-projects section removed
-PASS: cv trajectory section present
-PASS: redirect resources configured
+- check_image_assets_v91.py: PASS
+- PASS: 54 references
+PASS: 54 unique references
+PASS: 54 files
+PASS: no missing/orphan files
+PASS: load fallback
+PASS: error fallback
+PASS: inventory
+PASS: quarto resources
+- check_architecture_v9.py: PASS
 - check_animation_contract.py: PASS
 - check_layout_contract.py: PASS
-- Public references to projects/*.qmd: 0
-- Public hrefs to projects/*.html: 0
-- Dedicated project QMD files remaining: 0
-- Legacy redirect HTML files: 9
-- site.css unchanged from v8.11: YES
-- site-scripts.html unchanged from v8.11: YES
-- contact.qmd unchanged from v8.11: YES
+- Image references: 54
+- Image template files: 54
+- Zero-byte image templates: 54
+- Missing images: 0
+- Orphan images: 0
+- site-scripts.html unchanged from v9.0: YES
+- cv.qmd unchanged from v9.0: YES
+- contact.qmd unchanged from v9.0: YES

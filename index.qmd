@@ -34,6 +34,8 @@ hardware, software and physiology have to work as one system.
 
 ::: {.image-slot .home-portrait}
 
+<img class="portfolio-image asset-cover" src="imagenes/home_retrato_tecnico.jpg" alt="Foto principal / retrato técnico" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+
 ::: {.slot-label}
 FOTO PRINCIPAL / RETRATO TÉCNICO
 
@@ -125,6 +127,8 @@ Fluorescence kinetics and quantitative functional parameters.
 ::::
 
 ::: {.image-slot .large}
+
+<img class="portfolio-image asset-contain" src="imagenes/home_investigacion_magister.jpg" alt="Imagen principal de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
 
 ::: {.slot-label}
 IMAGEN PRINCIPAL DE LA INVESTIGACIÓN DE MAGÍSTER

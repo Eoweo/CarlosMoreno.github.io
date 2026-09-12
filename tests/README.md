@@ -49,3 +49,10 @@ Checks:
 - redirect targets point to valid Portfolio anchors;
 - exact six Portfolio groups remain;
 - Home and CV follow the simplified architecture.
+
+
+## Image assets v9.1
+
+```bash
+python tests/check_image_assets_v91.py
+```

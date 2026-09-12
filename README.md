@@ -293,3 +293,13 @@ Changes:
 - Removed Teaching / Leadership / Skills / Contact sections from the bottom of Portfolio because those belong to CV or Contact.
 - Preserved legacy `/projects/...` URLs through static redirect-only HTML files to avoid 404s.
 - Preserved Swiss layout, TOC portal, animations, responsive behavior and Light/Dark control.
+
+
+## v9.1 — Images
+
+- Added root folder `imagenes/` with **54 fixed filenames**.
+- Home and Portfolio reference those exact paths.
+- Empty/invalid files keep the descriptive placeholder.
+- Valid replacement images appear automatically on reload.
+- See `IMAGENES_REQUERIDAS.md`.
+- `_quarto.yml` includes `imagenes/*`.

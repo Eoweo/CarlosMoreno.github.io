@@ -3,6 +3,7 @@ project:
   output-dir: _site
   resources:
   - projects/*.html
+  - imagenes/*
 website:
   title: Carlos Moreno Rojas
   description: Biomedical & Electrical Engineering — Portfolio

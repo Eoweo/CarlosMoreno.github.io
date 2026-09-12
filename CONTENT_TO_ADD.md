@@ -1,5 +1,7 @@
 # Content checklist
 
+> **v9.1:** todas las imágenes ya tienen nombre y ruta definitiva. Reemplaza los archivos vacíos de `imagenes/` siguiendo `IMAGENES_REQUERIDAS.md`.
+
 > **Arquitectura v9.0:** todo el material técnico de proyectos se incorpora en `portfolio.qmd`. No existen páginas individuales de proyecto.
 
 Use this checklist project by project.
