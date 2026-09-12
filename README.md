@@ -90,6 +90,7 @@ PORTFOLIO_REQUIREMENTS.md
 - Portfolio TOC is fixed to six top-level technical categories.
 - Existing projects are reorganized under those six categories.
 - Non-project sections remain in `portfolio.qmd` but are excluded from the technical TOC.
+- `Project Pages` uses Swiss-styled redirect buttons instead of linked blue project titles.
 
 
 ## v7.4
@@ -97,6 +98,7 @@ PORTFOLIO_REQUIREMENTS.md
 - User-facing pages use a wider `full` page layout.
 - Main content can use up to 1180 px of horizontal body width.
 - Swiss title sizes were reduced globally.
+- `SITE_STRUCTURE.md` documents the current page architecture and highlights the overlap between Portfolio and Project Pages.
 - No page was removed in this version.
 
 
@@ -110,13 +112,14 @@ PORTFOLIO_REQUIREMENTS.md
 - Responsive edge gutters use `clamp()` instead of large fixed margins.
 - Technical media can use 100% of available width; prose keeps a character-based readability limit.
 
+
 ## v7.6
 
-- Left TOC is fixed directly to the physical left edge of the browser window.
-- Main content uses all remaining viewport width with small responsive gutters.
-- Navbar height is 52 px and starts at the top edge without vertical blank space.
-- Search is disabled globally.
-- No public `Project Pages` access exists.
-- Every Portfolio project ends with an `Open detailed project` button.
-- CV starts with direct Research CV and Engineering / Work CV downloads.
-- The old bottom `Downloads` section was removed.
+- Left TOC now starts near the physical left edge of the browser window.
+- Navbar top spacing reduced and header height set to 52 px.
+- Search disabled completely.
+- No Project Pages access exists.
+- All eight Portfolio projects end with an `Open detailed project` button.
+- CV Downloads section removed.
+- Research and Engineering CV download buttons are now placed at the beginning of the CV.
+- Actual downloadable PDF files are included in `/downloads`.

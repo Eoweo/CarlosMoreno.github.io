@@ -2,29 +2,30 @@
 
 - _quarto.yml: OK
 - Search disabled: YES
-- Navbar has right section: NO
-- Navbar left: Portfolio | CV | Contact
+- Navbar right absent: YES
+- Navbar items: Portfolio | CV | Contact
 - projects/index.qmd absent: YES
-- QMD YAML errors: 0
+- User-facing Project Pages references: 0
 - Portfolio detail buttons: 8/8
-- Project-page-button old links remain: NO
-- CV Research button: YES
-- CV Engineering button: YES
-- Bottom Downloads section removed: YES
-- Research PDF included: YES
-- Engineering PDF included: YES
+- CV Downloads heading removed: YES
+- Research CV button: YES
+- Engineering CV button: YES
+- Research PDF exists: YES
+- Engineering PDF exists: YES
+- Carlos_Moreno_Research_CV.pdf render verified: YES (2 page image(s))
+- Carlos_Moreno_Engineering_CV.pdf render verified: YES (2 page image(s))
 - CSS braces balanced: YES
-- TOC left 0: YES
-- Navbar 52px: YES
-- 100vw remaining-body rule: YES
-- Residual search hidden: YES
+- TOC screen-start/body-start: YES
+- Header height 52px: YES
+- Navbar explicit compact selector: YES
+- Search CSS fallback present: YES
 - Global JS 1: OK
+- QMD checked: 12
+- QMD YAML errors: 0
 - REQ-LAYOUT-006: OK
-- REQ-LAYOUT-007: OK
 - REQ-NAVBAR-001: OK
 - REQ-NAV-018: OK
 - REQ-PORTFOLIO-NAV-002: OK
 - REQ-CV-010: OK
 - REQ-SEARCH-001: OK
-- Current public projects/index.qmd references: 1
--   SITE_STRUCTURE.md
+- REQ-LAYOUT-007: OK

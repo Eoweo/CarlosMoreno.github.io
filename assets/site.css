@@ -14,7 +14,7 @@
   --border: #cbc7bc;
   --accent: #d63230;
   --accent-soft: rgba(214, 50, 48, .08);
-  --header-height: 62px;
+  --header-height: 52px;
 }
 
 .quarto-light,
@@ -1187,25 +1187,106 @@ main.content h2 {
 
 
 /* ================================================================
-   VERSION 7.5 — RESPONSIVE EDGE-TO-EDGE CONTENT
+   VERSION 7.6 — FULL WINDOW / EDGE TOC / COMPACT NAVBAR
    ================================================================ */
 
 :root {
-  /*
-     Small, resolution-aware gutters:
-     14px on narrow desktop/tablet, gradually increasing,
-     capped at 32px on large screens.
-  */
-  --portfolio-edge-gutter: clamp(0.875rem, 1.45vw, 2rem);
-  --portfolio-content-gap: clamp(0.65rem, 1.1vw, 1.25rem);
+  --portfolio-edge-gutter: clamp(0.75rem, 1vw, 1.35rem);
+  --portfolio-content-gap: clamp(0.45rem, 0.75vw, 0.9rem);
+  --toc-edge-padding: clamp(0.2rem, 0.35vw, 0.42rem);
 }
 
-/*
-   `page-layout: full` alone still leaves Quarto's normal body column.
-   On desktop, explicitly let main.content span from the body-start
-   grid line to the right screen edge, preserving the left TOC.
-*/
+/* The webpage itself starts at the real browser edges. */
+html,
+body {
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ------------------------------------------------
+   Navbar: no empty band above it.
+   ------------------------------------------------ */
+#quarto-header {
+  top: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#quarto-header .navbar.navbar-expand-lg,
+#quarto-header nav.navbar {
+  top: 0 !important;
+  margin: 0 !important;
+  padding-top: 0.18rem !important;
+  padding-bottom: 0.18rem !important;
+  min-height: var(--header-height) !important;
+}
+
+#quarto-header .navbar-container,
+#quarto-header .container-fluid {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: clamp(0.45rem, 0.7vw, 0.8rem) !important;
+  padding-right: clamp(0.55rem, 0.8vw, 1rem) !important;
+}
+
+/* Search is disabled in Quarto config; these are defensive fallbacks. */
+#quarto-search,
+.quarto-search,
+.quarto-search-button,
+#quarto-search-button,
+.aa-Autocomplete {
+  display: none !important;
+}
+
+/* ------------------------------------------------
+   Desktop layout: TOC starts at the left browser edge.
+   It remains a left sidebar and is NOT moved above the body.
+   ------------------------------------------------ */
 @media (min-width: 992px) {
+  #quarto-content.page-columns {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    column-gap: 0 !important;
+  }
+
+  #quarto-margin-sidebar,
+  .margin-sidebar,
+  .quarto-margin-sidebar {
+    grid-column: screen-start / body-start !important;
+    justify-self: stretch !important;
+    align-self: start !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: var(--portfolio-content-gap) !important;
+  }
+
+  #TOC {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: var(--toc-edge-padding) !important;
+    padding-right: 0.45rem !important;
+    top: calc(var(--header-height) + 0.45rem);
+    max-height: calc(100vh - var(--header-height) - 0.8rem);
+  }
+
+  #TOC .toc-title {
+    margin-left: 0.28rem;
+  }
+
+  .swiss-toc-group-link {
+    padding-left: 0.28rem;
+  }
+
+  /* Main content uses the complete remaining width. */
   #quarto-content.page-columns > main.content,
   #quarto-content > main.content {
     grid-column: body-start / screen-end !important;
@@ -1214,230 +1295,14 @@ main.content h2 {
     max-width: none !important;
     justify-self: stretch !important;
     margin: 0 !important;
-    padding-left: var(--portfolio-content-gap);
-    padding-right: var(--portfolio-edge-gutter);
-  }
-
-  /*
-     Reduce Quarto's visual gap between the left navigation and content.
-     The TOC keeps its own width/scroll behavior.
-  */
-  #quarto-margin-sidebar,
-  .margin-sidebar {
-    padding-right: var(--portfolio-content-gap);
+    padding-left: var(--portfolio-content-gap) !important;
+    padding-right: var(--portfolio-edge-gutter) !important;
   }
 
   main.content > * {
     max-width: 100%;
   }
 
-  /*
-     Prose remains readable while technical media can actually use
-     the entire available screen width.
-  */
-  main.content > p,
-  main.content > ul,
-  main.content > ol,
-  main.content > blockquote {
-    max-width: min(118ch, 100%);
-  }
-
-  .image-slot,
-  .home-intro,
-  .home-metric-grid,
-  .home-step-grid,
-  .home-project-grid,
-  .contact-hero,
-  .contact-grid,
-  .project-grid,
-  .skill-grid,
-  .download-grid,
-  .cell,
-  .cell-output-display,
-  table,
-  .data-slot {
-    width: 100%;
-    max-width: none !important;
-  }
-}
-
-/* Large monitors: still use the screen instead of centering a narrow 1180px box. */
-@media (min-width: 1600px) {
-  :root {
-    --portfolio-edge-gutter: clamp(1.25rem, 1.7vw, 2.75rem);
-  }
-
-  main.content > p,
-  main.content > ul,
-  main.content > ol,
-  main.content > blockquote {
-    max-width: min(126ch, 100%);
-  }
-}
-
-/* Tablet/mobile: simple dynamic gutters, no hard desktop widths. */
-@media (max-width: 991px) {
-  #quarto-content > main.content,
-  main.content {
-    width: 100% !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding-left: clamp(0.9rem, 3.5vw, 1.5rem);
-    padding-right: clamp(0.9rem, 3.5vw, 1.5rem);
-  }
-}
-
-@media (max-width: 520px) {
-  #quarto-content > main.content,
-  main.content {
-    padding-left: 0.875rem;
-    padding-right: 0.875rem;
-  }
-}
-
-
-/* ================================================================
-   VERSION 7.6 — WINDOW-FILLING LAYOUT / NAVBAR / CV DOWNLOADS
-   ================================================================ */
-
-:root {
-  --header-height: 52px;
-  --portfolio-toc-width: clamp(17rem, 20vw, 20.5rem);
-  --portfolio-window-gutter: clamp(0.75rem, 1vw, 1.25rem);
-}
-
-/* ------------------------------------------------
-   1. Browser window starts at the physical edges.
-   ------------------------------------------------ */
-html,
-body {
-  width: 100%;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden;
-}
-
-#quarto-content {
-  width: 100%;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* ------------------------------------------------
-   2. Navbar sits directly against the top edge.
-   ------------------------------------------------ */
-#quarto-header {
-  top: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.navbar.navbar-expand-lg,
-.navbar {
-  height: var(--header-height);
-  min-height: var(--header-height) !important;
-  margin: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-.navbar > .container-fluid,
-.navbar-container,
-#quarto-header .container-fluid {
-  width: 100% !important;
-  max-width: none !important;
-  min-height: var(--header-height);
-  margin: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  padding-left: var(--portfolio-window-gutter) !important;
-  padding-right: var(--portfolio-window-gutter) !important;
-}
-
-.navbar-brand,
-.navbar-nav,
-.navbar-nav .nav-link {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-/* ------------------------------------------------
-   3. Left TOC is physically flush with the window.
-   We no longer depend on Quarto's left grid gutter.
-   ------------------------------------------------ */
-@media (min-width: 992px) {
-  #quarto-margin-sidebar,
-  .margin-sidebar,
-  .quarto-margin-sidebar {
-    position: static !important;
-    width: 0 !important;
-    min-width: 0 !important;
-    max-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #TOC {
-    position: fixed !important;
-    top: var(--header-height) !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: var(--portfolio-toc-width) !important;
-    max-width: var(--portfolio-toc-width) !important;
-    max-height: none !important;
-    margin: 0 !important;
-    padding:
-      clamp(0.65rem, 1vw, 0.9rem)
-      0.65rem
-      1.5rem
-      0 !important;
-    background: var(--page-bg);
-    border-right: 1px solid var(--border);
-    z-index: 900;
-  }
-
-  #TOC .toc-title {
-    margin-left: 0 !important;
-    padding-left: 0.65rem !important;
-  }
-
-  .swiss-toc-group-link {
-    padding-left: 0.65rem;
-  }
-
-  /*
-     Main body occupies every remaining horizontal pixel after the TOC.
-     No centered max-width container is allowed.
-  */
-  #quarto-content.page-columns > main.content,
-  #quarto-content > main.content,
-  main.content {
-    grid-column: screen-start / screen-end !important;
-    width: calc(100vw - var(--portfolio-toc-width)) !important;
-    min-width: 0 !important;
-    max-width: none !important;
-    margin:
-      0
-      0
-      0
-      var(--portfolio-toc-width) !important;
-    padding-left: var(--portfolio-window-gutter) !important;
-    padding-right: var(--portfolio-window-gutter) !important;
-    justify-self: stretch !important;
-  }
-
-  #title-block-header {
-    width: 100%;
-    max-width: none !important;
-  }
-
-  main.content > * {
-    max-width: 100%;
-  }
-
-  /* Text is readable, media remains full width. */
   main.content > p,
   main.content > ul,
   main.content > ol,
@@ -1454,71 +1319,39 @@ body {
   .contact-grid,
   .project-grid,
   .skill-grid,
+  .download-grid,
+  .cv-download-actions,
   .cell,
   .cell-output-display,
   table,
   .data-slot {
-    width: 100% !important;
+    width: 100%;
     max-width: none !important;
   }
 }
 
-/* Tablet/mobile occupies the whole viewport with small dynamic gutters. */
-@media (max-width: 991px) {
-  #TOC {
-    left: auto !important;
-    width: auto !important;
-    border-right: 0;
+/* Extra-large screens still keep content close to the right edge. */
+@media (min-width: 1600px) {
+  :root {
+    --portfolio-edge-gutter: clamp(0.9rem, 1.1vw, 1.6rem);
   }
 
-  #quarto-content > main.content,
-  main.content {
-    width: 100vw !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding-left: clamp(0.75rem, 3vw, 1.15rem) !important;
-    padding-right: clamp(0.75rem, 3vw, 1.15rem) !important;
+  main.content > p,
+  main.content > ul,
+  main.content > ol,
+  main.content > blockquote {
+    max-width: min(128ch, 100%);
   }
 }
 
 /* ------------------------------------------------
-   4. No Quarto search UI, even if cached HTML exists.
+   CV download controls.
    ------------------------------------------------ */
-#quarto-search,
-.quarto-search,
-.aa-Autocomplete {
-  display: none !important;
-}
-
-/* ------------------------------------------------
-   5. Portfolio detail buttons.
-   Same visual language as Home action buttons.
-   ------------------------------------------------ */
-.portfolio-detail-button {
-  margin-top: 0.25rem;
-  margin-bottom: 1.1rem;
-}
-
-/* ------------------------------------------------
-   6. CV download controls at top.
-   ------------------------------------------------ */
-.cv-download-intro {
-  margin: -1.35rem 0 0.8rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
 .cv-download-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
-  margin: 0 0 2.4rem;
-  padding-bottom: 1.4rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.cv-download-actions > p {
-  display: contents;
+  margin: 0 0 2rem;
 }
 
 .cv-download-button {
@@ -1535,11 +1368,6 @@ body {
   letter-spacing: 0.035em;
   text-decoration: none !important;
   text-transform: uppercase;
-  transition:
-    background .16s ease,
-    border-color .16s ease,
-    color .16s ease,
-    transform .16s ease;
 }
 
 .cv-download-button:hover,
@@ -1547,11 +1375,41 @@ body {
   border-color: var(--accent);
   background: var(--accent);
   color: #fff !important;
-  transform: translateY(-1px);
 }
 
-.cv-download-button::before {
-  content: "↓";
-  margin-right: 0.45rem;
-  font-size: 1rem;
+/* ------------------------------------------------
+   Tablet / mobile.
+   ------------------------------------------------ */
+@media (max-width: 991px) {
+  #quarto-content > main.content,
+  main.content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: clamp(0.8rem, 3vw, 1.25rem) !important;
+    padding-right: clamp(0.8rem, 3vw, 1.25rem) !important;
+  }
+
+  #quarto-header .navbar-container,
+  #quarto-header .container-fluid {
+    padding-left: 0.55rem !important;
+    padding-right: 0.55rem !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #quarto-content > main.content,
+  main.content {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .cv-download-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cv-download-button {
+    width: 100%;
+  }
 }

@@ -72,3 +72,15 @@ Use this checklist project by project.
 - [ ] Prototype photos
 - [ ] Constraints
 - [ ] Final design
+
+
+## CV PDF maintenance
+
+The site currently includes generated CV PDFs at:
+
+```text
+downloads/Carlos_Moreno_Research_CV.pdf
+downloads/Carlos_Moreno_Engineering_CV.pdf
+```
+
+If final externally designed CV versions become available, replace these files while preserving the filenames so the website buttons continue working.
