@@ -179,11 +179,11 @@ Experimental work in organ preservation, supercooling and thermal control.
 ::: {.project-tag}
 EMBEDDED SYSTEMS & FPGA
 :::
-**Universal Testing Machine**
+**New Rally-X — Zybo Z7**
 
-Zybo Z10, Vivado and VHDL for acquisition and processing in a mechanical testing system.
+Complete embedded implementation of New Rally-X integrating Vivado hardware, real-time graphics, framebuffer rendering, enemy AI, audio, physical controls and SD-based assets.
 
-[View in Portfolio →](portfolio.qmd#fpga){.inline-project-link}
+[View Pproyect →](portfolio.qmd#rallyx){.inline-project-link}
 :::
 
 ::::
