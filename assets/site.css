@@ -248,7 +248,7 @@ main.content h4 {
 }
 
 hr {
-  margin: 3.3rem 0;
+  margin: auto 0;
   border: 0;
   border-top: 1px solid var(--border);
   opacity: 1;
