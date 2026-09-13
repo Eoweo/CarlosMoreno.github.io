@@ -245,9 +245,13 @@ transcranial electrical stimulation medical device, improving an existing protot
 Research project focused on reducing hypoxic damage during organ transport through **supercooling**, with the
 broader objective of extending preservation time and supporting transplantation.
 
-### Engineering themes
-
-Organ preservation · thermal control · experimental physiology · transport constraints · technology for transplantation.
+<div class="skill-chips">
+<span>Organ preservation</span>
+<span>thermal control</span>
+<span>experimental physiology</span>
+<span>transport constraints</span>
+<span>technology for transplantation</span>
+</div>
 
 <div class="image-slot large">
   <img class="portfolio-image asset-contain" src="imagenes/Borealis_equipo.jpeg" alt="Equipo experimental Borealis UC" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
