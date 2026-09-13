@@ -173,6 +173,18 @@ flowchart LR
   </div>
 </div>
 
+### Preparing for CYBATHLON 2024
+
+<div class="instagram-video">
+  <iframe
+    src="https://www.instagram.com/reel/DCFb_SbRhad/embed"
+    title="Ciervo UC"
+    allowfullscreen
+    scrolling="no">
+  </iframe>
+</div>
+
+
 ---
 
 ## CandelStim — Transcranial Electrical Stimulation {#candelstim}
@@ -494,11 +506,13 @@ End of game
 
 ### Gameplay demonstration
 
-<div class="project-video">
-  <video controls preload="metadata" playsinline>
-    <source src="videos/rallyx_gameplay.mp4" type="video/mp4">
-    Your browser does not support MP4 video.
-  </video>
+<div class="youtube-video">
+  <iframe
+    src="https://www.youtube.com/embed/1UD-L-ifbq8&t=1535s"
+    title="New Rally-X running on Zybo Z7"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
 </div>
 
 ### Result
