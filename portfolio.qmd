@@ -22,7 +22,7 @@ focused on ICG-NIR, is still in progress and is therefore presented only as upco
 flowchart LR
     O1["Objective 1<br/>Ex Vivo Perfusion Platform"]
     O1 --> O2["Objective 2<br/>Baseline Dataset without ICG"]
-    O2 --> O3["Objective 3<br/>ICG-NIR Functional Marker<br/>Coming soon"]
+    O2 --> O3["Objective 3<br/>ICG-NIR Functional Marker"]
 ```
 
 <div class="image-slot large">
@@ -87,9 +87,11 @@ The monitoring software displays the physiological variables acquired during the
   </div>
 </div>
 
+* Monitor example Capabilities (Not a real experiment)
+
 ### Calibration and validation
 
-Calibration and validation of the measurement chain were performed using **Fluke reference equipment**.
+Calibration and validation of the measurement chain were performed using **Fluke ProSim 8 equipment**.
 
 **Objective 1 success criterion:** a reproducible experimental window in which the rat liver remains perfused,
 thermally stable and its hemodynamic variables are continuously monitored.
@@ -281,7 +283,13 @@ Medical image segmentation project using a U-Net-based neural network for lung s
 
 ### Areas
 
-Medical imaging · deep learning · neural networks · segmentation · biomedical image processing.
+<div class="skill-chips">
+<span>Medical imaging</span>
+<span>deep learning</span>
+<span>neural networks </span>
+<span>segmentation</span>
+<span>biomedical image processing</span>
+</div>
 
 <div class="image-slot large">
   <img class="portfolio-image asset-contain" src="imagenes/Ipre.gif" alt="Visualización IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
@@ -352,33 +360,11 @@ The dual AXI Timer separates two timing domains: slower real-time game events an
 
 ### Graphics engine
 
-The original direct pixel-by-pixel LCD rendering system was replaced by a **framebuffer-based graphics pipeline**:
+The original direct pixel-by-pixel LCD rendering system was replaced by a **framebuffer-based graphics pipeline**: **Game Logic → Frame Buffer → Complete Frame → SPI → LCD**
 
-```text
-Game Logic
-    ↓
-Frame Buffer
-    ↓
-Complete Frame
-    ↓
-SPI
-    ↓
-LCD
-```
+All graphical primitives first modify the framebuffer in memory and the completed frame is then transferred to the LCD through SPI. This architecture reduced visual artifacts such as tearing and flickering and enabled smoother animation.
 
-All graphical primitives first modify the framebuffer in memory and the completed frame is then transferred to the LCD through SPI.
-
-This architecture reduced visual artifacts such as tearing and flickering and enabled smoother animation.
-
-The graphics engine was organized into three logical layers:
-
-```text
-Terrain
-    ↓
-Overlay
-    ↓
-Entities
-```
+The graphics engine was organized into three logical layers: **Terrain → Overlay → Entities**
 
 It also implements:
 
@@ -431,44 +417,15 @@ Enemy vehicles are controlled through an independent AI module.
 
 The AI performs pseudo-random direction decisions while reusing the same movement and collision engine used by the player.
 
-Collision detection evaluates interactions between:
-
-```text
-Terrain
-Overlay
-Entities
-Player
-Enemies
-```
-
 A smoke mechanic was also implemented as a defensive ability. Smoke is inserted dynamically into the world and can temporarily stun enemy vehicles.
 
 ### HUD and game interface
 
-The HUD displays real-time information including:
-
-```text
-Fuel
-Lives
-Score
-Minimap
-```
+The HUD displays real-time information including: Fuel, Lives, Score, Minimap
 
 A menu system was also developed for game startup, level selection and audio configuration.
 
-The global game flow is controlled through a state machine:
-
-```text
-MENU
-  ↓
-LEVEL SELECTION
-  ↓
-GAME
-  ↓
-WIN / LOSE
-  ↓
-MENU
-```
+The global game flow is controlled through a state machine: **MENU → lEVEL SELECTOR → GAME → WIN / LOSE → MENU**
 
 <div class="image-slot large">
   <img class="portfolio-image asset-contain"
@@ -490,19 +447,6 @@ MENU
 Audio was integrated through an **IP Core implemented in Vivado** and controlled from software.
 
 Music is represented using MIDI-style events containing note, timing and velocity information. Different music and sound effects are selected according to the current game state and gameplay events.
-
-Audio is used for:
-
-```text
-Menu
-Levels
-Flag collection
-Special flags
-Collision
-Smoke
-Fuel
-End of game
-```
 
 ### Gameplay demonstration
 

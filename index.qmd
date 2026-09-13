@@ -183,7 +183,7 @@ EMBEDDED SYSTEMS & FPGA
 
 Complete embedded implementation of New Rally-X integrating Vivado hardware, real-time graphics, framebuffer rendering, enemy AI, audio, physical controls and SD-based assets.
 
-[View Pproyect →](portfolio.qmd#rallyx){.inline-project-link}
+[View in Portfolio →](portfolio.qmd#rallyx){.inline-project-link}
 :::
 
 ::::
