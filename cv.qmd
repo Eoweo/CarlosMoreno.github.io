@@ -55,7 +55,7 @@ page-layout: full
 ```{=html}
 <section class="cv-timeline swiss-reveal">
   <article class="cv-timeline-card">
-    <div class="cv-timeline-date">2025–2027</div>
+    <div class="cv-timeline-date">2026–2027</div>
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-education" aria-hidden="true"></span>MSc Biomedical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
@@ -68,7 +68,7 @@ page-layout: full
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-bolt" aria-hidden="true"></span>Electrical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
-      <p>Electronics, embedded systems, data acquisition, control, FPGA and hardware/software integration.</p>
+      <p>Degree in Electrical engineering with specialization in electronics and image processing.</p>
     </div>
   </article>
 
@@ -145,7 +145,7 @@ page-layout: full
   <article class="cv-card">
     <div class="cv-icon-label"><span class="cv-card-icon cv-icon-globe" aria-hidden="true"></span><div class="cv-card-label">Professional chapter</div></div>
     <h3>IEEE EMBS PUC Chile</h3>
-    <p>Webmaster since <strong>2024</strong>.</p>
+    <p>Webmaster, <strong>2024</strong>.</p>
   </article>
 
   <article class="cv-card">
