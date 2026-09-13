@@ -52,9 +52,6 @@ EMAIL
 ::::
 
 **Email**
-
-Preferred channel for research and professional enquiries.
-
 `ADD_EMAIL`
 
 :::
@@ -74,9 +71,6 @@ CODE & PROJECTS
 ::::
 
 **GitHub**
-
-Repositories, code and technical project material.
-
 `ADD_GITHUB`
 
 :::
@@ -96,9 +90,6 @@ PROFESSIONAL NETWORK
 ::::
 
 **LinkedIn**
-
-Professional profile, engineering experience and network.
-
 `ADD_LINKEDIN`
 
 :::
@@ -118,10 +109,7 @@ RESEARCH ID
 :::
 
 **ORCID**
-
 Persistent academic researcher identifier.
-
-`ADD_ORCID_IF_APPLICABLE`
 
 :::
 
@@ -132,9 +120,6 @@ PUBLICATIONS
 :::
 
 **Google Scholar**
-
-Research publications and citation profile.
-
 `ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
 
 :::

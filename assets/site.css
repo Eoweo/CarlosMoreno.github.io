@@ -518,7 +518,6 @@ hr {
 }
 
 .contact-heading {
-  max-width: 760px;
   color: var(--text);
   font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1.02;
@@ -1183,7 +1182,7 @@ main.content h4 { font-size: .98rem; }
 .contact-heading { font-size: clamp(1.5rem, 2.9vw, 2.25rem); line-height: 1.08; }
 .contact-monogram { width: 112px; height: 112px; font-size: 1.8rem; }
 main.content h1:not(.title),
-main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
+main.content h2 { margin-top: 1rem; }
 
 .cv-download-actions {
   display: flex;
