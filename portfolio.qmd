@@ -19,7 +19,7 @@ focused on ICG-NIR, is still in progress and is therefore presented only as upco
 **Experimental model:** isolated ex vivo perfusion of rat livers.
 
 ```{mermaid}
-flowchart TD
+flowchart LR
     O1["Objective 1<br/>Ex Vivo Perfusion Platform"]
     O1 --> O2["Objective 2<br/>Baseline Dataset without ICG"]
     O2 --> O3["Objective 3<br/>ICG-NIR Functional Marker<br/>Coming soon"]

@@ -182,7 +182,7 @@ strong {
    ================================================================ */
 
 #title-block-header {
-  margin-bottom: 3rem;
+  margin-bottom: auto;
 }
 
 .quarto-title h1.title {
@@ -449,14 +449,14 @@ hr {
 
 .home-metric,
 .home-step {
-  min-height: 150px;
+  min-height: auto;
   padding: 1rem;
   border: 1px solid var(--border);
   background: var(--surface-2);
 }
 
 .home-step {
-  min-height: 180px;
+  min-height: auto;
 }
 
 .home-metric strong,
@@ -473,7 +473,7 @@ hr {
 }
 
 .step-number {
-  margin-bottom: 1.6rem;
+  margin-bottom: 10px;  
   color: var(--accent);
   font-size: .72rem;
   font-weight: 900;
@@ -515,9 +515,6 @@ hr {
   grid-template-columns: minmax(0, 1fr) 150px;
   gap: 2rem;
   align-items: center;
-  margin: .5rem 0 3.4rem;
-  padding: 1.5rem 0 2rem;
-  border-bottom: 4px solid var(--text);
 }
 
 .contact-heading {
@@ -1162,13 +1159,14 @@ table,
 .data-slot {
   width: 100%;
   max-width: none;
+  margin-bottom: 0px;
 }
 
 main.content > p,
 main.content > ul,
 main.content > ol,
 main.content > blockquote {
-  max-width: min(128ch, 100%);
+  max-width: auto;
 }
 
 .quarto-title h1.title {
