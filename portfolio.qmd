@@ -508,7 +508,7 @@ End of game
 
 <div class="youtube-video">
   <iframe
-    src="https://www.youtube.com/embed/1UD-L-ifbq8&t=1535s"
+    src="https://www.youtube.com/embed/1UD-L-ifbq8?start=901535s"
     title="New Rally-X running on Zybo Z7"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen>
