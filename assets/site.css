@@ -1400,7 +1400,7 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 }
 
 .cv-card {
-  min-height: 210px;
+  min-height: auto;
   padding: 1rem;
 }
 
@@ -1412,7 +1412,7 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 .cv-card.with-button .project-page-button {
   margin-top: auto;
   align-self: flex-start;
-  margin-bottom: 0;
+  margin-bottom: auto;
 }
 
 .cv-card-tags {
