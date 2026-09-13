@@ -55,7 +55,7 @@ page-layout: full
 ```{=html}
 <section class="cv-timeline swiss-reveal">
   <article class="cv-timeline-card">
-    <div class="cv-timeline-date">2026–2027</div>
+    <div class="cv-timeline-date">2026–Present</div>
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-education" aria-hidden="true"></span>MSc Biomedical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
@@ -68,7 +68,7 @@ page-layout: full
     <div>
       <div class="cv-timeline-degree"><span class="cv-ui-icon cv-icon-bolt" aria-hidden="true"></span>Electrical Engineering</div>
       <div class="cv-timeline-place">Pontificia Universidad Católica de Chile</div>
-      <p>Degree in Electrical engineering with specialization in electronics and image processing.</p>
+      <p>Professional Degree in Electrical engineering with specialization in electronics and image processing.</p>
     </div>
   </article>
 
@@ -88,7 +88,7 @@ page-layout: full
 ```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
-    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span><div class="cv-card-label">2025–present · Research</div></div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span><div class="cv-card-label">2026–present · Research</div></div>
     <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
     <p>Ex vivo liver perfusion, biomedical instrumentation and ICG-NIR functional assessment.</p>
   </article>

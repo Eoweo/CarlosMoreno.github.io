@@ -285,8 +285,6 @@ broader objective of extending preservation time and supporting transplantation.
 
 Medical image segmentation project using a U-Net-based neural network for lung segmentation in CT and MRI images.
 
-### Areas
-
 <div class="skill-chips">
 <span>Medical imaging</span>
 <span>deep learning</span>

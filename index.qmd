@@ -188,22 +188,137 @@ Complete embedded implementation of New Rally-X integrating Vivado hardware, rea
 
 ::::
 
-# Engineering Areas
 
-## Biomedical Instrumentation
+# About Me {#about-me}
 
-Physiological sensing, pressure, flow, temperature, perfusion systems, calibration, acquisition and
-experimental validation.
+Outside engineering, I enjoy music, skiing and reading. These activities have been an important part of my life alongside my academic and engineering work.
 
-## Electronics & Embedded Systems
+## Music
 
-Analog and digital electronics, PCB, microcontrollers, ESP32, STM32, Arduino, communications and
-hardware/software integration.
+```{=html}
+<div class="about-split">
 
-## Medical Imaging, Signals & Optics
+  <div class="about-copy">
+    <div class="about-kicker">MUSIC</div>
 
-Signal and image processing, deep learning, biomedical optics, NIR fluorescence and experimental data analysis.
+    <p>
+      From 2015 to 2019, I played violin with the
+      <strong>Orquesta Juvenil de Providencia</strong> in Chile.
+    </p>
 
-## CAD, Prototyping & Integration
+    <p>
+      I also enjoy playing guitar and ukulele, and I am currently
+      learning to play piano.
+    </p>
+  </div>
 
-Fusion 360, mechanical design, 3D printing, machining and integration of electronics, fluidics and mechanics.
+  <div class="about-gallery about-gallery-two">
+
+    <div class="image-slot about-image-slot">
+      <img
+        class="portfolio-image asset-cover"
+        src="imagenes/Violin_me.png"
+        alt="Playing violin"
+        loading="lazy"
+        decoding="async"
+        onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+        onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+      <div class="slot-label">
+        VIOLIN
+        <small>Playing violin</small>
+      </div>
+    </div>
+
+    <div class="image-slot about-image-slot">
+      <img
+        class="portfolio-image asset-cover"
+        src="imagenes/Violin_orchestra.png"
+        alt="Orquesta Juvenil de Providencia"
+        loading="lazy"
+        decoding="async"
+        onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+        onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+      <div class="slot-label">
+        ORQUESTA JUVENIL DE PROVIDENCIA
+        <small>Providencia, Chile</small>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+```
+
+## Skiing
+
+```{=html}
+<div class="about-split">
+
+  <div class="about-copy">
+    <div class="about-kicker">SPORT</div>
+
+    <p>
+      I also practice skiing and enjoy it as one of my main outdoor activities.
+    </p>
+  </div>
+
+  <div class="image-slot about-ski-slot">
+    <img
+      class="portfolio-image asset-cover"
+      src="imagenes/Ski_me.png"
+      alt="Skiing"
+      loading="lazy"
+      decoding="async"
+      onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+      onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+    <div class="slot-label">
+      SKIING
+      <small>One of my main outdoor activities</small>
+    </div>
+  </div>
+
+</div>
+```
+
+## Currently Reading
+
+```{=html}
+<div class="about-book-grid">
+
+  <div class="about-book-info">
+
+    <div class="about-kicker">CURRENTLY READING</div>
+
+    <h3>The Singularity Is Nearer: When We Merge with AI</h3>
+
+    <div class="about-book-author">
+      Ray Kurzweil
+    </div>
+
+    <p>
+      English edition.
+    </p>
+
+  </div>
+
+  <div class="image-slot about-book-cover">
+    <img
+      class="portfolio-image asset-contain"
+      src="imagenes/book_1.png"
+      alt="The Singularity Is Nearer by Ray Kurzweil"
+      loading="lazy"
+      decoding="async"
+      onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+      onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+    <div class="slot-label">
+      CURRENT BOOK
+      <small>The Singularity Is Nearer — Ray Kurzweil</small>
+    </div>
+  </div>
+
+</div>
+```
