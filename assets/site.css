@@ -1954,13 +1954,12 @@ main.content h2 { margin-top: 1rem; }
 
 /* YouTube — formato horizontal 16:9 */
 .youtube-video {
-  width: 100%;
+  width: min(100%, 900px);
   aspect-ratio: 16 / 9;
-  margin: 1.2rem 0 1.8rem;
+  margin: 1.2rem auto 1.8rem;
   border: 1px solid var(--border);
   background: #000;
   overflow: hidden;
-  align-items: center;
 }
 
 .youtube-video iframe {
