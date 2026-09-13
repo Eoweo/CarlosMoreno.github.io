@@ -305,14 +305,14 @@ Changes:
 - `_quarto.yml` includes `imagenes/*`.
 
 
-## v9.2 — Real media only
+## v9.2
 
-- Reduced image inventory from 54 placeholders to **29 actual planned media files**.
-- Thesis explicitly identifies the experimental model as ex vivo rat liver.
-- Removed dedicated damper section and damper images.
-- Monitoring now shows only software screenshots.
-- Calibration/validation is text-only.
-- Objective 3 / ICG-NIR is now only a title plus "Coming soon".
-- CandelStim public detail is intentionally restricted because of confidentiality obligations.
-- Organ Preservation Machine and FPGA remain text-only for now.
-- CYBATHLON Instagram video is documented as pending until the exact URL is provided.
+- Experimental thesis model is explicitly ex vivo rat liver perfusion.
+- Objective 3 / ICG-NIR is reduced to the title plus `Coming soon`.
+- All ICG images and progress/result content were removed.
+- Dedicated damper section/images removed.
+- Monitoring uses only `Tesis_Monitor2canales.jpeg`.
+- Calibration/validation only mentions Fluke reference equipment.
+- `imagenes/` now contains only the **21 files actually used**.
+- Exact filenames and capitalization supplied by the user are preserved.
+- CSS, animation system, TOC geometry, CV and Contact are unchanged.

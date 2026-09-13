@@ -52,8 +52,8 @@ Checks:
 
 
 
-## Media assets v9.2
+## Image assets v9.2
 
 ```bash
-python tests/check_media_assets_v92.py
+python tests/check_image_assets_v92.py
 ```

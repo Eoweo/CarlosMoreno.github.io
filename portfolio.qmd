@@ -12,27 +12,31 @@ This page is the complete technical portfolio. Projects are organized as a conci
 
 # MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR {#masters-research}
 
-My Master's thesis develops an **ex vivo rat liver perfusion model** for biomedical instrumentation,
-physiological monitoring and functional assessment. The current public portfolio focuses on the experimental
-platform and baseline work that can already be shown.
+My Master's thesis is based on an **ex vivo rat liver perfusion model**. The current work is focused on
+building a stable experimental platform and characterizing its physiological baseline. The third objective,
+focused on ICG-NIR, is still in progress and is therefore presented only as upcoming work.
 
-**Experimental model:** isolated perfused rat liver (*ex vivo*).
+**Experimental model:** isolated ex vivo perfusion of rat livers.
 
-The research is organized in three objectives. Objectives 1 and 2 describe the current experimental platform
-and baseline characterization. Objective 3, focused on ICG-NIR, is still in progress.
+```{mermaid}
+flowchart TD
+    O1["Objective 1<br/>Ex Vivo Perfusion Platform"]
+    O1 --> O2["Objective 2<br/>Baseline Dataset without ICG"]
+    O2 --> O3["Objective 3<br/>ICG-NIR Functional Marker<br/>Coming soon"]
+```
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_equipo_laboratorio.jpg" alt="Equipo / entorno de laboratorio" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Completo.jpeg" alt="Montaje completo de la tesis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    EQUIPO / ENTORNO DE LABORATORIO
-    <small>Foto del equipo o entorno de laboratorio asociado al desarrollo experimental.</small>
+    MONTAJE COMPLETO DE LA TESIS
+    <small>Vista general de la plataforma y del modelo experimental ex vivo de hígado de rata</small>
   </div>
 </div>
 
 ## Objective 1 — Ex Vivo Perfusion Platform {#objective-1}
 
-Build and validate a stable and reproducible platform for **ex vivo rat liver perfusion** under controlled
-experimental conditions.
+Build and validate a stable and reproducible experimental platform capable of maintaining **rat livers**
+under controlled ex vivo perfusion conditions.
 
 ### Perfusion circuit
 
@@ -48,84 +52,65 @@ flowchart LR
 ```
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_setup_vista_lejana.jpg" alt="Vista general del setup" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Setup.png" alt="Setup experimental de perfusión hepática" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    VISTA GENERAL DEL SETUP
-    <small>Vista desde lejos del montaje experimental completo.</small>
+    SETUP EXPERIMENTAL
+    <small>Montaje del circuito de perfusión y preparación ex vivo del hígado de rata</small>
   </div>
 </div>
 
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_setup_vidrios_frontal.jpg" alt="Vista frontal del setup" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    VISTA FRONTAL DEL SETUP
-    <small>Vista frontal de la estructura de vidrio y del montaje experimental.</small>
-  </div>
-</div>
+The system combines controlled perfusate circulation, oxygenation, bubble removal and continuous
+physiological monitoring.
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_setup_vidrios_lateral_cercana.jpg" alt="Vista lateral cercana del setup" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Oxigenador.png" alt="Oxigenador del sistema de perfusión" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    VISTA LATERAL CERCANA DEL SETUP
-    <small>Vista lateral cercana de la estructura de vidrio y conexiones principales.</small>
-  </div>
-</div>
-
-### Oxygenation
-
-The perfusion circuit includes an oxygenation stage designed for the experimental model.
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_nucleos_oxigenador_armados.jpg" alt="Núcleos de oxigenador armados" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    NÚCLEOS DE OXIGENADOR ARMADOS
-    <small>Núcleos del oxigenador ensamblados para su integración al circuito experimental.</small>
+    OXIGENADOR
+    <small>Detalle del sistema utilizado para mantener la oxigenación del perfusato</small>
   </div>
 </div>
 
 ### Monitoring
 
-The current rat-liver platform uses software monitoring for the experimental variables. The portfolio shows
-the software itself rather than additional sensor/electronics photographs.
+The monitoring software displays the physiological variables acquired during the experiment, including:
+
+- **P(t):** portal / pre-liver pressure.
+- **Q(t):** portal perfusion flow.
+- **T(t):** perfusate / organ temperature.
+- **R(t)=P/Q:** vascular resistance.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_monitor_1_canal.png" alt="Monitor de un canal" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Monitor2canales.jpeg" alt="Software de monitorización funcionando" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    MONITOR DE UN CANAL
-    <small>Captura del software de monitorización de un canal funcionando con el modelo experimental actual.</small>
-  </div>
-</div>
-
-A multichannel version has also been developed for **future experiments with a porcine model**; it is shown
-as future instrumentation and not as evidence of current pig experiments.
-
-<div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/tesis_monitor_multicanal_cerdo.png" alt="Monitor multicanal — future porcine experiments" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    MONITOR MULTICANAL — FUTURE PORCINE EXPERIMENTS
-    <small>Captura del software multicanal preparado para trabajo experimental futuro con cerdo.</small>
+    SOFTWARE DE MONITORIZACIÓN
+    <small>Captura del software funcionando durante adquisición de dos canales</small>
   </div>
 </div>
 
 ### Calibration and validation
 
-The measurement chain was calibrated and checked against **certified reference instrumentation / standards**.
-Validation used quantitative comparisons including **correlation, deviation and RMSE**. No additional
-calibration photographs are included in the public portfolio.
+Calibration and validation of the measurement chain were performed using **Fluke reference equipment**.
+
+**Objective 1 success criterion:** a reproducible experimental window in which the rat liver remains perfused,
+thermally stable and its hemodynamic variables are continuously monitored.
 
 ## Objective 2 — Baseline Dataset without ICG {#objective-2}
 
-This objective characterizes the stability of the **ex vivo rat liver model** before introducing ICG.
-The baseline is based on physiological and hydrodynamic variables such as pressure, flow, temperature,
-vascular resistance and perfusate state.
+Characterize the stability of the preparation and establish a physiological baseline before the next experimental stage.
 
-At this stage, the portfolio intentionally emphasizes the experimental platform and acquisition system rather
-than presenting additional figures that are not yet part of the selected public material.
+### Recorded variables
+
+- Q(t) — portal flow.
+- P(t) — portal pressure.
+- T(t) — temperature.
+- R(t)=P/Q — vascular resistance.
+- pH / gases — perfusate state, when included in the protocol.
+
+The baseline experiments are used to evaluate stability and reproducibility of the ex vivo rat liver preparation.
 
 ## Objective 3 — ICG-NIR Functional Marker {#objective-3}
 
-**Coming soon — this objective is currently in progress.**
-
+**Coming soon.**
 
 ---
 
@@ -133,101 +118,110 @@ than presenting additional figures that are not yet part of the selected public 
 
 ## Ciervo UC — CYBATHLON 2024 {#cybathlon}
 
-I participated in CYBATHLON 2024 in Zürich as **Electrical Area Leader** of Ciervo UC, contributing to the
-electrical and electromechanical integration of a robotic transfemoral prosthesis for competition.
+I participated in CYBATHLON 2024 in Zürich as **Electrical Area Leader** of Ciervo UC, contributing to
+the development and integration of a robotic transfemoral prosthesis for functional competition tasks.
 
 ### My role
 
-- Electronic and electromechanical integration.
+- Electronic system design.
+- Electronic prototyping and manufacturing.
+- Electronics integration into the prosthesis.
+- Electromechanical integration.
 - Coordination between electronics, control and mechanics.
-- Troubleshooting during prototype and competition preparation.
-- Testing under real-world constraints with the pilot.
+- Diagnosis and correction of integration problems.
+- Development under real-world constraints and with a real user.
 
-<div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_aeropuerto_antes_suiza.jpg" alt="Equipo antes del viaje a Suiza" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+```{mermaid}
+flowchart LR
+    A["Functional need"] --> B["Design"]
+    B --> C["Electronic + mechanical prototypes"]
+    C --> D["Integration"]
+    D --> E["Testing with pilot"]
+    E --> F["Iteration"]
+    F --> G["Competition-ready system"]
+```
+
+<div class="image-slot">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_aeropuerto.png" alt="Equipo Ciervo UC durante el viaje a CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    EQUIPO ANTES DEL VIAJE A SUIZA
-    <small>Foto en el aeropuerto antes del viaje a CYBATHLON 2024.</small>
+    EQUIPO CIERVO UC
+    <small>Registro del equipo durante el viaje a Zürich</small>
   </div>
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_equipo_estadio.jpg" alt="Equipo en el estadio" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_apoyo.jpeg" alt="Trabajo técnico y apoyo en CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    EQUIPO EN EL ESTADIO
-    <small>Equipo Ciervo UC apoyando durante la competencia.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_piloto_frontal_competencia.jpg" alt="Piloto compitiendo — vista frontal" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    PILOTO COMPITIENDO — VISTA FRONTAL
-    <small>Vista frontal del piloto durante una prueba de competencia.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_protesis_lateral_competencia.jpg" alt="Prótesis durante competencia — vista lateral" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    PRÓTESIS DURANTE COMPETENCIA — VISTA LATERAL
-    <small>Vista lateral de la prótesis en uso durante la competencia.</small>
+    TRABAJO Y APOYO TÉCNICO
+    <small>Preparación y soporte técnico del equipo Ciervo UC</small>
   </div>
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_diagrama_conexiones.png" alt="Diagrama de conexiones" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_Compitiendo.png" alt="Ciervo UC compitiendo en CYBATHLON 2024" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    DIAGRAMA DE CONEXIONES
-    <small>Diagrama de conexiones eléctricas/electromecánicas del sistema.</small>
+    COMPITIENDO EN CYBATHLON 2024
+    <small>Participación del equipo durante la competencia</small>
   </div>
 </div>
 
-**Instagram video:** video of the prosthesis operating is available; the public URL still needs to be inserted
-before publication.
-
+<div class="image-slot">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_diagrama.jpeg" alt="Diagrama técnico de CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <div class="slot-label">
+    DIAGRAMA DEL SISTEMA
+    <small>Diagrama técnico asociado a la prótesis y su integración</small>
+  </div>
+</div>
 
 ---
 
 ## CandelStim — Transcranial Electrical Stimulation {#candelstim}
 
-Professional internship at Candel Medical Company involving electronics, firmware and verification work for
-a transcranial electrical stimulation platform.
+Professional internship at Candel Medical Company focused on hardware, electronics and firmware for a
+transcranial electrical stimulation medical device, improving an existing prototype toward a more integrated system.
 
-**Confidentiality:** this project is covered by an active NDA. Public information is intentionally limited to
-high-level responsibilities and artifacts prepared specifically for safe disclosure. No confidential circuit,
-firmware, protocol or product-design details are included here.
+### Stimulation modalities
 
-The material shown publicly is limited to:
+- tDCS — transcranial direct current stimulation.
+- tACS — transcranial alternating current stimulation.
+- tRNS — transcranial random noise stimulation.
 
-- a DDS calibration result;
-- a deliberately pixelated circuit photograph;
-- the software created for connection and therapy-protocol verification.
+### Technical work
 
-<div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/candel_calibracion_dds.png" alt="Calibración DDS" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+- Circuit analysis and redesign.
+- Electronic component selection and simulation.
+- PCB design, correction and debugging.
+- ESP32 and STM32 development.
+- Firmware modification and implementation.
+- BLE communication.
+- Signal generation and synchronization.
+- Hardware/software integration.
+- Energy-consumption reduction.
+- Experimental validation and iterative troubleshooting.
+
+<div class="image-slot">
+  <img class="portfolio-image asset-contain" src="imagenes/Candel_pcb.png" alt="PCB de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    CALIBRACIÓN DDS
-    <small>Gráfico de calibración del DDS preparado para publicación.</small>
+    PCB / ELECTRÓNICA
+    <small>PCB o electrónica desarrollada durante la práctica</small>
   </div>
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/candel_circuito_pixelado.jpg" alt="Circuito pixelado" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/candel_dds.png" alt="DDS y generación de señal CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    CIRCUITO PIXELADO
-    <small>Fotografía deliberadamente pixelada para evitar revelar detalles confidenciales.</small>
+    DDS / GENERACIÓN DE SEÑAL
+    <small>Elemento asociado a la generación y control de señal</small>
   </div>
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/candel_software_protocolo.png" alt="Software de conexión y verificación" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Candel_Software.png" alt="Software de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    SOFTWARE DE CONEXIÓN Y VERIFICACIÓN
-    <small>Software creado para conexión y verificación del protocolo de terapia.</small>
+    SOFTWARE
+    <small>Interfaz o software asociado al sistema CandelStim</small>
   </div>
 </div>
-
 
 ---
 
@@ -235,38 +229,34 @@ The material shown publicly is limited to:
 
 ## Borealis UC — Organ Supercooling {#borealis}
 
-Research participation in organ preservation and supercooling, combining mechanical design, experimental
-implementation and thermal/experimental evaluation.
+Research project focused on reducing hypoxic damage during organ transport through **supercooling**, with the
+broader objective of extending preservation time and supporting transplantation.
+
+### Engineering themes
+
+Organ preservation · thermal control · experimental physiology · transport constraints · technology for transplantation.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/borealis_modelo_3d.png" alt="Modelo 3D de la solución" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_equipo.jpeg" alt="Equipo experimental Borealis UC" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    MODELO 3D DE LA SOLUCIÓN
-    <small>Modelo 3D de la solución desarrollada para el proyecto.</small>
+    EQUIPO / SETUP BOREALIS UC
+    <small>Sistema experimental o equipamiento utilizado en el proyecto</small>
   </div>
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/borealis_solucion_implementada.jpg" alt="Solución real implementada" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_liver2.png" alt="Hígado en proyecto Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    SOLUCIÓN REAL IMPLEMENTADA
-    <small>Fotografía de la solución física implementada.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/borealis_equipo.jpg" alt="Equipo del proyecto" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    EQUIPO DEL PROYECTO
-    <small>Fotografía del equipo asociado al proyecto Borealis.</small>
+    MODELO EXPERIMENTAL
+    <small>Imagen del órgano o preparación utilizada en el proyecto</small>
   </div>
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/borealis_grafico_experimento.png" alt="Gráfico experimental" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_Grafico2.png" alt="Gráfico experimental Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO EXPERIMENTAL
-    <small>Gráfico representativo de un experimento del proyecto.</small>
+    <small>Resultado o evolución experimental representativa</small>
   </div>
 </div>
 
@@ -286,62 +276,33 @@ Electromechanical redesign and size reduction of an organ preservation machine.
 - Fabrication.
 - Experimental testing.
 
-No additional public images are assigned to this project in the current portfolio version.
-
-
 ---
 
 # MEDICAL IMAGING & AI {#medical-imaging-ai}
 
 ## Lung Segmentation with U-Net {#unet}
 
-Medical image segmentation project using a U-Net-based neural network for lung segmentation.
+Medical image segmentation project using a U-Net-based neural network for lung segmentation in CT and MRI images.
 
-### Selected evidence
+### Areas
 
-The portfolio shows only the material currently available for this project: IPRE, Dice curve, performance
-curves, a segmentation GIF and the U-Net architecture used.
+Medical imaging · deep learning · neural networks · segmentation · biomedical image processing.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/unet_ipre.png" alt="IPRE" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Ipre.gif" alt="Visualización IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    IPRE
-    <small>Imagen o resultado identificado como IPRE.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/unet_curva_dice.png" alt="Curva Dice" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    CURVA DICE
-    <small>Curva de la métrica Dice.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/unet_curvas_desempeno.png" alt="Curvas de desempeño" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    CURVAS DE DESEMPEÑO
-    <small>Curvas de desempeño del modelo durante entrenamiento/evaluación.</small>
+    RESULTADO VISUAL IPRE / U-NET
+    <small>Visualización animada o secuencia del resultado de segmentación</small>
   </div>
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/unet_segmentacion.gif" alt="GIF de segmentación" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/ipre_graph.png" alt="Gráfico IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    GIF DE SEGMENTACIÓN
-    <small>Animación que muestra el comportamiento de la segmentación.</small>
+    GRÁFICO IPRE / U-NET
+    <small>Gráfico de entrenamiento, desempeño o métricas del modelo</small>
   </div>
 </div>
-
-<div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/unet_diagrama_arquitectura.png" alt="Diagrama U-Net utilizado" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    DIAGRAMA U-NET UTILIZADO
-    <small>Diagrama de la arquitectura U-Net usada en el proyecto.</small>
-  </div>
-</div>
-
 
 ---
 
@@ -354,55 +315,41 @@ Development of an FPGA-based processing board for a universal mechanical testing
 The system processes signals associated with **force, displacement, deformation and speed** using
 **Zybo Z10, Vivado and VHDL**.
 
-No additional public images are assigned to this project in the current portfolio version.
-
-
 ---
 
 # CAD & PROTOTYPING {#cad-prototyping}
 
 ## Vscan Air — Medical Device Enclosure {#vscan}
 
-3D design and prototyping of an accessory / enclosure associated with the GE Vscan Air portable ultrasound
-transducer, including geometric adaptation, CAD development and additive manufacturing.
+3D design work for a cover / enclosure associated with the GE Vscan Air portable ultrasound transducer.
+
+### Work
+
+- CAD design.
+- 3D modeling.
+- Geometric adaptation.
+- Medical-device-oriented prototyping.
+
+<div class="image-slot">
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_solo.png" alt="Diseño Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <div class="slot-label">
+    DISEÑO / DISPOSITIVO
+    <small>Vista del dispositivo o diseño de cubierta de manera aislada</small>
+  </div>
+</div>
+
+<div class="image-slot">
+  <img class="portfolio-image asset-contain" src="imagenes/Vscan_3dReal.png" alt="Prototipo físico Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <div class="slot-label">
+    PROTOTIPO FÍSICO
+    <small>Pieza real fabricada mediante prototipado o impresión 3D</small>
+  </div>
+</div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_modelo_3d.png" alt="Modelo 3D" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Vscan_uso1.png" alt="Uso del prototipo Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
   <div class="slot-label">
-    MODELO 3D
-    <small>Modelo CAD/3D de la solución desarrollada.</small>
+    PROTOTIPO EN USO
+    <small>Prototipo instalado o utilizado con el Vscan Air</small>
   </div>
 </div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_impresion_3d_sin_vscan.jpg" alt="Resultado de impresión 3D" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    RESULTADO DE IMPRESIÓN 3D
-    <small>Pieza impresa en 3D mostrada sin el Vscan.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_solucion_lateral_sin_paciente.jpg" alt="Solución en el Vscan sin paciente" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    SOLUCIÓN EN EL VSCAN SIN PACIENTE
-    <small>Vista lateral de la solución instalada en el Vscan sin paciente.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_uso_frontal.jpg" alt="Implementación en uso — vista frontal" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    IMPLEMENTACIÓN EN USO — VISTA FRONTAL
-    <small>Vista frontal de la implementación siendo utilizada.</small>
-  </div>
-</div>
-
-<div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_uso_lateral.jpg" alt="Implementación en uso — vista lateral" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
-  <div class="slot-label">
-    IMPLEMENTACIÓN EN USO — VISTA LATERAL
-    <small>Vista lateral de la implementación siendo utilizada.</small>
-  </div>
-</div>
-

@@ -34,12 +34,12 @@ hardware, software and physiology have to work as one system.
 
 ::: {.image-slot .home-portrait}
 
-<img class="portfolio-image asset-contain" src="imagenes/tesis_setup_vista_lejana.jpg" alt="Vista general del setup experimental" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-cover" src="imagenes/Trabajando.png" alt="Foto principal / retrato técnico" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
 
 ::: {.slot-label}
-SETUP EXPERIMENTAL DE TESIS
+FOTO PRINCIPAL / RETRATO TÉCNICO
 
-Vista general del montaje experimental de perfusión ex vivo
+Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental
 :::
 
 :::
@@ -83,9 +83,11 @@ CAD, mechanical integration, 3D printing, machining and iterative testing.
 
 ## Ex Vivo Liver Viability & ICG-NIR
 
-My Master's research develops an **ex vivo rat liver perfusion model** for biomedical instrumentation, physiological monitoring and baseline characterization. A third objective involving **ICG-NIR** is currently in preparation.
+My Master's research uses an **ex vivo rat liver perfusion model** to develop and validate the experimental
+platform and establish a physiological baseline. A third objective focused on **ICG-NIR** is planned and is
+currently in progress.
 
-The research progresses through three connected objectives:
+The research is organized in three connected objectives:
 
 :::: {.home-step-grid}
 
@@ -117,7 +119,7 @@ Pressure, flow, temperature, vascular resistance, pH and gases.
 :::
 **ICG-NIR Functional Marker**
 
-Coming soon — this objective is currently in progress.
+Coming soon.
 
 [View in Portfolio →](portfolio.qmd#objective-3){.inline-project-link}
 :::
@@ -126,12 +128,12 @@ Coming soon — this objective is currently in progress.
 
 ::: {.image-slot .large}
 
-<img class="portfolio-image asset-contain" src="imagenes/tesis_equipo_laboratorio.jpg" alt="Equipo / entorno de laboratorio" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-contain" src="imagenes/Tesis_Equipo.png" alt="Equipo actual de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
 
 ::: {.slot-label}
-EQUIPO / ENTORNO DE LABORATORIO
+EQUIPO ACTUAL DE LA INVESTIGACIÓN DE MAGÍSTER
 
-Imagen asociada al trabajo experimental de la tesis
+Instrumentación y equipamiento utilizado en el modelo experimental ex vivo de hígado de rata
 :::
 
 :::

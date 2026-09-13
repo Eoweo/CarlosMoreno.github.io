@@ -1,83 +1,82 @@
 # Imágenes requeridas — Portfolio v9.2
 
-> **Total: 29 archivos visuales.**
+> **Total utilizado por la web: 21 imágenes.**
 
-Esta versión elimina todos los placeholders que no corresponden a material que el usuario indicó que realmente posee.
-Solo debes reemplazar los archivos vacíos de `imagenes/` manteniendo exactamente el nombre y la extensión.
+Se conservaron **exactamente los nombres que entregaste** para que solo tengas que copiar/reemplazar los archivos dentro de `imagenes/`.
 
-## Reglas
+> **Importante:** GitHub Pages distingue mayúsculas y minúsculas.
 
-1. No renombrar archivos.
-2. Fotografías → `.jpg`; diagramas/gráficos/capturas → `.png`; animación de segmentación → `.gif`.
-3. Un archivo vacío mantiene el placeholder.
-4. Una imagen válida reemplaza automáticamente el placeholder.
-5. No hay imágenes asignadas actualmente a `Organ Preservation Machine Redesign` ni a `FPGA Upgrade`.
-6. Objective 3 (ICG-NIR) no tiene imágenes ni resultados públicos todavía.
-7. Candel debe mantenerse en nivel público/no confidencial por NDA.
+## Cambios respecto a v9.1
 
-## Tesis
+- Se eliminaron todos los placeholders de imágenes que no corresponden a archivos que realmente tienes.
+- Objective 3 (ICG-NIR) no utiliza imágenes: queda solo el título y `Coming soon`.
+- Monitoring utiliza una sola captura: `Tesis_Monitor2canales.jpeg`.
+- `Tesis_monitor1canal.jpeg` se dejó fuera intencionalmente.
+- Calibration and validation no utiliza imágenes.
+- Organ Preservation Machine y FPGA quedan sin imágenes por ahora.
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+## HOME / TESIS
+
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 1 | `tesis_equipo_laboratorio.jpg` | Master's Research | Foto del equipo o entorno de laboratorio asociado al trabajo de tesis. | 16:9 |
-| 2 | `tesis_monitor_1_canal.png` | Objective 1 / Monitoring | Captura del software de monitorización de un canal funcionando con el modelo experimental actual. | 16:9 |
-| 3 | `tesis_monitor_multicanal_cerdo.png` | Objective 1 / Monitoring | Captura del software multicanal desarrollado para trabajo experimental futuro con modelo porcino. | 16:9 |
-| 4 | `tesis_setup_vidrios_frontal.jpg` | Objective 1 | Vista frontal del montaje experimental y su estructura de vidrio. | 4:3 |
-| 5 | `tesis_setup_vista_lejana.jpg` | Objective 1 | Vista desde mayor distancia del montaje experimental completo. | 16:9 |
-| 6 | `tesis_setup_vidrios_lateral_cercana.jpg` | Objective 1 | Vista lateral cercana de la estructura de vidrio y montaje experimental. | 4:3 |
-| 7 | `tesis_nucleos_oxigenador_armados.jpg` | Objective 1 | Núcleos de oxigenador ensamblados para el circuito experimental. | 4:3 |
+| 1 | `Trabajando.png` | Hero — Retrato técnico / trabajando | Imagen tuya trabajando en laboratorio o con el montaje experimental. | 3:4 o 4:5 |
+| 2 | `Tesis_Equipo.png` | Current Research — Equipo de tesis | Imagen representativa del equipamiento actual del proyecto de tesis. | 16:9 |
+| 3 | `Tesis_Completo.jpeg` | Master's Research — Montaje completo de tesis | Vista general del modelo experimental y la plataforma de perfusión. | 16:9 |
+| 4 | `Tesis_Setup.png` | Objective 1 — Setup experimental | Montaje ex vivo del hígado de rata y circuito de perfusión. | 16:9 |
+| 5 | `Tesis_Oxigenador.png` | Objective 1 — Oxigenador | Detalle del sistema de oxigenación utilizado en la plataforma. | 4:3 |
+| 6 | `Tesis_Monitor2canales.jpeg` | Objective 1 / Monitoring — Software de monitorización | Captura del software funcionando con adquisición de dos canales. | 16:9 |
 
 ## CYBATHLON
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 8 | `cybathlon_equipo_estadio.jpg` | CYBATHLON 2024 | Equipo Ciervo UC apoyando durante la competencia en el estadio. | 16:9 |
-| 9 | `cybathlon_piloto_frontal_competencia.jpg` | CYBATHLON 2024 | Vista frontal del piloto durante una prueba de competencia. | 4:3 |
-| 10 | `cybathlon_protesis_lateral_competencia.jpg` | CYBATHLON 2024 | Vista lateral de la prótesis en uso durante la competencia. | 4:3 |
-| 11 | `cybathlon_diagrama_conexiones.png` | CYBATHLON 2024 | Diagrama de conexiones eléctricas/electromecánicas del sistema. | 16:9 |
-| 12 | `cybathlon_aeropuerto_antes_suiza.jpg` | CYBATHLON 2024 | Foto en el aeropuerto antes del viaje a CYBATHLON 2024 en Suiza. | 16:9 |
+| 7 | `cybathlon_aeropuerto.png` | CYBATHLON 2024 — Equipo / viaje a Zürich | Registro del equipo durante el viaje a CYBATHLON 2024. | 16:9 |
+| 8 | `cybathlon_apoyo.jpeg` | CYBATHLON 2024 — Trabajo y apoyo técnico | Preparación, soporte o trabajo técnico con el equipo Ciervo UC. | 4:3 |
+| 9 | `cybathlon_Compitiendo.png` | CYBATHLON 2024 — Competencia | Participación de Ciervo UC durante la competencia. | 16:9 |
+| 10 | `cybathlon_diagrama.jpeg` | CYBATHLON 2024 — Diagrama del sistema | Diagrama técnico asociado a la prótesis / integración del sistema. | 16:9 |
 
-## Borealis
+## CANDELSTIM
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 13 | `borealis_modelo_3d.png` | Borealis UC | Modelo 3D de la solución desarrollada para el proyecto. | 16:9 |
-| 14 | `borealis_solucion_implementada.jpg` | Borealis UC | Fotografía de la solución física implementada. | 16:9 |
-| 15 | `borealis_equipo.jpg` | Borealis UC | Fotografía del equipo asociado al proyecto Borealis. | 16:9 |
-| 16 | `borealis_grafico_experimento.png` | Borealis UC | Gráfico representativo de un experimento del proyecto. | 16:9 |
+| 11 | `candel_dds.png` | CandelStim — DDS / generación de señal | Parte del sistema de generación de señal utilizado en CandelStim. | 16:9 |
+| 12 | `Candel_pcb.png` | CandelStim — PCB | PCB o electrónica desarrollada durante la práctica. | 4:3 |
+| 13 | `Candel_Software.png` | CandelStim — Software | Interfaz o software asociado al sistema CandelStim. | 16:9 |
 
-## Candel
+## BOREALIS UC
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 17 | `candel_calibracion_dds.png` | CandelStim | Gráfico de calibración del DDS apto para publicación. | 16:9 |
-| 18 | `candel_circuito_pixelado.jpg` | CandelStim | Fotografía deliberadamente pixelada del circuito para proteger información confidencial. | 4:3 |
-| 19 | `candel_software_protocolo.png` | CandelStim | Captura del software creado para conexión y verificación del protocolo de terapia. | 16:9 |
+| 14 | `Borealis_equipo.jpeg` | Borealis UC — Equipo / setup | Sistema experimental o equipamiento utilizado en Borealis UC. | 16:9 |
+| 15 | `Borealis_liver2.png` | Borealis UC — Hígado / modelo experimental | Imagen del órgano o preparación experimental. | 4:3 |
+| 16 | `Borealis_Grafico2.png` | Borealis UC — Gráfico experimental | Resultado o evolución experimental representativa. | 16:9 |
 
-## U-Net
+## U-NET / IPRE
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 20 | `unet_ipre.png` | U-Net | Imagen/resultado identificado por el usuario como IPRE. | variable |
-| 21 | `unet_curva_dice.png` | U-Net | Curva de la métrica Dice. | 16:9 |
-| 22 | `unet_curvas_desempeno.png` | U-Net | Curvas de desempeño del modelo durante entrenamiento/evaluación. | 16:9 |
-| 23 | `unet_segmentacion.gif` | U-Net | Animación de segmentación mostrando el comportamiento del modelo. | variable |
-| 24 | `unet_diagrama_arquitectura.png` | U-Net | Diagrama de la arquitectura U-Net usada en el proyecto. | 16:9 |
+| 17 | `Ipre.gif` | U-Net — Resultado visual IPRE / U-Net | Visualización animada o secuencia del resultado de segmentación. | 16:9 |
+| 18 | `ipre_graph.png` | U-Net — Gráfico IPRE / U-Net | Gráfico de entrenamiento, desempeño o métricas del modelo. | 16:9 |
 
-## Vscan Air
+## VSCAN AIR
 
-| # | Archivo | Sección | Contenido | Formato sugerido |
+| # | Archivo | Uso en la web | Contenido | Relación sugerida |
 |---:|---|---|---|---|
-| 25 | `vscan_uso_frontal.jpg` | Vscan Air | Vista frontal de la solución siendo utilizada. | 4:3 |
-| 26 | `vscan_uso_lateral.jpg` | Vscan Air | Vista lateral de la solución siendo utilizada. | 4:3 |
-| 27 | `vscan_solucion_lateral_sin_paciente.jpg` | Vscan Air | Vista lateral de la solución instalada en el Vscan sin paciente. | 4:3 |
-| 28 | `vscan_modelo_3d.png` | Vscan Air | Modelo CAD/3D de la solución desarrollada. | 16:9 |
-| 29 | `vscan_impresion_3d_sin_vscan.jpg` | Vscan Air | Pieza impresa en 3D mostrada sin el Vscan. | 4:3 |
+| 19 | `Vscan_3dReal.png` | Vscan Air — Prototipo físico | Pieza real fabricada mediante prototipado / impresión 3D. | 4:3 |
+| 20 | `vscan_solo.png` | Vscan Air — Diseño Vscan | Vista del dispositivo o diseño de cubierta de manera aislada. | 4:3 |
+| 21 | `Vscan_uso1.png` | Vscan Air — Uso del prototipo | Prototipo instalado o utilizado con el Vscan Air. | 16:9 |
 
-## Recurso adicional no incluido como imagen
+## Archivo entregado pero no utilizado
 
-- **CYBATHLON:** URL del video de Instagram donde se ve la prótesis funcionando. La página ya indica que existe, pero el enlace queda pendiente hasta recibir la URL exacta.
+| Archivo | Motivo |
+|---|---|
+| `Tesis_monitor1canal.jpeg` | Se decidió mostrar únicamente una captura del software. Se utiliza `Tesis_Monitor2canales.jpeg`. |
 
-## Control antes de publicar
+## Procedimiento
 
-Ordena la carpeta `imagenes/` por tamaño. Los archivos de `0 bytes` todavía deben ser reemplazados.
+1. Abre `imagenes/`.
+2. Sustituye cada archivo vacío por tu imagen real.
+3. Mantén exactamente el mismo nombre y extensión.
+4. Publica el proyecto en GitHub.
+
+No necesitas editar las rutas del código.
