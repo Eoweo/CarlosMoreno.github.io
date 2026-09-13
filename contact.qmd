@@ -52,8 +52,8 @@ EMAIL
 ::::
 
 **Email**
-`ADD_EMAIL`
-
+mail: camoro2002@uc.cl
+[Write me →](mailto:camoro2002@uc.cl){.project-page-button}
 :::
 
 ::: {.contact-method}
@@ -71,7 +71,7 @@ CODE & PROJECTS
 ::::
 
 **GitHub**
-`ADD_GITHUB`
+[Repository →](https://github.com/Eoweo){.project-page-button}
 
 :::
 
@@ -90,7 +90,7 @@ PROFESSIONAL NETWORK
 ::::
 
 **LinkedIn**
-`ADD_LINKEDIN`
+[Link](https://www.linkedin.com/in/carlos-moreno-rojas/){.project-page-button}
 
 :::
 
@@ -162,10 +162,10 @@ Detailed technical record of research and engineering projects.
 
 ::::
 
-# Publishing Status
+<!-- # Publishing Status
 
-## Public Information
+<!-- ## Public Information
 
-::: {.contact-status}
-**Before publishing:** replace the `ADD_...` placeholders only with information that should be publicly visible.
-:::
+<!-- ::: {.contact-status}
+<!-- **Before publishing:** replace the `ADD_...` placeholders only with information that should be publicly visible.
+<!-- :::
