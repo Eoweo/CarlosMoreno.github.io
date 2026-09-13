@@ -184,7 +184,6 @@ transcranial electrical stimulation medical device, improving an existing protot
 
 - tDCS — transcranial direct current stimulation.
 - tACS — transcranial alternating current stimulation.
-- tRNS — transcranial random noise stimulation.
 
 ### Technical work
 
@@ -262,22 +261,6 @@ Organ preservation · thermal control · experimental physiology · transport co
 
 ---
 
-## Organ Preservation Machine Redesign {#organ-preservation-machine}
-
-Electromechanical redesign and size reduction of an organ preservation machine.
-
-### Engineering work
-
-- Mechanical design.
-- Electronics.
-- Control.
-- Fluid systems.
-- Electromechanical integration.
-- Fabrication.
-- Experimental testing.
-
----
-
 # MEDICAL IMAGING & AI {#medical-imaging-ai}
 
 ## Lung Segmentation with U-Net {#unet}
@@ -291,8 +274,7 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 <div class="image-slot large">
   <img class="portfolio-image asset-contain" src="imagenes/Ipre.gif" alt="Visualización IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
-    RESULTADO VISUAL IPRE / U-NET
-    <small>Visualización animada o secuencia del resultado de segmentación</small>
+    Loading, please wait :o
   </div>
 </div>
 
@@ -308,13 +290,229 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 
 # EMBEDDED SYSTEMS & FPGA {#embedded-systems-fpga}
 
+## New Rally-X — Zybo Z7 Embedded Game {#rallyx}
+
+Development of a complete embedded implementation of **New Rally-X** on a **Digilent Zybo Z7**, combining programmable hardware designed in **Xilinx Vivado** with a modular software architecture for real-time graphics, gameplay logic, artificial intelligence, audio, physical controls and level management.
+
+The project integrates hardware and software as a single embedded system, using the Zybo Z7 to manage the LCD, input devices, timers, interrupts, SPI communication, external storage and audio generation.
+
+<div class="skill-chips">
+<span>Zybo Z7</span>
+<span>Xilinx Vivado</span>
+<span>Embedded C</span>
+<span>AXI Timer</span>
+<span>SPI</span>
+<span>GPIO</span>
+<span>Frame Buffer</span>
+<span>SD Card</span>
+<span>Game AI</span>
+<span>Real-Time Graphics</span>
+</div>
+
+### Hardware architecture
+
+A custom **Vivado Block Design** was implemented to integrate the hardware resources required by the game, including:
+
+- SPI communication.
+- GPIO for player input and peripherals.
+- Dual AXI Timer.
+- Interrupt logic.
+- Audio IP Core.
+- LCD interface.
+- Physical input devices.
+
+The dual AXI Timer separates two timing domains: slower real-time game events and the approximately **20 FPS** graphics/gameplay update loop.
+
+<div class="image-slot large">
+  <img class="portfolio-image asset-contain"
+       src="imagenes/rallyx_vivado.png"
+       alt="New Rally-X Vivado architecture"
+       loading="lazy"
+       decoding="async"
+       onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+       onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+  <div class="slot-label">
+    VIVADO HARDWARE ARCHITECTURE
+    <small>Zybo Z7 Block Design, timers, GPIO, SPI, interrupts and audio hardware</small>
+  </div>
+</div>
+
+### Graphics engine
+
+The original direct pixel-by-pixel LCD rendering system was replaced by a **framebuffer-based graphics pipeline**:
+
+```text
+Game Logic
+    ↓
+Frame Buffer
+    ↓
+Complete Frame
+    ↓
+SPI
+    ↓
+LCD
+```
+
+All graphical primitives first modify the framebuffer in memory and the completed frame is then transferred to the LCD through SPI.
+
+This architecture reduced visual artifacts such as tearing and flickering and enabled smoother animation.
+
+The graphics engine was organized into three logical layers:
+
+```text
+Terrain
+    ↓
+Overlay
+    ↓
+Entities
+```
+
+It also implements:
+
+- 12 × 12 pixel sprites.
+- Sprite sheets.
+- RGB565 graphics.
+- Viewport clipping.
+- View culling.
+- Player-relative rendering.
+- World-to-screen coordinate transformations.
+- Camera tracking.
+
+Graphical resources and level data are loaded from an **SD card**, reducing the amount of graphical data stored directly in the executable.
+
+### Gameplay and world engine
+
+The game world is managed through independent structures for terrain, overlay objects and dynamic entities.
+
+The implementation includes:
+
+- Three independent levels.
+- Player movement.
+- World and entity collision detection.
+- Collectable flags.
+- Special flags.
+- Fuel system.
+- Three-life system.
+- Smoke defensive ability.
+- Score system.
+- Victory and defeat conditions.
+
+<div class="image-slot large">
+  <img class="portfolio-image asset-contain"
+       src="imagenes/rallyx_gui.png"
+       alt="New Rally-X graphical user interface"
+       loading="lazy"
+       decoding="async"
+       onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+       onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+  <div class="slot-label">
+    GAME INTERFACE
+    <small>LCD graphics, HUD, minimap, fuel, lives and player information</small>
+  </div>
+</div>
+
+### Enemy AI and collision system
+
+Enemy vehicles are controlled through an independent AI module.
+
+The AI performs pseudo-random direction decisions while reusing the same movement and collision engine used by the player.
+
+Collision detection evaluates interactions between:
+
+```text
+Terrain
+Overlay
+Entities
+Player
+Enemies
+```
+
+A smoke mechanic was also implemented as a defensive ability. Smoke is inserted dynamically into the world and can temporarily stun enemy vehicles.
+
+### HUD and game interface
+
+The HUD displays real-time information including:
+
+```text
+Fuel
+Lives
+Score
+Minimap
+```
+
+A menu system was also developed for game startup, level selection and audio configuration.
+
+The global game flow is controlled through a state machine:
+
+```text
+MENU
+  ↓
+LEVEL SELECTION
+  ↓
+GAME
+  ↓
+WIN / LOSE
+  ↓
+MENU
+```
+
+<div class="image-slot large">
+  <img class="portfolio-image asset-contain"
+       src="imagenes/rallyx_score.png"
+       alt="New Rally-X gameplay score and HUD"
+       loading="lazy"
+       decoding="async"
+       onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')"
+       onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+  <div class="slot-label">
+    GAMEPLAY / SCORE
+    <small>Running game showing score, HUD or final gameplay state</small>
+  </div>
+</div>
+
+### Audio system
+
+Audio was integrated through an **IP Core implemented in Vivado** and controlled from software.
+
+Music is represented using MIDI-style events containing note, timing and velocity information. Different music and sound effects are selected according to the current game state and gameplay events.
+
+Audio is used for:
+
+```text
+Menu
+Levels
+Flag collection
+Special flags
+Collision
+Smoke
+Fuel
+End of game
+```
+
+### Gameplay demonstration
+
+<div class="project-video">
+  <video controls preload="metadata" playsinline>
+    <source src="videos/rallyx_gameplay.mp4" type="video/mp4">
+    Your browser does not support MP4 video.
+  </video>
+</div>
+
+### Result
+
+The final system is a complete embedded implementation of **New Rally-X running on the Zybo Z7**, integrating programmable hardware, real-time graphics, physical input, external asset storage, collision detection, enemy AI, audio, multiple levels, HUD, minimap and complete game-state logic.
+
+---
+
 ## FPGA Upgrade — Universal Testing Machine {#fpga}
 
 Development of an FPGA-based processing board for a universal mechanical testing machine.
 
 The system processes signals associated with **force, displacement, deformation and speed** using
 **Zybo Z10, Vivado and VHDL**.
-
 ---
 
 # CAD & PROTOTYPING {#cad-prototyping}

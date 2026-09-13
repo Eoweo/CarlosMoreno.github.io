@@ -4,6 +4,7 @@ project:
   resources:
   - projects/*.html
   - imagenes/*
+  - videos/*
 website:
   title: Carlos Moreno Rojas
   description: Biomedical & Electrical Engineering — Portfolio
