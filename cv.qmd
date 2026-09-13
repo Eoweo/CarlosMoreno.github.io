@@ -43,10 +43,10 @@ page-layout: full
 
 ```{=html}
 <section class="cv-chip-grid swiss-reveal">
-  <article class="cv-chip"><span class="cv-chip-icon cv-icon-microscope" aria-hidden="true"></span><strong>Research</strong><p>Experimental design, organ perfusion, instrumentation and functional assessment.</p></article>
-  <article class="cv-chip"><span class="cv-chip-icon cv-icon-cpu" aria-hidden="true"></span><strong>Systems</strong><p>Embedded systems, electronics, sensing, acquisition and integration.</p></article>
-  <article class="cv-chip"><span class="cv-chip-icon cv-icon-medical" aria-hidden="true"></span><strong>Medical technology</strong><p>Biomedical devices, neurostimulation, imaging and validation workflows.</p></article>
-  <article class="cv-chip"><span class="cv-chip-icon cv-icon-tools" aria-hidden="true"></span><strong>Build approach</strong><p>CAD, prototyping, testing, debugging and iteration from data.</p></article>
+  <article class="cv-chip"><div class="cv-icon-title"><span class="cv-chip-icon cv-icon-microscope" aria-hidden="true"></span><strong>Research</strong></div><p>Experimental design, organ perfusion, instrumentation and functional assessment.</p></article>
+  <article class="cv-chip"><div class="cv-icon-title"><span class="cv-chip-icon cv-icon-cpu" aria-hidden="true"></span><strong>Systems</strong></div><p>Embedded systems, electronics, sensing, acquisition and integration.</p></article>
+  <article class="cv-chip"><div class="cv-icon-title"><span class="cv-chip-icon cv-icon-medical" aria-hidden="true"></span><strong>Medical technology</strong></div><p>Biomedical devices, neurostimulation, imaging and validation workflows.</p></article>
+  <article class="cv-chip"><div class="cv-icon-title"><span class="cv-chip-icon cv-icon-tools" aria-hidden="true"></span><strong>Build approach</strong></div><p>CAD, prototyping, testing, debugging and iteration from data.</p></article>
 </section>
 ```
 
@@ -88,43 +88,37 @@ page-layout: full
 ```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span>
-    <div class="cv-card-label">2025–present · Research</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-flask" aria-hidden="true"></span><div class="cv-card-label">2025–present · Research</div></div>
     <h3>Master’s Research — Liver Viability &amp; ICG-NIR</h3>
     <p>Ex vivo liver perfusion, biomedical instrumentation and ICG-NIR functional assessment.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-robot" aria-hidden="true"></span>
-    <div class="cv-card-label">2024 · Robotics</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-robot" aria-hidden="true"></span><div class="cv-card-label">2024 · Robotics</div></div>
     <h3>CYBATHLON 2024 — Ciervo UC</h3>
     <p>Electrical Area Leader for electronics and electromechanical integration of a robotic transfemoral prosthesis.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-medical" aria-hidden="true"></span>
-    <div class="cv-card-label">Professional internship · Medical devices</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-medical" aria-hidden="true"></span><div class="cv-card-label">Professional internship · Medical devices</div></div>
     <h3>Candel Medical Company</h3>
     <p>Hardware, electronics and firmware development for a transcranial electrical stimulation platform.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-snow" aria-hidden="true"></span>
-    <div class="cv-card-label">Research · Organ preservation</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-snow" aria-hidden="true"></span><div class="cv-card-label">Research · Organ preservation</div></div>
     <h3>Borealis UC</h3>
     <p>Experimental work related to organ preservation, supercooling and thermal control.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-briefcase" aria-hidden="true"></span>
-    <div class="cv-card-label">Industry</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-briefcase" aria-hidden="true"></span><div class="cv-card-label">Industry</div></div>
     <h3>Meldic Ltda.</h3>
     <p>Experience linked to medical equipment, technical development and engineering-oriented problem solving in applied settings.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span>
-    <div class="cv-card-label">Technical record</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span><div class="cv-card-label">Technical record</div></div>
     <h3>Engineering Portfolio</h3>
     <p>Detailed engineering work, architectures, validation and visual evidence are consolidated in the technical portfolio.</p>
     <a class="project-page-button" href="portfolio.html">View Technical Portfolio</a>
@@ -137,29 +131,25 @@ page-layout: full
 ```{=html}
 <section class="cv-card-grid swiss-reveal">
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-magnet" aria-hidden="true"></span>
-    <div class="cv-card-label">Teaching</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-magnet" aria-hidden="true"></span><div class="cv-card-label">Teaching</div></div>
     <h3>Physics Laboratory Teaching Assistant</h3>
     <p>Faculty of Physics UC — <strong>FIS154</strong>.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-users" aria-hidden="true"></span>
-    <div class="cv-card-label">Student leadership</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-users" aria-hidden="true"></span><div class="cv-card-label">Student leadership</div></div>
     <h3>Biomedical Engineering Student Chapter UC</h3>
     <p>President, <strong>2024–2025</strong>.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-globe" aria-hidden="true"></span>
-    <div class="cv-card-label">Professional chapter</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-globe" aria-hidden="true"></span><div class="cv-card-label">Professional chapter</div></div>
     <h3>IEEE EMBS PUC Chile</h3>
     <p>Webmaster since <strong>2024</strong>.</p>
   </article>
 
   <article class="cv-card">
-    <span class="cv-card-icon cv-icon-users" aria-hidden="true"></span>
-    <div class="cv-card-label">Collaboration</div>
+    <div class="cv-icon-label"><span class="cv-card-icon cv-icon-users" aria-hidden="true"></span><div class="cv-card-label">Collaboration</div></div>
     <h3>Interdisciplinary work</h3>
     <p>Experience working across research, engineering and implementation teams.</p>
   </article>
@@ -170,12 +160,12 @@ page-layout: full
 
 ```{=html}
 <section class="cv-card-grid cv-skill-grid swiss-reveal">
-  <article class="cv-card"><span class="cv-card-icon cv-icon-circuit" aria-hidden="true"></span><h3>Electronics &amp; Embedded Systems</h3><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></article>
-  <article class="cv-card"><span class="cv-card-icon cv-icon-code" aria-hidden="true"></span><h3>Programming &amp; Data</h3><p>Python, C++, acquisition, signal processing and image processing.</p></article>
-  <article class="cv-card"><span class="cv-card-icon cv-icon-cpu" aria-hidden="true"></span><h3>FPGA &amp; Digital Design</h3><p>Zybo Z10, Vivado and VHDL.</p></article>
-  <article class="cv-card"><span class="cv-card-icon cv-icon-heart-pulse" aria-hidden="true"></span><h3>Biomedical Engineering</h3><p>Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.</p></article>
-  <article class="cv-card"><span class="cv-card-icon cv-icon-ruler" aria-hidden="true"></span><h3>CAD &amp; Prototyping</h3><p>Fusion 360, CAD, 3D printing, machining and electromechanical integration.</p></article>
-  <article class="cv-card"><span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span><h3>Engineering approach</h3><p>Implementation-oriented, systems-level thinking and iterative validation.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-circuit" aria-hidden="true"></span><h3>Electronics &amp; Embedded Systems</h3></div><p>Analog/digital electronics, PCB, ESP32, STM32, Arduino, ADC/DAC, firmware and communications.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-code" aria-hidden="true"></span><h3>Programming &amp; Data</h3></div><p>Python, C++, acquisition, signal processing and image processing.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-cpu" aria-hidden="true"></span><h3>FPGA &amp; Digital Design</h3></div><p>Zybo Z10, Vivado and VHDL.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-heart-pulse" aria-hidden="true"></span><h3>Biomedical Engineering</h3></div><p>Instrumentation, organ perfusion, preservation, neurostimulation, NIR fluorescence and validation.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-ruler" aria-hidden="true"></span><h3>CAD &amp; Prototyping</h3></div><p>Fusion 360, CAD, 3D printing, machining and electromechanical integration.</p></article>
+  <article class="cv-card"><div class="cv-icon-title"><span class="cv-card-icon cv-icon-compass" aria-hidden="true"></span><h3>Engineering approach</h3></div><p>Implementation-oriented, systems-level thinking and iterative validation.</p></article>
 </section>
 ```
 

@@ -1483,8 +1483,8 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 
 .cv-chip-icon,
 .cv-card-icon {
-  display: block;
-  margin-bottom: 1rem;
+  display: inline-block;
+  margin: 0;
   font-size: 0;
 }
 
@@ -1793,7 +1793,7 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
    VERSION 9.1 — IMAGE ASSET SLOTS
    ================================================================ */
 
-.image-slot > .portfolio-image {
+.image-slot .portfolio-image {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -1804,15 +1804,15 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
   background: var(--surface);
 }
 
-.image-slot > .portfolio-image.asset-contain {
+.image-slot .portfolio-image.asset-contain {
   object-fit: contain;
 }
 
-.image-slot > .portfolio-image.asset-cover {
+.image-slot .portfolio-image.asset-cover {
   object-fit: cover;
 }
 
-.image-slot.has-image > .portfolio-image {
+.image-slot.has-image .portfolio-image {
   opacity: 1;
 }
 
@@ -1825,4 +1825,106 @@ main.content h2 { margin-top: 2.75rem; padding-top: .16rem; }
 .image-slot.has-image {
   border-style: solid;
   background: var(--surface);
+}
+
+
+/* v9.3 — Quarto can wrap Markdown images in <p>. Keep the image slot
+   geometry identical whether the image is a direct child or wrapped. */
+.image-slot > p:has(.portfolio-image) {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ================================================================
+   VERSION 9.3 — INLINE ICON + TEXT HEADERS
+   ================================================================ */
+
+.cv-icon-title,
+.cv-icon-label {
+  display: flex;
+  align-items: center;
+  gap: .48rem;
+  min-width: 0;
+}
+
+.cv-icon-title {
+  margin-bottom: .34rem;
+}
+
+.cv-icon-title > strong,
+.cv-icon-title > h3 {
+  margin: 0 !important;
+}
+
+.cv-icon-label {
+  margin-bottom: .45rem;
+}
+
+.cv-icon-label .cv-card-label {
+  margin: 0;
+}
+
+.cv-icon-title .cv-chip-icon,
+.cv-icon-title .cv-card-icon,
+.cv-icon-label .cv-card-icon {
+  --cv-icon-size: 1rem;
+  display: inline-block;
+  margin: 0;
+  flex: 0 0 var(--cv-icon-size);
+}
+
+/* CV chips can now be shorter because the icon no longer occupies a row. */
+.cv-chip {
+  min-height: 0;
+  padding: .78rem .9rem;
+}
+
+.cv-chip > p {
+  margin-top: .15rem;
+}
+
+/* General CV cards: remove spacing reserved for the previous standalone icon. */
+.cv-card {
+  padding-top: .82rem;
+}
+
+.cv-card .cv-icon-label + h3 {
+  margin-top: .08rem;
+}
+
+/* Technical Skills: icon and title share the same line. */
+.cv-skill-grid .cv-icon-title {
+  margin-bottom: .2rem;
+}
+
+.cv-skill-grid .cv-icon-title .cv-card-icon {
+  --cv-icon-size: .95rem !important;
+}
+
+.cv-skill-grid .cv-icon-title h3 {
+  line-height: 1.12 !important;
+}
+
+/* Contact: icon and uppercase label share one line. */
+.contact-icon-label {
+  display: flex;
+  align-items: center;
+  gap: .48rem;
+  margin-bottom: .45rem;
+}
+
+.contact-icon-label .contact-icon,
+.contact-icon-label .contact-card-label {
+  margin: 0 !important;
+}
+
+.contact-icon-label .contact-icon {
+  min-height: 0;
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+.contact-method {
+  min-height: 0;
 }

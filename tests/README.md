@@ -57,3 +57,10 @@ Checks:
 ```bash
 python tests/check_image_assets_v92.py
 ```
+
+
+## UI v9.3
+
+```bash
+python tests/check_ui_v93.py
+```

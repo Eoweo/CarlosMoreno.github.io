@@ -2,7 +2,7 @@
 
 > **Documento vivo de requisitos**
 >
-> **Versión base documentada:** `v9.2 — Swiss Research / Real Image Set + Thesis Reduction`  
+> **Versión base documentada:** `v9.3 — Swiss Research / Inline Icons + Image Slot Fix`  
 > **Base funcional:** `v5.2` + integración visual/interactiva Swiss Research  
 > **Propósito:** dejar por escrito el comportamiento, diseño, arquitectura y restricciones actuales del portafolio para poder modificar requisitos de forma controlada sin perder funcionalidades existentes.
 
@@ -5742,7 +5742,7 @@ La versión descrita por este documento se considera la referencia funcional:
 
 ```text
 Carlos Moreno Portfolio
-Version: v9.2 Swiss Research / Real Image Set + Thesis Reduction
+Version: v9.3 Swiss Research / Inline Icons + Image Slot Fix
 Base: v6 Swiss Research / v5.2 content architecture
 Style: Swiss Research
 Framework: Quarto
@@ -6744,3 +6744,135 @@ No se modifican `assets/site.css`, `assets/site-scripts.html`, TOC portal, Swiss
 
 ### Precedencia v9.2
 Los requisitos v9.2 sustituyen el inventario de 54 placeholders definido en v9.1.
+
+
+---
+
+# 107. Registro incremental — v9.3
+
+## VERSION 9.3 — Inline Icons + Image Slot Fix
+
+### REQ-IMG-030 — Detección robusta de `.image-slot`
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Las imágenes deben activar el slot con:
+
+```javascript
+this.closest('.image-slot')?.classList.add('has-image')
+```
+
+y en error:
+
+```javascript
+this.closest('.image-slot')?.classList.remove('has-image')
+```
+
+No debe usarse `parentElement`, porque Quarto puede insertar un `<p>` intermedio.
+
+### REQ-IMG-031 — Selectores compatibles con wrapper de Quarto
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se usan:
+
+```css
+.image-slot .portfolio-image
+.image-slot.has-image .portfolio-image
+```
+
+y no selectores `>` que exijan que `<img>` sea hijo directo.
+
+La X del placeholder debe desaparecer tanto en Home como en Portfolio cuando una imagen real carga correctamente.
+
+### REQ-UI-030 — Icono y texto en una sola línea
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Toda tarjeta con icono debe presentar su encabezado como:
+
+```text
+[icono]  Texto
+```
+
+y no como:
+
+```text
+[icono]
+
+Texto
+```
+
+Aplica a CV y Contact, incluyendo:
+
+```text
+CV chips
+CV experience cards
+CV teaching/leadership cards
+CV technical skills
+CV summary/timeline/languages ya-inline
+Contact professional-channel cards
+```
+
+### REQ-UI-031 — Compactación vertical de tarjetas con iconos
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P1`
+
+Los iconos de `.cv-chip-icon` y `.cv-card-icon` dejan de ser bloques verticales con margen inferior.
+
+Los wrappers vigentes son:
+
+```text
+.cv-icon-title
+.cv-icon-label
+.contact-icon-label
+```
+
+### REQ-QA-060 — Test de image-slot
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Debe cumplirse:
+
+```text
+parentElement has-image calls = 0
+closest('.image-slot') calls > 0
+direct-child portfolio-image selectors = 0
+```
+
+### REQ-QA-061 — Test de icon headers
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+No deben quedar pares standalone:
+
+```text
+cv-chip-icon + strong
+cv-card-icon + h3
+contact-icon + contact-card-label
+```
+
+sin wrapper horizontal.
+
+### REQ-QA-062 — Sistemas preservados
+
+**Estado:** `IMPLEMENTADO`  
+**Prioridad:** `P0`
+
+Se conserva:
+
+```text
+arquitectura Home / Portfolio / CV / Contact
+orden del Portfolio
+TOC portal
+Swiss Wipe
+Light/Dark
+redirects legacy
+inventario de imágenes v9.2
+```

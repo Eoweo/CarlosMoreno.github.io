@@ -316,3 +316,14 @@ Changes:
 - `imagenes/` now contains only the **21 files actually used**.
 - Exact filenames and capitalization supplied by the user are preserved.
 - CSS, animation system, TOC geometry, CV and Contact are unchanged.
+
+
+## v9.3
+
+- Fixed Home images showing the placeholder X after the real image loaded.
+- Image handlers now use `closest('.image-slot')`.
+- Image CSS supports Quarto/Pandoc paragraph wrappers.
+- CV icon cards now use horizontal `icon + text` headers.
+- Contact professional-channel cards now use horizontal `icon + label` headers.
+- Removed the vertical spacing reserved for standalone icons.
+- Architecture, TOC, animations, Light/Dark, project order and image inventory are unchanged.

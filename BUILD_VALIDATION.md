@@ -1,10 +1,28 @@
-# Build validation — v9.2
+# Build validation — v9.3
 
 - QMD YAML: OK
 - Pandoc index.qmd: OK
 - Pandoc portfolio.qmd: OK
 - Pandoc cv.qmd: OK
 - Pandoc contact.qmd: OK
+- check_ui_v93.py: PASS
+- PASS: no parentElement add
+PASS: no parentElement remove
+PASS: closest add
+PASS: closest remove
+PASS: no direct-child base selector
+PASS: no direct-child loaded selector
+PASS: descendant image selector
+PASS: 4 chip icons
+PASS: all chip icons inline
+PASS: 16 card icons
+PASS: all card icons accounted
+PASS: no nested icon-title wrappers
+PASS: 3 contact icons
+PASS: all contact icons inline
+PASS: inline cv CSS
+PASS: inline contact CSS
+PASS: contact icon old min-height neutralized
 - check_image_assets_v92.py: PASS
 - PASS: 21 references
 PASS: 21 unique references
@@ -74,12 +92,13 @@ PASS: toc 20px left padding CSS
 PASS: toc 20px top padding CSS
 PASS: padding left QA
 PASS: padding top QA
-- Image references: 21
-- Image template files: 21
-- Zero-byte templates: 21
-- ICG image references: 0
-- Tesis_monitor1canal present: NO
-- site.css unchanged from v9.1: YES
-- site-scripts.html unchanged from v9.1: YES
-- cv.qmd unchanged from v9.1: YES
-- contact.qmd unchanged from v9.1: YES
+- Compiled Home image wrapped by Pandoc <p>: YES
+- Compiled Home uses closest image-slot: YES
+- Compiled CV inline title wrappers: 10
+- Compiled CV inline label wrappers: 10
+- Compiled Contact inline icon-label containers: 3
+- CSS braces balanced: YES
+- JavaScript syntax: OK
+- site-scripts.html unchanged from v9.2: YES
+- portfolio H1 order preserved: YES
+- image inventory unchanged from v9.2: YES

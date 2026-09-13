@@ -26,7 +26,7 @@ flowchart TD
 ```
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Completo.jpeg" alt="Montaje completo de la tesis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Completo.jpeg" alt="Montaje completo de la tesis" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     MONTAJE COMPLETO DE LA TESIS
     <small>Vista general de la plataforma y del modelo experimental ex vivo de hígado de rata</small>
@@ -52,7 +52,7 @@ flowchart LR
 ```
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Setup.png" alt="Setup experimental de perfusión hepática" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Setup.png" alt="Setup experimental de perfusión hepática" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     SETUP EXPERIMENTAL
     <small>Montaje del circuito de perfusión y preparación ex vivo del hígado de rata</small>
@@ -63,7 +63,7 @@ The system combines controlled perfusate circulation, oxygenation, bubble remova
 physiological monitoring.
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Oxigenador.png" alt="Oxigenador del sistema de perfusión" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Oxigenador.png" alt="Oxigenador del sistema de perfusión" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     OXIGENADOR
     <small>Detalle del sistema utilizado para mantener la oxigenación del perfusato</small>
@@ -80,7 +80,7 @@ The monitoring software displays the physiological variables acquired during the
 - **R(t)=P/Q:** vascular resistance.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Monitor2canales.jpeg" alt="Software de monitorización funcionando" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Tesis_Monitor2canales.jpeg" alt="Software de monitorización funcionando" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     SOFTWARE DE MONITORIZACIÓN
     <small>Captura del software funcionando durante adquisición de dos canales</small>
@@ -142,7 +142,7 @@ flowchart LR
 ```
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_aeropuerto.png" alt="Equipo Ciervo UC durante el viaje a CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_aeropuerto.png" alt="Equipo Ciervo UC durante el viaje a CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     EQUIPO CIERVO UC
     <small>Registro del equipo durante el viaje a Zürich</small>
@@ -150,7 +150,7 @@ flowchart LR
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_apoyo.jpeg" alt="Trabajo técnico y apoyo en CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_apoyo.jpeg" alt="Trabajo técnico y apoyo en CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     TRABAJO Y APOYO TÉCNICO
     <small>Preparación y soporte técnico del equipo Ciervo UC</small>
@@ -158,7 +158,7 @@ flowchart LR
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_Compitiendo.png" alt="Ciervo UC compitiendo en CYBATHLON 2024" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_Compitiendo.png" alt="Ciervo UC compitiendo en CYBATHLON 2024" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     COMPITIENDO EN CYBATHLON 2024
     <small>Participación del equipo durante la competencia</small>
@@ -166,7 +166,7 @@ flowchart LR
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_diagrama.jpeg" alt="Diagrama técnico de CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/cybathlon_diagrama.jpeg" alt="Diagrama técnico de CYBATHLON" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     DIAGRAMA DEL SISTEMA
     <small>Diagrama técnico asociado a la prótesis y su integración</small>
@@ -200,7 +200,7 @@ transcranial electrical stimulation medical device, improving an existing protot
 - Experimental validation and iterative troubleshooting.
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/Candel_pcb.png" alt="PCB de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Candel_pcb.png" alt="PCB de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     PCB / ELECTRÓNICA
     <small>PCB o electrónica desarrollada durante la práctica</small>
@@ -208,7 +208,7 @@ transcranial electrical stimulation medical device, improving an existing protot
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/candel_dds.png" alt="DDS y generación de señal CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/candel_dds.png" alt="DDS y generación de señal CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     DDS / GENERACIÓN DE SEÑAL
     <small>Elemento asociado a la generación y control de señal</small>
@@ -216,7 +216,7 @@ transcranial electrical stimulation medical device, improving an existing protot
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Candel_Software.png" alt="Software de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Candel_Software.png" alt="Software de CandelStim" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     SOFTWARE
     <small>Interfaz o software asociado al sistema CandelStim</small>
@@ -237,7 +237,7 @@ broader objective of extending preservation time and supporting transplantation.
 Organ preservation · thermal control · experimental physiology · transport constraints · technology for transplantation.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Borealis_equipo.jpeg" alt="Equipo experimental Borealis UC" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_equipo.jpeg" alt="Equipo experimental Borealis UC" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     EQUIPO / SETUP BOREALIS UC
     <small>Sistema experimental o equipamiento utilizado en el proyecto</small>
@@ -245,7 +245,7 @@ Organ preservation · thermal control · experimental physiology · transport co
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/Borealis_liver2.png" alt="Hígado en proyecto Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_liver2.png" alt="Hígado en proyecto Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     MODELO EXPERIMENTAL
     <small>Imagen del órgano o preparación utilizada en el proyecto</small>
@@ -253,7 +253,7 @@ Organ preservation · thermal control · experimental physiology · transport co
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Borealis_Grafico2.png" alt="Gráfico experimental Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Borealis_Grafico2.png" alt="Gráfico experimental Borealis" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO EXPERIMENTAL
     <small>Resultado o evolución experimental representativa</small>
@@ -289,7 +289,7 @@ Medical image segmentation project using a U-Net-based neural network for lung s
 Medical imaging · deep learning · neural networks · segmentation · biomedical image processing.
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Ipre.gif" alt="Visualización IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Ipre.gif" alt="Visualización IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     RESULTADO VISUAL IPRE / U-NET
     <small>Visualización animada o secuencia del resultado de segmentación</small>
@@ -297,7 +297,7 @@ Medical imaging · deep learning · neural networks · segmentation · biomedica
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/ipre_graph.png" alt="Gráfico IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/ipre_graph.png" alt="Gráfico IPRE U-Net" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     GRÁFICO IPRE / U-NET
     <small>Gráfico de entrenamiento, desempeño o métricas del modelo</small>
@@ -331,7 +331,7 @@ The system processes signals associated with **force, displacement, deformation 
 - Medical-device-oriented prototyping.
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/vscan_solo.png" alt="Diseño Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/vscan_solo.png" alt="Diseño Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     DISEÑO / DISPOSITIVO
     <small>Vista del dispositivo o diseño de cubierta de manera aislada</small>
@@ -339,7 +339,7 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot">
-  <img class="portfolio-image asset-contain" src="imagenes/Vscan_3dReal.png" alt="Prototipo físico Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Vscan_3dReal.png" alt="Prototipo físico Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     PROTOTIPO FÍSICO
     <small>Pieza real fabricada mediante prototipado o impresión 3D</small>
@@ -347,7 +347,7 @@ The system processes signals associated with **force, displacement, deformation 
 </div>
 
 <div class="image-slot large">
-  <img class="portfolio-image asset-contain" src="imagenes/Vscan_uso1.png" alt="Uso del prototipo Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+  <img class="portfolio-image asset-contain" src="imagenes/Vscan_uso1.png" alt="Uso del prototipo Vscan Air" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
   <div class="slot-label">
     PROTOTIPO EN USO
     <small>Prototipo instalado o utilizado con el Vscan Air</small>

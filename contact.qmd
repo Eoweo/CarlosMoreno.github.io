@@ -39,6 +39,8 @@ CM
 
 ::: {.contact-method}
 
+:::: {.contact-icon-label}
+
 ::: {.contact-icon}
 ✉
 :::
@@ -46,6 +48,8 @@ CM
 ::: {.contact-card-label}
 EMAIL
 :::
+
+::::
 
 **Email**
 
@@ -57,6 +61,8 @@ Preferred channel for research and professional enquiries.
 
 ::: {.contact-method}
 
+:::: {.contact-icon-label}
+
 ::: {.contact-icon}
 ⌘
 :::
@@ -64,6 +70,8 @@ Preferred channel for research and professional enquiries.
 ::: {.contact-card-label}
 CODE & PROJECTS
 :::
+
+::::
 
 **GitHub**
 
@@ -75,6 +83,8 @@ Repositories, code and technical project material.
 
 ::: {.contact-method}
 
+:::: {.contact-icon-label}
+
 ::: {.contact-icon}
 in
 :::
@@ -82,6 +92,8 @@ in
 ::: {.contact-card-label}
 PROFESSIONAL NETWORK
 :::
+
+::::
 
 **LinkedIn**
 

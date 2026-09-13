@@ -34,7 +34,13 @@ hardware, software and physiology have to work as one system.
 
 ::: {.image-slot .home-portrait}
 
-<img class="portfolio-image asset-cover" src="imagenes/Trabajando.png" alt="Foto principal / retrato técnico" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-cover" src="imagenes/Trabajando.png" alt="Foto principal / retrato técnico" loading="eager" decoding="async" fetchpriority="high" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+::: {.slot-label}
+FOTO PRINCIPAL / RETRATO TÉCNICO
+
+Idealmente una fotografía tuya trabajando en laboratorio, electrónica o montaje experimental
+:::
 
 :::
 
@@ -122,7 +128,13 @@ Coming soon.
 
 ::: {.image-slot .large}
 
-<img class="portfolio-image asset-contain" src="imagenes/Tesis_Equipo.png" alt="Equipo actual de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.parentElement.classList.add('has-image')" onerror="this.hidden=true;this.parentElement.classList.remove('has-image')">
+<img class="portfolio-image asset-contain" src="imagenes/Tesis_Equipo.png" alt="Equipo actual de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
+
+::: {.slot-label}
+EQUIPO ACTUAL DE LA INVESTIGACIÓN DE MAGÍSTER
+
+Instrumentación y equipamiento utilizado en el modelo experimental ex vivo de hígado de rata
+:::
 
 :::
 
