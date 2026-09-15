@@ -52,7 +52,7 @@ EMAIL
 ::::
 
 **Email**
-[Write me](mailto:camoro2002@uc.cl){.inline-project-link}
+[Write me](mailto:camoro2002@uc.cl){.home-action target="_blank"}
 :::
 
 ::: {.contact-method}
@@ -70,7 +70,8 @@ CODE & PROJECTS
 ::::
 
 **GitHub**
-[Repository](https://github.com/Eoweo){.inline-project-link}
+
+[View Repository](https://github.com/Eoweo){.home-action target="_blank"}
 
 :::
 
@@ -89,7 +90,8 @@ PROFESSIONAL NETWORK
 ::::
 
 **LinkedIn**
-[Link](https://www.linkedin.com/in/carlos-moreno-rojas/){.inline-project-link}
+
+[View Profile](https://www.linkedin.com/in/carlos-moreno-rojas/){.home-action target="_blank"}
 
 :::
 
@@ -107,6 +109,6 @@ RESEARCH ID
 
 **ORCID**
 
-[Link](https://orcid.org/0009-0002-3596-8567)
+[View Profile](https://orcid.org/0009-0002-3596-8567){.home-action target="_blank"}
 
 :::
