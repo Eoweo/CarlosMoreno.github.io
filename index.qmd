@@ -124,6 +124,8 @@ Coming soon.
 
 ::::
 
+## Ex Vivo Perfusion and Transplantation Laboratory - IIBM UC
+
 ::: {.image-slot .large}
 
 <img class="portfolio-image asset-contain" src="imagenes/Tesis_Equipo.png" alt="Equipo actual de la investigación de magíster" loading="lazy" decoding="async" onload="this.hidden=false;this.closest('.image-slot')?.classList.add('has-image')" onerror="this.hidden=true;this.closest('.image-slot')?.classList.remove('has-image')">
