@@ -107,23 +107,13 @@ PROFESSIONAL NETWORK
 RESEARCH ID
 :::
 
-**ORCID**
+**[ORCID](https://orcid.org/0009-0002-3596-8567)**
+
+[0009-0002-3596-8567](https://orcid.org/0009-0002-3596-8567)
+
 Persistent academic researcher identifier.
 
 :::
-
-::: {.contact-method .compact-card}
-
-::: {.contact-card-label}
-PUBLICATIONS
-:::
-
-**Google Scholar**
-`ADD_GOOGLE_SCHOLAR_IF_APPLICABLE`
-
-:::
-
-::::
 
 # Documents & Portfolio
 

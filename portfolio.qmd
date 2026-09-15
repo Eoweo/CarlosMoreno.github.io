@@ -450,7 +450,7 @@ Audio was integrated through an **IP Core implemented in Vivado** and controlled
 
 Music is represented using MIDI-style events containing note, timing and velocity information. Different music and sound effects are selected according to the current game state and gameplay events.
 
-### Gameplay demonstration
+### Gameplay demonstration - Please skip to 25:40
 
 <div class="youtube-video">
   <iframe
@@ -463,6 +463,8 @@ Music is represented using MIDI-style events containing note, timing and velocit
     allowfullscreen>
   </iframe>
 </div>
+
+
 
 ### Result
 
