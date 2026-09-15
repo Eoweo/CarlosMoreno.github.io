@@ -93,13 +93,6 @@ PROFESSIONAL NETWORK
 
 :::
 
-**ORCID**
-
-[Link](https://orcid.org/0009-0002-3596-8567)
-
-:::
-
-
 ::::
 
 # Research Profiles
@@ -110,3 +103,10 @@ PROFESSIONAL NETWORK
 
 ::: {.contact-card-label}
 RESEARCH ID
+:::
+
+**ORCID**
+
+[Link](https://orcid.org/0009-0002-3596-8567)
+
+:::
