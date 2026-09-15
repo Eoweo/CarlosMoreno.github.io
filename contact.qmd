@@ -93,11 +93,16 @@ PROFESSIONAL NETWORK
 
 :::
 
+**ORCID**
+
+[Link](https://orcid.org/0009-0002-3596-8567)
+
+:::
+
+
 ::::
 
 # Research Profiles
-
-## Academic Identity
 
 :::: {.contact-grid .contact-grid-two}
 
@@ -105,48 +110,3 @@ PROFESSIONAL NETWORK
 
 ::: {.contact-card-label}
 RESEARCH ID
-:::
-
-**[ORCID](https://orcid.org/0009-0002-3596-8567)**
-
-[0009-0002-3596-8567](https://orcid.org/0009-0002-3596-8567)
-
-Persistent academic researcher identifier.
-
-:::
-
-# Documents & Portfolio
-
-## Explore My Work
-
-:::: {.contact-grid .contact-grid-two}
-
-::: {.contact-method .contact-link-card}
-
-::: {.contact-card-label}
-DOCUMENT
-:::
-
-**Curriculum Vitae**
-
-Education, research, professional experience, projects and technical skills.
-
-[Open CV →](cv.qmd){.inline-project-link}
-
-:::
-
-::: {.contact-method .contact-link-card}
-
-::: {.contact-card-label}
-TECHNICAL WORK
-:::
-
-**Engineering Portfolio**
-
-Detailed technical record of research and engineering projects.
-
-[Open Portfolio →](portfolio.qmd){.inline-project-link}
-
-:::
-
-::::
