@@ -7,9 +7,6 @@ toc-depth: 2
 page-layout: full
 ---
 
-This page is the complete technical portfolio. Projects are organized as a concise engineering record:
-**problem → design → implementation → testing → results / lessons learned**.
-
 # MASTER'S RESEARCH — LIVER VIABILITY & ICG-NIR {#masters-research}
 
 My Master's thesis is based on an **ex vivo rat liver perfusion model**. The current work is focused on
